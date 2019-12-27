@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AoC.Common;
 
-namespace AoC2018.Day01
+namespace AoC2018
 {
     public class Day01_Solution : ISolution
     {

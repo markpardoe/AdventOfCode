@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using AoC2018.Day01;
+using AoC2018;
 
-namespace Tests_Aoc2018.Day01
+namespace Tests_Aoc2018.Solutions
 {
-    public class ChronalCalibrationTests
+    public class Day01_Tests
     {
         [Theory]
         [InlineData(3, "+1", "+1", "+1")]

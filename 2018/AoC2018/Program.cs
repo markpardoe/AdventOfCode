@@ -1,8 +1,8 @@
 ﻿using System;
 using AoC.Common;
-using AoC2018.Day01;
 using System.IO;
 using System.Linq;
+using AoC2018.Day03;
 
 namespace AoC2018
 {
@@ -10,7 +10,7 @@ namespace AoC2018
     {
         static void Main(string[] args)
         {
-            ISolution problem = new Day01_Solution();
+            ISolution problem = new Day03_Solution();
 
             string inputFile = Path.Combine(System.Environment.CurrentDirectory, "InputData", problem.InputFileName);
             var data = File.ReadAllLines(inputFile).ToList();
