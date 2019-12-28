@@ -10,10 +10,14 @@ namespace AoC2018.Day07
         public string  NodeId { get; }
         public readonly List<Node> Parents = new List<Node>();
         public readonly List<Node> Children = new List<Node>();
+        public int Time { get; }
+
 
         public Node(string Id)
         {
             this.NodeId = Id;
+            char c = Id.ToUpper()[0];
+            Time = 60 + (c - 64);
         }
 
         public bool Equals([AllowNull] Node other)

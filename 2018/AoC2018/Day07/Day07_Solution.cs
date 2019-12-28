@@ -42,7 +42,6 @@ namespace AoC2018.Day07
                     }
                 }
             }
-
             return string.Join("", closedList.Select(n => n.NodeId));
         }
 

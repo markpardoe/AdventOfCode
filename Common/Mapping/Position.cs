@@ -36,14 +36,19 @@ namespace AoC.Common.Mapping
             return Math.Abs(this.X - p.X) + Math.Abs(this.Y - p.Y);
         }
 
-        public Position Move(Direction direction)
+        public int DistanceFromOrigin()
+        {
+            return Math.Abs(this.X) + Math.Abs(this.Y);
+        }
+
+        public Position Move(Direction direction, int distance = 1)
         {
             return direction switch
             {
-                Direction.Up => new Position(X, Y - 1),
-                Direction.Down => new Position(X, Y + 1),
-                Direction.Left => new Position(X - 1, Y),
-                Direction.Right => new Position(X + 1, Y),
+                Direction.Up => new Position(X, Y - distance),
+                Direction.Down => new Position(X, Y + distance),
+                Direction.Left => new Position(X - distance, Y),
+                Direction.Right => new Position(X + distance, Y),
                 _ => throw new InvalidOperationException("Invalid Direction."),
             };
         }
@@ -59,7 +64,7 @@ namespace AoC.Common.Mapping
             throw new InvalidOperationException("Invalid target for find direction!");
         }
 
-        public IEnumerable<Position> GetNeighbours()
+        public IEnumerable<Position> GetNeighbouringPositions()
         {
             return new List<Position>() { Move(Direction.Up), this.Move(Direction.Down), this.Move(Direction.Left), this.Move(Direction.Right) };
         }
