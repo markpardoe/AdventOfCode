@@ -8,7 +8,8 @@ namespace AoC2019.Problems.Day16
     public class FlawedFrequencyTransmission
     {
         private readonly List<int> _basePattern = new List<int>() { 0, 1, 0, -1 };
-        private Dictionary<int, IList<int>> _cachedPatterns = new Dictionary<int, IList<int>>();
+        private readonly Dictionary<int, IList<int>> _cachedPatterns = new Dictionary<int, IList<int>>();
+
         private readonly List<int> _data;
 
         public FlawedFrequencyTransmission(string input)
@@ -16,20 +17,21 @@ namespace AoC2019.Problems.Day16
             _data = BuildData(input, 1);
         }
 
-        public string DecodeSignal(int numberOfPhases, int offSet)
+        public string DecodeSignal(int numberOfRepeats, int numberOfPhases, int offSet)
         {
-            List<int> data = new List<int>(_data);  // make a copy of the input
+            List<int> data = new List<int>();
+            for (int i = 0; i < numberOfRepeats; i++)
+            {
+                data.AddRange(_data);  // make a copy of the input
+            }
 
             // Remove the offset from the initial data.
             // We know the offset is in the 2nd half of the data - so we can just skip the data before it.
-
             data = data.Skip(offSet).ToList();
 
             for (int i = 1; i <= numberOfPhases; i++)
             {
-                Console.WriteLine("Phase: " + i);
                 int result = 0;
-
 
                 // Each digit in the 2nd half of the data obays the rule:
                 //  Value = Data[ix] + ResultFor[ix+1]  (so for last digit its just Data[ix])

@@ -26,7 +26,7 @@ namespace AoC2019.Problems.Day16
 
             yield return result;
             
-            yield return fft.DecodeSignal(100, offSet).ToString();
+            yield return fft.DecodeSignal(10000 , 100, offSet).ToString();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace AoC2019.Problems.Day13
             ArcadeCabinet cabinet = new ArcadeCabinet(vm);
 
             cabinet.RunGame();
-            Console.WriteLine(cabinet.PrintMap());
+           // Console.WriteLine(cabinet.Map.DrawMap());
             return cabinet;
         }
     }
