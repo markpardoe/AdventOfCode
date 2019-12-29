@@ -7,17 +7,17 @@ namespace AoC2019.IntCodeComputer
 {
     public class AmplificationController
     {
-        protected readonly List<int> _settings;
+        protected readonly List<long> _settings;
         protected readonly List<IntCodeVM> _compilers;
 
-        public AmplificationController(IEnumerable<int> settings, IEnumerable<int> instructions)
+        public AmplificationController(IEnumerable<long> settings, IEnumerable<long> instructions)
         {
             _settings = settings?.ToList() ?? throw new ArgumentNullException(nameof(settings));
 
             _compilers = new List<IntCodeVM>(_settings.Count);
             for (int i = 0; i < _settings.Count; i++)
             {
-                var c = new IntCodeVM(new List<int>(instructions), _settings[i]);
+                var c = new IntCodeVM(new List<long>(instructions), _settings[i]);
                 _compilers.Add(c);
             }
         }
@@ -37,7 +37,7 @@ namespace AoC2019.IntCodeComputer
 
     public class FeedbackAmplificationController : AmplificationController
     {
-        public FeedbackAmplificationController(IEnumerable<int> settings, IEnumerable<int> instructions) : base(settings, instructions) { }
+        public FeedbackAmplificationController(IEnumerable<long> settings, IEnumerable<long> instructions) : base(settings, instructions) { }
 
         public override long RunAmplifiedCircuits(long initialInput = 0)
         {

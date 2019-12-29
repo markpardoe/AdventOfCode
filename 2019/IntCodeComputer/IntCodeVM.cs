@@ -66,6 +66,8 @@ namespace AoC2019.IntCodeComputer
             this.Status = ExecutionStatus.Running;
         }
 
+        public IntCodeVM(string code) : this(ParseStringData(code)) { }
+
         public static List<long> ParseStringData(string dataStream)
         {
             return dataStream.Split(',').Select(x => Int64.Parse(x)).ToList();
