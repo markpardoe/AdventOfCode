@@ -8,7 +8,7 @@ namespace AoC.Common.Mapping
     public class Map<TValue> : Dictionary<Position, TValue>//   where TPosition:IPosition
     {
 
-        internal readonly TValue _default;
+        protected readonly TValue _default;
         public Map(TValue defaultValue)
         {
             _default = defaultValue;

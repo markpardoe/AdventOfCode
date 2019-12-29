@@ -12,7 +12,8 @@ namespace AoC2019
         static void Main(string[] args)
         {
             // DAY 13 GIVING WORNG ANSWERS!
-            ISolution problem = new Problems.Day13.Day13_Solution();
+            // Day 16 crashes
+            ISolution problem = new Problems.Day20.Day20_Solution();
             List<string> data = new List<string>();
             if (problem.InputFileName != null)
             {
