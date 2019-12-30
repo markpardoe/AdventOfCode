@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
-namespace AoC2019.Problems.Day18
+namespace Aoc.AoC2019.Problems.Day18
 {
     public class MazeRobot
     {

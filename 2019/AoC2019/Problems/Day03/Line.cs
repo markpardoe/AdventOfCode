@@ -1,6 +1,6 @@
 ﻿using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day03
+namespace Aoc.AoC2019.Problems.Day03
 {
     public enum LineAxis
     {

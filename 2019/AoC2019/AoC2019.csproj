@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\IntCodeComputer\IntCodeComputer.csproj" />
+    <ProjectReference Include="..\IntCodeComputer\IntCode.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AoC2019.Problems.Day16
+namespace Aoc.AoC2019.Problems.Day16
 {
     public class Day16_Solution : ISolution
     {
@@ -19,14 +19,13 @@ namespace AoC2019.Problems.Day16
 
         public IEnumerable<string> Solve(IEnumerable<string> input)
         {
-            FlawedFrequencyTransmission fft = new FlawedFrequencyTransmission(input.First());
-            int offSet = Int32.Parse(input.First().Substring(0, 7));
+            FlawedFrequencyTransmission fft = new FlawedFrequencyTransmission(input.First());           
             List<int> results = fft.VerifySignal(100);
             string result = String.Join("", results).Substring(0, 8);
 
             yield return result;
             
-            yield return fft.DecodeSignal(10000 , 100, offSet).ToString();
+            yield return fft.DecodeSignal(10000 , 100, 8).ToString();
         }
     }
 }

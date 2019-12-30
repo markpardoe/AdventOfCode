@@ -5,7 +5,7 @@ using System.Text;
 using AoC.Common;
 using System.Linq;
 
-namespace AoC2019.Problems.Day20
+namespace Aoc.AoC2019.Problems.Day20
 {
     public class Day20_Solution : ISolution
     {

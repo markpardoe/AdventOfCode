@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using AoC.Common;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 
-namespace AoC2019.Problems.Day13
+namespace Aoc.AoC2019.Problems.Day13
 {
     public class Day13_Solution : ISolution
     {

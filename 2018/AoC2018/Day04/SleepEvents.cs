@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AoC2018.Day04
+namespace Aoc.Aoc2018.Day04
 {
     public class SleepEvent
     {
@@ -12,7 +12,6 @@ namespace AoC2018.Day04
         public int FallsAsleep { get; }
         public int WakesUp { get; }
         public int MinutesSlept => WakesUp - FallsAsleep;
-       
 
         public SleepEvent(int id, DateTime sleep, DateTime wake)
         {
@@ -24,8 +23,6 @@ namespace AoC2018.Day04
             ShiftDate = wake.Date;
             FallsAsleep = sleep.Minute;
             WakesUp = wake.Minute;
-        }
-
-
+        }        
     }
 }

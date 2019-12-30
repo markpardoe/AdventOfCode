@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AoC2019.IntCodeComputer
+namespace Aoc.AoC2019.IntCode
 {
     enum ParameterMode
     {

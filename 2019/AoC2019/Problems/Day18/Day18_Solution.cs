@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using AoC.Common;
 
-namespace AoC2019.Problems.Day18
+namespace Aoc.AoC2019.Problems.Day18
 {
     public class Day18_Solution :ISolution
     {

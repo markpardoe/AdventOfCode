@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace AoC2019.Problems.Day18
+namespace Aoc.AoC2019.Problems.Day18
 {
     public class KeyDistance :IEquatable<KeyDistance>
     {

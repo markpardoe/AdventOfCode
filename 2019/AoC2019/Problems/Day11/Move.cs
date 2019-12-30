@@ -1,4 +1,4 @@
-﻿namespace AoC2019.Problems.Day11
+﻿namespace Aoc.AoC2019.Problems.Day11
 {
     public class Move
     {

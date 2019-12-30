@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AoC2019.Problems.Day16
+namespace Aoc.AoC2019.Problems.Day16
 {
     internal class RepeatingList<T> : IList<T>
     {

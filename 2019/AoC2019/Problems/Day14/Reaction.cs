@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AoC2019.Problems.Day14
+namespace Aoc.AoC2019.Problems.Day14
 {
     public class Reaction 
     {

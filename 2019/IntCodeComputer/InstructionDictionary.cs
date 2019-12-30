@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-namespace AoC2019.IntCodeComputer
+namespace Aoc.AoC2019.IntCode
 {
     /// <summary>
     /// Container for instructions in an IntCodeCompiler.  

@@ -5,7 +5,7 @@ using System.Linq;
 using AoC.Common;
 using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day03
+namespace Aoc.AoC2019.Problems.Day03
 {
 
     public class Day03_Solution :ISolution
@@ -20,9 +20,19 @@ namespace AoC2019.Problems.Day03
 
         public IEnumerable<string> Solve(IEnumerable<string> input)
         {
-            yield return CalculateDistance(input.ToList(), DistanceFromOrigin).ToString();
-            yield return CalculateDistance(input.ToList(), CumulativeWireLength).ToString();
+            yield return CalculateDistanceFromOriginAtNearestIntersection(input).ToString();
+            yield return CalculateCumulativeWireLengthAtFirstIntersection(input).ToString();
         }       
+
+        public int CalculateDistanceFromOriginAtNearestIntersection(IEnumerable<string> data)
+        {
+            return CalculateDistance(data.ToList(), DistanceFromOrigin);
+        }
+
+        public int CalculateCumulativeWireLengthAtFirstIntersection(IEnumerable<string> data)
+        {
+            return CalculateDistance(data.ToList(), CumulativeWireLength);
+        }
 
         private int DistanceFromOrigin(LineWithDistance line1, LineWithDistance line2, Position collision)
         {

@@ -5,7 +5,7 @@ using System.Linq;
 using AoC.Common;
 using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day10
+namespace Aoc.AoC2019.Problems.Day10
 {
     public class Day10_Solution :ISolution
     {
@@ -42,7 +42,7 @@ namespace AoC2019.Problems.Day10
         private int DestroyAsteroids(IEnumerable<string> input, Position laserPosition, int asteroidCount)
         {
             AsteroidMap map = new AsteroidMap(input.ToList());
-            Laser laser = new Laser(map, new Position(20, 21));
+            Laser laser = new Laser(map, laserPosition);
 
             Position lastDestroyed = new Position(0, 0);
             for (int i = 1; i <= asteroidCount; i++)

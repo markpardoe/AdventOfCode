@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using AoC.Common;
 
-namespace AoC2019.Problems.Day22
+namespace Aoc.AoC2019.Problems.Day22
 {
     public class Day22_Solution :ISolution
     {

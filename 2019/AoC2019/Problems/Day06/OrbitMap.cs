@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AoC2019.Problems.Day06
+namespace Aoc.AoC2019.Problems.Day06
 {
-    internal class OrbitMap
+    public class OrbitMap
     {
         private const string CenterOfMass = "COM";
         private readonly Dictionary<string, Planet> _allPlanets = new Dictionary<string, Planet>();
 
-        internal OrbitMap(IEnumerable<string> mapData)
+        public OrbitMap(IEnumerable<string> mapData)
         {
             foreach (String orbit in mapData)
             {
@@ -24,7 +24,7 @@ namespace AoC2019.Problems.Day06
             }
         }
 
-        internal int CountOrbits()
+        public int CountOrbits()
         {
             Queue<Planet> planetsToCheck = new Queue<Planet>();
             Dictionary<string, int> orbitCounts = new Dictionary<string, int>();
@@ -49,7 +49,7 @@ namespace AoC2019.Problems.Day06
             return orbitCounts.Values.Sum();
         }
 
-        internal int FindPath(string startPlanet, string targetPlanet)
+        public int FindPath(string startPlanet, string targetPlanet)
         {
 
             Planet start = _allPlanets[startPlanet];

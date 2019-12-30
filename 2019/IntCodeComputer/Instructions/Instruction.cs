@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace AoC2019.IntCodeComputer.Instructions
+namespace Aoc.AoC2019.IntCode.Instructions
 {
     abstract class Instruction
     {

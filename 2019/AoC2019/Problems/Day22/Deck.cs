@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace AoC2019.Problems.Day22
+namespace Aoc.AoC2019.Problems.Day22
 {
     public class Deck
     {

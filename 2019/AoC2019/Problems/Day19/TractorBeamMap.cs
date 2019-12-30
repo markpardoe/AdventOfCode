@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace AoC2019.Problems.Day19
+namespace Aoc.AoC2019.Problems.Day19
 {
     public enum BeamStatus
     {

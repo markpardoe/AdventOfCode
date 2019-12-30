@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AoC.Common;
 
-namespace AoC2019.Problems.Day14
+namespace Aoc.AoC2019.Problems.Day14
 {
     public class Day14_Solution :ISolution
     {

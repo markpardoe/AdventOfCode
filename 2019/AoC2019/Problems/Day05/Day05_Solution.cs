@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 using System.Linq;
 using AoC.Common;
 
-namespace AoC2019.Problems.Day05
+namespace Aoc.AoC2019.Problems.Day05
 {
     public class Day05_Solution : ISolution
     {

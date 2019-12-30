@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AoC2019.Problems.Day24
+namespace Aoc.AoC2019.Problems.Day24
 {
     public class RecursiveTile : IEquatable<RecursiveTile>
     {

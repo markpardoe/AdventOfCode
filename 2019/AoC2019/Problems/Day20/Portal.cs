@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-namespace AoC2019.Problems.Day20
+namespace Aoc.AoC2019.Problems.Day20
 {
     public enum TileType
     {

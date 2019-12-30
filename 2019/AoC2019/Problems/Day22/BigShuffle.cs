@@ -5,7 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 
-namespace AoC2019.Problems.Day22
+namespace Aoc.AoC2019.Problems.Day22
 {
     public static class BigShuffle
     {

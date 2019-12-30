@@ -2,19 +2,16 @@
 using AoC.Common;
 using System.IO;
 using System.Linq;
-using AoC2018.Day03;
-using AoC2018.Day04;
-using AoC2018.Day05;
-using AoC2018.Day07;
+using Aoc.Aoc2018;
 using System.Collections.Generic;
 
-namespace AoC2018
+namespace Aoc.Aoc2018
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            ISolution problem = new Day07_Solution();
+            ISolution problem = new Aoc2018.Day07.Day07_Solution();
 
             string inputFile = Path.Combine(System.Environment.CurrentDirectory, "InputData", problem.InputFileName);
             var data = File.ReadAllLines(inputFile).ToList();

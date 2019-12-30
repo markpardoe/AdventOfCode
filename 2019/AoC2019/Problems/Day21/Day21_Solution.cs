@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using AoC.Common;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 
-namespace AoC2019.Problems.Day21
+namespace Aoc.AoC2019.Problems.Day21
 {
     public class Day21_Solution : ISolution
     {
@@ -25,9 +25,7 @@ namespace AoC2019.Problems.Day21
 
             yield return Solve(input.First(), solution1).ToString();
             yield return Solve(input.First(), solution2).ToString();
-        }
-
-
+        }        
 
         public long Solve(string intCode, List<string> jumpCommands)
         {
@@ -44,6 +42,7 @@ namespace AoC2019.Problems.Day21
             // Console.WriteLine(AsciiToString(outputs));  // print the final output (including visualisation of any errors)
             return outputs.Last();  
         }
+
         private string AsciiToString(List<long> chars)
         {
             StringBuilder b = new StringBuilder();

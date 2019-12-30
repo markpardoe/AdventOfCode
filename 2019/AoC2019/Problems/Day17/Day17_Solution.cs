@@ -1,11 +1,11 @@
-﻿using AoC2019.IntCodeComputer;
+﻿using Aoc.AoC2019.IntCode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AoC.Common;
 
-namespace AoC2019.Problems.Day17
+namespace Aoc.AoC2019.Problems.Day17
 {
     public class Day17_Solution :ISolution
     {
@@ -56,7 +56,7 @@ namespace AoC2019.Problems.Day17
         private List<long> CreateInputs(string path)
         {
             List<long> output = new List<long>();
-            foreach (char c in DustPath)
+            foreach (char c in path)
             {
                 output.Add((long)c);
             }

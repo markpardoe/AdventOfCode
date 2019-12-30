@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AoC2019.Problems.Day08
+namespace Aoc.AoC2019.Problems.Day08
 {
     public class Layer
     {

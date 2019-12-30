@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using AoC.Common.Mapping;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 using System.Linq;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
-namespace AoC2019.Problems.Day15
+namespace Aoc.AoC2019.Problems.Day15
 {
     public class Robot
     {

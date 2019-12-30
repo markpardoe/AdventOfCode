@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 
-namespace AoC2019.Problems.Day25
+namespace Aoc.AoC2019.Problems.Day25
 {
     public class AdventureGame
     {

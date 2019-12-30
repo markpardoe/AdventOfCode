@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day11
+namespace Aoc.AoC2019.Problems.Day11
 {
     public enum TurnDirection
     {

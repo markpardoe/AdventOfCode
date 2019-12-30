@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 using System.Linq;
 
-namespace AoC2019.Problems.Day23
+namespace Aoc.AoC2019.Problems.Day23
 {
     public class NicController
     {
@@ -43,7 +43,7 @@ namespace AoC2019.Problems.Day23
             for (int i = 0; i < Size; i++)
             {
                 IVirtualMachine comp = _nics[i];
-                ProcessOutputs(comp, i);
+                ProcessOutputs(comp);
                                
                 if (comp.Status == ExecutionStatus.Finished)
                 {
@@ -58,11 +58,11 @@ namespace AoC2019.Problems.Day23
                     comp.Execute();
                 }
 
-                ProcessOutputs(comp, i);
+                ProcessOutputs(comp);
             }
         }
 
-        private void ProcessOutputs(IVirtualMachine comp, int add)
+        private void ProcessOutputs(IVirtualMachine comp)
         {
             while (comp.Outputs.Count >= 3)
             {

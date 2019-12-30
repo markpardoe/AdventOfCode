@@ -4,7 +4,7 @@ using System.Text;
 using System.Linq;
 using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day11
+namespace Aoc.AoC2019.Problems.Day11
 {
     public class PaintMap : Map<PaintColor>
     {

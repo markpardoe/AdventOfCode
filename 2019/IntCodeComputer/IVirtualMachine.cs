@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AoC2019.IntCodeComputer
+namespace Aoc.AoC2019.IntCode
 {
     public interface IVirtualMachine
     {

@@ -1,11 +1,11 @@
-﻿using AoC2019.IntCodeComputer;
+﻿using Aoc.AoC2019.IntCode;
 using AoC.Common.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace AoC2019.Problems.Day17
+namespace Aoc.AoC2019.Problems.Day17
 {
     public class Robot
     {

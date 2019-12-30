@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day11
+namespace Aoc.AoC2019.Problems.Day11
 {
     public enum PaintColor
     {

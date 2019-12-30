@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using AoC2018;
+using Aoc.Aoc2018.Day01;
 
 namespace Tests_Aoc2018.Solutions
 {

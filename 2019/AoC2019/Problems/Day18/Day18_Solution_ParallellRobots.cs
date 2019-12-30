@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using AoC.Common;
 
-namespace AoC2019.Problems.Day18
+namespace Aoc.AoC2019.Problems.Day18
 {
     /// <summary>
     /// Override Day18 Solution file to use a seperate input file due to changes in maze format.

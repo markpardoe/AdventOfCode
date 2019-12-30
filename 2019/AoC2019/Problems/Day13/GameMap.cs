@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day13
+namespace Aoc.AoC2019.Problems.Day13
 {
     public class GameMap :Map<TileType>
     {

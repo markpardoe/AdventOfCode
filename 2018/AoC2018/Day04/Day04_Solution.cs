@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace AoC2018.Day04
+namespace Aoc.Aoc2018.Day04
 {
     public class Day04_Solution : ISolution
     {

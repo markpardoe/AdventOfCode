@@ -1,10 +1,10 @@
-﻿using AoC2019.IntCodeComputer;
+﻿using Aoc.AoC2019.IntCode;
 using System;
 using System.Collections.Generic;
 using AoC.Common.Mapping;
 using System.Text;
 
-namespace AoC2019.Problems.Day19
+namespace Aoc.AoC2019.Problems.Day19
 {
     public class Probe
     {

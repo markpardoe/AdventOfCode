@@ -1,10 +1,10 @@
-﻿using AoC2019.IntCodeComputer.Instructions;
+﻿using Aoc.AoC2019.IntCode.Instructions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace AoC2019.IntCodeComputer
+namespace Aoc.AoC2019.IntCode
 {
     public class IntCodeVM : IVirtualMachine
     {

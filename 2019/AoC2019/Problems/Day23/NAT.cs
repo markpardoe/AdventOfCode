@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 
-namespace AoC2019.Problems.Day23
+namespace Aoc.AoC2019.Problems.Day23
 {
     public class NAT
     {

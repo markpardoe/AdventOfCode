@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day18
+namespace Aoc.AoC2019.Problems.Day18
 {
     public class Maze : Map<MazeTile>
     {

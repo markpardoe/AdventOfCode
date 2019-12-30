@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AoC2018.Day04;
+using Aoc.Aoc2018.Day04;
 using Xunit;
 
 namespace Tests_Aoc2018.Solutions

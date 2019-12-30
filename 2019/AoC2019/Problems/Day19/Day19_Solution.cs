@@ -1,4 +1,4 @@
-﻿using AoC2019.IntCodeComputer;
+﻿using Aoc.AoC2019.IntCode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using AoC.Common;
 using AoC.Common.Mapping;
 
-namespace AoC2019.Problems.Day19
+namespace Aoc.AoC2019.Problems.Day19
 {
     public class Day19_Solution : ISolution
     {

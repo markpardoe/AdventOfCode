@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AoC2019.IntCodeComputer.Instructions
+﻿namespace Aoc.AoC2019.IntCode.Instructions
 {
     class AddInstruction : Instruction
     {

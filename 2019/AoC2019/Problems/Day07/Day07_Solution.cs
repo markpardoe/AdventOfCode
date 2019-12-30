@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 using AoC.Common;
 
-namespace AoC2019.Problems.Day07
+namespace Aoc.AoC2019.Problems.Day07
 {
     public class Day07_Solution : ISolution
     {

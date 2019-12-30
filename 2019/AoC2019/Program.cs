@@ -1,15 +1,15 @@
 ﻿using System;
-using AoC2019.Problems;
+using Aoc.AoC2019.Problems;
 using AoC.Common;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace AoC2019
+namespace Aoc.AoC2019
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             ISolution problem = new Problems.Day13.Day13_Solution();
             List<string> data = new List<string>();

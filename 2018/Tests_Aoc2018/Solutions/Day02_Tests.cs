@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using AoC2018;
+using Aoc.Aoc2018.Day02;
 using System.Linq;
 
 namespace Tests_Aoc2018.Solutions

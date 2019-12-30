@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AoC2019.Problems.Day20
+namespace Aoc.AoC2019.Problems.Day20
 {
     public class Path
     {
@@ -11,7 +11,8 @@ namespace AoC2019.Problems.Day20
         public readonly Portal Destination;
         public int TotalDistance { get; internal set; }
 
-        private bool IsPortalPath;
+        private bool IsPortalPath { get; }
+
         public Path(Portal origin, Portal endPoint, int distance, bool isPortal)
         {
             this.Origin = origin ?? throw new ArgumentNullException(nameof(origin));

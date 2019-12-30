@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace AoC2019.Problems.Day16
+namespace Aoc.AoC2019.Problems.Day16
 {
     public class FlawedFrequencyTransmission
     {
@@ -17,13 +17,16 @@ namespace AoC2019.Problems.Day16
             _data = BuildData(input, 1);
         }
 
-        public string DecodeSignal(int numberOfRepeats, int numberOfPhases, int offSet)
+        public string DecodeSignal(int numberOfRepeats, int numberOfPhases, int offSetLength)
         {
             List<int> data = new List<int>();
             for (int i = 0; i < numberOfRepeats; i++)
             {
                 data.AddRange(_data);  // make a copy of the input
             }
+
+            // Get the offset from the first <offSetLength> digits in the data
+            int offSet = Int32.Parse(string.Join("",_data.GetRange(0, offSetLength)));
 
             // Remove the offset from the initial data.
             // We know the offset is in the 2nd half of the data - so we can just skip the data before it.

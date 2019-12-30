@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 using System.Linq;
 
-namespace AoC2019.Problems.Day23
+namespace Aoc.AoC2019.Problems.Day23
 {
     public class NicControllerWithNat : NicController
     {

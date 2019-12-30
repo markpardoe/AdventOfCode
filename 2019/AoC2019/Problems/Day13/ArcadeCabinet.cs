@@ -1,11 +1,11 @@
 ﻿using AoC.Common.Mapping;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace AoC2019.Problems.Day13
+namespace Aoc.AoC2019.Problems.Day13
 {
     public enum TileType
     {

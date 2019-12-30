@@ -4,7 +4,7 @@ using System.Text;
 using System.Linq;
 using System.Globalization;
 
-namespace AoC2018.Day04
+namespace Aoc.Aoc2018.Day04
 {
     internal enum GuardEventType
     {

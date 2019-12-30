@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Aoc.AoC2019.IntCode</RootNamespace>
+    <AssemblyName>Aoc.AoC2019.IntCode</AssemblyName>
   </PropertyGroup>
 
 </Project>

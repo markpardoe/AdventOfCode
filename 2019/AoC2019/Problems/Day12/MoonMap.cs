@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Numerics;
 
-namespace AoC2019.Problems.Day12
+namespace Aoc.AoC2019.Problems.Day12
 {
     public class MoonMap
     {

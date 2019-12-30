@@ -13,4 +13,10 @@
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\AoC2019\AoC2019.csproj" />
+    <ProjectReference Include="..\..\IntCodeComputer\IntCode.csproj" />
+  </ItemGroup>
+
 </Project>

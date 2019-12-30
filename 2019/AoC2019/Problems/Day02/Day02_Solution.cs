@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using AoC2019.IntCodeComputer;
+using Aoc.AoC2019.IntCode;
 
-namespace AoC2019.Problems.Day02
+namespace Aoc.AoC2019.Problems.Day02
 {
-
     public class Day02_Solution : ISolution
     {
         public int Year => 2019;
@@ -22,8 +21,7 @@ namespace AoC2019.Problems.Day02
         {
             yield return ExecuteMachine(input.First(), 12, 2).ToString() ;
             yield return FindAddressForTargetResult(input.First(), 19690720).ToString();
-        }
-       
+        }       
 
         public long FindAddressForTargetResult(string data, long target)
         {
