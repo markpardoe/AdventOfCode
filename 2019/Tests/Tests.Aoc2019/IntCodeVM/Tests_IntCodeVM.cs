@@ -51,7 +51,7 @@ namespace Tests.IntCodeComputerTests
         [InlineData(8, 1, 3, 3, 1108, -1, 8, 3, 4, 3, 99)]
         [InlineData(7, 0, 3, 3, 1108, -1, 8, 3, 4, 3, 99)]
         [InlineData(9, 0, 3, 3, 1108, -1, 8, 3, 4, 3, 99)]
-        public void Test_EqualsOperations(int input, int expectedResult, params long[] values)
+        public void Test_EqualsOperations(int input, int expectedResult, params int[] values)
         {
             IntCodeVM parser = new IntCodeVM(values, input);
             parser.Execute();
@@ -65,7 +65,7 @@ namespace Tests.IntCodeComputerTests
         [InlineData(0, 0, 3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1)]
         [InlineData(1, 1, 3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1)]
         [InlineData(2, 1, 3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1)]
-        public void Test_JumpOperations(int input, int expectedResult, params long[] values)
+        public void Test_JumpOperations(int input, int expectedResult, params int[] values)
         {
             IntCodeVM parser = new IntCodeVM(values, input);
             parser.Execute();
@@ -79,7 +79,7 @@ namespace Tests.IntCodeComputerTests
         [InlineData(7, 1, 3, 3, 1107, -1, 8, 3, 4, 3, 99)]
         [InlineData(9, 0, 3, 3, 1107, -1, 8, 3, 4, 3, 99)]
         [InlineData(8, 0, 3, 3, 1107, -1, 8, 3, 4, 3, 99)]
-        public void Test_LessThanOperations(int input, int expectedResult, params long[] values)
+        public void Test_LessThanOperations(int input, int expectedResult, params int[] values)
         {
             IntCodeVM parser = new IntCodeVM(values, input);
             parser.Execute();
@@ -88,7 +88,7 @@ namespace Tests.IntCodeComputerTests
 
         [Theory]
         [InlineData(109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99)]
-        public void Test_RelativeBaseOperation_ReturnsItself(params long[] values)
+        public void Test_RelativeBaseOperation_ReturnsItself(params int[] values)
         {
             IntCodeVM parser = new IntCodeVM(values);
             parser.Execute();

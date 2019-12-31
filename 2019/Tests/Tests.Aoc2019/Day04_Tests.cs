@@ -5,7 +5,7 @@ using Xunit;
 using AoC.Common;
 using Aoc.AoC2019.Problems.Day04;
 
-namespace Tests
+namespace Aoc.AoC2019.Tests
 {
     public class Day04_Tests
     {

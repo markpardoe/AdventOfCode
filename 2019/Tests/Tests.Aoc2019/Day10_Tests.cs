@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Tests
+namespace Aoc.AoC2019.Tests
 {
     public class Day10_Tests
     {

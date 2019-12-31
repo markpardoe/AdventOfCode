@@ -6,7 +6,7 @@ using AoC.Common;
 using Aoc.AoC2019.Problems.Day06;
 using System.Linq;
 
-namespace Tests
+namespace Aoc.AoC2019.Tests
 {
     public class Day06_Tests
     {
@@ -22,7 +22,7 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData(346, "COM)B,B)C,C)D,D)E,E)F,B)G,G)H,D)I,E)J,J)K,K)L,K)YOU,I)SAN")]
+        [InlineData(4, "COM)B,B)C,C)D,D)E,E)F,B)G,G)H,D)I,E)J,J)K,K)L,K)YOU,I)SAN")]
         public void Test_OrbitMap_FindPath(int expectedResult, string inputData)
         {
             List<string> orbits = inputData.Split(',').ToList();

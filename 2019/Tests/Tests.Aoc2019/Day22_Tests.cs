@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using AoC.Common;
-using Aoc.AoC2019.Problems.Day22;
-using System.Linq;
+﻿using Aoc.AoC2019.Problems.Day22;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
 
-namespace Tests
-{    public class Day22_Tests
+namespace Aoc.AoC2019.Tests
+{
+    public class Day22_Tests
     {
         [Theory]
         [InlineData(5, 0,1,2,3,4)]
@@ -99,6 +98,7 @@ namespace Tests
             List<int> actual = new List<int>(d.GetCards());
             Assert.Equal(expected, actual);
         }
+
         [Theory]
         [ClassData(typeof(Day22_TestData))]
         public void Test_Deck_ShuffleCommandList(List<string> commands, List<int> expectedResults)
@@ -109,7 +109,6 @@ namespace Tests
             Assert.Equal(expectedResults, actualResults);
 
         }
-
 
         public class Day22_TestData : IEnumerable<object[]>
         {

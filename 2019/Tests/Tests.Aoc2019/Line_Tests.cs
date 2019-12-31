@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Tests
+namespace Aoc.AoC2019.Tests
 {    
     public class Line_Tests
     {
@@ -29,7 +29,7 @@ namespace Tests
         {
             Position A = new Position(0, 0);
             Position B = new Position(-2, 3);
-            Vector v1 = new Vector(Direction.Up, 5);
+            Vector v1 = new Vector(Direction.Down, 5);
             Vector v2 = new Vector(Direction.Right, 6);
             Position collision = new Position(0, 3);
 

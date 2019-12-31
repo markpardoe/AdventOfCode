@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Aoc.AoC2019.IntCode;
@@ -8,7 +9,7 @@ using Aoc.AoC2019.Problems.Day01;
 using AoC.Common;
 using Xunit;
 
-namespace Tests
+namespace Aoc.AoC2019.Tests
 {
     public class Day01_Tests
     {
@@ -35,6 +36,6 @@ namespace Tests
             var input = new List<string>() { value.ToString() };
             int actualResult = sut.CalculateFuelRequirements(input, true);
             Assert.Equal(result, actualResult);
-        }
+        }   
     }
 }

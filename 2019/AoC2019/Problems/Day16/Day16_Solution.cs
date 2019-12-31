@@ -25,7 +25,7 @@ namespace Aoc.AoC2019.Problems.Day16
 
             yield return result;
             
-            yield return fft.DecodeSignal(10000 , 100, 8).ToString();
+            yield return fft.DecodeSignal(10000 , 100, 7).ToString();
         }
     }
 }

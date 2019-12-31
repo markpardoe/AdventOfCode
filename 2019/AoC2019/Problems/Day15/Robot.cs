@@ -58,15 +58,15 @@ namespace Aoc.AoC2019.Problems.Day15
                 else
                 {
                     // no output or locations found - system must have finished
-                    Console.WriteLine("FINISHED!!");
+                 //   Console.WriteLine("FINISHED!!");
                     return;
                         
                 }
 
-                Console.SetCursorPosition(0, 0);
-                Console.WriteLine("Droid Locaion: " + _map.Droid.ToString());
-                Console.WriteLine(_map.DrawMap());
-                Thread.Sleep(25);
+                //Console.SetCursorPosition(0, 0);
+                //Console.WriteLine("Droid Locaion: " + _map.Droid.ToString());
+                //Console.WriteLine(_map.DrawMap());
+                //Thread.Sleep(25);
               //  Console.Out.WriteLine("Press enter to continue!");
               //  Console.ReadLine();
             }

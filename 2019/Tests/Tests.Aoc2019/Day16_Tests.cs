@@ -6,7 +6,7 @@ using System.Linq;
 using AoC.Common;
 using Aoc.AoC2019.Problems.Day16;
 
-namespace Tests
+namespace Aoc.AoC2019.Tests
 {
     public class Day16_Tests
     {
@@ -24,13 +24,13 @@ namespace Tests
         }
 
         [Theory]
-        [InlineData("84462026",  "03036732577212944063491565474664")]
-        [InlineData("78725270",  "02935109699940807407585447034323")]
-        [InlineData("53553731",  "03081770884921959731165446850517")]
-        public void Test_FlawedFrequencyTransmission_DecodeSignal(string expectedResultData, string data)
+        [InlineData("84462026",  "03036732577212944063491565474664", 7 )]
+        [InlineData("78725270",  "02935109699940807407585447034323", 7)]
+        [InlineData("53553731",  "03081770884921959731165446850517", 7)]
+        public void Test_FlawedFrequencyTransmission_DecodeSignal(string expectedResultData, string data, int offSetLength)
         {
             FlawedFrequencyTransmission fft = new FlawedFrequencyTransmission(data);
-            string actualResult = fft.DecodeSignal( 10000, 100, 8);
+            string actualResult = fft.DecodeSignal( 10000, 100, offSetLength);
             Assert.Equal(expectedResultData, actualResult);
         }
     }
