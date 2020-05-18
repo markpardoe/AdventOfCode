@@ -8,6 +8,11 @@ namespace AoC.Common.DataStructures
 {
     /// <summary>
     /// List implementation that allows roll-over of values.
+    /// Eg. List<string> strList = {"A", "B"}
+    /// strList[0] = "A"
+    /// strList[1] = "B"
+    /// strList[2] = "A"
+    /// strList[3] = "B"
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class RepeatingList<T> : IList<T>

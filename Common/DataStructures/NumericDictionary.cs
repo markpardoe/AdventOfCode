@@ -4,6 +4,11 @@ using System.Text;
 
 namespace AoC.Common.DataStructures
 {
+    /// <summary>
+    /// Dictionary implementation that holds numeric values.
+    /// Returns 0 as a default value if a key doesn't exist.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class NumericDictionary<T> : Dictionary<T, long>
     {
         public NumericDictionary() : base() { }

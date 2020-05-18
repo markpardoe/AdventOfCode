@@ -6,7 +6,7 @@ namespace Aoc.AoC2019.IntCode
     {
         IReadOnlyList<long> Data { get; }
         Queue<long> Outputs { get; }
-      
+        
         ExecutionStatus Status { get; }
 
         void AddInput(params long[] inputs);
