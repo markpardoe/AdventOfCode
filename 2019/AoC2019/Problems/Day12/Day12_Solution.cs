@@ -9,6 +9,7 @@ namespace Aoc.AoC2019.Problems.Day12
 {
     public class Day12_Solution : ISolution
     {
+        public string URL => @"https://adventofcode.com/2019/day/12";
         public int Year => 2019;
 
         public int Day => 12;
@@ -19,13 +20,14 @@ namespace Aoc.AoC2019.Problems.Day12
 
         public IEnumerable<string> Solve(IEnumerable<string> input)
         {
+            // use hard-coded input rather than file.
             yield return GetTotalEnergy(initialPositions, 1000).ToString();
             yield return FindStepsUntilRepeat(initialPositions).ToString();
         }
 
         private int GetTotalEnergy(List<Position3d> positions, int numMoves)
         {
-            MoonMap map = new MoonMap(initialPositions);
+            MoonMap map = new MoonMap(positions);
             map.Move(numMoves);
             return map.GetTotalEnergy();
         }

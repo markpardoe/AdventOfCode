@@ -9,7 +9,7 @@ namespace Aoc.AoC2019.Problems.Day18
 {
     public class Day18_Solution :ISolution
     {
-        protected bool IgnoreDoors = false;
+        public string URL => @"https://adventofcode.com/2019/day/18";
 
         public int Year => 2019;
 
@@ -19,6 +19,8 @@ namespace Aoc.AoC2019.Problems.Day18
 
         public virtual string InputFileName => "Day18.txt";
 
+
+        protected bool IgnoreDoors = false;
 
         public virtual IEnumerable<string> Solve(IEnumerable<string> input)
         {

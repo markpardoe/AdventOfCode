@@ -8,6 +8,7 @@ namespace Aoc.AoC2019.Problems.Day04
 {
     public class Day04_Solution : ISolution
     {
+        public string URL => @"https://adventofcode.com/2019/day/4";
         public int Year => 2019;
 
         public int Day => 4;

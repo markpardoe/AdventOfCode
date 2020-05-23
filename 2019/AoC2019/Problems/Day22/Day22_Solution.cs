@@ -9,6 +9,8 @@ namespace Aoc.AoC2019.Problems.Day22
 {
     public class Day22_Solution :ISolution
     {
+        public string URL => @"https://adventofcode.com/2019/day/22";
+
         public const int SPACE_DECK_SIZE = 10007;
         
         public int Year => 2019;

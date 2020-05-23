@@ -8,6 +8,7 @@ namespace Aoc.AoC2019.Problems.Day08
 {
     public class Day08_Solution :ISolution
     {
+        public string URL => @"https://adventofcode.com/2019/day/8";
         public int Year => 2019;
 
         public int Day => 8;
@@ -18,7 +19,7 @@ namespace Aoc.AoC2019.Problems.Day08
 
         public IEnumerable<string> Solve(IEnumerable<string> input)
         {
-            yield return FindLayerWithLeastDigits(GenerateImage(6,25, input.First()), 0).ToString();
+            yield return FindLayerWithLeastDigits(GenerateImage(6,25, input.First())).ToString();
             yield return GenerateImage(6, 25, input.First()).DrawImage();
         }
 
@@ -28,7 +29,7 @@ namespace Aoc.AoC2019.Problems.Day08
             return new SpaceImage(rows, columns, messageData);
         }
 
-        private int FindLayerWithLeastDigits(SpaceImage img, int digit)
+        private int FindLayerWithLeastDigits(SpaceImage img)
         {
             int minCount = Int32.MaxValue;
             Layer minLayer = null;

@@ -11,5 +11,6 @@ namespace AoC.Common
         int Day { get; }
         string Name { get; }
         string InputFileName { get; }
+        string URL { get; }        
     }
 }

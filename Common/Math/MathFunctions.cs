@@ -8,6 +8,13 @@ namespace AoC.Common
 {
     public class MathFunctions
     {
+        /// <summary>
+        /// Calculates the Leaset Common Multiplier (LCM) for a set of long values
+        /// https://en.wikipedia.org/wiki/Least_common_multiple
+        /// Returns a BigInteger as we can't predict the size of the found value.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns>BigInteger</returns>
         public static BigInteger LCM(params long[] values)
         {
             BigInteger result = 1;
@@ -18,7 +25,7 @@ namespace AoC.Common
             {
                 while (currentValues.Any(l => l % i == 0))
                 {
-                    result = result * i;
+                    result *= i;
                     List<long> newList = new List<long>(currentValues.Count);
                     foreach(long l in currentValues)
                     {
@@ -37,7 +44,7 @@ namespace AoC.Common
 
             foreach (long l in currentValues)
             {
-                result = result * l;
+                result *= l;
             }
             return result;
         }

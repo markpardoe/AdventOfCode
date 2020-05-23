@@ -7,8 +7,13 @@ using Aoc.AoC2019.IntCode;
 
 namespace Aoc.AoC2019.Problems.Day21
 {
+    /// <summary>
+    /// Solutions hand-processed as easier than calulating.
+    /// </summary>
     public class Day21_Solution : ISolution
     {
+        public string URL => @"https://adventofcode.com/2019/day/21";
+
         public int Year => 2019;
 
         public int Day => 21;
@@ -25,8 +30,9 @@ namespace Aoc.AoC2019.Problems.Day21
 
             yield return Solve(input.First(), solution1).ToString();
             yield return Solve(input.First(), solution2).ToString();
-        }        
+        }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]
         public long Solve(string intCode, List<string> jumpCommands)
         {
             IVirtualMachine vm = new IntCodeVM(intCode);
@@ -34,6 +40,8 @@ namespace Aoc.AoC2019.Problems.Day21
 
             // Execute initial setup.
             vm.Execute();
+
+            // We have to process outputs in order to clear output queue - even if we do nothing with them.
             List<long> outputs = vm.Outputs.DequeueToList();
             // Console.WriteLine(AsciiToString(outputs));  // Print initial output (asking for commands)
 

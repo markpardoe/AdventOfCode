@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using AoC.Common.DataStructures;
 
 namespace Aoc.AoC2019.Problems.Day16
 {
@@ -102,7 +103,7 @@ namespace Aoc.AoC2019.Problems.Day16
             total = Math.Abs(total);
             while (total >= 10)
             {
-                total = total % 10;
+                total %= 10;
             }
             return total;
         }
