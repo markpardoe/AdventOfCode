@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Text;
 
 namespace Aoc.AoC2019.Problems.Day22
 {
@@ -22,9 +21,9 @@ namespace Aoc.AoC2019.Problems.Day22
                 RunP2(ref increment_mul, ref offset_diff, size, line);
             }
 
-            (BigInteger increment, BigInteger offset) = getseq(iter, increment_mul, offset_diff, size);
+            (BigInteger increment, BigInteger offset) = GetSeq(iter, increment_mul, offset_diff, size);
 
-            var card = get(offset, increment, 2020, size);
+            var card = Get(offset, increment, 2020, size);
 
             return card.ToString();
         }
@@ -44,33 +43,33 @@ namespace Aoc.AoC2019.Problems.Day22
             {
                 var num = Int32.Parse(line.Split(" ").Last());
 
-                inc_mul *= num.TBI().inv(size);
+                inc_mul *= num.TBI().Inv(size);
             }
 
-            inc_mul = inc_mul.mod(size);
-            offset_diff = offset_diff.mod(size);
+            inc_mul = inc_mul.Mod(size);
+            offset_diff = offset_diff.Mod(size);
         }
 
-        private static BigInteger mod(this BigInteger x, BigInteger m)
+        private static BigInteger Mod(this BigInteger x, BigInteger m)
         {
             return (x % m + m) % m;
         }
 
-        private static BigInteger inv(this BigInteger num, BigInteger size)
+        private static BigInteger Inv(this BigInteger num, BigInteger size)
         {
-            return num.mpow(size - 2, size);
+            return num.Mpow(size - 2, size);
         }
 
-        private static BigInteger get(BigInteger offset, BigInteger increment, BigInteger i, BigInteger size)
+        private static BigInteger Get(BigInteger offset, BigInteger increment, BigInteger i, BigInteger size)
         {
             return (offset + i * increment) % size;
         }
 
-        private static (BigInteger increment, BigInteger offset) getseq(this BigInteger iterations, BigInteger inc_mul, BigInteger offset_diff, BigInteger size)
+        private static (BigInteger increment, BigInteger offset) GetSeq(this BigInteger iterations, BigInteger inc_mul, BigInteger offset_diff, BigInteger size)
         {
-            var increment = inc_mul.mpow(iterations, size);
+            var increment = inc_mul.Mpow(iterations, size);
 
-            var offset = offset_diff * (1 - increment) * ((1 - inc_mul) % size).inv(size);
+            var offset = offset_diff * (1 - increment) * ((1 - inc_mul) % size).Inv(size);
 
             offset %= size;
 
@@ -82,7 +81,7 @@ namespace Aoc.AoC2019.Problems.Day22
             return new BigInteger(num);
         }
 
-        private static BigInteger mpow(this BigInteger bigInteger, BigInteger pow, BigInteger mod)
+        private static BigInteger Mpow(this BigInteger bigInteger, BigInteger pow, BigInteger mod)
         {
             return BigInteger.ModPow(bigInteger, pow, mod);
         }
@@ -113,8 +112,6 @@ namespace Aoc.AoC2019.Problems.Day22
 
             return deck;
         }
-
-
 
         public static List<int> DealwithInc(this List<int> deck, int n)
         {

@@ -1,24 +1,21 @@
-﻿using AoC.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Aoc.AoC2019.Problems.Day16
 {
-    public class Day16_Solution : ISolution
+    public class Day16_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/16";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/16";
 
-        public int Day => 16;
+        public override int Day => 16;
 
-        public string Name => "Day 16: Flawed Frequency Transmission";
+        public override string Name => "Day 16: Flawed Frequency Transmission";
 
-        public string InputFileName => "Day16.txt";
+        public override string InputFileName => "Day16.txt";
 
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             FlawedFrequencyTransmission fft = new FlawedFrequencyTransmission(input.First());           
             List<int> results = fft.VerifySignal(100);

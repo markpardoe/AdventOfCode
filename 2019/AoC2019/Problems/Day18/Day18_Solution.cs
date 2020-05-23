@@ -1,32 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using System.Threading;
-using AoC.Common;
+﻿using System.Collections.Generic;
 
 namespace Aoc.AoC2019.Problems.Day18
 {
-    public class Day18_Solution :ISolution
+    public class Day18_Solution :AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/18";
+        public override string URL => @"https://adventofcode.com/2019/day/18";
 
-        public int Year => 2019;
+        public override int Day => 18;
 
-        public int Day => 18;
+        public override string Name => "Day 18: Many-Worlds Interpretation";
 
-        public virtual string Name => "Day 18: Many-Worlds Interpretation";
-
-        public virtual string InputFileName => "Day18.txt";
-
+        public override string InputFileName => "Day18.txt";
 
         protected bool IgnoreDoors = false;
 
-        public virtual IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return FindShortestPath(input, IgnoreDoors).ToString();
         }
-
 
         public int FindShortestPath(IEnumerable<string> input, bool ignoreDoors)
         {

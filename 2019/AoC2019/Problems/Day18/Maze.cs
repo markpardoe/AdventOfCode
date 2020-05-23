@@ -1,8 +1,8 @@
-﻿using System;
+﻿using AoC.Common.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AoC.Common.Mapping;
 
 namespace Aoc.AoC2019.Problems.Day18
 {

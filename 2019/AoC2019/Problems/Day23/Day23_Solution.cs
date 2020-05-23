@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day23
 {
-    public class Day23_Solution : ISolution
+    public class Day23_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/23";
+        public override string URL => @"https://adventofcode.com/2019/day/23";
 
-        public int Year => 2019;
+        public override int Day => 23;
 
-        public int Day => 23;
+        public override string Name => "Day 23: Category Six";
 
-        public string Name => "Day 23: Category Six";
+        public override string InputFileName => "Day23.txt";
 
-        public string InputFileName => "Day23.txt";
-
-        public IEnumerable<string> Solve(IEnumerable<string> data)
+        public override IEnumerable<string> Solve(IEnumerable<string> data)
         {
             NicController nic = new NicController(50, data.First());
             yield return nic.Execute().ToString();

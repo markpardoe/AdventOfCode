@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Numerics;
 
 namespace Aoc.AoC2019.Problems.Day12
 {

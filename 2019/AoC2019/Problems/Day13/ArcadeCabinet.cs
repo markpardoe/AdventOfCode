@@ -1,9 +1,7 @@
-﻿using AoC.Common.Mapping;
-using Aoc.AoC2019.IntCode;
+﻿using Aoc.AoC2019.IntCode;
+using AoC.Common.Mapping;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace Aoc.AoC2019.Problems.Day13
 {

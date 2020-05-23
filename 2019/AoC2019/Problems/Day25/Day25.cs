@@ -1,25 +1,21 @@
-﻿using System;
+﻿using Aoc.AoC2019.IntCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AoC.Common;
-using Aoc.AoC2019.IntCode;
 
 namespace Aoc.AoC2019.Problems.Day25
 {
-    public class Day25 : ISolution
+    public class Day25 : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/25";
+        public override string URL => @"https://adventofcode.com/2019/day/25";
 
-        public int Year => 2019;
+        public override int Day => 25;
 
-        public int Day => 25;
+        public override string Name => "Day 25: Cryostasis";
 
-        public string Name => "Day 25: Cryostasis";
+        public override string InputFileName => "Day25.txt";
 
-        public string InputFileName => "Day25.txt";
-
-        public IEnumerable<string> Solve(IEnumerable<string> data)
+        public override IEnumerable<string> Solve(IEnumerable<string> data)
         {
             yield return "Day 25 needs to be run manually!  Please call RunGame to run the text adventure";
         }

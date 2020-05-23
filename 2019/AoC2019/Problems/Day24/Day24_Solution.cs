@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day24
 {
-    public class Day24_Solution : ISolution
+    public class Day24_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/24";
+        public override string URL => @"https://adventofcode.com/2019/day/24";
 
-        public int Year => 2019;
+        public override int Day => 24;
 
-        public int Day => 24;
+        public override string Name => "Day 24: Planet of Discord";
 
-        public string Name => "Day 24: Planet of Discord";
+        public override string InputFileName => "Day24.txt";
 
-        public string InputFileName => "Day24.txt";
-
-        public IEnumerable<string> Solve(IEnumerable<string> data)
+        public override IEnumerable<string> Solve(IEnumerable<string> data)
         {
             yield return FindReoccuringState(data).ToString();
             yield return RecusiveGame_CountBugs(data, 200).ToString();

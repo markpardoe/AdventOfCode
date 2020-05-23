@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AoC.Common;
 
 namespace Aoc.Aoc2018.Day01
 {
-    public class Day01_Solution : ISolution
+    public class Day01_Solution : AoC2018Solution
     {
-        public string URL => @"https://adventofcode.com/2018/day/1";
+        public override string URL => @"https://adventofcode.com/2018/day/1";
 
-        public int Year => 2018;
+        public override int Day =>  1;
 
-        public int Day =>  1;
+        public override string Name => "Chronal Calibration";
 
-        public string Name => "Chronal Calibration";
+        public override string InputFileName => "Day01.txt";
 
-        public string InputFileName => "Day01.txt";
-
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return CalculateFrequency(input).ToString();
             yield return FindDuplicateFrequency(input).ToString();

@@ -1,23 +1,20 @@
-﻿using AoC.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace Aoc.Aoc2018.Day04
 {
-    public class Day04_Solution : ISolution
+    public class Day04_Solution : AoC2018Solution
     {
-        public string URL => @"https://adventofcode.com/2018/day/4";
-        public int Year => 2018;
+        public override string URL => @"https://adventofcode.com/2018/day/4";
 
-        public int Day => 4;
+        public override int Day => 4;
 
-        public string Name => "Day 4: Repose Record";
+        public override string Name => "Day 4: Repose Record";
 
-        public string InputFileName => "Day04.txt";
+        public override string InputFileName => "Day04.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return Strategy1(input).ToString();
             yield return Strategy2(input).ToString();

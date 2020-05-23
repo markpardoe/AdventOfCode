@@ -1,7 +1,5 @@
 ﻿using AoC.Common.Mapping;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Aoc.AoC2019.Problems.Day20
 {
@@ -21,11 +19,10 @@ namespace Aoc.AoC2019.Problems.Day20
             return this.X == other.X && this.Y == other.Y && this.Layer == other.Layer;
         }
 
-
         public override bool Equals(Object obj)
         {
             if (obj == null) return false;
-            if (obj is RecursiveMapNode) return (Equals((RecursiveMapNode)obj));
+            if (obj is RecursiveMapNode node) return (Equals(node));
             if (obj is LayerPosition) return base.Equals(obj as LayerPosition);
             return false;
         }

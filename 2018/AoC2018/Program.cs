@@ -1,9 +1,7 @@
-﻿using System;
-using AoC.Common;
+﻿using AoC.Common;
+using System;
 using System.IO;
 using System.Linq;
-using Aoc.Aoc2018;
-using System.Collections.Generic;
 
 namespace Aoc.Aoc2018
 {

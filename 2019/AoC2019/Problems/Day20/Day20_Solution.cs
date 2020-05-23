@@ -1,25 +1,20 @@
 ﻿using AoC.Common.Mapping;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using AoC.Common;
 using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day20
 {
-    public class Day20_Solution : ISolution
+    public class Day20_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/20";
+        public override string URL => @"https://adventofcode.com/2019/day/20";
 
-        public int Year => 2019;
+        public override int Day => 20;
 
-        public int Day => 20;
+        public override string Name => "Day 20: Donut Maze";
 
-        public virtual string Name => "Day 20: Donut Maze";
+        public override string InputFileName => "Day20.txt";
 
-        public virtual string InputFileName => "Day20.txt";
-
-        public virtual IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             Maze m = new Maze(input.ToList());
             //yield return m.DrawMap();

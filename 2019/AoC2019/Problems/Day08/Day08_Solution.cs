@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day08
 {
-    public class Day08_Solution :ISolution
+    public class Day08_Solution :AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/8";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/8";
 
-        public int Day => 8;
+        public override int Day => 8;
 
-        public string Name => "Day 8: Space Image Format";
+        public override string Name => "Day 8: Space Image Format";
 
-        public string InputFileName => "Day08.txt";
+        public override string InputFileName => "Day08.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return FindLayerWithLeastDigits(GenerateImage(6,25, input.First())).ToString();
             yield return GenerateImage(6, 25, input.First()).DrawImage();

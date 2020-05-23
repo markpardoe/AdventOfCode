@@ -1,28 +1,24 @@
-﻿using System;
+﻿using Aoc.AoC2019.IntCode;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using AoC.Common;
-using Aoc.AoC2019.IntCode;
+using System.Text;
 
 namespace Aoc.AoC2019.Problems.Day21
 {
     /// <summary>
     /// Solutions hand-processed as easier than calulating.
     /// </summary>
-    public class Day21_Solution : ISolution
+    public class Day21_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/21";
+        public override string URL => @"https://adventofcode.com/2019/day/21";
 
-        public int Year => 2019;
+        public override int Day => 21;
 
-        public int Day => 21;
+        public override string Name => "Day 21: Springdroid Adventure";
 
-        public string Name => "Day 21: Springdroid Adventure";
+        public override string InputFileName => "Day21.txt";
 
-        public string InputFileName => "Day21.txt";
-
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             // Hand-coded solutions to the problem
             List<string> solution1 = new List<string>() { "NOT A J", "NOT B T", "OR T J", "NOT C T", "OR T J", "NOT D T", "NOT T T", "AND T J", "WALK" };

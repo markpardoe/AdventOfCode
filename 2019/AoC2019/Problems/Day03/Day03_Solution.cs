@@ -1,25 +1,22 @@
-﻿using System;
+﻿using AoC.Common.Mapping;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using AoC.Common;
-using AoC.Common.Mapping;
 
 namespace Aoc.AoC2019.Problems.Day03
 {
 
-    public class Day03_Solution :ISolution
+    public class Day03_Solution :AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/3";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/3";        
 
-        public int Day => 3;
+        public override int Day => 3;
 
-        public string Name => "Day 3: Crossed Wires";
+        public override string Name => "Day 3: Crossed Wires";
 
-        public string InputFileName => "Day03.txt";
+        public override string InputFileName => "Day03.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return CalculateDistanceFromOriginAtNearestIntersection(input).ToString();
             yield return CalculateCumulativeWireLengthAtFirstIntersection(input).ToString();

@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Text;
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day12
 {
-    public class Day12_Solution : ISolution
+    public class Day12_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/12";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/12";
 
-        public int Day => 12;
+        public override int Day => 12;
 
-        public string Name => "Day 12: The N-Body Problem";
+        public override string Name => "Day 12: The N-Body Problem";
 
-        public string InputFileName => null;
+        public override string InputFileName => null;
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             // use hard-coded input rather than file.
             yield return GetTotalEnergy(initialPositions, 1000).ToString();

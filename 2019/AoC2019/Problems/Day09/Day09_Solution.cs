@@ -1,24 +1,20 @@
-﻿using System;
+﻿using Aoc.AoC2019.IntCode;
 using System.Collections.Generic;
-using System.Text;
-using Aoc.AoC2019.IntCode;
 using System.Linq;
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day09
 {
-    public class Day09_Solution : ISolution
+    public class Day09_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/9";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/9";
 
-        public int Day => 9;
+        public override int Day => 9;
 
-        public string Name => "Day 9: Sensor Boost";
+        public override string Name => "Day 9: Sensor Boost";
 
-        public string InputFileName => "Day09.txt";
+        public override string InputFileName => "Day09.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return ExecuteCode(input.First(), 1).ToString();
             yield return ExecuteCode(input.First(), 2).ToString();

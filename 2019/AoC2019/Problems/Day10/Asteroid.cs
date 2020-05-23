@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Aoc.AoC2019.Problems.Day10
+﻿namespace Aoc.AoC2019.Problems.Day10
 {
     public enum VisibilityStatus
     {

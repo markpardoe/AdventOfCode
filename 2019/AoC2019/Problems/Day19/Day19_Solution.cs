@@ -1,26 +1,21 @@
 ﻿using Aoc.AoC2019.IntCode;
-using System;
+using AoC.Common.Mapping;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AoC.Common;
-using AoC.Common.Mapping;
 
 namespace Aoc.AoC2019.Problems.Day19
 {
-    public class Day19_Solution : ISolution
+    public class Day19_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/19";
+        public override string URL => @"https://adventofcode.com/2019/day/19";
 
-        public int Year => 2019;
+        public override int Day => 19;
 
-        public int Day => 19;
+        public override string Name => "Day 19: Tractor Beam";
 
-        public virtual string Name => "Day 19: Tractor Beam";
+        public override string InputFileName => "Day19.txt";
 
-        public virtual string InputFileName => "Day19.txt";
-
-        public virtual IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             TractorBeamMap map = new TractorBeamMap();
             var data = IntCodeVM.ParseStringData(input.First());

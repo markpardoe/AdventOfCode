@@ -1,24 +1,20 @@
-﻿using AoC.Common;
-using System;
+﻿using Aoc.AoC2019.IntCode;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Aoc.AoC2019.IntCode;
 
 namespace Aoc.AoC2019.Problems.Day02
 {
-    public class Day02_Solution : ISolution
+    public class Day02_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/2";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/2";
 
-        public int Day => 2;
+        public override int Day => 2;
 
-        public string Name => "Day 2: 1202 Program Alarm";
+        public override string Name => "Day 2: 1202 Program Alarm";
 
-        public string InputFileName => "Day02.txt";
+        public override string InputFileName => "Day02.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return ExecuteMachine(input.First(), 12, 2).ToString() ;
             yield return FindAddressForTargetResult(input.First(), 19690720).ToString();

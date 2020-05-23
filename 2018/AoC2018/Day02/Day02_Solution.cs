@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AoC.Common;
 
 namespace Aoc.Aoc2018.Day02
 {
-    public class Day02_Solution : ISolution
+    public class Day02_Solution : AoC2018Solution
     {
-        public string URL => @"https://adventofcode.com/2018/day/2";
-        public int Year => 2018;
+        public override string URL => @"https://adventofcode.com/2018/day/2";
 
-        public int Day =>  2;
+        public override int Day =>  2;
 
-        public string Name => "Inventory Management System";
+        public override string Name => "Inventory Management System";
 
-        public string InputFileName => "Day02.txt";
+        public override string InputFileName => "Day02.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return CalculateCheckSum(input).ToString();
             yield return FindSimilarBoxIds(input.ToList());

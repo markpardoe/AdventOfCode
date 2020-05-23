@@ -6,6 +6,8 @@ namespace AoC.Common
 {
     public interface ISolution
     {
+        string ParentCategory { get; }
+
         IEnumerable<string> Solve(IEnumerable<string> input);
         int Year { get; }
         int Day { get; }

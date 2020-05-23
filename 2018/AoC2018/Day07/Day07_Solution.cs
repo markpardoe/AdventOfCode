@@ -1,24 +1,20 @@
-﻿using AoC.Common;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Aoc.Aoc2018.Day07
 {
-    public class Day07_Solution : ISolution
+    public class Day07_Solution : AoC2018Solution
     {
 
-        public string URL => @"https://adventofcode.com/2018/day/7";
-        public int Year => 2018;
+        public override string URL => @"https://adventofcode.com/2018/day/7";
 
-        public int Day => 7;
+        public override int Day => 7;
 
-        public string Name => "Day 7: The Sum of Its Parts";
+        public override string Name => "Day 7: The Sum of Its Parts";
 
-        public string InputFileName => "Day07.txt";
+        public override string InputFileName => "Day07.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return FindShortestPath(input);
         }

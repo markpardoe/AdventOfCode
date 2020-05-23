@@ -1,24 +1,21 @@
-﻿using System;
+﻿using AoC.Common.Mapping;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using AoC.Common;
-using AoC.Common.Mapping;
 
 namespace Aoc.AoC2019.Problems.Day10
 {
-    public class Day10_Solution :ISolution
+    public class Day10_Solution :AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/10";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/10";
 
-        public int Day => 10;
+        public override int Day => 10;
 
-        public string Name => "Day 10: Monitoring Station";
+        public override string Name => "Day 10: Monitoring Station";
 
-        public string InputFileName => "Day10.txt";
+        public override string InputFileName => "Day10.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return FindBestLocation(input).ToString();
             yield return DestroyAsteroids(input, new Position(20,21), 200).ToString();

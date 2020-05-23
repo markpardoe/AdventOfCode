@@ -1,27 +1,21 @@
-﻿using System;
+﻿using Aoc.AoC2019.IntCode;
 using System.Collections.Generic;
-using System.Text;
-using Aoc.AoC2019.IntCode;
 using System.Linq;
-using AoC.Common.Mapping;
-
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day15
 {
-    public class Day15_Solution : ISolution
+    public class Day15_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/15";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/15";
 
-        public int Day => 15;
+        public override int Day => 15;
 
-        public string Name => "Day 15: Oxygen System";
+        public override string Name => "Day 15: Oxygen System";
 
-        public string InputFileName => "Day15.txt";
+        public override string InputFileName => "Day15.txt";
 
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             IVirtualMachine vm = new IntCodeVM(input.First());
             Robot robot = new Robot(vm);

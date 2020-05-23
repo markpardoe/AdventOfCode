@@ -1,23 +1,20 @@
-﻿using AoC.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Aoc.Aoc2018.Day05
 {
-    public class Day05_Solution : ISolution
+    public class Day05_Solution : AoC2018Solution
     {
-        public string URL => @"https://adventofcode.com/2018/day/5";
-        public int Year => 2018;
+        public override string URL => @"https://adventofcode.com/2018/day/5";
 
-        public int Day => 5;
+        public override int Day => 5;
 
-        public string Name => "Day 5: Alchemical Reduction";
+        public override string Name => "Day 5: Alchemical Reduction";
 
-        public string InputFileName => "Day05.txt";
+        public override string InputFileName => "Day05.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return ReducePolymer(input.First()).Length.ToString();
             yield return FindShortestWithReduction(input.First()).ToString();

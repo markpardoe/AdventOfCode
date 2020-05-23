@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day04
 {
-    public class Day04_Solution : ISolution
+    public class Day04_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/4";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/4";
+        public override int Day => 4;
 
-        public int Day => 4;
+        public override string Name => "Day 4: Secure Container";
 
-        public string Name => "Day 4: Secure Container";
+        public override string InputFileName => null;
 
-        public string InputFileName => null;
-
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return CalculatePasswordCombinations(284639, 748759).ToString();
             yield return CalculatePasswordCombinationsWithNoRepeatingGroups(284639, 748759).ToString();

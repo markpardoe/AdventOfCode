@@ -1,24 +1,18 @@
-﻿using System;
+﻿using Aoc.AoC2019.IntCode;
 using System.Collections.Generic;
-using System.Text;
-using Aoc.AoC2019.IntCode;
 using System.Linq;
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day05
 {
-    public class Day05_Solution : ISolution
+    public class Day05_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/5";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/5";
+        public override int Day => 5;
+        public override string Name => "Day 5: Sunny with a Chance of Asteroids";
 
-        public int Day => 5;
+        public override string InputFileName => "Day05.txt";
 
-        public string Name => "Day 5: Sunny with a Chance of Asteroids";
-
-        public string InputFileName => "Day05.txt";
-
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return ExecuteIntCode(input.First(), 1).ToString();
             yield return ExecuteIntCode(input.First(), 5).ToString();

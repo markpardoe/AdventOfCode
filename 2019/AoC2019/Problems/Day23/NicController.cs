@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Aoc.AoC2019.IntCode;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using Aoc.AoC2019.IntCode;
-using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day23
 {

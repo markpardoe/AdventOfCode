@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Aoc.AoC2019.IntCode;
+﻿using Aoc.AoC2019.IntCode;
 using AoC.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day07
 {
-    public class Day07_Solution : ISolution
+    public class Day07_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/7";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/7";
 
-        public int Day => 7;
+        public override int Day => 7;
 
-        public string Name => "Day 7: Amplification Circuit";
+        public override string Name => "Day 7: Amplification Circuit";
 
-        public string InputFileName => "Day07.txt";
+        public override string InputFileName => "Day07.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return FindHighestSignal(input.First()).ToString();
             yield return FindHighestSignalWithFeedback(input.First()).ToString();

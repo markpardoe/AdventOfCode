@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AoC.Common;
+﻿using System.Collections.Generic;
 
 namespace Aoc.AoC2019.Problems.Day14
 {
-    public class Day14_Solution :ISolution
+    public class Day14_Solution :AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/14";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/14";
 
-        public int Day => 14;
+        public override int Day => 14;
 
-        public string Name => "Day 14: Space Stoichiometry";
+        public override string Name => "Day 14: Space Stoichiometry";
 
-        public string InputFileName => "Day14.txt";
+        public override string InputFileName => "Day14.txt";
 
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             NanoReactor nano = new NanoReactor(input);
             long targetOre = 1000000000000;

@@ -1,24 +1,20 @@
-﻿using AoC.Common;
-using AoC.Common.Mapping;
-using System;
-using System.Linq;
+﻿using AoC.Common.Mapping;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Aoc.Aoc2018.Day03
 {
-    public class Day03_Solution : ISolution
+    public class Day03_Solution : AoC2018Solution
     {
-        public string URL => @"https://adventofcode.com/2018/day/3";
-        public int Year => 2018;
+        public override string URL => @"https://adventofcode.com/2018/day/3";
 
-        public int Day => 3;
+        public override int Day => 3;
 
-        public string Name => "Day 3: No Matter How You Slice It";
+        public override string Name => "Day 3: No Matter How You Slice It";
 
-        public string InputFileName => "Day03.txt";
+        public override string InputFileName => "Day03.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return CountOverlappingClothes(input).ToString();
             yield return FindNonOverlappingCloth(input);

@@ -4,21 +4,21 @@ using System.Text;
 using AoC.Common;
 using Aoc.AoC2019.IntCode;
 using System.Linq;
+using Aoc.AoC2019;
 
 namespace Aoc.AoC2019.Problems.Day11
 {
-    public class Day11_Solution :ISolution
+    public class Day11_Solution :AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/11";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/11";
 
-        public int Day => 11;
+        public override int Day => 11;
 
-        public string Name => "Day 11: Space Police";
+        public override string Name => "Day 11: Space Police";
 
-        public string InputFileName => "Day11.txt";
+        public override string InputFileName => "Day11.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return PaintShip(input.First(), PaintColor.Black).CountPanels().ToString();
             yield return PaintShip(input.First(), PaintColor.White).Map.DrawMap();

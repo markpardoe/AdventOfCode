@@ -2,24 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AoC.Common;
 
 namespace Aoc.AoC2019.Problems.Day17
 {
-    public class Day17_Solution :ISolution
+    public class Day17_Solution :AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/17";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/17";
 
-        public int Day => 17;
+        public override int Day => 17;
 
-        public string Name => "Day 17: Set and Forget";
+        public override string Name => "Day 17: Set and Forget";
 
-        public string InputFileName => "Day17.txt";
+        public override string InputFileName => "Day17.txt";
 
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {            
             yield return CalibrateCamera(input.First()).ToString();
 

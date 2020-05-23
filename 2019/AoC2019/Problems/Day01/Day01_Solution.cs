@@ -1,25 +1,21 @@
-﻿using AoC.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day01
-{ 
-    
-    public class Day01_Solution : ISolution
+{
+
+    public class Day01_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/1";
+        public override string URL => @"https://adventofcode.com/2019/day/1";
 
-        public int Year => 2019;
+        public override int Day => 1;
 
-        public int Day => 1;
+        public override string Name => "Day 1: The Tyranny of the Rocket Equation";
 
-        public string Name => "Day 1: The Tyranny of the Rocket Equation";
+        public override string InputFileName => "Day01.txt";
 
-        public string InputFileName => "Day01.txt";
-
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return CalculateFuelRequirements(input, false).ToString();
             yield return CalculateFuelRequirements(input, true).ToString();

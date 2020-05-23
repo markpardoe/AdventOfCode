@@ -1,24 +1,20 @@
-﻿using System;
+﻿using Aoc.AoC2019.IntCode;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using AoC.Common;
-using Aoc.AoC2019.IntCode;
 
 namespace Aoc.AoC2019.Problems.Day13
 {
-    public class Day13_Solution : ISolution
+    public class Day13_Solution : AoC2019Solution
     {
-        public string URL => @"https://adventofcode.com/2019/day/13";
-        public int Year => 2019;
+        public override string URL => @"https://adventofcode.com/2019/day/13";
 
-        public int Day => 13;
+        public override int Day => 13;
 
-        public string Name => "Day 13: Care Package";
+        public override string Name => "Day 13: Care Package";
 
-        public string InputFileName => "Day13.txt";
+        public override string InputFileName => "Day13.txt";
 
-        public IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return RunGame(input.First()).CountBlocks(TileType.Block).ToString();
             yield return RunGame(input.First(), 2).FinalScore.ToString();

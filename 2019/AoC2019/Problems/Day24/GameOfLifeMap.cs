@@ -1,8 +1,8 @@
-﻿using System;
+﻿using AoC.Common.Mapping;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using AoC.Common.Mapping;
 using System.Linq;
+using System.Text;
 
 namespace Aoc.AoC2019.Problems.Day24
 {
@@ -105,7 +105,7 @@ namespace Aoc.AoC2019.Problems.Day24
                     {
                         total += score;
                     }
-                    score = score * 2;
+                    score *= 2;
                 }
             }
             return total;
