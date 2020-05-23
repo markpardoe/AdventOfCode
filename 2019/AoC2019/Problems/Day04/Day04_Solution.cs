@@ -1,12 +1,14 @@
-﻿using System;
+﻿using AoC.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day04
 {
-    public class Day04_Solution : AoC2019Solution
+    public class Day04_Solution : AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2019/day/4";
+        public override int Year => 2019;
+
         public override int Day => 4;
 
         public override string Name => "Day 4: Secure Container";

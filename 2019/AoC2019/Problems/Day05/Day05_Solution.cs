@@ -1,12 +1,13 @@
 ﻿using Aoc.AoC2019.IntCode;
+using AoC.Common;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day05
 {
-    public class Day05_Solution : AoC2019Solution
+    public class Day05_Solution : AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2019/day/5";
+        public override int Year => 2019;
         public override int Day => 5;
         public override string Name => "Day 5: Sunny with a Chance of Asteroids";
 

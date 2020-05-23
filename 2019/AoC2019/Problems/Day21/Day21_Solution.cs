@@ -1,4 +1,5 @@
 ﻿using Aoc.AoC2019.IntCode;
+using AoC.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace Aoc.AoC2019.Problems.Day21
     /// <summary>
     /// Solutions hand-processed as easier than calulating.
     /// </summary>
-    public class Day21_Solution : AoC2019Solution
+    public class Day21_Solution : AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2019/day/21";
+        public override int Year => 2019;
 
         public override int Day => 21;
 

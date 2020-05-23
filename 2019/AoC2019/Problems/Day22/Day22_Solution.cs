@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using AoC.Common;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day22
 {
-    public class Day22_Solution :AoC2019Solution
+    public class Day22_Solution :AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2019/day/22";
+        public override int Year => 2019;
 
         public const int SPACE_DECK_SIZE = 10007;
 

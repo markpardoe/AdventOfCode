@@ -1,14 +1,15 @@
-﻿using AoC.Common.Mapping;
+﻿using AoC.Common;
+using AoC.Common.Mapping;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day20
 {
-    public class Day20_Solution : AoC2019Solution
+    public class Day20_Solution : AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2019/day/20";
-
         public override int Day => 20;
+
+        public override int Year => 2019;
 
         public override string Name => "Day 20: Donut Maze";
 

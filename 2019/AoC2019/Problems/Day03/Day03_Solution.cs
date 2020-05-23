@@ -1,4 +1,5 @@
-﻿using AoC.Common.Mapping;
+﻿using AoC.Common;
+using AoC.Common.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Linq;
 namespace Aoc.AoC2019.Problems.Day03
 {
 
-    public class Day03_Solution :AoC2019Solution
+    public class Day03_Solution :AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2019/day/3";        
+        public override int Year => 2019; 
 
         public override int Day => 3;
 

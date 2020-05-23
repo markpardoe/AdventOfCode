@@ -8,9 +8,9 @@ using Aoc.AoC2019;
 
 namespace Aoc.AoC2019.Problems.Day11
 {
-    public class Day11_Solution :AoC2019Solution
+    public class Day11_Solution :AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2019/day/11";
+        public override int Year => 2019;
 
         public override int Day => 11;
 

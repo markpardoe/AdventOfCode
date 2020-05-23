@@ -1,12 +1,13 @@
-﻿using System;
+﻿using AoC.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Aoc.Aoc2018.Day01
 {
-    public class Day01_Solution : AoC2018Solution
+    public class Day01_Solution : AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2018/day/1";
+        public override int Year => 2018;
 
         public override int Day =>  1;
 

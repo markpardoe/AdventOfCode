@@ -1,12 +1,13 @@
-﻿using AoC.Common.Mapping;
+﻿using AoC.Common;
+using AoC.Common.Mapping;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Aoc.Aoc2018.Day03
 {
-    public class Day03_Solution : AoC2018Solution
+    public class Day03_Solution : AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2018/day/3";
+        public override int Year => 2018;
 
         public override int Day => 3;
 
@@ -19,7 +20,6 @@ namespace Aoc.Aoc2018.Day03
             yield return CountOverlappingClothes(input).ToString();
             yield return FindNonOverlappingCloth(input);
         }
-
 
         public int CountOverlappingClothes(IEnumerable<string> input)
         {

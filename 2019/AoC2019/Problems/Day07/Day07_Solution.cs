@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day07
 {
-    public class Day07_Solution : AoC2019Solution
+    public class Day07_Solution : AoCSolution
     {
-        public override string URL => @"https://adventofcode.com/2019/day/7";
+        public override int Year => 2019;
 
         public override int Day => 7;
 

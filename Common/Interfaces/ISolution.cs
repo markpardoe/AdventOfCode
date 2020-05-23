@@ -6,13 +6,17 @@ namespace AoC.Common
 {
     public interface ISolution
     {
-        string ParentCategory { get; }
+        string Site { get; }
+        string Category { get; }
+        string SubCategory { get; }
+        string Name { get; }
+        string InputFileName { get; }
+        string URL { get; }
+
+   //     string SolveSingle(IEnumerable<string> Input);
 
         IEnumerable<string> Solve(IEnumerable<string> input);
         int Year { get; }
-        int Day { get; }
-        string Name { get; }
-        string InputFileName { get; }
-        string URL { get; }        
+        int Day { get; }          
     }
 }
