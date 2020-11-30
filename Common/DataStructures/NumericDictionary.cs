@@ -7,12 +7,18 @@ namespace AoC.Common.DataStructures
     /// <summary>
     /// Dictionary implementation that holds numeric values.
     /// Returns 0 as a default value if a key doesn't exist.
+    /// Creates new or updates existing entry
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class NumericDictionary<T> : Dictionary<T, long>
     {
         public NumericDictionary() : base() { }
+        public int DefaultValue { get; } = 0;
 
+        public NumericDictionary(int defaultValue = 0) :base()
+        {
+            DefaultValue = defaultValue;
+        }
 
         public new void Add(T key, long value)
         {
@@ -32,7 +38,7 @@ namespace AoC.Common.DataStructures
             {
                 if (!base.ContainsKey(key))
                 {
-                    return 0;
+                    return DefaultValue;
                 }
                 else
                 {
