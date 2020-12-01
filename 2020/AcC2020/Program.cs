@@ -11,7 +11,7 @@ namespace AoC.AoC2020
     {
         static void Main()
         {
-            AoCSolution problem = new Problems.Day01.Day01_Solution();
+            var problem = new Problems.Day01.Day01_Solution();
             List<string> data = new List<string>();
             if (problem.InputFileName != null)
             {

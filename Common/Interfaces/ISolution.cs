@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AoC.Common
 {
-    public interface ISolution
+    public interface ISolution<out T>
     {
         string Site { get; }
         string Category { get; }
@@ -15,7 +15,7 @@ namespace AoC.Common
 
    //     string SolveSingle(IEnumerable<string> Input);
 
-        IEnumerable<string> Solve(IEnumerable<string> input);
+        IEnumerable<T> Solve(IEnumerable<string> input);
         int Year { get; }
         int Day { get; }          
     }

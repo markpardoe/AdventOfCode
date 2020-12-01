@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Aoc.AoC2019.Problems.Day14
 {
-    public class Day14_Solution :AoCSolution
+    public class Day14_Solution :AoCSolution<long>
     {
         public override int Year => 2019;
 
@@ -14,13 +14,13 @@ namespace Aoc.AoC2019.Problems.Day14
         public override string InputFileName => "Day14.txt";
 
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
             NanoReactor nano = new NanoReactor(input);
             long targetOre = 1000000000000;
 
-            yield return nano.ProduceChemical("FUEL", 1).ToString();
-            yield return nano.FindFuelOutput(targetOre).ToString();
+            yield return nano.ProduceChemical("FUEL", 1);
+            yield return nano.FindFuelOutput(targetOre);
         }       
     }
 }

@@ -9,7 +9,7 @@ namespace Aoc.AoC2019.Problems.Day21
     /// <summary>
     /// Solutions hand-processed as easier than calulating.
     /// </summary>
-    public class Day21_Solution : AoCSolution
+    public class Day21_Solution : AoCSolution<long>
     {
         public override int Year => 2019;
 
@@ -19,14 +19,14 @@ namespace Aoc.AoC2019.Problems.Day21
 
         public override string InputFileName => "Day21.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
             // Hand-coded solutions to the problem
             List<string> solution1 = new List<string>() { "NOT A J", "NOT B T", "OR T J", "NOT C T", "OR T J", "NOT D T", "NOT T T", "AND T J", "WALK" };
             List<string> solution2 = new List<string>() { "NOT A J", "NOT B T", "OR T J", "NOT C T", "OR T J", "NOT D T", "NOT T T", "AND T J", "NOT E T", "NOT T T", "OR H T", "AND T J", "RUN" };
 
-            yield return Solve(input.First(), solution1).ToString();
-            yield return Solve(input.First(), solution2).ToString();
+            yield return Solve(input.First(), solution1);
+            yield return Solve(input.First(), solution2);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day07
 {
-    public class Day07_Solution : AoCSolution
+    public class Day07_Solution : AoCSolution<long>
     {
         public override int Year => 2019;
 
@@ -16,10 +16,10 @@ namespace Aoc.AoC2019.Problems.Day07
 
         public override string InputFileName => "Day07.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
-            yield return FindHighestSignal(input.First()).ToString();
-            yield return FindHighestSignalWithFeedback(input.First()).ToString();
+            yield return FindHighestSignal(input.First());
+            yield return FindHighestSignalWithFeedback(input.First());
         }
 
         public long FindHighestSignal(string intCode)

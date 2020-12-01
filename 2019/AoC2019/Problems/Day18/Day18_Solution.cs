@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Aoc.AoC2019.Problems.Day18
 {
-    public class Day18_Solution :AoCSolution
+    public class Day18_Solution :AoCSolution<int>
     {
         public override int Year => 2019;
 
@@ -15,9 +15,9 @@ namespace Aoc.AoC2019.Problems.Day18
 
         protected bool IgnoreDoors = false;
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            yield return FindShortestPath(input, IgnoreDoors).ToString();
+            yield return FindShortestPath(input, IgnoreDoors);
         }
 
         public int FindShortestPath(IEnumerable<string> input, bool ignoreDoors)

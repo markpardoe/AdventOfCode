@@ -11,7 +11,7 @@ namespace Aoc.AoC2019
     {
         static void Main()
         {
-            AoCSolution problem = new Problems.Day16.Day16_Solution();
+            var problem = new Problems.Day16.Day16_Solution();
             List<string> data = new List<string>();
             if (problem.InputFileName != null)
             {

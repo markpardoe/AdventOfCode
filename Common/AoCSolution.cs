@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AoC.Common
 {
-    public abstract class AoCSolution :ISolution
+    public abstract class AoCSolution<T> : ISolution<T>
     {
         public string Site => "Advent Of Code";        
 
@@ -22,6 +22,6 @@ namespace AoC.Common
 
         public string URL => $"https://adventofcode.com/{Year}/{Day}";
 
-        public abstract IEnumerable<string> Solve(IEnumerable<string> input);     
+        public abstract IEnumerable<T> Solve(IEnumerable<string> input);     
     }
 }

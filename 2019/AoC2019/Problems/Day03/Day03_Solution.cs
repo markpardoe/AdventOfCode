@@ -7,7 +7,7 @@ using System.Linq;
 namespace Aoc.AoC2019.Problems.Day03
 {
 
-    public class Day03_Solution :AoCSolution
+    public class Day03_Solution : AoCSolution<int>
     {
         public override int Year => 2019; 
 
@@ -17,10 +17,10 @@ namespace Aoc.AoC2019.Problems.Day03
 
         public override string InputFileName => "Day03.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            yield return CalculateDistanceFromOriginAtNearestIntersection(input).ToString();
-            yield return CalculateCumulativeWireLengthAtFirstIntersection(input).ToString();
+            yield return CalculateDistanceFromOriginAtNearestIntersection(input);
+            yield return CalculateCumulativeWireLengthAtFirstIntersection(input);
         }       
 
         public int CalculateDistanceFromOriginAtNearestIntersection(IEnumerable<string> data)

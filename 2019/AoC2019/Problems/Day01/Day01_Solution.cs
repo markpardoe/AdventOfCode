@@ -6,7 +6,7 @@ using System.Linq;
 namespace Aoc.AoC2019.Problems.Day01
 {
 
-    public class Day01_Solution : AoCSolution
+    public class Day01_Solution : AoCSolution<int>
     {
         public override int Year => 2019;
 
@@ -16,10 +16,10 @@ namespace Aoc.AoC2019.Problems.Day01
 
         public override string InputFileName => "Day01.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            yield return CalculateFuelRequirements(input, false).ToString();
-            yield return CalculateFuelRequirements(input, true).ToString();
+            yield return CalculateFuelRequirements(input, false);
+            yield return CalculateFuelRequirements(input, true);
         }
 
         public int CalculateFuelRequirements(IEnumerable<string> data, bool recursive = false)

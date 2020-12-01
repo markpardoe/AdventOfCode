@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace Aoc.AoC2019.Problems.Day12
 {
-    public class Day12_Solution : AoCSolution
+    public class Day12_Solution : AoCSolution<string>
     {
         public override int Year => 2019;
 

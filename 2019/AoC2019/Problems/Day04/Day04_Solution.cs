@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day04
 {
-    public class Day04_Solution : AoCSolution
+    public class Day04_Solution : AoCSolution<int>
     {
         public override int Year => 2019;
 
@@ -15,10 +15,10 @@ namespace Aoc.AoC2019.Problems.Day04
 
         public override string InputFileName => null;
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            yield return CalculatePasswordCombinations(284639, 748759).ToString();
-            yield return CalculatePasswordCombinationsWithNoRepeatingGroups(284639, 748759).ToString();
+            yield return CalculatePasswordCombinations(284639, 748759);
+            yield return CalculatePasswordCombinationsWithNoRepeatingGroups(284639, 748759);
         }
 
         private readonly int _maxPasswordLength = 6;

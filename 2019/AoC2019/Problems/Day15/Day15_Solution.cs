@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day15
 {
-    public class Day15_Solution : AoCSolution
+    public class Day15_Solution : AoCSolution<int>
     {
         public override int Year => 2019;
 
@@ -16,14 +16,14 @@ namespace Aoc.AoC2019.Problems.Day15
         public override string InputFileName => "Day15.txt";
 
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
             IVirtualMachine vm = new IntCodeVM(input.First());
             Robot robot = new Robot(vm);
             robot.ExploreShip();
 
-            yield return robot.GetPathToOxygen().Count().ToString();
-            yield return robot.FindTimeToFillWithOxxygen().ToString();
+            yield return robot.GetPathToOxygen().Count();
+            yield return robot.FindTimeToFillWithOxxygen();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day20
 {
-    public class Day20_Solution : AoCSolution
+    public class Day20_Solution : AoCSolution<int>
     {
         public override int Day => 20;
 
@@ -15,17 +15,17 @@ namespace Aoc.AoC2019.Problems.Day20
 
         public override string InputFileName => "Day20.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
             Maze m = new Maze(input.ToList());
             //yield return m.DrawMap();
 
             MapNode node = m.FindExit();
-            yield return node.TotalDistance.ToString();
+            yield return node.TotalDistance;
 
             RecursiveMaze recursiveMaze = new RecursiveMaze(input.ToList());
             RecursiveMapNode recursiveMapNode = recursiveMaze.FindExit();
-            yield return recursiveMapNode.DistanceFromStart.ToString();
+            yield return recursiveMapNode.DistanceFromStart;
         }
 
 

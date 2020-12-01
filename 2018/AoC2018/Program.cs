@@ -9,7 +9,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            ISolution problem = new Aoc2018.Day07.Day07_Solution();
+            var problem = new Aoc2018.Day07.Day07_Solution();
 
             string inputFile = Path.Combine(System.Environment.CurrentDirectory, "InputData", problem.InputFileName);
             var data = File.ReadAllLines(inputFile).ToList();

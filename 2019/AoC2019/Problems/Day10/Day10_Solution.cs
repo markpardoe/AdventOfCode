@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day10
 {
-    public class Day10_Solution :AoCSolution
+    public class Day10_Solution :AoCSolution<int>
     {
         public override int Year => 2019;
 
@@ -16,10 +16,10 @@ namespace Aoc.AoC2019.Problems.Day10
 
         public override string InputFileName => "Day10.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            yield return FindBestLocation(input).ToString();
-            yield return DestroyAsteroids(input, new Position(20,21), 200).ToString();
+            yield return FindBestLocation(input);
+            yield return DestroyAsteroids(input, new Position(20,21), 200);
 
         }
 

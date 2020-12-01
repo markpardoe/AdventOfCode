@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aoc.Aoc2018.Day04
 {
-    public class Day04_Solution : AoCSolution
+    public class Day04_Solution : AoCSolution<int>
     {
         public override int Year => 2018;
 
@@ -15,10 +15,10 @@ namespace Aoc.Aoc2018.Day04
 
         public override string InputFileName => "Day04.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            yield return Strategy1(input).ToString();
-            yield return Strategy2(input).ToString();
+            yield return Strategy1(input);
+            yield return Strategy2(input);
         }
         
         

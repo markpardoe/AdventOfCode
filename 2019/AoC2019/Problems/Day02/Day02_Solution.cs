@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day02
 {
-    public class Day02_Solution : AoCSolution
+    public class Day02_Solution : AoCSolution<long>
     {
         public override int Year => 2019;
 
@@ -15,10 +15,10 @@ namespace Aoc.AoC2019.Problems.Day02
 
         public override string InputFileName => "Day02.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
-            yield return ExecuteMachine(input.First(), 12, 2).ToString() ;
-            yield return FindAddressForTargetResult(input.First(), 19690720).ToString();
+            yield return ExecuteMachine(input.First(), 12, 2) ;
+            yield return FindAddressForTargetResult(input.First(), 19690720);
         }       
 
         public long FindAddressForTargetResult(string data, long target)

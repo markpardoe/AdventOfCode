@@ -8,7 +8,7 @@ using Aoc.AoC2019;
 
 namespace Aoc.AoC2019.Problems.Day11
 {
-    public class Day11_Solution :AoCSolution
+    public class Day11_Solution :AoCSolution<string>
     {
         public override int Year => 2019;
 

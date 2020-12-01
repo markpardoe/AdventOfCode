@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day24
 {
-    public class Day24_Solution : AoCSolution
+    public class Day24_Solution : AoCSolution<long>
     {
         public override int Year => 2019;
 
@@ -14,10 +14,10 @@ namespace Aoc.AoC2019.Problems.Day24
 
         public override string InputFileName => "Day24.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> data)
+        public override IEnumerable<long> Solve(IEnumerable<string> data)
         {
-            yield return FindReoccuringState(data).ToString();
-            yield return RecusiveGame_CountBugs(data, 200).ToString();
+            yield return FindReoccuringState(data);
+            yield return RecusiveGame_CountBugs(data, 200);
         }              
 
         public long FindReoccuringState(IEnumerable<string> data)

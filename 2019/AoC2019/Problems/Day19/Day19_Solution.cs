@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Aoc.AoC2019.Problems.Day19
 {
-    public class Day19_Solution : AoCSolution
+    public class Day19_Solution : AoCSolution<int>
     {
         public override int Year => 2019;
 
@@ -16,19 +16,19 @@ namespace Aoc.AoC2019.Problems.Day19
 
         public override string InputFileName => "Day19.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
             TractorBeamMap map = new TractorBeamMap();
             var data = IntCodeVM.ParseStringData(input.First());
             Probe probe = new Probe(map, data);
             probe.ScanMap(50);
             
-            yield return map.CountTiles(BeamStatus.Pulling).ToString();
+            yield return map.CountTiles(BeamStatus.Pulling);
 
 
             Position p = probe.FindShip(100);
             int result = (p.X * 10000) + p.Y;
-            yield return result.ToString();
+            yield return result;
         }      
     }
 }

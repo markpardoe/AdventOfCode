@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aoc.Aoc2018.Day01
 {
-    public class Day01_Solution : AoCSolution
+    public class Day01_Solution : AoCSolution<int>
     {
         public override int Year => 2018;
 
@@ -15,10 +15,10 @@ namespace Aoc.Aoc2018.Day01
 
         public override string InputFileName => "Day01.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            yield return CalculateFrequency(input).ToString();
-            yield return FindDuplicateFrequency(input).ToString();
+            yield return CalculateFrequency(input);
+            yield return FindDuplicateFrequency(input);
         }
 
         public int CalculateFrequency(IEnumerable<string> input)

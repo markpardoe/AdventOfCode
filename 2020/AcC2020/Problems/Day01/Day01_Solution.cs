@@ -6,7 +6,7 @@ using AoC.Common;
 
 namespace AoC.AoC2020.Problems.Day01
 {
-    class Day01_Solution : AoCSolution
+    class Day01_Solution : AoCSolution<int>
     {
 
         public override int Year => 2020;
@@ -14,10 +14,10 @@ namespace AoC.AoC2020.Problems.Day01
         public override string Name => "Day 1: Report Repair";
         public override string InputFileName => "Day01.txt";
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            yield return RepairReport(2020, input).ToString();
-            yield return RepairReportThreeNumbers(2020, input).ToString();
+            yield return RepairReport(2020, input);
+            yield return RepairReportThreeNumbers(2020, input);
         }
 
         public int RepairReport(int target, IEnumerable<string> input)

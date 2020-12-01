@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Aoc.AoC2019.Problems.Day06
 {
-    public class Day06_Solution : AoCSolution
+    public class Day06_Solution : AoCSolution<string>
     {
         public override int Year => 2019;
         public override int Day => 6;
