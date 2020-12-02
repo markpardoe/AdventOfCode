@@ -13,12 +13,14 @@
 
   <ItemGroup>
     <Folder Include="InputData\" />
-    <Folder Include="Problems\Day02\" />
     <Folder Include="Problems\Day03\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="InputData\Day01.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="InputData\Day02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

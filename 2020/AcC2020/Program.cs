@@ -3,7 +3,8 @@ using AoC.Common;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using AoC.AoC2020.Problems.Day01;
+using AoC.AoC2020.Problems;
+using AoC.AoC2020.Problems.Day02;
 
 namespace AoC.AoC2020
 {
@@ -11,7 +12,7 @@ namespace AoC.AoC2020
     {
         static void Main()
         {
-            var problem = new Problems.Day01.Day01_Solution();
+            var problem = new Day02_PasswordPhilosophy();
             List<string> data = new List<string>();
             if (problem.InputFileName != null)
             {
