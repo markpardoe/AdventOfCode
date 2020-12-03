@@ -14,7 +14,7 @@ namespace AoC.Common.Mapping
             _default = defaultValue;
         }
 
-        public virtual new void Add(Position key, TValue value)
+        public new virtual void Add(Position key, TValue value)
         {
             if (base.ContainsKey(key))
             {
@@ -85,10 +85,5 @@ namespace AoC.Common.Mapping
 
             return map.ToString();
         }
-
-        //public List<TValue> GetValues CountMatching(TValue value)
-        //{
-        //    return base.Values.ToList();
-        //}
     }
 }
