@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using AoC.AoC2020.Problems;
-using AoC.AoC2020.Problems.Day03;
+using AoC.AoC2020.Problems.Day04;
 
 namespace AoC.AoC2020
 {
@@ -12,7 +12,7 @@ namespace AoC.AoC2020
     {
         static void Main()
         {
-            var problem = new Day03_TobogganTrajectory();
+            var problem = new PassportProcessing();
             List<string> data = new List<string>();
             if (problem.InputFileName != null)
             {

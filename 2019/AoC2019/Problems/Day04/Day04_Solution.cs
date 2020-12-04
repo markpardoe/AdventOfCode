@@ -33,7 +33,7 @@ namespace Aoc.AoC2019.Problems.Day04
                     total++;
                 }
            }
-            return total;
+           return total;
         }
 
         private int CalculatePasswordCombinationsWithNoRepeatingGroups(int start, int end)
