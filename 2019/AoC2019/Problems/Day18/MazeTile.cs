@@ -12,7 +12,9 @@ namespace Aoc.AoC2019.Problems.Day18
         Key = 3
     }
     
-
+    /// <summary>
+    /// A location in the maze - with the tileType and position.
+    /// </summary>
     public class MazeTile : Position, IEquatable<MazeTile>, IEquatable<Position>
     {
         public TileType Tile { get; }
@@ -28,6 +30,7 @@ namespace Aoc.AoC2019.Problems.Day18
             }
             else if (tile == '.' || tile == '@')
             {
+                // @ is starting location of a robot - so still an empty square.
                 Tile = TileType.Empty;
                 KeyId = ".";
             }
@@ -54,6 +57,10 @@ namespace Aoc.AoC2019.Problems.Day18
             else return $"{base.ToString()} - {Tile.ToString()}";
         }
 
+        // Check if 2 tiles are the same.
+        // Since a tile can only contain one 'type' (wall, key, door, etc)
+        // We only need to check the (x, y) co-ordinates match.
+        // This also allows us to check it directly against a Position.
         public bool Equals([AllowNull] MazeTile other)
         {
             if (other == null) return false;

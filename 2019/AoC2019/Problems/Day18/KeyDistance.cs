@@ -5,6 +5,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Aoc.AoC2019.Problems.Day18
 {
+    /// <summary>
+    /// Path from one key to another key.
+    /// Contains the shortest path and which doors need to be opened on the way.
+    /// </summary>
     public class KeyDistance :IEquatable<KeyDistance>
     {
         public MazeTile Origin { get;  }
@@ -23,6 +27,8 @@ namespace Aoc.AoC2019.Problems.Day18
             Destination = end;
             Distance = node.DistanceFromStart; ;
 
+            // Map nodes are recursive paths - starting at Destination location.
+            // So iterate through it to get the path from Destination --> Origin.
             MapNode cur = node;
             List<Position> p = new List<Position>();
             while (cur.Parent != null)
@@ -30,9 +36,10 @@ namespace Aoc.AoC2019.Problems.Day18
                 cur = cur.Parent;
                 p.Add(new Position(cur.X, cur.Y));
             }
-            p.Reverse();
+            p.Reverse();  // Reverse to get path from Origin --> Destination
             Path = p;
         }
+
 
         public bool Equals([AllowNull] KeyDistance other)
         {
@@ -40,6 +47,9 @@ namespace Aoc.AoC2019.Problems.Day18
             {
                 return false;
             }
+
+            // We only care if the Origin & Destination are the same.
+            // We only want the shortest route - so we can ignore Doors / Keys enroute.
             return Origin.Equals(other.Origin) && Destination.Equals(other.Destination);
         }
 

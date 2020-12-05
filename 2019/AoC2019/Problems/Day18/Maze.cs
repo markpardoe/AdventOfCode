@@ -10,11 +10,16 @@ namespace Aoc.AoC2019.Problems.Day18
     {
         public HashSet<MazeTile> KeyPositions { get; } = new HashSet<MazeTile>();
         public HashSet<MazeTile> DoorPositions { get; } = new HashSet<MazeTile>();
-        
-        public readonly Dictionary<Position, HashSet<KeyDistance>> KeyDistances = new Dictionary<Position, HashSet<KeyDistance>>(); // Distance from <Key to Key>
-
         public List<MazeTile> StartPositions { get; } = new List<MazeTile>();
 
+        // Working out movements per tile takes too long - we only need to know the distances between 2 keys (and any doors on the way).
+        // This is a Dictionary <Position of a key, <Distance to / location of all other keys>
+        public readonly Dictionary<Position, HashSet<KeyDistance>> KeyDistances = new Dictionary<Position, HashSet<KeyDistance>>(); // Distance from <Key to Key>
+
+        /// <summary>
+        /// Key based maze.
+        /// </summary>
+        /// <param name="mapData"></param>
         public Maze(IEnumerable<string> mapData) : base(null)
         {
             int y = 0;
@@ -46,7 +51,7 @@ namespace Aoc.AoC2019.Problems.Day18
                 y++;
             }
 
-            // Cache distances between points
+            // Cache distances between keys.
             foreach (MazeTile origin in KeyPositions)
             {
                 HashSet<KeyDistance> distances = FindKeys(origin);
@@ -104,6 +109,8 @@ namespace Aoc.AoC2019.Problems.Day18
         }
 
         // Find all other keys that can be moved to from the given position.
+        // This ignores doors for the path finding - the returned KeyDistance will contain the doors that need to be opened en-route.
+        // This uses a breadth first search to check the entire maze - guarenteeing the shortest-path to every other key.
         public HashSet<KeyDistance> FindKeys(MazeTile start)
         {
             var results = new Dictionary<string, MapNode>();
@@ -136,7 +143,8 @@ namespace Aoc.AoC2019.Problems.Day18
                     }
                 }
 
-                var neighbours = this.GetAvailableNeighbours(current);  // Get open (not wall or door) adjacent squares.
+                // Get open (not wall) adjacent squares
+                var neighbours = this.GetAvailableNeighbours(current);  
 
                 // for every neighbour 
                 // Check if its in closedList - if so its already been checked.
@@ -156,6 +164,7 @@ namespace Aoc.AoC2019.Problems.Day18
                 }
             }
 
+            // Need to convert the paths to each key into a distance.
             HashSet<KeyDistance> distances = new HashSet<KeyDistance>();
 
             foreach (string key in results.Keys)
@@ -174,6 +183,7 @@ namespace Aoc.AoC2019.Problems.Day18
                     }
                     else if (tile.Tile == TileType.Key)
                     {
+                        // See if we picked up extra keys on the way
                         d.ExtraKeys.Add(tile.KeyId);
                     }
 
@@ -185,6 +195,11 @@ namespace Aoc.AoC2019.Problems.Day18
             return distances;
         }
 
+        /// <summary>
+        /// Returns the neighbouring Positions we can move into - which aren't walls.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public override IEnumerable<Position> GetAvailableNeighbours(Position position)
         {
             return position.GetNeighbouringPositions().Where(p => base[p].Tile != TileType.Wall);
