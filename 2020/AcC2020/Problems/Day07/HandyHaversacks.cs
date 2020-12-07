@@ -15,6 +15,8 @@ namespace AoC.AoC2020.Problems.Day07
 
             Bag target = bags.First(b => b.Name == "shiny gold");
             yield return SearchForBag(bags, target);
+
+            yield return CountNestedBags(bags, target, 1) - 1;  // subtract 1 to exclude the original bag.
         }
 
         public override int Year => 2020;
@@ -65,6 +67,7 @@ namespace AoC.AoC2020.Problems.Day07
                         Bag childBag = null;
                         var childMatch = Regex.Match(child, childBagPattern);
                         var childName = childMatch.Groups["bag"].Value.Trim();
+                        var qty = int.Parse(childMatch.Groups["qty"].Value);
 
                         if (bags.ContainsKey(childName))
                         {
@@ -77,7 +80,7 @@ namespace AoC.AoC2020.Problems.Day07
                         }
 
                         // Add children to parents - and vice-versa.
-                        parent.AddChild(childBag);
+                        parent.AddChild(childBag, qty);
                         childBag.AddParent(parent);
                     }
                 }
@@ -122,6 +125,34 @@ namespace AoC.AoC2020.Problems.Day07
             }
 
             return result.Count;
+        }
+
+        private int CountNestedBags(HashSet<Bag> bags, Bag target, int qty)
+        {
+            int total = 0;
+            HashSet<Bag> checkedBags = new HashSet<Bag>();  // All the bags we've checked - prevent any loops in the graph.
+            Queue<Bag> bagsToCheck = new Queue<Bag>();
+
+            // Add initial parents of the target to the list to check.
+            var children = target.Children;
+
+            if (children.Count == 0)
+            {
+                // no children - so return value.
+                Console.WriteLine($"{target.Name} - no children");
+                return qty;
+            }
+            else
+            {
+                foreach (var child in children )
+                {
+                    Console.WriteLine($"{target.Name} - Searching {child.Key.Name} {child.Value}.  Qty = {qty}");
+                    total += (CountNestedBags(bags, child.Key, child.Value)) * qty;
+                }
+
+                Console.WriteLine($"{target.Name} Total = {total}");
+                return total + qty;
+            }
         }
     }
 }

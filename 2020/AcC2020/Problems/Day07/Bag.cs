@@ -13,11 +13,12 @@ namespace AoC.AoC2020.Problems.Day07
     {
         public string Name { get; }
 
-        private readonly HashSet<Bag> _children = new HashSet<Bag>(); // Bags that can be placed in this bag
+        private readonly Dictionary<Bag, int> _children = new Dictionary<Bag,int>(); // Bags that can be placed in this bag
         private readonly HashSet<Bag> _parents = new HashSet<Bag>();  // Bags this bag fits into
 
 
         public IReadOnlyCollection<Bag> Parents => _parents;
+        public IReadOnlyCollection<KeyValuePair<Bag, int>> Children => _children;
 
         public Bag(string name)
         {
@@ -37,9 +38,9 @@ namespace AoC.AoC2020.Problems.Day07
             return Name.Equals(other.Name);
         }
 
-        public void AddChild(Bag bag)
+        public void AddChild(Bag bag, int qty)
         {
-            _children.Add(bag);
+            _children.Add(bag, qty);
         }
 
         public void AddParent(Bag bag)
@@ -49,7 +50,7 @@ namespace AoC.AoC2020.Problems.Day07
 
         public bool ContainsChild(Bag bag)
         {
-            return _children.Contains(bag);
+            return _children.Keys.Contains(bag);
         }
 
         public bool ContainsParent(Bag bag)
