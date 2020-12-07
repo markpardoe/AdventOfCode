@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Aoc.Aoc2018.Day07
 {
-    public class Day07_Solution : AoCSolution<string>
+    public class SumOfItsParts : AoCSolution<string>
     {
         public override int Year => 2018;
 

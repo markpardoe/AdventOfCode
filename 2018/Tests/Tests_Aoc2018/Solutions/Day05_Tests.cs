@@ -15,7 +15,7 @@ namespace Tests_Aoc2018.Solutions
         [InlineData("aaBBcc", "aaBBcc")]
         public void Test_ReducePolymer(string expectedResult, string input)
         {
-            Day05_Solution sut = new Day05_Solution();
+            AlchemicalReduction sut = new AlchemicalReduction();
             string actualResult = sut.ReducePolymer(input);
             Assert.Equal(expectedResult, actualResult);
         }
@@ -24,7 +24,7 @@ namespace Tests_Aoc2018.Solutions
         [InlineData(4, "dabAcCaCBAcCcaDA")]
         public void Test_FindShortestWithReduction(int expectedResult, string input)
         {
-            Day05_Solution sut = new Day05_Solution();
+            AlchemicalReduction sut = new AlchemicalReduction();
             int actualResult = sut.FindShortestWithReduction(input);
             Assert.Equal(expectedResult, actualResult);
         }

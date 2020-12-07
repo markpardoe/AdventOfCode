@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aoc.Aoc2018.Day01
 {
-    public class Day01_Solution : AoCSolution<int>
+    public class ChronalCalibration : AoCSolution<int>
     {
         public override int Year => 2018;
 

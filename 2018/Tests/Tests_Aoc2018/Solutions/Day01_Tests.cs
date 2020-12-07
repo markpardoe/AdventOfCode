@@ -15,7 +15,7 @@ namespace Tests_Aoc2018.Solutions
         [InlineData(-6, "-1", "-2", "-3")]
         public void Test_FrequencyModification(int expectedResult, params string[] inputData)
         {
-            Day01_Solution s = new Day01_Solution();
+            ChronalCalibration s = new ChronalCalibration();
             int result = s.CalculateFrequency(inputData);
             Assert.Equal(expectedResult, result);
         }
@@ -27,7 +27,7 @@ namespace Tests_Aoc2018.Solutions
         [InlineData(14, "+7", "+7", "-2", "-7", "-4")]
         public void Test_DuplicateFrequency(int expectedResult, params string[] inputData)
         {
-            Day01_Solution s = new Day01_Solution();
+            ChronalCalibration s = new ChronalCalibration();
             int result = s.FindDuplicateFrequency(inputData);
             Assert.Equal(expectedResult, result);
         }

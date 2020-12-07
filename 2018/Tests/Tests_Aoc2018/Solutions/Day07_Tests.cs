@@ -25,7 +25,7 @@ namespace Tests_Aoc2018.Solutions
         [Fact]
         public void Test_FindShortestPath()
         {
-            var sut = new Day07_Solution();
+            var sut = new SumOfItsParts();
             string result =  sut.FindShortestPath(ExampleInput);
             Assert.Equal(Example_Result, result);
         }

@@ -16,7 +16,7 @@ namespace Tests_Aoc2018.Solutions
         [Fact]
         public void Test_CountOverlappingClothes()
         {
-            Day03_Solution sut = new Day03_Solution();
+            SuitSlicer sut = new SuitSlicer();
             int result = sut.CountOverlappingClothes(Example1);
 
             Assert.Equal(Example1_Result, result);            
@@ -25,7 +25,7 @@ namespace Tests_Aoc2018.Solutions
         [Fact]
         public void Test_FindNonOverlappingCloth()
         {
-            Day03_Solution sut = new Day03_Solution();
+            SuitSlicer sut = new SuitSlicer();
             string result = sut.FindNonOverlappingCloth(Example1);
 
             Assert.Equal(Example1_NoOverlap_id, result);

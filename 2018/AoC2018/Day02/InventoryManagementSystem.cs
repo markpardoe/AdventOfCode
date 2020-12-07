@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Aoc.Aoc2018.Day02
 {
-    public class Day02_Solution : AoCSolution<string>
+    public class InventoryManagementSystem : AoCSolution<string>
     {
         public override int Year => 2018;
 

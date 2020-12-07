@@ -36,7 +36,7 @@ namespace Tests_Aoc2018.Solutions
         [Fact]
         public void Test_Strategy1()
         {
-            Day04_Solution sut = new Day04_Solution();
+            ReposeRecord sut = new ReposeRecord();
             int actualResult = sut.Strategy1(Example1);
             Assert.Equal(Example1_Strategy1_Result, actualResult);
         }
@@ -44,7 +44,7 @@ namespace Tests_Aoc2018.Solutions
         [Fact]
         public void Test_Strategy2()
         {
-            Day04_Solution sut = new Day04_Solution();
+            ReposeRecord sut = new ReposeRecord();
             int actualResult = sut.Strategy2(Example1);
             Assert.Equal(Example1_Strategy2_Result, actualResult);
         }

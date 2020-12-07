@@ -13,7 +13,7 @@ namespace Tests_Aoc2018.Solutions
         [InlineData(12, "abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab")]
         public void Test_CalculateCheckSum(int expectedResult, params string[] input)
         {
-            Day02_Solution sut = new Day02_Solution();
+            InventoryManagementSystem sut = new InventoryManagementSystem();
 
             int result = sut.CalculateCheckSum(input);
 
@@ -24,7 +24,7 @@ namespace Tests_Aoc2018.Solutions
         [InlineData("fgij", "abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz")]
         public void Test_FindSimilarBoxIds(string expectedResult, params string[] input)
         {
-            Day02_Solution sut = new Day02_Solution();
+            InventoryManagementSystem sut = new InventoryManagementSystem();
 
             string result = sut.FindSimilarBoxIds(input.ToList());
 
