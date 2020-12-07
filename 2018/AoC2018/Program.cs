@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using Aoc.Aoc2018;
 
 namespace Aoc.Aoc2018
 {
@@ -9,7 +10,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Aoc2018.Day07.SumOfItsParts();
+            var problem = new Day08.MemoryManeuver();
 
             string inputFile = Path.Combine(System.Environment.CurrentDirectory, "InputData", problem.InputFileName);
             var data = File.ReadAllLines(inputFile).ToList();
