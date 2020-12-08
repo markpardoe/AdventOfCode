@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day10.StarsAlign();
+            var problem = new Day11.ChronalCharge();
           
             List<string> data = new List<string>();
 
