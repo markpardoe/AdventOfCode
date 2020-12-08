@@ -1,5 +1,6 @@
 ﻿using AoC.Common;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Aoc.Aoc2018;
@@ -10,10 +11,18 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day08.MemoryManeuver();
+            var problem = new Day09.MarbleMania();
+          
+            List<string> data = new List<string>();
 
-            string inputFile = Path.Combine(System.Environment.CurrentDirectory, "InputData", problem.InputFileName);
-            var data = File.ReadAllLines(inputFile).ToList();
+            if (problem.InputFileName != null)
+            {
+                string inputFile =
+                    Path.Combine(System.Environment.CurrentDirectory, "InputData", problem.InputFileName);
+                data = File.ReadAllLines(inputFile).ToList();
+
+            }
+           
 
             foreach (var result in problem.Solve(data))
             {
