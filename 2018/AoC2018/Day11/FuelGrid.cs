@@ -75,38 +75,8 @@ namespace Aoc.Aoc2018.Day11
             RowTotals = item1;
             ColumnTotals = item2;
         }
-        
+
         public SearchResult FindLargestPowerRegion(int searchSize)
-        {
-            int maxPower = int.MinValue;
-            Position result = new Position(0, 0);
-
-            for (int y = 1; y <= GridSize - searchSize; y++)
-            {
-                for (int x = 1; x <= GridSize - searchSize; x++)
-                {
-                    int power = 0;
-                    for (int i = 0; i < searchSize; i++)
-                    {
-                        for (int j = 0; j < searchSize; j++)
-                        {
-                            power += this[x+i, y + j];
-                        }
-                    }
-
-                    if (power > maxPower)
-                    {
-                        maxPower = power;
-                        result = new Position(x, y);
-                    }
-                }
-            }
-
-         //   Console.Out.WriteLine($"MaxPower = {maxPower} ==> {result}");
-            return new SearchResult(result, maxPower, searchSize);
-        }
-
-        public SearchResult FindLargestPowerRegion2(int searchSize)
         {
             int maxPower = int.MinValue;
             Position result = new Position(0, 0);
@@ -124,14 +94,7 @@ namespace Aoc.Aoc2018.Day11
                         int row2 = RowTotals[x-1, y + i];  // old row removed
 
                         power += row1 - row2;
-                        //if (x == y && y == 3)
-                        //{
-                        //    Console.WriteLine(
-                        //        $"({x}, {y}) =>  New Value ({x + searchSize - 1}, {y + i}) = {row1}  ==> Old Value ({x - 1}, {y + i}) = {row2}.  Total Power = {power}");
-                        //}
                     }
-
-                    //   Console.WriteLine($"({x},{y}) = {power}");
 
                     if (power > maxPower)
                     {
@@ -141,7 +104,6 @@ namespace Aoc.Aoc2018.Day11
                 }
             }
 
-         //   Console.Out.WriteLine($"MaxPower = {maxPower} ==> {result}");
             return new SearchResult(result, maxPower, searchSize);
         }
 

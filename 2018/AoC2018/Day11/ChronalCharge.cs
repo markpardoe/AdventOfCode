@@ -16,11 +16,7 @@ namespace Aoc.Aoc2018.Day11
         {
             FuelGrid grid = new FuelGrid(Input, GridSize);
 
-          //  yield return grid.DrawMap();
-          //  yield return grid.RowTotals.DrawMap();
-
             yield return grid.FindLargestPowerRegion(3).ToString();
-           // yield return grid.FindLargestPowerRegion2(3).ToString();
 
            var watch = new Stopwatch();
            watch.Start();
@@ -43,7 +39,7 @@ namespace Aoc.Aoc2018.Day11
             for (int searchSize = GridSize; searchSize >0; searchSize--)
             {
                 Console.WriteLine($"SearchSpace: {searchSize}");
-                SearchResult result = map.FindLargestPowerRegion2(searchSize);
+                SearchResult result = map.FindLargestPowerRegion(searchSize);
 
                 if (result.Power > max.Power)
                 {
