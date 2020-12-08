@@ -43,14 +43,7 @@ namespace Aoc.Aoc2018.Day11
     {
         private readonly int _serial;
 
-        // Cache the cumulative row & column totals for the grid.
-        // For calculating the Sum of an area, we only need to do 2 lookups per row (or column)
-        // Eg. Row 1, columns 3 to 5 = RowTotals[5,1] - RowTotals[3, 1]
-        // So a 300 search grid is only (300 * 2 ) = 600 lookups
-        // The iterative approach would use 300 * 300 = 90,000 lookups!
-        //
-        // This can then be improved as we move across the Search area (for same size grid) as 
-        // we only need to add the new Row / Column totals, and remove the old Row / columns totals - ie 8 lookups
+        // Cached cumulative totals
         public readonly FuelMap RowTotals;
         public readonly FuelMap ColumnTotals; 
 
@@ -76,6 +69,18 @@ namespace Aoc.Aoc2018.Day11
             ColumnTotals = item2;
         }
 
+        
+        // Cache the cumulative row & column totals for the grid.
+        // For calculating the Sum of an area, we only need to do 2 lookups per row (or column)
+        // Eg. Row 1, columns 3 to 5 = RowTotals[5,1] - RowTotals[3, 1]
+        // So a 300 search grid is only (300 * 2 ) = 600 lookups
+        // The iterative approach would use 300 * 300 = 90,000 lookups!
+        //
+        // This can then be improved as we move across the Search area (for same size grid) as 
+        // we only need to add the new Row / Column totals, and remove the old Row / columns totals - ie 4 lookups
+        // 
+        // This is only currently optimised for moving across the search area on the Y-Axis. 
+        // It regenerates the initial power everytime it moves across the X-Axis.
         public SearchResult FindLargestPowerRegion(int searchSize)
         {
             int maxPower = int.MinValue;
@@ -83,18 +88,41 @@ namespace Aoc.Aoc2018.Day11
 
             for (int x = 1; x <= GridSize - searchSize + 1; x++)
             {
-                for (int y = 1; y <= GridSize - searchSize + 1; y++)
+                // Use a queue to hold power values per line.  
+                // When we move down a line- we can just pop the old value off and add the next value
+                Queue<int> powerPerRow = new Queue<int>(searchSize);  
+                int power = 0;  // use same power for each column (x stays the same)
+                
+                // calculate initial power (on top <X> rows)
+                // This could be cached and the exact same calculation used (ie. Column totals stored in a queue).
+                for (int i = 0; i < searchSize; i++)
                 {
-                    int power = 0;
-                    // for each row
-                    
-                    for (int i = 0; i < searchSize; i++)
-                    {
-                        int row1 = RowTotals[x + searchSize - 1, y + i];  // new row added
-                        int row2 = RowTotals[x-1, y + i];  // old row removed
+                    int row1 = RowTotals[x + searchSize - 1, i+1];  // new row added
 
-                        power += row1 - row2;
-                    }
+                    powerPerRow.Enqueue(row1);
+                    power += row1;
+                }
+
+                if (power > maxPower)
+                {
+                    maxPower = power;
+                    result = new Position(x, 1);
+                }
+                
+                // As we move down the y axis - we only need to remove the oldest row total
+                // Then add the new row total.
+                for (int y = 2; y <= GridSize - searchSize + 1; y++)
+                {
+                    int row1 = RowTotals[x + searchSize - 1, y + searchSize -1];  // new row added
+                    int row2 = RowTotals[x - 1, y + searchSize -1];  // old row removed
+
+                    // Remove old value (ie no longer in search space)
+                    // and add the new area in the search space)
+                    int newPower = row1 - row2;
+                    int oldPower = powerPerRow.Dequeue();
+                    powerPerRow.Enqueue(newPower);
+
+                    power = power + newPower - oldPower;  // update power
 
                     if (power > maxPower)
                     {
