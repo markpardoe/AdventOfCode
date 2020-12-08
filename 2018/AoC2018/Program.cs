@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day09.MarbleMania();
+            var problem = new Day10.StarsAlign();
           
             List<string> data = new List<string>();
 

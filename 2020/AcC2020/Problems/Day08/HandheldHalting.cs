@@ -94,7 +94,4 @@ namespace AoC.AoC2020.Problems.Day08
 
         }
     }
-
-
-
 }
