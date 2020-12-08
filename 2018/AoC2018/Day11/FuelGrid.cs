@@ -5,41 +5,93 @@ using AoC.Common.Mapping;
 
 namespace Aoc.Aoc2018.Day11
 {
-    public sealed class FuelGrid : Map<int>
+    /// <summary>
+    /// Numeric map with a fixed size.
+    /// Use rather than Map<int> as it has custom DrawMap logic that makes it nicer to read.
+    /// </summary>
+    public class FuelMap : Map<int>
     {
-        private readonly int _serial;
-        private readonly int _gridSize;
+        public readonly int GridSize;
 
-        public FuelGrid(int gridSerialNumber, int gridSize) : base(0)
+        public FuelMap(int gridSize) : base(0)
         {
-            _gridSize = gridSize;
-            _serial = gridSerialNumber;
-
-            for (int y = 1; y <= gridSize; y++)
-            {
-                for (int x = 1; x <= gridSize; x++)
-                {
-                    Add(new Position(x, y), CalculatePower(x, y, _serial));
-                }
-            }
+            GridSize = gridSize;
         }
 
+        public override string DrawMap()
+        {
 
-        public Position FindLargestPowerRegion()
+            StringBuilder map = new StringBuilder();
+            for (int y = 1; y <= GridSize ; y++)
+            {
+                map.Append(Environment.NewLine);
+
+                for (int x = 1 ; x <= GridSize; x++)
+                {
+                    int value = this[x, y];
+
+                    // if less than zero - no leading space to allow negative sign
+                    map.Append(value < 0 ? $"{value} " : $" {value} ");
+                }
+            }
+
+            return map.ToString();
+        }
+    }
+
+    public sealed class FuelGrid : FuelMap
+    {
+        private readonly int _serial;
+
+        // Cache the cumulative row & column totals for the grid.
+        // For calculating the Sum of an area, we only need to do 2 lookups per row (or column)
+        // Eg. Row 1, columns 3 to 5 = RowTotals[5,1] - RowTotals[3, 1]
+        // So a 300 search grid is only (300 * 2 ) = 600 lookups
+        // The iterative approach would use 300 * 300 = 90,000 lookups!
+        //
+        // This can then be improved as we move across the Search area (for same size grid) as 
+        // we only need to add the new Row / Column totals, and remove the old Row / columns totals - ie 8 lookups
+        public readonly FuelMap RowTotals;
+        public readonly FuelMap ColumnTotals; 
+
+        public FuelGrid(int gridSerialNumber, int gridSize) : base(gridSize)
+        {
+            _serial = gridSerialNumber;
+            RowTotals = new FuelMap(gridSize);
+            ColumnTotals = new FuelMap(gridSize);
+
+            for (int x = 1; x <= gridSize; x++)
+            {
+              
+                for (int y = 1; y <= gridSize; y++)
+                {
+                    int power = CalculatePower(x, y, _serial);
+                    Add(new Position(x, y), power);  // add to the fuelGrid
+                }
+            }
+
+            // Get row and column totals
+            var (item1, item2) = GetGridTotals();
+            RowTotals = item1;
+            ColumnTotals = item2;
+        }
+        
+        public SearchResult FindLargestPowerRegion(int searchSize)
         {
             int maxPower = int.MinValue;
             Position result = new Position(0, 0);
 
-            for (int y = 0; y <= _gridSize - 3; y++)
+            for (int y = 1; y <= GridSize - searchSize; y++)
             {
-                for (int x = 0; x <= _gridSize - 3; x++)
+                for (int x = 1; x <= GridSize - searchSize; x++)
                 {
                     int power = 0;
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < searchSize; i++)
                     {
-                        power += this[x, y + i];
-                        power += this[x + 1, y + i];
-                        power += this[x + 2, y + i];
+                        for (int j = 0; j < searchSize; j++)
+                        {
+                            power += this[x+i, y + j];
+                        }
                     }
 
                     if (power > maxPower)
@@ -50,8 +102,47 @@ namespace Aoc.Aoc2018.Day11
                 }
             }
 
-            Console.Out.WriteLine($"MaxPower = {maxPower} ==> {result}");
-            return result;
+         //   Console.Out.WriteLine($"MaxPower = {maxPower} ==> {result}");
+            return new SearchResult(result, maxPower, searchSize);
+        }
+
+        public SearchResult FindLargestPowerRegion2(int searchSize)
+        {
+            int maxPower = int.MinValue;
+            Position result = new Position(0, 0);
+
+            for (int x = 1; x <= GridSize - searchSize + 1; x++)
+            {
+                for (int y = 1; y <= GridSize - searchSize + 1; y++)
+                {
+                    int power = 0;
+                    // for each row
+                    
+                    for (int i = 0; i < searchSize; i++)
+                    {
+                        int row1 = RowTotals[x + searchSize - 1, y + i];  // new row added
+                        int row2 = RowTotals[x-1, y + i];  // old row removed
+
+                        power += row1 - row2;
+                        //if (x == y && y == 3)
+                        //{
+                        //    Console.WriteLine(
+                        //        $"({x}, {y}) =>  New Value ({x + searchSize - 1}, {y + i}) = {row1}  ==> Old Value ({x - 1}, {y + i}) = {row2}.  Total Power = {power}");
+                        //}
+                    }
+
+                    //   Console.WriteLine($"({x},{y}) = {power}");
+
+                    if (power > maxPower)
+                    {
+                        maxPower = power;
+                        result = new Position(x, y);
+                    }
+                }
+            }
+
+         //   Console.Out.WriteLine($"MaxPower = {maxPower} ==> {result}");
+            return new SearchResult(result, maxPower, searchSize);
         }
 
         public int CalculatePower(int x, int y, int gridSerial)
@@ -82,5 +173,58 @@ namespace Aoc.Aoc2018.Day11
 
             return power - 5;
         }
+
+        // Gets the cumulative totals per row / columns.
+        // Eg.  
+        // [ 1, 4, -1]
+        // [ 5, 0, 2 ]
+        // Row Columns:
+        // [1, 5, 4]
+        // [5, 5, 7]
+        // Column Totals:
+        // [1, 4, -1]
+        // [6, 4, 1]
+        private Tuple<FuelMap, FuelMap> GetGridTotals()
+        {
+            FuelMap rowTotals = new FuelMap(GridSize);
+            FuelMap columnTotals = new FuelMap(GridSize);
+
+            for (int x = 1; x <= GridSize; x++)
+            {
+                int rowTotal = 0;
+                int columnTotal = 0;
+
+                for (int y = 1; y <= GridSize; y++)
+                {
+                    columnTotal += this[x, y];
+                    rowTotal += this[y, x];
+
+                    rowTotals.Add(new Position(y, x), rowTotal);
+                    columnTotals.Add(new Position(x, y), columnTotal);
+                }
+            }
+
+            return new Tuple<FuelMap, FuelMap>(rowTotals, columnTotals);
+        }
     }
+
+    public class SearchResult
+    {
+        public int Power { get; }
+        public int SearchSize { get; }
+        public Position Position { get; }
+
+        public SearchResult(Position p, int pow, int searchSize)
+        {
+            Power = pow;
+            Position = p;
+            SearchSize = searchSize;
+        }
+
+        public override string ToString()
+        {
+            return $"{Position.ToString()}, Power = {Power}, Size = {SearchSize}";
+        }
+    }
+
 }
