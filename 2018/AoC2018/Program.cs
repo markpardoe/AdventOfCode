@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day11.ChronalCharge();
+            var problem = new Day12.SubterraneanSustainability();
           
             List<string> data = new List<string>();
 
