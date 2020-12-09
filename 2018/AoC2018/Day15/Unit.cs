@@ -22,7 +22,7 @@ namespace Aoc.Aoc2018.Day15
         }
 
 
-        public int AttackValue => 3;
+        public int AttackValue { get; } = 3;
         public int HitPoints { get; private set; } = 200;
 
         public int X { get; private set; }
@@ -35,11 +35,12 @@ namespace Aoc.Aoc2018.Day15
 
         public Position Position => new Position(X, Y);
 
-        public Unit(int x, int y, UnitType type)
+        public Unit(int x, int y, UnitType type, int attackValue = 3)
         {
             this.X = x;
             this.Y = y;
             this.Type = type;
+            AttackValue = attackValue;
         }
 
         public char Character => Type == UnitType.Elf ? 'E' : 'G';
