@@ -8,10 +8,14 @@ namespace AoC.Common.Mapping
     {
         public MapNode Parent { get; set; }
 
-        public MapNode(Position p) : base(p.X, p.Y) { }
+        public MapNode(Position p, MapNode parent = null, int distanceFromStart = 0 ) : base(p.X, p.Y)
+        {
+            DistanceFromStart = distanceFromStart;
+            Parent = parent;
+        }
 
-        public int DistanceFromStart { get; set; }
-        public int CalculatedDistanceToTarget { get; set; }
+        public int DistanceFromStart { get; set; } = 0;
+        public int CalculatedDistanceToTarget { get; set; } = 0;
         public int TotalDistance => DistanceFromStart + CalculatedDistanceToTarget;
 
         public bool Equals(MapNode other)
@@ -30,6 +34,21 @@ namespace AoC.Common.Mapping
         public override int GetHashCode()
         {
             return HashCode.Combine(this.X, this.Y);
+        }
+
+
+        // Returns the first non-null Parent node recursively.
+        // if no parent node - returns itself.
+        public MapNode GetFirstNode()
+        {
+            MapNode node = this;
+
+            while (node.Parent != null)
+            {
+                node = node.Parent;
+            }
+
+            return node;
         }
     }
 }

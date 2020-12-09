@@ -69,6 +69,15 @@ namespace AoC.Common.Mapping
             return new List<Position>() { Move(Direction.Up), this.Move(Direction.Down), this.Move(Direction.Left), this.Move(Direction.Right) };
         }
 
+        /// <summary>
+        /// Gets neighboring positions in reading order.  Ie. from top row, then left to righ
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Position> GetNeighbouringPositionsInReadingOrder()
+        {
+            return new List<Position>() { Move(Direction.Up), this.Move(Direction.Left), this.Move(Direction.Right), this.Move(Direction.Down) };
+        }
+
         public bool Equals(Position other)
         {
             if (other == null) return false;
