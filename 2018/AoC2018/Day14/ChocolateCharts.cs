@@ -20,8 +20,8 @@ namespace Aoc.Aoc2018.Day14
         public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             //  string result = GetScores(initialRecipes, 9, 10);
-         //   string result = GetScores(initialRecipes, part1Target, 10, false);
-          //  yield return result;
+            string result = GetScores(initialRecipes, part1Target, 10, false);
+            yield return result;
 
             // part 2 
             yield return FindSequence(initialRecipes, "170641").ToString();
