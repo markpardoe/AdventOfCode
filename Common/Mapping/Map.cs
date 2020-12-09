@@ -60,6 +60,11 @@ namespace AoC.Common.Mapping
             }
         }
 
+        public long CountValue(TValue item)
+        {
+            return base.Values.Count(v => v.Equals(item));
+        }
+
         public virtual IEnumerable<Position> GetAvailableNeighbours(Position position)
         {
             return position.GetNeighbouringPositions();

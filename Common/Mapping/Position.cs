@@ -36,6 +36,11 @@ namespace AoC.Common.Mapping
             return Math.Abs(this.X - p.X) + Math.Abs(this.Y - p.Y);
         }
 
+        public int DistanceTo(int x, int y)
+        {
+            return Math.Abs(this.X - x) + Math.Abs(this.Y - y);
+        }
+
         public int DistanceFromOrigin()
         {
             return Math.Abs(this.X) + Math.Abs(this.Y);

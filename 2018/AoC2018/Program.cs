@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day15.BeverageBandits();
+            var problem = new Day06.ChronalCoordinates();
           
             List<string> data = new List<string>();
 
@@ -20,9 +20,7 @@ namespace Aoc.Aoc2018
                 string inputFile =
                     Path.Combine(System.Environment.CurrentDirectory, "InputData", problem.InputFileName);
                 data = File.ReadAllLines(inputFile).ToList();
-
             }
-           
 
             foreach (var result in problem.Solve(data))
             {

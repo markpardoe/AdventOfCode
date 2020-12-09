@@ -38,6 +38,14 @@ namespace AoC.Common.DataStructures
             return false;
         }
 
+        public void RemoveKey(T item)
+        {
+            if (_internalDictionary.ContainsKey(item))
+            {
+                _internalDictionary.Remove(item);
+            }
+        }
+
         public int Count => _internalDictionary.Count;
         public bool IsReadOnly => false;
 
@@ -56,7 +64,6 @@ namespace AoC.Common.DataStructures
         {
             throw new NotImplementedException();
         }
-
 
         public IEnumerator<T> GetEnumerator()
         {
