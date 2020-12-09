@@ -99,10 +99,12 @@ namespace Aoc.Aoc2018.Day15
                     sb.Append("     ");  // add spaces before hp
                     foreach (Unit unit in units)
                     {
-                        sb.Append($" {unit.Character}({unit.HitPoints:D3}),");
+                        sb.Append($" {unit},");
                     }
 
                     sb.Remove(sb.Length - 1, 1);
+                    // Extra spaces because we don't clear the screen - just overwrite.
+                    // So we need to make sure we wipe any leftover HPs from last turn
                     sb.Append("                                ");
                 }
                 else
@@ -116,6 +118,8 @@ namespace Aoc.Aoc2018.Day15
 
         public GameStatus RunTurn()
         {
+           
+
             // Check if the game has finished
             if (GoblinCount == 0)
             {
@@ -126,9 +130,10 @@ namespace Aoc.Aoc2018.Day15
                 return GameStatus.GoblinWin;
             }
 
-            Turn++;
-           // Get units in order
-           var units = _units.OrderBy(u => u.Y).ThenBy(u => u.X).ToList();
+            Turn++; 
+
+            // Get units in order
+            var units = _units.OrderBy(u => u.Y).ThenBy(u => u.X).ToList();
 
            foreach (var unit in units)
            {
@@ -225,6 +230,8 @@ namespace Aoc.Aoc2018.Day15
                 }
                 // otherwise ignore it as we don't need to do anything.
                 // No need to check if we've got shortest path as we're  using a breadth first search - so if its in checkPositions already, it must be faster
+
+                checkedPositions.Add(current);
             }
 
             return null;
@@ -247,6 +254,11 @@ namespace Aoc.Aoc2018.Day15
 
             // return unit with lowest hitpoints, then in ReadingOrder
             return enemies.OrderBy(x => x.HitPoints).ThenBy(u => u.Y).ThenBy(u => u.X).FirstOrDefault();
+        }
+
+        public int RemainingHitpoints()
+        {
+            return _units.Where(x => x.Status == Unit.UnitStatus.Alive).Sum(x => x.HitPoints);
         }
     }
 }

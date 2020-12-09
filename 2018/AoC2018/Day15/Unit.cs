@@ -84,5 +84,10 @@ namespace Aoc.Aoc2018.Day15
         {
             this.HitPoints -= attack;
         }
+
+        public override string ToString()
+        {
+            return $"{Character}({HitPoints:D3})";
+        }
     }
 }

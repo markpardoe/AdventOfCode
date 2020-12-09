@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using AoC.Common;
 
 namespace Aoc.Aoc2018.Day15
 {
-    public class BeverageBandits : AoCSolution<int>
+    public class BeverageBandits : AoCSolution<long>
     {
 
         public override int Year => 2018;
@@ -13,11 +14,11 @@ namespace Aoc.Aoc2018.Day15
         public override string Name => "Day 15: Beverage Bandits";
         public override string InputFileName => "Day15.txt";
 
-        public override IEnumerable<int> Solve(IEnumerable<string> input)
+        public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
-            ArenaMap map = new ArenaMap(Example1);
+            ArenaMap map = new ArenaMap(input);
             Console.WriteLine(map.DrawMap());
-            Console.ReadKey();
+          //  Console.ReadKey();
 
             GameStatus status = GameStatus.Running;
             while (status == GameStatus.Running)
@@ -25,15 +26,15 @@ namespace Aoc.Aoc2018.Day15
                 status = map.RunTurn();
 
                 Console.SetCursorPosition(0,0);
-
-              // Console.Clear();
                 Console.WriteLine(map.DrawMap());
                 
-                Console.ReadKey();
+                Thread.Sleep(200);
+             //   Console.ReadKey();
             }
 
-
-            yield return -1;
+            var hp = map.RemainingHitpoints();
+            Console.WriteLine($"HP: {hp}");
+            yield return hp * (map.Turn - 1);
         }
 
 
@@ -46,6 +47,17 @@ namespace Aoc.Aoc2018.Day15
             "#.#.#G#",
             "#..G#E#",
             "#.....#",
+            "#######"
+        };
+
+        private static readonly List<string> Example2 = new List<string>
+        {
+            "#######",
+            "#G..#E#",
+            "#E#E.E#",
+            "#G.##.#",
+            "#...#E#",
+            "#...E.#",
             "#######"
         };
     }
