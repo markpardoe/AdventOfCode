@@ -115,12 +115,18 @@ namespace Aoc.Aoc2018.Day15
             var units = _units.OrderBy(u => u.Y).ThenBy(u => u.X).ToList();
 
             foreach (var unit in units)
+            {
                 // Units may have been killed before moving...
                 if (unit.Status == Unit.UnitStatus.Alive)
                 {
                     MoveUnit(unit);
                     AttackWithUnit(unit);
+
+                    // Check if the game has finished
+                    if (GoblinCount == 0) return GameStatus.ElfWin;
+                    if (ElfCount == 0) return GameStatus.GoblinWin;
                 }
+            }
 
             // remove dead units - we can't do this in the loop as we can't remove items during Enumration
             // The map will be updated when they originally die.
@@ -129,20 +135,24 @@ namespace Aoc.Aoc2018.Day15
 
             // Check if the game has finished
             if (GoblinCount == 0) return GameStatus.ElfWin;
-
             if (ElfCount == 0) return GameStatus.GoblinWin;
 
             Turn++;
             return GameStatus.Running;
         }
 
-
+       
+        // Simulate attack move with specified unit
+        // Checks for a valid unit to attack - and removes HP from it.
         private void AttackWithUnit(Unit unit)
         {
             var enemy = GetUnitToAttack(unit);
             if (enemy != null)
             {
-                unit.AttackUnit(enemy);
+
+                // Remove HP from unit
+                enemy.Hit(unit.AttackValue);
+
                 // remove the dead enemy
                 if (enemy.Status == Unit.UnitStatus.Dead)
                 {

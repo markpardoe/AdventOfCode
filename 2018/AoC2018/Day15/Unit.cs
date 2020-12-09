@@ -59,28 +59,7 @@ namespace Aoc.Aoc2018.Day15
             X = position.X;
             Y = position.Y;
         }
-
-        public void AttackUnit(Unit enemy)
-        {
-
-            if (enemy == null)
-            {
-                throw new ArgumentNullException(nameof(enemy));
-            }
-
-            if (this.Position.DistanceTo(enemy.Position) != 1)
-            {
-                throw new InvalidDataException("Units must be 1 tile apart to fight!");;
-            }
-
-            if (this.Status == UnitStatus.Dead || enemy.Status == UnitStatus.Dead)
-            {
-                throw new InvalidDataException("Deceased units can't fight!"); ;
-            }
-
-            enemy.Hit(this.AttackValue);
-        }
-
+        
         public void Hit(int attack)
         {
             this.HitPoints -= attack;
