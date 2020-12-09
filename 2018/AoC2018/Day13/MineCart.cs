@@ -100,7 +100,17 @@ namespace Aoc.Aoc2018.Day13
             Status = CartStatus.Crashed;
         }
 
-        public char Character => (char) _directionMappings[Facing];
+        public char Character
+        {
+            get
+            {
+                if (Status == CartStatus.Crashed)
+                {
+                    return 'X';
+                }
+                return (char)_directionMappings[Facing];
+            }
+        } 
 
         public void MoveCart(MineTile tile)
         {

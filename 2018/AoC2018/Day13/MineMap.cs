@@ -30,6 +30,7 @@ namespace Aoc.Aoc2018.Day13
         private List<Position> _crashes = new List<Position>();
 
         public IReadOnlyCollection<Position> Crashes => _crashes;
+        public IReadOnlyCollection<MineCart> Carts => _carts;
 
         public MineMap(IEnumerable<string> input) : base(MineTile.Empty)
         {
@@ -82,7 +83,7 @@ namespace Aoc.Aoc2018.Day13
             for (int y = 0; y <= max_Y + 2; y++)
             {
                 // We can filter the carts by the current row - faster than searching all carts everytime.
-                var cartsOnRow = _carts.Where(c => c.Y == y).ToHashSet();
+                var cartsOnRow = _carts.Where(c => c.Y == y && c.Status == CartStatus.Running).ToHashSet();
 
                 map.Append(Environment.NewLine);
 
@@ -112,7 +113,7 @@ namespace Aoc.Aoc2018.Day13
         /// <summary>
         /// Moves minecarts one tick
         /// </summary>
-        public void MoveCarts()
+        public void MoveCarts(bool removeCrashes = false)
         {
             // Sort carts by Row, then column
             var sortedCarts = _carts.OrderBy(c => c.Y).ThenBy(c => c.X);
@@ -131,10 +132,25 @@ namespace Aoc.Aoc2018.Day13
                 }
                 else
                 {
-                    var cartsAtLocation = _carts.Where(c => c.X == cart.X && c.Y == cart.Y);
+                    var cartsAtLocation = _carts.Where(c => c.X == cart.X && c.Y == cart.Y).ToList();
+                    
+                    // If 2 carts at same position - then we've got a crash
                     if (cartsAtLocation.Count() > 1)
                     {
                         _crashes.Add(new Position(cart.X, cart.Y));
+                        if (removeCrashes)
+                        {
+                            foreach (var c in cartsAtLocation)
+                            {
+                                _carts.Remove(c);
+                            }
+                            
+                        }
+                        else
+                        {
+                            // leave on course - but mark as a crash
+                            this[new Position(cart.X, cart.Y)] = MineTile.Crash;
+                        }
 
                         foreach (MineCart c in cartsAtLocation)
                         {
