@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day13.MineCartMadness();
+            var problem = new Day14.ChocolateCharts();
           
             List<string> data = new List<string>();
 
