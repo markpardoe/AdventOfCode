@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using AoC.AoC2020.Problems;
-using AoC.AoC2020.Problems.Day09;
+using AoC.AoC2020.Problems.Day10;
 
 namespace AoC.AoC2020
 {
@@ -12,7 +12,7 @@ namespace AoC.AoC2020
     {
         static void Main()
         {
-            var problem = new EncodingError();
+            var problem = new AdapterArray();
             List<string> data = new List<string>();
             if (problem.InputFileName != null)
             {
