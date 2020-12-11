@@ -196,7 +196,7 @@ namespace Aoc.Aoc2018.Day15
             var checkedPositions = new HashSet<MapNode>();
 
             // Start with a list of neighbours in ReadingOrder (ie. top, left, right, down)
-            var neighbors = unit.Position.GetNeighbouringPositionsInReadingOrder();
+            var neighbors = unit.Position.GetNeighboringPositionsInReadingOrder();
 
             var locationsToCheck = new Queue<MapNode>(neighbors.Select(n => new MapNode(n)));
 
@@ -216,7 +216,7 @@ namespace Aoc.Aoc2018.Day15
 
                 if (tile == ArenaTile.Open && !checkedPositions.Contains(current))
                 {
-                    var next = current.GetNeighbouringPositionsInReadingOrder();
+                    var next = current.GetNeighboringPositionsInReadingOrder();
                     foreach (var p in next)
                         locationsToCheck.Enqueue(new MapNode(p, current, current.DistanceFromStart + 1));
                 }
@@ -235,7 +235,7 @@ namespace Aoc.Aoc2018.Day15
             // Get the positions on the map where there is an enemy unit (based on ArenaTileType) in a neighboring square
             // We could also do a search per neighboring position on the _units collection - but this should be faster if no enemy units (which is the norm)
             // as only 4 lookups + 1 lookup per unit (so 8 max) as opposed to 4 * <numUnits>
-            var enemyPositions = attacker.Position.GetNeighbouringPositions()
+            var enemyPositions = attacker.Position.GetNeighboringPositions()
                 .Where(p => this[p] == attacker.EnemyTileType);
 
             var enemies = new HashSet<Unit>();

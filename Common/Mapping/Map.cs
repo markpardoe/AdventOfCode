@@ -67,7 +67,7 @@ namespace AoC.Common.Mapping
 
         public virtual IEnumerable<Position> GetAvailableNeighbours(Position position)
         {
-            return position.GetNeighbouringPositions();
+            return position.GetNeighboringPositions();
         }
 
         public virtual string DrawMap()

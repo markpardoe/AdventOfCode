@@ -62,7 +62,7 @@ namespace Aoc.AoC2019.Problems.Day24
             // Add neighbours
             foreach (GameTile tile in base.Values)
             {
-                var neighbours = tile.GetNeighbouringPositions();
+                var neighbours = tile.GetNeighboringPositions();
                 foreach (Position pos in neighbours)
                 {
                     GameTile t = base[pos];

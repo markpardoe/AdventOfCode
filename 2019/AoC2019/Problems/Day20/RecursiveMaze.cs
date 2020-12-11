@@ -250,7 +250,7 @@ namespace Aoc.AoC2019.Problems.Day20
 
         public override IEnumerable<Position> GetAvailableNeighbours(Position position)
         {
-            return position.GetNeighbouringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void);
+            return position.GetNeighboringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void);
         }
 
         private bool TryUpdateList(HashSet<RecursiveMapNode> list, RecursiveMapNode currentPosition)

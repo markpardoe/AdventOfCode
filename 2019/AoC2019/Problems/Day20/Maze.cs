@@ -135,7 +135,7 @@ namespace Aoc.AoC2019.Problems.Day20
 
         public override IEnumerable<Position> GetAvailableNeighbours(Position position)
         {
-            var neighbours =  position.GetNeighbouringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void).ToList();
+            var neighbours =  position.GetNeighboringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void).ToList();
 
             // if its a portal - we can move through it to the next portal
             if (this[position] == TileType.Portal && Portals.ContainsKey(position))

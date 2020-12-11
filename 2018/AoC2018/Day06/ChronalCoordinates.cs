@@ -132,7 +132,7 @@ namespace Aoc.Aoc2018.Day06
             {
                 Position pos = toCheck.Dequeue();
                 
-                var neighbors = pos.GetNeighbouringPositions();
+                var neighbors = pos.GetNeighboringPositions();
 
                 foreach (var n in neighbors)
                 {

@@ -31,7 +31,7 @@ namespace Aoc.AoC2019.Problems.Day17
             {
                 if (this[p] == ScaffoldType.Scaffold)
                 {
-                    var neighbours = p.GetNeighbouringPositions();
+                    var neighbours = p.GetNeighboringPositions();
                     if (neighbours.All(p => this[p] == ScaffoldType.Scaffold))
                     {
                         intersections.Add(p);

@@ -202,7 +202,7 @@ namespace Aoc.AoC2019.Problems.Day18
         /// <returns></returns>
         public override IEnumerable<Position> GetAvailableNeighbours(Position position)
         {
-            return position.GetNeighbouringPositions().Where(p => base[p].Tile != TileType.Wall);
+            return position.GetNeighboringPositions().Where(p => base[p].Tile != TileType.Wall);
         }
    
     }
