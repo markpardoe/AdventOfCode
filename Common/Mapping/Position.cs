@@ -98,6 +98,25 @@ namespace AoC.Common.Mapping
             return new List<Position>() { Move(Direction.Up), this.Move(Direction.Left), this.Move(Direction.Right), this.Move(Direction.Down) };
         }
 
+        /// <summary>
+        /// Gets all 8 neighboring positions - includes diagonals.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Position> GetNeighboringPositionsIncludingDiagonals()
+        {
+           return new List<Position>
+            {
+                new Position(this.X, this.Y + 1),
+                new Position(this.X, this.Y - 1 ),
+                new Position(this.X + 1,  this.Y ),
+                new Position(this.X + 1, this.Y + 1),
+                new Position(this.X + 1, this.Y - 1 ),
+                new Position(this.X - 1,  this.Y ),
+                new Position(this.X - 1, this.Y + 1),
+                new Position(this.X - 1, this.Y - 1 ),
+            };
+        }
+
         public bool Equals(Position other)
         {
             if (other == null) return false;
