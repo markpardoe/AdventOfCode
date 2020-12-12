@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day16.ChronalClassification();
+            var problem = new Day17.ReservoirResearch();
           
             List<string> data = new List<string>();
 
