@@ -206,7 +206,6 @@ namespace Aoc.Aoc2018.Day17
         #region Load input Data & create initial map
         public override void LoadData(IEnumerable<string> input)
         {
-            var y = 0;
             foreach (var line in input)
             {
                 LoadInputRange(line);
