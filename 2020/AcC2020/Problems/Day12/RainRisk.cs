@@ -18,7 +18,7 @@ namespace AoC.AoC2020.Problems.Day12
         Right = 'R'
     }
 
-    public class Day12Solution :AoCSolution<int>
+    public class RainRisk :AoCSolution<int>
     {
         public override int Year => 2020;
         public override int Day => 12;
