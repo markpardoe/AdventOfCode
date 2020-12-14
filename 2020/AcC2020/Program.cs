@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using AoC.AoC2020.Problems;
-using AoC.AoC2020.Problems.Day13;
+using AoC.AoC2020.Problems.Day14;
 
 namespace AoC.AoC2020
 {
@@ -12,8 +12,9 @@ namespace AoC.AoC2020
     {
         static void Main()
         {
-            var problem = new ShuttleSearch();
-            List<string> data = new List<string>();
+            var problem = new DockingData();
+            var data = new List<string>();
+
             if (problem.InputFileName != null)
             {
                 string inputFile = Path.Combine(System.Environment.CurrentDirectory, "InputData", problem.InputFileName);
