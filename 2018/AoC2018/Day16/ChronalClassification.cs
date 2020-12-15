@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.RegularExpressions;
+using Aoc.Aoc2018.Common;
+using Aoc.Aoc2018.Common.OpCode;
 using AoC.Common;
 
 namespace Aoc.Aoc2018.Day16
@@ -19,10 +21,8 @@ namespace Aoc.Aoc2018.Day16
         {
             var inputData = ParseInputData(input.ToList());
             var tests = inputData.Item1;
-            var instructions = inputData.Item2;
-
-
-
+            var instructions = inputData.Item2; // 2nd half of input is a program
+            
             // Count the number of tests that have at least 3 matching instructionTypes.
             int count = 0;
             foreach (var test in tests)
@@ -36,6 +36,7 @@ namespace Aoc.Aoc2018.Day16
             
             yield return count;
 
+            // Finds which int value maps to each opcode
             var instructionMapping = FindOpCodeInstructions(tests);
             var register = RunInstructions(instructionMapping, instructions);
 
@@ -52,7 +53,7 @@ namespace Aoc.Aoc2018.Day16
             foreach (int[] values in instructions)
             {
                 OpCodeInstructionType type = instructionMap[values[0]];
-                OpCodeInstruction instruction = OpCodeInstruction.Create(type, values);
+                OpCodeInstruction instruction = OpCodeInstruction.Create(type, values.Skip(1).ToArray());
                 register = instruction.Execute(register);
             }
 
@@ -72,8 +73,6 @@ namespace Aoc.Aoc2018.Day16
                 if (!input[lineCount].StartsWith('B')) break;  // Reached end of input set
                 var testGroup = new OpcodeTestGroup(input[lineCount], input[lineCount + 2], input[lineCount + 1]);
                 grps.Add(testGroup);
-
-
             }
 
             // Get the instructions
@@ -82,8 +81,6 @@ namespace Aoc.Aoc2018.Day16
                 if (string.IsNullOrWhiteSpace(input[lineCount])) continue;  // ignore blank lines
                 instructions.Add(input[lineCount].Split(' ').Select(x => int.Parse(x)).ToArray());
             }
-
-
 
             return new Tuple<List<OpcodeTestGroup>, List<int[]>>(grps, instructions);
         }
@@ -96,7 +93,7 @@ namespace Aoc.Aoc2018.Day16
         /// <returns></returns>
         private ICollection<OpCodeInstructionType> FindValidInstructionsForTest(OpcodeTestGroup test)
         {
-            var instructions = OpCodeInstruction.GetAllInstructions(test.OpCodes);
+            var instructions = OpCodeInstruction.GetAllInstructions(test.Instructions);
             List<OpCodeInstructionType> matches = new List<OpCodeInstructionType>();
 
             foreach (var instruction in instructions)
@@ -114,7 +111,7 @@ namespace Aoc.Aoc2018.Day16
         /// <summary>
         /// Calculates which Opcode (0-16) relates to which opcodeInstructionType.
         /// For each Opcode, we can find a list of all the types that pass all tests containing that OpCode.
-        /// That list can then be reduced by looking at any OpCodes with only one match - and removing that matched type from all other opcodes.
+        /// That list can then be reduced by looking at any Instructions with only one match - and removing that matched type from all other opcodes.
         ///
         /// Eg.
         ///     0 = [addr, mulr, banr]
@@ -133,7 +130,6 @@ namespace Aoc.Aoc2018.Day16
             // Foreach opcode number (0 - 16) - find all the instruction types that are valid for it.
             var matchedCodesPerOpCode = new Dictionary<int, List<OpCodeInstructionType>>();
 
-            // Initialise list per opcode
             for (int i = 0; i < 16; i++)
             {
                List<OpCodeInstructionType> matchedCodes = new List<OpCodeInstructionType>();
@@ -187,12 +183,12 @@ namespace Aoc.Aoc2018.Day16
         /// <returns></returns>
         private bool IsOpcodeValidForInstructionType(int code, OpCodeInstructionType type, List<OpcodeTestGroup> opCodeTests)
         {
-            var tests = opCodeTests.Where(x => x.OpCodes[0] == code);
+            var tests = opCodeTests.Where(x => x.OpCode == code);
 
   
             foreach (var test in tests)
             {
-                OpCodeInstruction instruction = OpCodeInstruction.Create(type, test.OpCodes);
+                OpCodeInstruction instruction = OpCodeInstruction.Create(type, test.Instructions);
 
                 if (!CheckOpCode(instruction, test))
                 {
@@ -206,7 +202,6 @@ namespace Aoc.Aoc2018.Day16
         private bool CheckOpCode(OpCodeInstruction instruction, OpcodeTestGroup test)
         {
             int[] after = instruction.Execute(test.Before);
-
             return after.SequenceEqual(test.After);
         }
 
@@ -226,14 +221,18 @@ namespace Aoc.Aoc2018.Day16
 
         public int[] Before { get; }
         public int[] After { get; }
-        public int[] OpCodes { get; }
+        public int OpCode { get; }
+        public int[] Instructions { get; }
 
 
         public OpcodeTestGroup(string before, string after, string opCodes)
         {
             Before = GetInputValues(before);
             After = GetInputValues(after);
-            OpCodes = opCodes.Split(" ").Select(a => int.Parse(a)).ToArray();
+
+            var values = opCodes.Split(" ").Select(a => int.Parse(a)).ToList();
+            OpCode = values[0];
+            Instructions = values.Skip(1).ToArray();
         }
 
         private int[] GetInputValues(string input)
