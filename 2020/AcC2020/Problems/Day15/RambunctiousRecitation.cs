@@ -40,18 +40,29 @@ namespace AoC.AoC2020.Problems.Day15
 
     public class NumberGame
     {
-        public int Turn { get; private set; } = 1;
+        public int Turn { get; private set; }
 
         // Holds the turn(s) in which each number was spoken
         private readonly Dictionary<int, List<int>> _previousNumbers = new Dictionary<int, List<int>>();
         private readonly List<int> _initialTurns;
-        private readonly List<int> _numbers = new List<int>();
+        private int _lastNumber;
 
-        public int LastNumber => _numbers.Last();
+        public int LastNumber => _lastNumber;
        
         public NumberGame(List<int> initialValues)
         {
+            Turn = 1;
             _initialTurns = initialValues;
+
+            // add initial values in constructor - not the best way to do this,
+            // but avoids checking if we're still using them in the main game loop.
+            // this knocked about 2 seconds off execution time
+            foreach (var value in initialValues)
+            {
+                AddNumber(value, Turn);
+                _lastNumber = value;
+                Turn++;
+            }
         }
 
         /// <summary>
@@ -72,10 +83,10 @@ namespace AoC.AoC2020.Problems.Day15
         public int TakeTurn()
         {
             // either take number from initial list, or calculate it from the last number spoken
-            int value = Turn <= _initialTurns.Count ? _initialTurns[Turn - 1] : CalculateNumber(_numbers.Last());
+            int value = CalculateNumber(_lastNumber);
 
             AddNumber(value, Turn);
-            _numbers.Add(value);
+            _lastNumber = value;
             Turn++;
             return value;
         }
