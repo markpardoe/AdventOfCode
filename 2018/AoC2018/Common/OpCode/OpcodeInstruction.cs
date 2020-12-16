@@ -40,10 +40,15 @@ namespace Aoc.Aoc2018.Common.OpCode
             C = c;
         }
 
+        public override string ToString()
+        {
+            return $"{Type} {A} {B} {C}";
+        }
+
         public abstract int[] Execute(int[] registers);
 
-        private static readonly Dictionary<OpCodeInstructionType, Func<int[], OpCodeInstruction>> instructionMap =
-            new Dictionary<OpCodeInstructionType, Func<int[], OpCodeInstruction>>()
+        private static readonly Dictionary<OpCodeInstructionType, Func<IList<int>, OpCodeInstruction>> instructionMap =
+            new Dictionary<OpCodeInstructionType, Func<IList<int>, OpCodeInstruction>>()
             {
                 {OpCodeInstructionType.AddImmediate, (x) => new AddImmediate(x[0], x[1], x[2])},
                 {OpCodeInstructionType.AddRegister, (x) => new AddRegister(x[0], x[1], x[2])},
@@ -99,9 +104,9 @@ namespace Aoc.Aoc2018.Common.OpCode
             return instructionMap[instructionType](input);
         }
 
-        public static OpCodeInstruction Create(string opcode, int[] input)
+        public static OpCodeInstruction Create(string opcode, IList<int> input)
         {
-            if (input.Length != 3)
+            if (input.Count != 3)
             {
                 throw new ArgumentException("Input must contain 3 items.");
             }
