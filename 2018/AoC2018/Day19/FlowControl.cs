@@ -21,7 +21,7 @@ namespace Aoc.Aoc2018.Day19
 
         private int Solve(IEnumerable<string> input, int initialValue)
         {
-            OpcodeVM opCode = new OpcodeVM(input, initialValue);
+            HackedOpcodeVM opCode = new HackedOpcodeVM(input, initialValue);
             opCode.ExecuteFast();
             return opCode.Register[0];
         }
