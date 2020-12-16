@@ -45,7 +45,7 @@ namespace Aoc.Aoc2018.Common.OpCode
             return $"{Type} {A} {B} {C}";
         }
 
-        public abstract int[] Execute(int[] registers);
+        public abstract long[] Execute(long[] registers);
 
         private static readonly Dictionary<OpCodeInstructionType, Func<IList<int>, OpCodeInstruction>> instructionMap =
             new Dictionary<OpCodeInstructionType, Func<IList<int>, OpCodeInstruction>>()
@@ -138,9 +138,9 @@ namespace Aoc.Aoc2018.Common.OpCode
 
         public AddRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = input[A] + input[B];
             return output;
@@ -152,9 +152,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.AddImmediate;
         public AddImmediate(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = input[A] + B;
             return output;
@@ -166,9 +166,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.MultiplyRegister;
         public MultiplyRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = input[A] * input[B];
             return output;
@@ -180,9 +180,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.MultiplyImmediate;
         public MultiplyImmediate(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = input[A] * B;
             return output;
@@ -194,9 +194,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.BitwiseAndRegister;
         public BitwiseAndRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = input[A] & input[B];
             return output;
@@ -208,9 +208,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.BitwiseAndImmediate;
         public BitwiseAndImmediate(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = input[A] & B;
             return output;
@@ -223,9 +223,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.BitwiseOrRegister;
         public BitwiseOrRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = input[A] | input[B];
             return output;
@@ -237,11 +237,11 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.BitwiseOrImmediate;
         public BitwiseOrImmediate(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
-            output[C] = input[A] | B;
+            output[C] = input[A] |(long) B;
             return output;
         }
     }
@@ -251,9 +251,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.SetRegister;
         public AssignRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = input[A];
             return output;
@@ -265,9 +265,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.SetImmediate;
         public AssignImmediate(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = A;
             return output;
@@ -279,9 +279,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.GreaterThanImmediateRegister;
         public GreaterThanImmediateRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = Convert.ToInt32(A > input[B]);
             return output;
@@ -293,9 +293,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.GreaterThanRegisterImmediate;
         public GreaterThanRegisterImmediate(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = Convert.ToInt32(input[A] > B);
             return output;
@@ -307,9 +307,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.GreaterThanRegisterRegister;
         public GreaterThanRegisterRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = Convert.ToInt32(input[A] > input[B]);
             return output;
@@ -321,9 +321,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.EqualImmediateRegister;
         public EqualImmediateRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = Convert.ToInt32(A == input[B]);
             return output;
@@ -335,9 +335,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.EqualRegisterImmediate;
         public EqualRegisterImmediate(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = Convert.ToInt32(input[A] == B);
             return output;
@@ -349,9 +349,9 @@ namespace Aoc.Aoc2018.Common.OpCode
         public override OpCodeInstructionType Type => OpCodeInstructionType.EqualRegisterRegister;
         public EqualRegisterRegister(int a, int b, int c) : base( a, b, c) { }
 
-        public override int[] Execute(int[] input)
+        public override long[] Execute(long[] input)
         {
-            int[] output = input.ToArray();
+            long[] output = input.ToArray();
 
             output[C] = Convert.ToInt32(input[A] == input[B]);
             return output;

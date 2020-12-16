@@ -6,20 +6,20 @@ using AoC.Common;
 
 namespace Aoc.Aoc2018.Day19
 {
-    public class FlowControl : AoCSolution<int>
+    public class FlowControl : AoCSolution<long>
     {
         public override int Year => 2018;
         public override int Day => 19;
         public override string Name => "Day 19: Go With The Flow";
         public override string InputFileName => "Day19.txt";
 
-        public override IEnumerable<int> Solve(IEnumerable<string> input)
+        public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
             yield return Solve(input, 0);
             yield return Solve(input, 1);
         }
 
-        private int Solve(IEnumerable<string> input, int initialValue)
+        private long Solve(IEnumerable<string> input, int initialValue)
         {
             HackedOpcodeVM opCode = new HackedOpcodeVM(input, initialValue);
             opCode.ExecuteFast();

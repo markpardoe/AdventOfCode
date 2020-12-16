@@ -10,14 +10,14 @@ using AoC.Common;
 
 namespace Aoc.Aoc2018.Day16
 {
-    public class ChronalClassification : AoCSolution<int>
+    public class ChronalClassification : AoCSolution<long>
     {
         public override int Year => 2018;
         public override int Day => 16;
         public override string Name => "Day 16: Chronal Classification";
         public override string InputFileName => "Day16.txt";
 
-        public override IEnumerable<int> Solve(IEnumerable<string> input)
+        public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
             var inputData = ParseInputData(input.ToList());
             var tests = inputData.Item1;
@@ -42,13 +42,11 @@ namespace Aoc.Aoc2018.Day16
 
             Console.WriteLine($"[{register[0]}, {register[1]}, {register[2]}, {register[3]}]");
             yield return register[0];
-
-
         }
 
-        private int[] RunInstructions(Dictionary<int, OpCodeInstructionType> instructionMap, List<int[]> instructions)
+        private long[] RunInstructions(Dictionary<int, OpCodeInstructionType> instructionMap, List<int[]> instructions)
         {
-            int[] register = new int[4];
+            long[] register = new long[4];
 
             foreach (int[] values in instructions)
             {
@@ -155,7 +153,7 @@ namespace Aoc.Aoc2018.Day16
              {
                  var singleValue = matchedCodesPerOpCode.First(x => x.Value.Count == 1);
                  var instructionType = singleValue.Value[0];
-                 Console.WriteLine($"Matched: {singleValue.Key} to {instructionType.ToString()}");
+                 Console.WriteLine($"Matched: {singleValue.Key} to {instructionType}");
                  // Since only one type found - we know its a match
                  matchedTypes.Add(singleValue.Key, instructionType);
                  matchedCodesPerOpCode.Remove(singleValue.Key);
@@ -201,7 +199,7 @@ namespace Aoc.Aoc2018.Day16
         // Check if an instruction is valid for the test
         private bool CheckOpCode(OpCodeInstruction instruction, OpcodeTestGroup test)
         {
-            int[] after = instruction.Execute(test.Before);
+            long[] after = instruction.Execute(test.Before);
             return after.SequenceEqual(test.After);
         }
 
@@ -219,8 +217,8 @@ namespace Aoc.Aoc2018.Day16
     {
         private const string pattern = @"^\D+\[(?<CodeA>\d*),\s?(?<CodeB>\d*),\s?(?<CodeC>\d*),\s?(?<CodeD>\d*)\s?\]$";
 
-        public int[] Before { get; }
-        public int[] After { get; }
+        public long[] Before { get; }
+        public long[] After { get; }
         public int OpCode { get; }
         public int[] Instructions { get; }
 
@@ -235,9 +233,9 @@ namespace Aoc.Aoc2018.Day16
             Instructions = values.Skip(1).ToArray();
         }
 
-        private int[] GetInputValues(string input)
+        private long[] GetInputValues(string input)
         {
-            int[] result = new int[4];
+            long[] result = new long[4];
             var match = Regex.Match(input, pattern);
 
             result[0] = int.Parse(match.Groups["CodeA"].Value);

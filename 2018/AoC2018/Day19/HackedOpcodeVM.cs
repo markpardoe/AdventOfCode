@@ -42,8 +42,6 @@ namespace Aoc.Aoc2018.Day19
                 {
                     _register[0] += i;
                 }
-
-                string output = $"ip={InstructionPointer}, {string.Join(',', _register)}";
             }
 
             // finish the program

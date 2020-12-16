@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -6,12 +8,12 @@ namespace Aoc.Aoc2018.Common.OpCode
 {
     public class OpcodeVM
     {
-        protected readonly int[] _register = new int[6];
+        protected readonly long[] _register = new long[6];
         private readonly List<OpCodeInstruction> _instructions = new List<OpCodeInstruction>();
         protected int _registerIndex = 0;
 
-        public int InstructionPointer => _register[_registerIndex];
-        public IReadOnlyList<int> Register => _register.ToList();
+        public int InstructionPointer => (int) _register[_registerIndex];
+        public IReadOnlyList<long> Register => _register.ToList();
 
         private readonly string instructionPattern = @"^(?<instruction>\w+)\s(?<A>\d+)\s(?<B>\d+)\s(?<C>\d+)$";
 
@@ -40,18 +42,18 @@ namespace Aoc.Aoc2018.Common.OpCode
                 }
             }
         }
-
+        
         public void ExecuteNextInstruction()
         {
-            int instructionIndex = _register[_registerIndex];
+            int instructionIndex = InstructionPointer;
 
             var instruction = _instructions[instructionIndex];
             var newValues = instruction.Execute(_register);
             
             // Debugging output
-            // string output = $"ip={InstructionPointer}, {string.Join(',', _register)}, {instruction.ToString()}, {string.Join(',',newValues)}";
-            // Console.WriteLine(output);
-
+            //   string output =  $"ip={InstructionPointer}, {string.Join(',', _register)}, {instruction}, {string.Join(',', newValues)}"
+            //  Console.WriteLine(output);
+            
             // Update results with new values
             for (int i = 0; i < newValues.Length; i++)
             {
