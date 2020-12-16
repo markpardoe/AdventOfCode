@@ -76,7 +76,6 @@ namespace AoC.AoC2020.Problems.Day08
                     }
                 }
             }
-
             return -1;
         }
 
