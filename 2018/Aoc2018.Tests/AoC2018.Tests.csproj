@@ -1,13 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyName>AoC.AoC2019.Tests</AssemblyName>
+    <AssemblyName>AoC.AoC2018.Tests</AssemblyName>
 
-    <RootNamespace>AoC.AoC2019.Tests</RootNamespace>
+    <RootNamespace>AoC.AoC2018.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,9 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\..\AoC2019\AoC2019.csproj" />
-    <ProjectReference Include="..\..\IntCodeComputer\IntCode.csproj" />
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\AoC2018\AoC2018.csproj" />
   </ItemGroup>
 
 </Project>

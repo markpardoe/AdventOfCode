@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\..\AoC2018\AoC2018.csproj" />
   </ItemGroup>
 
 </Project>

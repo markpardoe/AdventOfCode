@@ -5,7 +5,9 @@
 
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>AoC.Tests.AoC2020</RootNamespace>
+    <AssemblyName>AoC.AoC2019.Tests</AssemblyName>
+
+    <RootNamespace>AoC.AoC2019.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,18 +15,19 @@
     <PackageReference Include="Shouldly" Version="4.0.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="coverlet.collector" Version="1.3.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\..\AcC2020\AcC2020.csproj" />
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\AoC2019\AoC2019.csproj" />
+    <ProjectReference Include="..\IntCodeComputer\IntCode.csproj" />
   </ItemGroup>
 
 </Project>
