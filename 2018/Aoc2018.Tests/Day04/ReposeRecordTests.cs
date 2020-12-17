@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using Aoc.Aoc2018.Day04;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2018.Tests.Solutions
+namespace AoC.AoC2018.Tests.Day04
 {
-    public class Day04_Tests
+    public class ReposeRecordTests : AocSolutionTest<int>
     {
+        protected override SolutionData<int> Solution => new SolutionData<int>(new ReposeRecord(), 118599, 33949);
 
         private readonly List<string> Example1 = new List<string>()
         {

@@ -1,11 +1,14 @@
 ﻿using System.Linq;
 using Aoc.Aoc2018.Day02;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2018.Tests.Solutions
+namespace AoC.AoC2018.Tests.Day02
 {
-    public class Day02_Tests
+    public class InventoryManagementSystemTests : AocSolutionTest<string>
     {
+        protected override SolutionData<string> Solution => new SolutionData<string>(new InventoryManagementSystem(), "4712", "lufjygedpvfbhftxiwnaorzmq");
+
         [Theory]
         [InlineData(12, "abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab")]
         public void Test_CalculateCheckSum(int expectedResult, params string[] input)

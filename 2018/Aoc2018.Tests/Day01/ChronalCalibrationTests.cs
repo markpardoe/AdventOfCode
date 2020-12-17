@@ -1,10 +1,13 @@
 ﻿using Aoc.Aoc2018.Day01;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2018.Tests.Solutions
+namespace AoC.AoC2018.Tests.Day01
 {
-    public class Day01_Tests
+    public class ChronalCalibrationTests : AocSolutionTest<int>
     {
+        protected override SolutionData<int> Solution => new SolutionData<int>(new ChronalCalibration(), 400, 232);
+
         [Theory]
         [InlineData(3, "+1", "+1", "+1")]
         [InlineData(0, "+1", "+1", "-2")]
@@ -27,5 +30,7 @@ namespace AoC.AoC2018.Tests.Solutions
             int result = s.FindDuplicateFrequency(inputData);
             Assert.Equal(expectedResult, result);
         }
+
+        
     }
 }

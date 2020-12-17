@@ -1,10 +1,13 @@
 ﻿using Aoc.Aoc2018.Day05;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2018.Tests.Solutions
+namespace AoC.AoC2018.Tests.Day05
 {
-    public class Day05_Tests
+    public class AlchemicalReductionTests :AocSolutionTest<string>
     {
+        protected override SolutionData<string> Solution => new SolutionData<string>(new AlchemicalReduction(), "9154", "4556");
+
         [Theory]
         [InlineData("dabCBAcaDA", "dabAcCaCBAcCcaDA")]
         [InlineData("", "abBA")]

@@ -29,4 +29,10 @@
     <ProjectReference Include="..\AoC2018\AoC2018.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	<Folder Include="Day23\" />
+	<Folder Include="Day24\" />
+	<Folder Include="Day25\" />
+  </ItemGroup>
+
 </Project>
