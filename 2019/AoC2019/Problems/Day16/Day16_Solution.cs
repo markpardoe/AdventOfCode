@@ -23,7 +23,6 @@ namespace Aoc.AoC2019.Problems.Day16
             string result = String.Join("", results).Substring(0, 8);
 
             yield return result;
-            
             yield return fft.DecodeSignal(10000 , 100, 7).ToString();
         }
     }

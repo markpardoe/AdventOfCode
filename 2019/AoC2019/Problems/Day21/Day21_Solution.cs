@@ -7,7 +7,7 @@ using System.Text;
 namespace Aoc.AoC2019.Problems.Day21
 {
     /// <summary>
-    /// Solutions hand-processed as easier than calulating.
+    /// Solutions hand-processed as easier than calculating.
     /// </summary>
     public class Day21_Solution : AoCSolution<long>
     {

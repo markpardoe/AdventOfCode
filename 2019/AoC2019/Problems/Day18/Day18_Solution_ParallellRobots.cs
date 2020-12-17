@@ -1,8 +1,8 @@
 ﻿namespace Aoc.AoC2019.Problems.Day18
 {
     /// <summary>
-    /// Override Day18 Solution file to use a seperate input file due to changes in maze format.
-    /// The trick here is that we can simply calulate the fastest path per robot - ignoring doors.  
+    /// Override Day18 Solution file to use a separate input file due to changes in maze format.
+    /// The trick here is that we can simply calculate the fastest path per robot - ignoring doors.  
     /// If a robot is stuck we can simply pretend we're moving a different robot until the door is unlocked.
     /// So the total time is Sum(TimePerRobot).
     /// </summary>
