@@ -38,6 +38,7 @@ namespace AoC.AoC2020.Problems.Day16
 
             validTickets.Append(_yourTicket);
 
+            // Find which TicketField maps to which index on a ticket
             var ticketMap =  MatchFieldToTicketIndex(validTickets);
 
             var departures = ticketMap

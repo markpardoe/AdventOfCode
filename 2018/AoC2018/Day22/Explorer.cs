@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using AoC.Common.Mapping;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
-using AoC.Common.Mapping;
 
 namespace Aoc.Aoc2018.Day22
 {

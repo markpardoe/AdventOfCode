@@ -68,6 +68,18 @@ namespace AoC.Common.Mapping
             };
         }
 
+        public Position Move(CompassDirection direction, int distance = 1)
+        {
+            return direction switch
+            {
+                CompassDirection.North => new Position(X, Y - distance),
+                CompassDirection.South => new Position(X, Y + distance),
+                CompassDirection.West => new Position(X - distance, Y),
+                CompassDirection.East => new Position(X + distance, Y),
+                _ => throw new InvalidOperationException("Invalid Direction."),
+            };
+        }
+
         /// <summary>
         /// Returns the direction of a specified Position relative to itself
         /// </summary>
