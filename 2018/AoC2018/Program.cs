@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day19.FlowControl();
+            var problem = new Day22.ModeMaze();
           
             List<string> data = new List<string>();
 
