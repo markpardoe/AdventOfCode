@@ -4,26 +4,20 @@ using System.Collections.Generic;
 namespace AoC.Common.TestHelpers
 {
     /// <summary>
-    /// Data class for passing strongly typed arguments to a XUnit Theory
+    /// Data class for passing strongly typed solution results to a XUnit Theory
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SolutionData<T> : IEnumerable<object[]>
+    public class SolutionData<T>
     {
-        readonly List<object[]> data = new List<object[]>();
+        public ISolution<T> SolutionUnderTest { get; }
+        public T Result1 { get; }
+        public T Result2 { get; }
 
-        public SolutionData(ISolution<T> sut, T result1, T result2)
+        public SolutionData(ISolution<T> solutionUnderTest, T result1, T result2)
         {
-            data.Add(new object[] {sut, result1, result2});
-        }
-
-        public IEnumerator<object[]> GetEnumerator()
-        {
-            return data.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
+            SolutionUnderTest = solutionUnderTest;
+            Result1 = result1;
+            Result2 = result2;
         }
     }
 }

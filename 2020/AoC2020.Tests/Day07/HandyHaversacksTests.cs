@@ -8,7 +8,7 @@ using Xunit;
 
 namespace AoC.AoC2020.Tests.Day07
 {
-    public class HandyHaversacksTests
+    public class HandyHaversacksTests :AocSolutionTest<int>
     {
         [Fact]
         public void Solve_WithExample1_ReturnsCorrectPart1()
@@ -34,21 +34,9 @@ namespace AoC.AoC2020.Tests.Day07
 
             sut.Solve(Example1Data()).Last().ShouldBe(32);
         }
-
-        [Theory]
-        [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<int> sut, int result1, int result2)
-        {
-            var data = InputData.LoadSolutionInput(sut);
-            var actualResults = sut.Solve(data).ToList();
-
-            actualResults.First().ShouldBe(result1);
-            actualResults.Last().ShouldBe(result2);
-        }
-
-        public static SolutionData<int> Solution => new SolutionData<int>(new HandyHaversacks(), 235, 158493);
-
-
+        
+        protected override SolutionData<int> Solution => new SolutionData<int>(new HandyHaversacks(), 235, 158493);
+        
         public static IEnumerable<string> Example1Data()
         {
             yield return "light red bags contain 1 bright white bag, 2 muted yellow bags.";

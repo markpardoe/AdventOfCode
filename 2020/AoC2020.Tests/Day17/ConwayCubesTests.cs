@@ -8,7 +8,7 @@ using Xunit;
 
 namespace AoC.AoC2020.Tests.Day17
 {
-    public class ConwayCubesTests
+    public class ConwayCubesTests :AocSolutionTest<int>
     {
         [Fact]
         public void Solve_WithExampleData_ReturnsCorrectValues()
@@ -21,18 +21,7 @@ namespace AoC.AoC2020.Tests.Day17
             actualResults.Last().ShouldBe(ExampleResult2);
         }
 
-        [Theory]
-        [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<int> sut, int result1, int result2)
-        {
-            var data = InputData.LoadSolutionInput(sut);
-            var actualResults = sut.Solve(data).ToList();
-
-            actualResults.First().ShouldBe(result1);
-            actualResults.Last().ShouldBe(result2);
-        }
-
-        public static SolutionData<int> Solution => new SolutionData<int>(new ConwayCubes(), 310, 2056);
+        protected override SolutionData<int> Solution => new SolutionData<int>(new ConwayCubes(), 310, 2056);
 
         private readonly int ExampleResult1 = 112;
         private readonly int ExampleResult2 = 848;

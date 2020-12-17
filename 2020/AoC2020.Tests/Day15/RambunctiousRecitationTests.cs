@@ -7,19 +7,8 @@ using Xunit;
 
 namespace AoC.AoC2020.Tests.Day15
 {
-    public class RambunctiousRecitationTests
-    {
-        [Theory]
-        [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<int> sut, int result1, int result2)
-        {
-            var data = InputData.LoadSolutionInput(sut);
-            var actualResults = sut.Solve(data).ToList();
-
-            actualResults.First().ShouldBe(result1);
-            actualResults.Last().ShouldBe(result2);
-        }
-
-        public static SolutionData<int> Solution => new SolutionData<int>(new RambunctiousRecitation(), 257, 8546398);
+    public class RambunctiousRecitationTests : AocSolutionTest<int>
+    { 
+        protected override SolutionData<int> Solution => new SolutionData<int>(new RambunctiousRecitation(), 257, 8546398);
     }
 }

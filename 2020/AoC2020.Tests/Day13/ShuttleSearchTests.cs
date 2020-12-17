@@ -9,7 +9,7 @@ using Xunit;
 namespace AoC.AoC2020.Tests.Day13
 {
 
-    public class ShuttleSearchTests
+    public class ShuttleSearchTests : AocSolutionTest<long>
     {
         [Fact]
         public void FindNextBus_WithExampleData_ReturnsCorrectValues()
@@ -36,18 +36,7 @@ namespace AoC.AoC2020.Tests.Day13
         }
 
 
-        [Theory]
-        [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<long> sut, long result1, long result2)
-        {
-            var data = InputData.LoadSolutionInput(sut);
-            var actualResults = sut.Solve(data).ToList();
-
-            actualResults.First().ShouldBe(result1);
-            actualResults.Last().ShouldBe(result2);
-        }
-
-        public static SolutionData<long> Solution => new SolutionData<long>(new ShuttleSearch(), 222, 408270049879073);
+        protected override SolutionData<long> Solution => new SolutionData<long>(new ShuttleSearch(), 222, 408270049879073);
 
         private IEnumerable<BusTime> ParseBusTimes(string input)
         {

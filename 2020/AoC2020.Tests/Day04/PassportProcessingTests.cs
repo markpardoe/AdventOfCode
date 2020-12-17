@@ -8,19 +8,8 @@ using Xunit;
 
 namespace AoC.AoC2020.Tests.Day04
 {
-    public class PassportProcessingTests
+    public class PassportProcessingTests :AocSolutionTest<int>
     {
-        [Theory]
-        [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<int> sut, int result1, int result2)
-        {
-            var data = InputData.LoadSolutionInput(sut);
-            var actualResults = sut.Solve(data).ToList();
-
-            actualResults.First().ShouldBe(result1);
-            actualResults.Last().ShouldBe(result2);
-        }
-
 
         [Fact]
         public void Solve_WithExampleData_ReturnsCorrectValues()
@@ -32,7 +21,7 @@ namespace AoC.AoC2020.Tests.Day04
             actualResults.First().ShouldBe(ExampleResult1);
         }
 
-        public static SolutionData<int> Solution => new SolutionData<int>(new PassportProcessing(), 256, 198);
+        protected override SolutionData<int> Solution => new SolutionData<int>(new PassportProcessing(), 256, 198);
 
         private readonly int ExampleResult1 = 2;
         private readonly IEnumerable<string> ExampleData = new List<string>()

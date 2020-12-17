@@ -8,7 +8,7 @@ using Xunit;
 
 namespace AoC.AoC2020.Tests.Day10
 {
-    public class AdapterArrayTests
+    public class AdapterArrayTests: AocSolutionTest<long>
     {
         [Theory]
         [MemberData(nameof(Part1Data))]
@@ -31,18 +31,7 @@ namespace AoC.AoC2020.Tests.Day10
             actual.ShouldBe(expected);
         }
 
-        [Theory]
-        [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<long> sut, long result1, long result2)
-        {
-            var data = InputData.LoadSolutionInput(sut);
-            var actualResults = sut.Solve(data).ToList();
-
-            actualResults.First().ShouldBe(result1);
-            actualResults.Last().ShouldBe(result2);
-        }
-
-        public static SolutionData<long> Solution => new SolutionData<long>(new AdapterArray(), 2244, 3947645370368);
+        protected override SolutionData<long> Solution => new SolutionData<long>(new AdapterArray(), 2244, 3947645370368);
 
         private static readonly IReadOnlyList<int> Example1 = new List<int>
             {16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4};

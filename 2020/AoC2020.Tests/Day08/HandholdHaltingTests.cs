@@ -9,7 +9,7 @@ using Xunit;
 namespace AoC.AoC2020.Tests.Day08
 {
     
-    public class HandholdHaltingTests
+    public class HandholdHaltingTests :AocSolutionTest<int>
     {
         [Fact]
         public void Solve_WithExampleData_ReturnsCorrectValues()
@@ -21,19 +21,8 @@ namespace AoC.AoC2020.Tests.Day08
             actualResults.First().ShouldBe(ExampleResult1);
             actualResults.Last().ShouldBe(ExampleResult2);
         }
-
-        [Theory]
-        [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<int> sut, int result1, int result2)
-        {
-            var data = InputData.LoadSolutionInput(sut);
-            var actualResults = sut.Solve(data).ToList();
-
-            actualResults.First().ShouldBe(result1);
-            actualResults.Last().ShouldBe(result2);
-        }
-
-        public static SolutionData<int> Solution => new SolutionData<int>(new HandheldHalting(), 1087, 780);
+        
+        protected override SolutionData<int> Solution => new SolutionData<int>(new HandheldHalting(), 1087, 780);
 
         private readonly int ExampleResult1 = 5;
         private readonly int ExampleResult2 = 8;

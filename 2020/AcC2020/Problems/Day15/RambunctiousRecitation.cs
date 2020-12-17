@@ -31,7 +31,6 @@ namespace AoC.AoC2020.Problems.Day15
         }
     }
 
-
     public class NumberGame
     {
         public int Turn { get; private set; }

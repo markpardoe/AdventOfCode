@@ -8,7 +8,7 @@ using Xunit;
 namespace AoC.AoC2020.Tests.Day05
 {
 
-    public class BinaryBoardingTests
+    public class BinaryBoardingTests :AocSolutionTest<int>
     {
 
         [Theory]
@@ -23,18 +23,7 @@ namespace AoC.AoC2020.Tests.Day05
 
             actual.ShouldBe(expectedValue);
         }
-
-        [Theory]
-        [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<int> sut, int result1, int result2)
-        {
-            var data = InputData.LoadSolutionInput(sut);
-            var actualResults = sut.Solve(data).ToList();
-
-            actualResults.First().ShouldBe(result1);
-            actualResults.Last().ShouldBe(result2);
-        }
-
-        public static SolutionData<int> Solution => new SolutionData<int>(new BinaryBoarding(), 885, 623);
+        
+        protected override SolutionData<int> Solution => new SolutionData<int>(new BinaryBoarding(), 885, 623);
     }
 }
