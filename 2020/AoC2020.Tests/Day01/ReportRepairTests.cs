@@ -1,12 +1,12 @@
-﻿using AoC.AoC2020.Problems.Day01;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AoC.AoC2020.Problems.Day01;
 using AoC.Common;
 using AoC.Common.TestHelpers;
 using Shouldly;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
-namespace AoC.Tests.AoC2020
+namespace AoC.AoC2020.Tests.Day01
 {
     public class ReportRepairTests
     {

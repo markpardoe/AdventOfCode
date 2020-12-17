@@ -21,7 +21,7 @@ namespace AoC.AoC2020.Problems.Day15
             while (game.Turn <= 30000000)
             {
                 game.TakeTurn();
-                if (game.Turn == 2020)
+                if (game.Turn == 2021)
                 {
                     yield return game.LastNumber;
                 }

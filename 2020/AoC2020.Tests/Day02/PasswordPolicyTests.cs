@@ -2,7 +2,7 @@
 using Shouldly;
 using Xunit;
 
-namespace AoC.Tests.AoC2020
+namespace AoC.AoC2020.Tests.Day02
 {
     public class PasswordPolicyTests
     {

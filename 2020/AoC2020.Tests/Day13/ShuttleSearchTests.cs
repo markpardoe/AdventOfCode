@@ -38,7 +38,7 @@ namespace AoC.AoC2020.Tests.Day13
 
         [Theory]
         [MemberData(nameof(Solution))]
-        public void Solve_WithInput_ReturnsCorrectValues(ISolution<int> sut, int result1, int result2)
+        public void Solve_WithInput_ReturnsCorrectValues(ISolution<long> sut, long result1, long result2)
         {
             var data = InputData.LoadSolutionInput(sut);
             var actualResults = sut.Solve(data).ToList();

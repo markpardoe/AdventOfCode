@@ -35,7 +35,7 @@ namespace AoC.AoC2020.Tests.Day03
 
         public static SolutionData<long> Solution => new SolutionData<long>(new TobogganTrajectory(), 214, 8336352024);
 
-        private readonly long ExampleResult1 = 214;
+        private readonly long ExampleResult1 = 7;
         private readonly long ExampleResult2 = 336;
         private readonly IEnumerable<string> ExampleData = new List<string>()
         {
