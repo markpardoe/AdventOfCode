@@ -1,11 +1,7 @@
-﻿using AoC.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Aoc.Aoc2018.Day01;
 using Xunit;
-using Aoc.Aoc2018.Day01;
 
-namespace Tests_Aoc2018.Solutions
+namespace AoC.AoC2018.Tests.Solutions
 {
     public class Day01_Tests
     {

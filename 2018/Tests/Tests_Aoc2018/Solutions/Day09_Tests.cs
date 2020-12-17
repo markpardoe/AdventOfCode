@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Aoc.Aoc2018.Day09;
+﻿using Aoc.Aoc2018.Day09;
 using Shouldly;
 using Xunit;
 
-namespace Tests_Aoc2018.Solutions
+namespace AoC.AoC2018.Tests.Solutions
 {
     public class Day09_Tests
     {

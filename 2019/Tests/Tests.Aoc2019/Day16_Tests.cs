@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Xunit;
 using System.Linq;
-using AoC.Common;
 using Aoc.AoC2019.Problems.Day16;
+using Xunit;
 
-namespace Aoc.AoC2019.Tests
+namespace AoC.AoC2019.Tests
 {
     public class Day16_Tests
     {

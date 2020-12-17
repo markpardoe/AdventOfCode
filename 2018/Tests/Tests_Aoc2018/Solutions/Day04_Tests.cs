@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Aoc.Aoc2018.Day04;
 using Xunit;
 
-namespace Tests_Aoc2018.Solutions
+namespace AoC.AoC2018.Tests.Solutions
 {
     public class Day04_Tests
     {

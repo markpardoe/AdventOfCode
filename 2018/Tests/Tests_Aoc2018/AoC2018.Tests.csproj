@@ -1,13 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyName>Aoc.Aoc2018.Tests</AssemblyName>
+    <AssemblyName>AoC.AoC2018.Tests</AssemblyName>
 
-    <RootNamespace>Aoc.Aoc2018.Tests</RootNamespace>
+    <RootNamespace>AoC.AoC2018.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

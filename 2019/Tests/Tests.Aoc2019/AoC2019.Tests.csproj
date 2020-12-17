@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>AoC.AoC2019.Tests</AssemblyName>
+
+    <RootNamespace>AoC.AoC2019.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
