@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AoC.AoC2020.Problems.Day10;
+using AoC.Common;
+using AoC.Common.TestHelpers;
 using Shouldly;
 using Xunit;
 
-namespace AoC.Tests.AoC2020
+namespace AoC.AoC2020.Tests.Day10
 {
-    public class Day10_AdapterArray_Tests
+    public class AdapterArrayTests
     {
         [Theory]
         [MemberData(nameof(Part1Data))]
@@ -30,6 +30,19 @@ namespace AoC.Tests.AoC2020
 
             actual.ShouldBe(expected);
         }
+
+        [Theory]
+        [MemberData(nameof(Solution))]
+        public void Solve_WithInput_ReturnsCorrectValues(ISolution<long> sut, long result1, long result2)
+        {
+            var data = InputData.LoadSolutionInput(sut);
+            var actualResults = sut.Solve(data).ToList();
+
+            actualResults.First().ShouldBe(result1);
+            actualResults.Last().ShouldBe(result2);
+        }
+
+        public static SolutionData<long> Solution => new SolutionData<long>(new AdapterArray(), 2244, 3947645370368);
 
         private static readonly IReadOnlyList<int> Example1 = new List<int>
             {16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4};

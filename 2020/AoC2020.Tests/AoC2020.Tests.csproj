@@ -5,28 +5,39 @@
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyName>Aoc.Aoc2018.Tests</AssemblyName>
+    <AssemblyName>AoC.AoC2020.Tests</AssemblyName>
 
-    <RootNamespace>Aoc.Aoc2018.Tests</RootNamespace>
+    <RootNamespace>AoC.AoC2020.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="Shouldly" Version="4.0.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-      <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="coverlet.collector" Version="1.3.0">
-      <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\..\AoC2018\AoC2018.csproj" />
+    <Folder Include="Day18\" />
+    <Folder Include="Day19\" />
+    <Folder Include="Day20\" />
+    <Folder Include="Day21\" />
+    <Folder Include="Day22\" />
+    <Folder Include="Day23\" />
+    <Folder Include="Day24\" />
+    <Folder Include="Day25\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\AcC2020\AcC2020.csproj" />
   </ItemGroup>
 
 </Project>

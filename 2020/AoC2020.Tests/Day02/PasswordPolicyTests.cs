@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AoC.AoC2020.Problems.Day02;
-using Xunit;
+﻿using AoC.AoC2020.Problems.Day02;
 using Shouldly;
+using Xunit;
 
 namespace AoC.Tests.AoC2020
 {
-    public class Day02_PasswordPolicy_Tests
+    public class PasswordPolicyTests
     {
 
         [Theory]
@@ -46,6 +43,5 @@ namespace AoC.Tests.AoC2020
 
             sut.IsValidWithPositions().ShouldBe(expectedValue);
         }
-
     }
 }
