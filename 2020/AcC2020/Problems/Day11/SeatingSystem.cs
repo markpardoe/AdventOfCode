@@ -1,12 +1,9 @@
-﻿using System;
+﻿using AoC.Common;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AoC.Common;
 
 namespace AoC.AoC2020.Problems.Day11
 {
-
     public class SeatingSystem :AoCSolution<int>
     {
         public override int Year => 2020;
@@ -32,47 +29,19 @@ namespace AoC.AoC2020.Problems.Day11
         /// <returns></returns>
         public int CountOccupiedSeatsWhenStable(SeatMap map, Action action)
         {
-           
             string currentStatus = map.StatusCode;
             string oldStatus = string.Empty;
-
             int turn = 0;
-            // Console.WriteLine("Turn " + turn);
-            // Console.WriteLine(map.DrawMap());
 
             while (!oldStatus.Equals(currentStatus))
             {
                 action();
-
                 turn++;
-                //Console.WriteLine();
-                //Console.WriteLine("Turn " + turn);
-                //Console.WriteLine(map.DrawMap());
-
-                //Console.ReadLine();
-
                 oldStatus = currentStatus;
                 currentStatus = map.StatusCode;
             }
 
-            //Console.WriteLine("Turn " + turn);
-            //Console.WriteLine(map.DrawMap());
             return map.OccupiedSeats;
         }
-
-
-        private readonly IEnumerable<string> example1 = new List<string>
-        {
-            "L.LL.LL.LL",
-            "LLLLLLL.LL",
-            "L.L.L..L..",
-            "LLLL.LL.LL",
-            "L.LL.LL.LL",
-            "L.LLLLL.LL",
-            "..L.L.....",
-            "LLLLLLLLLL",
-            "L.LLLLLL.L",
-            "L.LLLLL.LL"
-        };
     }
 }

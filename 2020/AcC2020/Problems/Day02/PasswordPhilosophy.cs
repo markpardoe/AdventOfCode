@@ -6,7 +6,7 @@ using AoC.Common;
 
 namespace AoC.AoC2020.Problems.Day02
 {
-    public class Day02_PasswordPhilosophy :AoCSolution<int>
+    public class PasswordPhilosophy :AoCSolution<int>
     {
         public override int Year => 2020;
         public override int Day => 2;

@@ -6,7 +6,7 @@ using AoC.Common;
 
 namespace AoC.AoC2020.Problems.Day01
 {
-    class Day01_Solution : AoCSolution<int>
+    public class ReportRepair : AoCSolution<int>
     {
 
         public override int Year => 2020;
@@ -42,7 +42,6 @@ namespace AoC.AoC2020.Problems.Day01
             }
             return -1;
         }
-
 
         public int RepairReportThreeNumbers(int target, IEnumerable<string> input)
         {

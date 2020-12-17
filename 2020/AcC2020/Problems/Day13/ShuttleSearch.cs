@@ -28,12 +28,13 @@ namespace AoC.AoC2020.Problems.Day13
                 }
             }
 
+            yield return FindNextBus(departureTime, busTimes);
             yield return CalculatePart2(busTimes);
         }
 
         /// Finds the bus with the minimum wait time at the current stop.
         /// Returns busId * wait time (in min.)
-        private long FindNextBus(long departTime, IEnumerable<BusTime> busTimes)
+        public long FindNextBus(long departTime, IEnumerable<BusTime> busTimes)
         {
             long minWait = long.MaxValue;
             BusTime earliestBus = null;
@@ -93,43 +94,7 @@ namespace AoC.AoC2020.Problems.Day13
             Console.WriteLine($"{bus} = {time}");
             return time;
         }
-        
-      
-        private readonly IEnumerable<string> Example1 = new List<string>()
-        {
-            "939",
-            "7,13,x,x,59,x,31,19"
-        };
 
-        private readonly IEnumerable<string> Example2 = new List<string>()
-        {
-            "0",
-            "17,x,13,19"
-        };
-
-        private readonly IEnumerable<string> Example3 = new List<string>()
-        {
-            "0",
-            "67,7,59,61"
-        };
-
-        private readonly IEnumerable<string> Example4 = new List<string>()
-        {
-            "0",
-            "67,x,7,59,61"
-        };
-
-        private readonly IEnumerable<string> Example5 = new List<string>()
-        {
-            "0",
-            "67,7,x,59,61"
-        };
-
-        private readonly IEnumerable<string> Example6 = new List<string>()
-        {
-            "0",
-            "1789,37,47,1889"
-        };
     }
 
     public class BusTime

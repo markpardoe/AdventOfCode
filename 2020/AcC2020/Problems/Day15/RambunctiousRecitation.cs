@@ -1,9 +1,6 @@
-﻿using System;
+﻿using AoC.Common;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using AoC.Common;
 
 namespace AoC.AoC2020.Problems.Day15
 {
@@ -16,17 +13,14 @@ namespace AoC.AoC2020.Problems.Day15
 
         private readonly List<int> PuzzleInput = new List<int>() {0, 14, 6, 20, 1, 4};
 
-        private readonly List<int> Example1 = new List<int>() { 0, 3, 6 };
-
         public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
             NumberGame game = new NumberGame(PuzzleInput);
-
-
+            
             // Brute force the answer to part B.  Not ideal, but runs in approx. 10 seconds
             while (game.Turn <= 30000000)
             {
-                int value = game.TakeTurn();
+                game.TakeTurn();
                 if (game.Turn == 2020)
                 {
                     yield return game.LastNumber;
@@ -44,7 +38,6 @@ namespace AoC.AoC2020.Problems.Day15
 
         // Holds the turn(s) in which each number was spoken
         private readonly Dictionary<int, List<int>> _previousNumbers = new Dictionary<int, List<int>>();
-        private readonly List<int> _initialTurns;
         private int _lastNumber;
 
         public int LastNumber => _lastNumber;
@@ -52,7 +45,6 @@ namespace AoC.AoC2020.Problems.Day15
         public NumberGame(List<int> initialValues)
         {
             Turn = 1;
-            _initialTurns = initialValues;
 
             // add initial values in constructor - not the best way to do this,
             // but avoids checking if we're still using them in the main game loop.
@@ -91,7 +83,6 @@ namespace AoC.AoC2020.Problems.Day15
             return value;
         }
 
-
         // Returns how many times this number has been said
         private int CalculateNumber(int lastNumber)
         {
@@ -110,7 +101,6 @@ namespace AoC.AoC2020.Problems.Day15
             {
                 throw new InvalidDataException($"Number {lastNumber} has never been spoken.");
             }
-
         }
     }
 }

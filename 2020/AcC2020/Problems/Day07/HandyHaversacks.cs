@@ -24,8 +24,8 @@ namespace AoC.AoC2020.Problems.Day07
         public override string Name => "Day 7: Handy Haversacks";
         public override string InputFileName => "Day07.txt";
 
-        private string regExPattern = @"^(?<bag>[a-z ]+)(?=\bbags contain\b)bags contain (?<children>.+)*.$";
-        private string childBagPattern = @"(?<qty>\d+) (?<bag>[a-z]+ [a-z]+) bag[s]*";
+        private readonly string regExPattern = @"^(?<bag>[a-z ]+)(?=\bbags contain\b)bags contain (?<children>.+)*.$";
+        private readonly string childBagPattern = @"(?<qty>\d+) (?<bag>[a-z]+ [a-z]+) bag[s]*";
 
         // Generates a graph of all bags with links to their children (bags they contain)
         // and parents (bags they can fit into).
@@ -64,7 +64,7 @@ namespace AoC.AoC2020.Problems.Day07
                     // Create a bag (or use existing) or each bag
                     foreach (var child in splitChildren)
                     {
-                        Bag childBag = null;
+                        Bag childBag;
                         var childMatch = Regex.Match(child, childBagPattern);
                         var childName = childMatch.Groups["bag"].Value.Trim();
                         var qty = int.Parse(childMatch.Groups["qty"].Value);
@@ -130,9 +130,7 @@ namespace AoC.AoC2020.Problems.Day07
         private int CountNestedBags(HashSet<Bag> bags, Bag target, int qty)
         {
             int total = 0;
-            HashSet<Bag> checkedBags = new HashSet<Bag>();  // All the bags we've checked - prevent any loops in the graph.
-            Queue<Bag> bagsToCheck = new Queue<Bag>();
-
+            
             // Add initial parents of the target to the list to check.
             var children = target.Children;
 

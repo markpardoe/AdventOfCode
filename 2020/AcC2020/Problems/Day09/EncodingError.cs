@@ -67,8 +67,7 @@ namespace AoC.AoC2020.Problems.Day09
             for (int i = 0; i <= input.Count; i++)
             {
                 long total = input[i];
-                List<long> seq = new List<long>();
-                seq.Add(total);
+                List<long> seq = new List<long> {total};
 
                 // Check that the 1st number in the sequence is valid.
                 if (total >= targetNumber)

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Aoc.Aoc2018.Day08
 {
-    class MemoryManeuver: AoCSolution<int>
+    public class MemoryManeuver: AoCSolution<int>
     {
         public override IEnumerable<int> Solve(IEnumerable<string> input)
         {

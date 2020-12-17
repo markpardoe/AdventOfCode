@@ -79,7 +79,6 @@ namespace AoC.AoC2020.Problems.Day17
 
         protected Func<TValue, char?> MapConverter;  // function to use for converting the value for mapping purposes
         private char? DefaultStringFunction(TValue value) => value?.ToString()[0];
-
        
 
         // Returns all positions within the region of the map (between min and max bounds)

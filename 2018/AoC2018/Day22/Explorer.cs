@@ -82,8 +82,6 @@ namespace Aoc.Aoc2018.Day22
                     { 
                         equip = FindValidEquipment(currentRegion.RegionType, neighborRegion.RegionType);
                     }
-  
-                    if (equip == null) continue;  // no valid equipment found - so we can't move
                     
                     CaveNode neighborNode = new CaveNode(neighbor, equip)
                     {
@@ -144,24 +142,6 @@ namespace Aoc.Aoc2018.Day22
             throw new Exception("No equipment found");
         }
 
-        private bool AddNodeToList(HashSet<CaveNode> list, CaveNode node)
-        {
-            // update distance from start if we have a shorter path
-            if (list.TryGetValue(node, out CaveNode existingNode))
-            {
-                if (existingNode.DistanceFromStart > node.DistanceFromStart)
-                {
-                    existingNode.DistanceFromStart = node.DistanceFromStart;
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
         private class CaveNode : IEquatable<CaveNode>
         {
             public int DistanceFromStart { get; set; } = 0;
@@ -188,7 +168,7 @@ namespace Aoc.Aoc2018.Day22
             public override bool Equals(object obj)
             {
                 if (obj == null) return false;
-                if (obj is CaveNode) return (Equals((CaveNode)obj));
+                if (obj is CaveNode node) return (Equals(node));
                 return false;
             }
 

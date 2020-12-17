@@ -5,7 +5,7 @@ using AoC.Common;
 
 namespace AoC.AoC2020.Problems.Day03
 {
-    public class Day03_TobogganTrajectory : AoCSolution<long>
+    public class TobogganTrajectory : AoCSolution<long>
     {
         public override int Year => 2020;
         public override int Day => 3;
