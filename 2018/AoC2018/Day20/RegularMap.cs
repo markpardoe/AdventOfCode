@@ -13,6 +13,7 @@ namespace Aoc.Aoc2018.Day20
             string regEx = input.First();  // shpuld only be one line
 
             yield return 5;
+            yield return 5;
         }
 
         public override int Year => 2018;

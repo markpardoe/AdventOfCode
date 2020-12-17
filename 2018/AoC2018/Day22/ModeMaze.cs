@@ -21,9 +21,6 @@ namespace Aoc.Aoc2018.Day22
 
            Explorer explorer = new Explorer(map);
            yield return explorer.FindShortestPath(new Position(0, 0), _target);
-
-           // 938 too low
-           // 1017 too high
         }
 
         private readonly int _depth =  3339;

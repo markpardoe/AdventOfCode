@@ -7,16 +7,14 @@ namespace Aoc.Aoc2018.Day07
     public class SumOfItsParts : AoCSolution<string>
     {
         public override int Year => 2018;
-
         public override int Day => 7;
-
         public override string Name => "Day 7: The Sum of Its Parts";
-
         public override string InputFileName => "Day07.txt";
 
         public override IEnumerable<string> Solve(IEnumerable<string> input)
         {
             yield return FindShortestPath(input);
+            yield return "";
         }
 
         public string FindShortestPath(IEnumerable<string> input)

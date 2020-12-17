@@ -15,7 +15,6 @@ namespace Aoc.Aoc2018.Day10
     {
         private static string outputFilePath = @"e:\tmpImages\";
         
-
         /// <summary>
         /// Had to fudge the output as the search area is too big for the console window.
         /// So instead we generate a bitmap and save in the outputfilePath folder.

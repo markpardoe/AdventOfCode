@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using AoC.Common;
+﻿using AoC.Common;
 using AoC.Common.Mapping;
+using System;
+using System.Collections.Generic;
 
 namespace Aoc.Aoc2018.Day17
 {
-
     public class ReservoirResearch : AoCSolution<int>
     {
-
         public override int Year => 2018;
         public override int Day => 17;
         public override string Name => "Day 17: Reservoir Research";

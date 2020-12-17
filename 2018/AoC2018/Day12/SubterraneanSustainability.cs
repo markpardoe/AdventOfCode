@@ -7,7 +7,7 @@ using AoC.Common.Mapping;
 
 namespace Aoc.Aoc2018.Day12
 {
-    public class SubterraneanSustainability : AoCSolution<string>
+    public class SubterraneanSustainability : AoCSolution<long>
     {
         private readonly Dictionary<char, PlantStatus> _plantMappings = new Dictionary<char, PlantStatus>
         {
@@ -15,7 +15,7 @@ namespace Aoc.Aoc2018.Day12
             {'#', PlantStatus.Plant}
         };
 
-        public override IEnumerable<string> Solve(IEnumerable<string> input)
+        public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
             string firstLine =input.First();
 
@@ -28,7 +28,7 @@ namespace Aoc.Aoc2018.Day12
                 map.GrowGeneration();
             }
 
-            yield return map.SumPlants().ToString();
+            yield return map.SumPlants();
 
 
             for (int i = 20; i < 1000; i++)
@@ -37,12 +37,10 @@ namespace Aoc.Aoc2018.Day12
                 map.GrowGeneration();
             }
 
-
-            // at 1000 generation it stabalises at +58 per generation
-
+            // at 1000 generation it stabilizes at +58 per generation
             long genLeft = 50000000000 - 1000;
             long finalScore = map.SumPlants() + (genLeft * 58);
-            yield return finalScore.ToString();
+            yield return finalScore;
         }
 
         public override int Year => 2018;
