@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Aoc.AoC2019.Problems.Day01;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2019.Tests
+namespace AoC.AoC2019.Tests.Day01
 {
-    public class Day01_Tests
+    public class Day01_Tests : AocSolutionTest<int>
     {
         private readonly Day01_Solution sut = new Day01_Solution();
 
@@ -29,6 +30,8 @@ namespace AoC.AoC2019.Tests
             var input = new List<string>() { value.ToString() };
             int actualResult = sut.CalculateFuelRequirements(input, true);
             Assert.Equal(result, actualResult);
-        }   
+        }
+
+        protected override SolutionData<int> Solution => new SolutionData<int>(new Day01_Solution(), 3423279, 5132018);
     }
 }

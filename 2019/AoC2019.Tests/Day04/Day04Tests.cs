@@ -1,9 +1,10 @@
 ﻿using Aoc.AoC2019.Problems.Day04;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2019.Tests
+namespace AoC.AoC2019.Tests.Day04
 {
-    public class Day04_Tests
+    public class Day04Tests : AocSolutionTest<int>
     {
         private readonly Day04_Solution sut = new Day04_Solution();
 
@@ -29,5 +30,7 @@ namespace AoC.AoC2019.Tests
             bool result = sut.IsValidPasswordNoRepeatingGroups(password);
             Assert.Equal(expectedValue, result);
         }
+
+        protected override SolutionData<int> Solution => new SolutionData<int>(new Day04_Solution(), 895, 591);
     }
 }

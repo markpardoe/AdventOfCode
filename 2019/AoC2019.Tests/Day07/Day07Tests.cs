@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Aoc.AoC2019.IntCode;
+using Aoc.AoC2019.Problems.Day07;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2019.Tests
+namespace AoC.AoC2019.Tests.Day07
 { 
-    public class Day07_Tests
+    public class Day07Tests : AocSolutionTest<long>
     {
         [Theory]
         [InlineData(43210, 4, 3, 2, 1, 0, 3, 15, 3, 16, 1002, 16, 10, 16, 1, 16, 15, 15, 4, 15, 99, 0, 0)]
@@ -31,5 +33,7 @@ namespace AoC.AoC2019.Tests
             long output = controller.RunAmplifiedCircuits(0);
             Assert.Equal(expectedResult, output);
         }
+
+        protected override SolutionData<long> Solution => new SolutionData<long>(new Day07_Solution(), 440880, 3745599);
     }
 }

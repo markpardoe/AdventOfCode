@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Aoc.AoC2019.Problems.Day16;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2019.Tests
+namespace AoC.AoC2019.Tests.Day16
 {
-    public class Day16_Tests
+    public class Day16Tests  : AocSolutionTest<string>
     {
+        protected override SolutionData<string> Solution => new SolutionData<string>(new Day16_Solution(), "85726502", "92768399");
+
         [Theory]
         [InlineData("01029498", 4, 8, "12345678")]
         [InlineData("24176176", 100, 8, "80871224585914546619083218645595")]

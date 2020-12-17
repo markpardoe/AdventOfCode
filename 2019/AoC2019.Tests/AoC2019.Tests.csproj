@@ -11,6 +11,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Day01 - Copy %284%29\**" />
+    <Compile Remove="Day01 - Copy %285%29\**" />
+    <Compile Remove="Day01 - Copy %286%29\**" />
+    <Compile Remove="Day01 - Copy %287%29\**" />
+    <Compile Remove="Day01 - Copy %288%29\**" />
+    <Compile Remove="Day01 - Copy %289%29\**" />
+    <EmbeddedResource Remove="Day01 - Copy %284%29\**" />
+    <EmbeddedResource Remove="Day01 - Copy %285%29\**" />
+    <EmbeddedResource Remove="Day01 - Copy %286%29\**" />
+    <EmbeddedResource Remove="Day01 - Copy %287%29\**" />
+    <EmbeddedResource Remove="Day01 - Copy %288%29\**" />
+    <EmbeddedResource Remove="Day01 - Copy %289%29\**" />
+    <None Remove="Day01 - Copy %284%29\**" />
+    <None Remove="Day01 - Copy %285%29\**" />
+    <None Remove="Day01 - Copy %286%29\**" />
+    <None Remove="Day01 - Copy %287%29\**" />
+    <None Remove="Day01 - Copy %288%29\**" />
+    <None Remove="Day01 - Copy %289%29\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
     <PackageReference Include="Shouldly" Version="4.0.1" />
     <PackageReference Include="xunit" Version="2.4.1" />

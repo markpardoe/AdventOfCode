@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Aoc.AoC2019.Problems.Day10;
 using AoC.Common.Mapping;
+using AoC.Common.TestHelpers;
+using Shouldly;
 using Xunit;
 
-namespace AoC.AoC2019.Tests
+namespace AoC.AoC2019.Tests.Day10
 {
-    public class Day10_Tests
+    public class Day10Tests : AocSolutionTest<int>
     {
+        protected override SolutionData<int> Solution => new SolutionData<int>(new Day10_Solution(), 247, 1919);
+
         [Theory]
         [ClassData(typeof(Day10TestData))]
         public void Test_AsteroidMap_MaxAsteroidsDetected(List<string> data, int expectedResult, Position expectedPosition)
@@ -24,8 +28,7 @@ namespace AoC.AoC2019.Tests
                     max = total;
                 }
             }
-
-            Assert.Equal(expectedResult, max);
+            max.ShouldBe(expectedResult);
         }
 
         [Theory]
@@ -44,9 +47,8 @@ namespace AoC.AoC2019.Tests
                     best = p;
                 }
             }
-
-            Assert.Equal(expectedPosition.X, best.X);
-            Assert.Equal(expectedPosition.Y, best.Y);
+            best.X.ShouldBe(expectedPosition.X);
+            best.Y.ShouldBe(expectedPosition.Y);
         }
 
 
@@ -65,14 +67,14 @@ namespace AoC.AoC2019.Tests
                 p = laser.DestroyNextAsteroid();
             }
 
-            Assert.Equal(expectedResult.X, p.X);
-            Assert.Equal(expectedResult.Y, p.Y);
+            p.X.ShouldBe(expectedResult.X);
+            p.Y.ShouldBe(expectedResult.Y);
         }
 
         public class Day10TestData : IEnumerable<object[]>
         {
 
-            public readonly static List<string> Example1 = new List<string>()
+            public static readonly List<string> Example1 = new List<string>()
             {
                 ".#..#",
                 ".....",
@@ -81,7 +83,7 @@ namespace AoC.AoC2019.Tests
                 "...##"
             };
 
-            public readonly static List<string> Example2 = new List<string>()
+            public static readonly List<string> Example2 = new List<string>()
             {
                 "......#.#.",
                 "#..#.#....",
@@ -95,7 +97,7 @@ namespace AoC.AoC2019.Tests
                 ".#....####"
             };
 
-            public readonly static List<string> Example3 = new List<string>()
+            public static readonly List<string> Example3 = new List<string>()
             {
                 "#.#...#.#.",
                 ".###....#.",
@@ -109,7 +111,7 @@ namespace AoC.AoC2019.Tests
                 ".####.###."
             };
 
-            public readonly static List<string> Example4 = new List<string>()
+            public static readonly List<string> Example4 = new List<string>()
             {
                 ".#..#..###",
                 "####.###.#",
@@ -123,7 +125,7 @@ namespace AoC.AoC2019.Tests
                 ".....#.#.."
             };
 
-            public readonly static List<string> Example5 = new List<string>()
+            public static readonly List<string> Example5 = new List<string>()
             {
                 ".#..##.###...#######",
                 "##.############..##.",

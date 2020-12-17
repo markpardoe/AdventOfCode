@@ -3,9 +3,9 @@ using Aoc.AoC2019.Problems.Day03;
 using AoC.Common.Mapping;
 using Xunit;
 
-namespace AoC.AoC2019.Tests
+namespace AoC.AoC2019.Tests.Day03
 {    
-    public class Line_Tests
+    public class LineTests
     {
         [Fact]
         public void Line_GetCollision_Null_If_Same_Axis()

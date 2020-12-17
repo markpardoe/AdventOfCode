@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Aoc.AoC2019.Problems.Day14;
+using AoC.Common.TestHelpers;
 using Xunit;
 
-namespace AoC.AoC2019.Tests
+namespace AoC.AoC2019.Tests.Day14
 {
-    public class Day14_Tests
+    public class Day14Tests : AocSolutionTest<long>
     {
+        protected override SolutionData<long> Solution => new SolutionData<long>(new Day14_Solution(), 751038, 2074843);
+
         [Theory]
         [ClassData(typeof(Day14TestData))]
         public void Test_NanoReactor_Produce_1_Fuel(List<string> data, long expectedResult, long ignore)

@@ -2,12 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using Aoc.AoC2019.Problems.Day18;
+using AoC.Common.TestHelpers;
+using Shouldly;
 using Xunit;
 
-namespace AoC.AoC2019.Tests
+namespace AoC.AoC2019.Tests.Day18
 {
-    public class Day18_Tests
+    public class Day18Tests
     {
+        // A bit different from normal as we need to use 2 different objects to solve it as we have 2 different input files
+        public static IEnumerable<object[]> Data => new List<object[]>
+        {
+            new object[] {new Day18_Solution(), 6316},
+            new object[] {new Day18_Solution_ParallelRobots(), 1648}
+
+        };
+
+        [Theory]
+        [MemberData(nameof(Data))]
+        public void Solve_WithInput_ReturnsCorrectValues(Day18_Solution sut, int expectedResult)
+        {
+            var data = InputData.LoadSolutionInput(sut);
+
+            var actualResults = sut.Solve(data).First();
+
+            actualResults.ShouldBe(expectedResult);
+        }
+
+
         [Theory]
         [ClassData(typeof(Day18_TestData))]
         public void Test_MazeRobot_Finds_ShortestPath(List<string> data, int expectedResult)
