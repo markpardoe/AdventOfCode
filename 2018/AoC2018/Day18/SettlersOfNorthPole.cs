@@ -28,8 +28,8 @@ namespace Aoc.Aoc2018.Day18
             Console.WriteLine(map.DrawMap());
             File.WriteAllLines(@"E:\simple.txt", new List<string>(){map.DrawMap()});
 
-            int trees = map.CountSettlers(SettlerType.Tree);
-            int lumberYards = map.CountSettlers(SettlerType.Lumberyard);
+            int trees = map.CountValue(SettlerType.Tree);
+            int lumberYards = map.CountValue(SettlerType.Lumberyard);
 
             Console.WriteLine();
             Console.WriteLine($"Trees: {trees}.  LumberYards: {lumberYards}");
@@ -85,8 +85,8 @@ namespace Aoc.Aoc2018.Day18
 
             // Run last steps
             map.RunSimulation(remainingSteps);
-            int trees = map.CountSettlers(SettlerType.Tree);
-            int lumberYards = map.CountSettlers(SettlerType.Lumberyard);
+            int trees = map.CountValue(SettlerType.Tree);
+            int lumberYards = map.CountValue(SettlerType.Lumberyard);
 
 
             return trees * lumberYards;
