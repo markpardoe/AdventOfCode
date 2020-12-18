@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace AoC.Common.Mapping
 {
+
     public readonly struct Position4d : IEquatable<Position4d>
     {
         public int X { get; }
@@ -63,6 +64,11 @@ namespace AoC.Common.Mapping
         public override string ToString()
         {
             return $"({X}, {Y}, {Z}, {W})";
+        }
+
+        public int DistanceTo(Position4d target)
+        {
+            return Math.Abs(this.X - target.X) + Math.Abs(this.Y - target.Y) + Math.Abs(this.Z - target.Z) + Math.Abs(this.W - target.W);
         }
     }
 }
