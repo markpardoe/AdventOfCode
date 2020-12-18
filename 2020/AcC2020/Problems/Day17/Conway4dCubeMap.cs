@@ -12,8 +12,6 @@ namespace AoC.AoC2020.Problems.Day17
     {
         public int Generation { get; private set; } = 0;
 
-        private readonly Dictionary<Position4d, CubeStatus> _buffer = new Dictionary<Position4d, CubeStatus>();
-
         public Conway4dCubeMap(IEnumerable<string> input) : base(CubeStatus.Inactive)
         {
             var y = 0;
@@ -21,7 +19,6 @@ namespace AoC.AoC2020.Problems.Day17
             {
                 for (var x = 0; x < line.Length; x++)
                 {
-
                     var tile = (CubeStatus)line[x];
                     var pos = new Position4d(x, y, 0, 0);
 
@@ -44,27 +41,16 @@ namespace AoC.AoC2020.Problems.Day17
 
                     if (status == CubeStatus.Active && (active == 2 || active == 3))
                     {
-                        _buffer[pos] = CubeStatus.Active;
-                    }
+                        AddToBuffer(pos, CubeStatus.Active);
+    }
                     else if (status == CubeStatus.Inactive && active == 3)
                     {
-                        _buffer[pos] = CubeStatus.Active;
+                        AddToBuffer(pos, CubeStatus.Active);
                     }
                 }
                 
                 // replace the map with the buffer
-                Map.Clear();
-
-                foreach (var location in _buffer)
-                {
-                    // only copy active locations
-                    if (location.Value == CubeStatus.Active)
-                    {
-                        Map.Add(location.Key, location.Value);
-                    }
-                }
-
-                _buffer.Clear();
+                UpdateFromBuffer();
                 Generation++;
             }
         }

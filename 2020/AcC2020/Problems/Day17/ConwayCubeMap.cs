@@ -17,8 +17,6 @@ namespace AoC.AoC2020.Problems.Day17
     {
         public int Generation { get; private set; } = 0;
 
-        private readonly Dictionary<Position3d, CubeStatus> _buffer = new Dictionary<Position3d, CubeStatus>();
-
         public ConwayCubeMap(IEnumerable<string> input) : base(CubeStatus.Inactive)
         {
             var y = 0;
@@ -37,7 +35,6 @@ namespace AoC.AoC2020.Problems.Day17
         }
 
         protected override char? ConvertValueToChar(Position3d position, CubeStatus value) => (char) value;
-
 
         public void RunGeneration(int steps = 1)
         {
@@ -58,84 +55,22 @@ namespace AoC.AoC2020.Problems.Day17
                     var status = location.Value;
                     int active = CountActiveNeighbors(pos); // count active neighbors
 
+                    // We only add 'Active' cubes to the buffer as this is much more efficient than adding 'inactive' values
                     if (status == CubeStatus.Active && (active == 2 || active == 3))
                     {
-                        _buffer[pos] = CubeStatus.Active;
+                        AddToBuffer(pos, CubeStatus.Active);
                     }
                     else if (status == CubeStatus.Inactive && active == 3)
                     {
-                        _buffer[pos] = CubeStatus.Active;
+                        AddToBuffer(pos, CubeStatus.Active);
                     }
                 }
 
-                //for (int z = minZ; z <= maxZ; z++)
-                //{
-
-                //    for (int y = minY; y <= maxY; y++)
-                //    {
-                //        for (int x = minX; x <= maxX; x++)
-                //        {
-                //            var pos = new Position3d(x, y, z);
-                //            var status = this[pos];
-
-                //            int active = CountActiveNeighbors(pos); // count active neighbors
-
-                //            if (status == CubeStatus.Active && (active == 2 || active == 3))
-                //            {
-                //                _buffer[pos] = CubeStatus.Active;
-                //            }
-                //            else if (status == CubeStatus.Inactive && active == 3)
-                //            {
-                //                _buffer[pos] = CubeStatus.Active;
-                //            }
-                //        }
-                //    }
-                //}
-
-                // replace the map with the buffer
-                Map.Clear();
-
-                foreach (var location in _buffer)
-                {
-                    // only copy active locations
-                    if (location.Value == CubeStatus.Active)
-                    {
-                        Map.Add(location.Key, location.Value);
-                    }
-                }
-
-                _buffer.Clear();
+                UpdateFromBuffer(); 
                 Generation++;
             }
         }
-
-        public string DraDrawActiveMap()
-        {
-            int minZ = MinZ;
-            int maxZ = MaxZ;
-            int minY = MinY- 1;
-            int maxY = MaxY + 1;
-            int minX = MinX - 1;
-            int maxX = MaxX + 1;
-            StringBuilder sb = new StringBuilder();
-
-            for (int z = minZ; z <= maxZ; z++)
-            {
-                sb.AppendLine($"z = {z}");
-                for (int y = minY; y <= maxY; y++)
-                {
-                    for (int x = minX; x <= maxX; x++)
-                    {
-                        sb.Append(CountActiveNeighbors(new Position3d(x, y, z)));
-                    }
-                    sb.Append(Environment.NewLine);
-                }
-            }
-
-            return sb.ToString();
-        }
-
-
+        
         private int CountActiveNeighbors(Position3d position)
         {
             int count = 0;
