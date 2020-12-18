@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AoC.Common.Mapping._4d
 {
-    public class Map4d <TValue> : MapBase<Position4d, TValue>
+    public class Map4d <TValue> : BufferedMap<Position4d, TValue>
     {
         
         public int MaxX => Map.Keys.Max(p => p.X);

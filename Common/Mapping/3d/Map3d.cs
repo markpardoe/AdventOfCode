@@ -9,7 +9,7 @@ namespace AoC.Common.Mapping._3d
     /// 3d Map
     /// </summary>
     /// <typeparam name="TValue"></typeparam>
-    public class Map3d <TValue> : MapBase<Position3d, TValue>
+    public class Map3d <TValue> : BufferedMap<Position3d, TValue>
     {
         
         public int MaxX => Map.Keys.Max(p => p.X);

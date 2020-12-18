@@ -9,7 +9,7 @@ namespace AoC.Common.Mapping
     /// Map of 2d Positions
     /// </summary>
     /// <typeparam name="TValue"></typeparam>
-    public class Map<TValue> : MapBase<Position, TValue>
+    public class Map<TValue> : BufferedMap<Position, TValue>
     {
         public virtual int MaxX => Map.Keys.Max(p => p.X);
         public virtual int MinX => Map.Keys.Min(p => p.X);
