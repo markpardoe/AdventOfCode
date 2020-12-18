@@ -12,7 +12,6 @@ namespace AoC.AoC2020.Problems.Day11
         Floor = '.',
         Occupied = '#',
         Empty = 'L',
-        Unknown = ' '
     }
 
 
@@ -22,6 +21,14 @@ namespace AoC.AoC2020.Problems.Day11
     /// </summary>
     public class SeatMap : Map<SeatType>
     {
+        // Cached values for a non-expanding grid
+        public override int MaxX { get; }
+        public override int MaxY { get; }
+
+        public override int MinX => 0;
+        public override int MinY => 0;
+
+
         // List of all seats (ie. not floor) in the map.
         // USe a list rather than a hashset as we need to preserve the order of the seats to generate a code for checking statuses.
         // By only listing seats (eg. "###LL##") and ignoring spaces this should be smaller and faster.
@@ -31,18 +38,18 @@ namespace AoC.AoC2020.Problems.Day11
         // List of seats as a string.  Useful for comparing states.
         public string StatusCode => string.Join("", seats.Select(x =>(char)  Map[x]));
 
-
         public int OccupiedSeats => CountValue(SeatType.Occupied);
 
-        public SeatMap(IEnumerable<string> input, int seatLimit) : base(SeatType.Unknown)
+        public SeatMap(IEnumerable<string> input, int seatLimit) : base(SeatType.Floor)
         {
             _seatLimit = seatLimit;
             var y = 0;
             foreach (var line in input)
             {
+                MaxX = line.Length;
                 for (var x = 0; x < line.Length; x++)
                 {
-
+                    
                     var tile = (SeatType)line[x];
                     Position pos = new Position(x, y);
 
@@ -56,6 +63,9 @@ namespace AoC.AoC2020.Problems.Day11
 
                 y++;
             }
+
+            MaxY = y-1;
+
         }
 
         /// <summary>
@@ -104,14 +114,8 @@ namespace AoC.AoC2020.Problems.Day11
         public void RunComplexSimulationTurn()
         {
             // Calculate the new status for each location and buffer it.
-            foreach (var location in this.GetBoundedEnumerator(0))
+            foreach (var seat  in seats)
             {
-                var seat = location.Key;
-                if (location.Value == SeatType.Floor)
-                {
-                    AddToBuffer(seat, location.Value);
-                    continue;
-                }
 
                 int occupiedNeighbours =
                     (IsVisibleOccupiedSeatsFromPosition(seat, -1, 0) ? 1 : 0) +
@@ -127,7 +131,6 @@ namespace AoC.AoC2020.Problems.Day11
             }
 
             UpdateFromBuffer();
-
         }
 
         // Checks if we can see any occupied seats in the direction indicated 
@@ -137,7 +140,7 @@ namespace AoC.AoC2020.Problems.Day11
             int y = start.Y + yModifier;
 
             var seat = this[x, y];
-            while (seat != SeatType.Unknown)
+            while (x >= MinX && x <= MaxX && y >= MinY && y <= MaxY)
             {
                 if (seat == SeatType.Occupied)
                 {
