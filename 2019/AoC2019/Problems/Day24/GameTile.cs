@@ -8,15 +8,15 @@ namespace Aoc.AoC2019.Problems.Day24
     {
         public NullTile(int x, int y) : base(x, y, false) { }
 
-        public override bool IsBug { get { return false; } }
+        public override bool IsBug => false;
 
         public override void UpdateBuffer() { }
 
         public override void UpdateFromBuffer() { }
 
-        public override List<GameTile> Neighbours { get { return new List<GameTile>(); } }
+        public override List<GameTile> Neighbours => new List<GameTile>();
 
-        public char Code { get { return '?'; } }
+        public override char Code => '?';
     }
 
     public class GameTile : Position
