@@ -24,19 +24,20 @@ namespace Aoc.AoC2019.Problems.Day17
 
         public List<Position> FindAllIntersections()
         {
-            List<Position> intersections = new List<Position>();           
+            List<Position> intersections = new List<Position>();
 
-            foreach (Position p in _map.Keys)
+            foreach (var location in GetBoundedEnumerator())
             {
-                if (this[p] == ScaffoldType.Scaffold)
+                if (location.Value == ScaffoldType.Scaffold)
                 {
-                    var neighbors = p.GetNeighboringPositions();
+                    var neighbors = location.Key.GetNeighboringPositions();
                     if (neighbors.All(p => this[p] == ScaffoldType.Scaffold))
                     {
-                        intersections.Add(p);
+                        intersections.Add(location.Key);
                     }
                 }
-            }          
+            }
+
             return intersections;
         }
 
