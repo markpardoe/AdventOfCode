@@ -118,9 +118,9 @@ namespace Aoc.AoC2019.Problems.Day20
         {
             get
             {
-                if (!base.ContainsKey(position.Position))
+                if (!_map.ContainsKey(position.Position))
                 {
-                    return _default;
+                    return DefaultValue;
                 }
                 else
                 {
@@ -248,7 +248,7 @@ namespace Aoc.AoC2019.Problems.Day20
             }
         }
 
-        public override IEnumerable<Position> GetAvailableNeighbours(Position position)
+        public override IEnumerable<Position> GetAvailableNeighbors(Position position)
         {
             return position.GetNeighboringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void);
         }
@@ -306,7 +306,7 @@ namespace Aoc.AoC2019.Problems.Day20
                     }
                 }
 
-                var neighbours = GetAvailableNeighbours(current);  // Get open (not wall or door) adjacent squares.
+                var neighbours = GetAvailableNeighbors(current);  // Get open (not wall or door) adjacent squares.
 
                 // for every neighbour 
                 // Check if its in closedList - if so its already been checked.

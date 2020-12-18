@@ -23,7 +23,7 @@ namespace Aoc.AoC2019.Problems.Day19
             Probe probe = new Probe(map, data);
             probe.ScanMap(50);
             
-            yield return map.CountTiles(BeamStatus.Pulling);
+            yield return map.CountValue(BeamStatus.Pulling);
 
 
             Position p = probe.FindShip(100);

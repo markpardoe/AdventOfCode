@@ -59,7 +59,7 @@ namespace Aoc.Aoc2018.Day18
 
         public int CountSettlers(SettlerType type)
         {
-            return this.Values.Count(x => x.Type == type);
+            return _map.Values.Count(x => x.Type == type);
         }
 
         public void RunSimulation(long numTurns = 1)

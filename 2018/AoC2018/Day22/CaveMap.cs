@@ -72,7 +72,7 @@ namespace Aoc.Aoc2018.Day22
 
         public int GetRiskLevel()
         {
-            return this.Where(x => x.Key.X >= _start.X && x.Key.X <= _target.X && x.Key.Y >= _start.Y && x.Key.Y <= _target.Y)
+            return _map.Where(x => x.Key.X >= _start.X && x.Key.X <= _target.X && x.Key.Y >= _start.Y && x.Key.Y <= _target.Y)
                 .Sum(x => x.Value.RiskLevel);
         }
 

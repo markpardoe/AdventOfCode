@@ -130,7 +130,7 @@ namespace Aoc.AoC2019.Problems.Day15
                 closedList.Add(current);
                 openList.Remove(current);
          
-                var neighbours = _map.GetAvailableNeighbours(current);
+                var neighbours = _map.GetAvailableNeighbors(current);
 
                 foreach (var location in neighbours)
                 {
@@ -179,7 +179,7 @@ namespace Aoc.AoC2019.Problems.Day15
                 // check if we've found an empty cell?
                 if (_map[current] == targetType) { return current; }
 
-                var neighbours = _map.GetAvailableNeighbours(current);
+                var neighbours = _map.GetAvailableNeighbors(current);
 
                 foreach (var location in neighbours)
                 {

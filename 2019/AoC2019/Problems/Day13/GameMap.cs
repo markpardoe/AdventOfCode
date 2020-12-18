@@ -7,44 +7,25 @@ namespace Aoc.AoC2019.Problems.Day13
 {
     public class GameMap :Map<TileType>
     {
-        public GameMap() : base(TileType.Empty) { }
+        public GameMap() : base(TileType.Empty)
+        {
+            this.DrawPadding = 2;  // Draw 2 spaces around the map when printing it
+        }
 
         public Position Ball { get; set; }
         public Position Paddle { get; private set; }
 
-        public override void Add(Position key, TileType value)
+        // Override default implementation of AddOrReplace as we need to
+        // keep track of the location of the ball & paddle in separate variables
+        protected override void AddOrReplace(Position key, TileType value)
         {
-            this.AddOrReplace(key, value);
-        }
-
-        public override TileType this[Position position]
-        {
-            get
+            if (_map.ContainsKey(key))
             {
-                if (!base.ContainsKey(position))
-                {
-                    return TileType.Empty;
-                }
-                else
-                {
-                    return base[position];
-                }
-            }
-            set
-            {
-                this.AddOrReplace(position, value);
-            }
-        }
-
-        private void AddOrReplace(Position key, TileType value)
-        {
-            if (base.ContainsKey(key))
-            {
-                base[key] = value;
+                _map[key] = value;
             }
             else
             {
-                base.Add(key, value);
+                _map.Add(key, value);
             }
 
             if (value == TileType.Ball)
@@ -57,50 +38,18 @@ namespace Aoc.AoC2019.Problems.Day13
             }
         }
 
-        public override string DrawMap()
+        private readonly Dictionary<TileType, char> _tileTypeCharMapping = new Dictionary<TileType, char>()
         {
-            int min_X = MinX;
-            int min_Y = MinY;
-            int max_X = MaxX;
-            int max_Y = MaxY;
+            {TileType.Empty, ' '},
+            {TileType.Block, 'B'},
+            {TileType.Paddle, '='},
+            {TileType.Ball, '@'},
+            {TileType.Wall, '#'},
+        };
 
-            StringBuilder map = new StringBuilder();
-            for (int y = min_Y - 2; y <= max_Y + 2; y++)
-            {
-                map.Append(Environment.NewLine);
-
-                for (int x = min_X - 2; x <= max_X + 2; x++)
-                {
-                    TileType tile = this[new Position(x, y)];
-                    if (tile == TileType.Empty)
-                    {
-                        map.Append(" ");
-                    }
-                    else if (tile == TileType.Block)
-                    {
-                        map.Append("B");
-                    }
-                    else if (tile == TileType.Ball)
-                    {
-                        map.Append("@");
-                    }
-                    else if (tile == TileType.Paddle)
-                    {
-                        map.Append("=");
-                    }
-                    else if (tile == TileType.Wall)
-                    {
-                        map.Append("#");
-                    }
-                }
-            }
-
-            return map.ToString();
-        }
-
-        public override IEnumerable<Position> GetAvailableNeighbours(Position position)
+        protected override char? ConvertValueToChar(Position position, TileType value)
         {
-            throw new NotImplementedException();
+            return _tileTypeCharMapping[value];
         }
     }
 }

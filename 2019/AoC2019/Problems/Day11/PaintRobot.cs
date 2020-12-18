@@ -46,7 +46,7 @@ namespace Aoc.AoC2019.Problems.Day11
 
         public int CountPanels()
         {
-            return Map.Count;
+            return Map.PanelCount();
         }
 
         private Move GetNextMove()

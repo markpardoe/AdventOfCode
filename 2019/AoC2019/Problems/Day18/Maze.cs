@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Aoc.AoC2019.Problems.Day18
 {
+
     public class Maze : Map<MazeTile>
     {
         public HashSet<MazeTile> KeyPositions { get; } = new HashSet<MazeTile>();
@@ -144,12 +145,12 @@ namespace Aoc.AoC2019.Problems.Day18
                 }
 
                 // Get open (not wall) adjacent squares
-                var neighbours = this.GetAvailableNeighbours(current);  
+                var neighbors = this.GetAvailableNeighbors(current);  
 
                 // for every neighbour 
                 // Check if its in closedList - if so its already been checked.
                 // Otherwise add it to open list (or update if shorter path to a location in shorter path).
-                foreach (var location in neighbours)
+                foreach (var location in neighbors)
                 {
                     MapNode locationPos = new MapNode(location)
                     {
@@ -200,10 +201,9 @@ namespace Aoc.AoC2019.Problems.Day18
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public override IEnumerable<Position> GetAvailableNeighbours(Position position)
+        public override IEnumerable<Position> GetAvailableNeighbors(Position position)
         {
-            return position.GetNeighboringPositions().Where(p => base[p].Tile != TileType.Wall);
+            return position.GetNeighboringPositions().Where(x => this[x] != null && this[x].Tile != TileType.Wall);
         }
-   
     }
 }

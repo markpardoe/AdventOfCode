@@ -24,16 +24,16 @@ namespace Aoc.Aoc2018.Day03
         public int CountOverlappingClothes(IEnumerable<string> input)
         {
             var cloths = input.Select(s => new ClothRectangle(s));
-            Map<int> fabric = GenerateFabricMap(cloths);
+            FabricMap fabric = new FabricMap(cloths);
 
             // Count entries with more than one allocation
-            return fabric.Values.Count( c => c>1);
+            return fabric.CountGreaterThan1;
         }
 
         public string FindNonOverlappingCloth(IEnumerable<string> input)
         {
             var cloths = input.Select(s => new ClothRectangle(s));
-            Map<int> fabric = GenerateFabricMap(cloths);
+            FabricMap fabric = new FabricMap(cloths);
 
             foreach (ClothRectangle c in cloths)
             {
@@ -61,20 +61,23 @@ namespace Aoc.Aoc2018.Day03
             return true;
         }
 
-        private Map<int> GenerateFabricMap(IEnumerable<ClothRectangle> cloths)
+        private class FabricMap : Map<int>
         {
-            Map<int> fabric = new Map<int>(0);
-            foreach (ClothRectangle c in cloths)
+            public FabricMap(IEnumerable<ClothRectangle> cloths) : base(0)
             {
-                for (int x = c.X; x < c.X + c.Width; x++)
+                foreach (ClothRectangle c in cloths)
                 {
-                    for (int y = c.Y; y < c.Y + c.Height; y++)
+                    for (int x = c.X; x < c.X + c.Width; x++)
                     {
-                        fabric[new Position(x, y)]++;
+                        for (int y = c.Y; y < c.Y + c.Height; y++)
+                        {
+                            this[new Position(x, y)]++;
+                        }
                     }
                 }
             }
-            return fabric;
+
+            public int CountGreaterThan1 => _map.Values.Count(x => x > 1);
         }
     }
 }

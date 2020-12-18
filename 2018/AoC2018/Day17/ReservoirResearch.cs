@@ -12,7 +12,7 @@ namespace Aoc.Aoc2018.Day17
         public override string Name => "Day 17: Reservoir Research";
         public override string InputFileName => "Day17.txt";
 
-        private Position _spring = new Position(500,0);
+        private readonly Position _spring = new Position(500,0);
 
         public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
@@ -29,6 +29,8 @@ namespace Aoc.Aoc2018.Day17
 
         
 
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once UnusedMember.Local
         private readonly List<string> example1 = new List<string>()
         {
             "x=495, y=2..7",

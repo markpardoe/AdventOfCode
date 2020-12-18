@@ -38,7 +38,7 @@ namespace Aoc.AoC2019.Problems.Day24
                 base[new Position(2,2)] = new NullTile(2,2);
             }
 
-            AddNeighbours();
+            AddNeighbors();
         }
 
         // Create a new empty map
@@ -54,13 +54,13 @@ namespace Aoc.AoC2019.Problems.Day24
                 }
             }
             base[new Position(2, 2)] = new NullTile(2, 2);
-            AddNeighbours();
+            AddNeighbors();
         }
 
-        private void AddNeighbours()
+        private void AddNeighbors()
         {
             // Add neighbours
-            foreach (GameTile tile in base.Values)
+            foreach (GameTile tile in _map.Values)
             {
                 var neighbours = tile.GetNeighboringPositions();
                 foreach (Position pos in neighbours)
@@ -71,12 +71,10 @@ namespace Aoc.AoC2019.Problems.Day24
                         tile.Neighbours.Add(t);
                     }
                 }
-
             }
         }
 
-       
-
+        // Only draw region of 5 squares
         public override string DrawMap()
         {
             StringBuilder sb = new StringBuilder();

@@ -16,28 +16,8 @@ namespace Aoc.Aoc2018.Day18
 
         public override IEnumerable<long> Solve(IEnumerable<string> input)
         {
-
             yield return RunSimulation(input, 10);
-
             yield return RunLargeSimulation(input, 1000000000);
-            //// Part 2
-            //SettlerMap map2 = new SettlerMap(input);
-            //map2.RunSimulation(1000000000);
-
-            //trees = map.CountSettlers(SettlerType.Tree);
-            //lumberYards = map.CountSettlers(SettlerType.Lumberyard);
-
-            //Console.WriteLine();
-            //Console.WriteLine($"Trees: {trees}.  LumberYards: {lumberYards}");
-            //yield return trees * lumberYards;
-        }
-
-        private void DrawMap(string map, int turn)
-        {
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine($"Turn {turn}");
-            Console.WriteLine(map);
-            Thread.Sleep(500);
         }
 
         private long RunSimulation(IEnumerable<string> input, int steps)
@@ -111,9 +91,7 @@ namespace Aoc.Aoc2018.Day18
 
             return trees * lumberYards;
         }
-
-
-
+        
         private readonly List<string> example1 = new List<string>()
         {
             ".#.#...|#.",

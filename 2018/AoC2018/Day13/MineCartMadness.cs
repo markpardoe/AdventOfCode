@@ -80,7 +80,7 @@ namespace Aoc.Aoc2018.Day13
             MineCart lastCart = map.Carts.First();
             return new Position(lastCart.X, lastCart.Y);
         }
-        private static List<string> example1 = new List<string>
+        private static readonly List<string> example1 = new List<string>
         {
             @"/->-\        ",
             @"|   |  /----\",
@@ -90,7 +90,7 @@ namespace Aoc.Aoc2018.Day13
             @"  \------/   ",
         };
 
-        private static List<string> example2 = new List<string>
+        private static readonly List<string> example2 = new List<string>
         {
             @"/>-<\  ",
             @"|   |  ",

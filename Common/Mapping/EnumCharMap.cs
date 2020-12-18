@@ -21,11 +21,7 @@ namespace AoC.Common.Mapping
     /// <typeparam name="T"></typeparam>
     public class EnumCharMap<T> : Map<T> where T : struct, Enum
     {
-        // How many 'Default' rows / columns to add around the map when drawing it
-        protected int DrawPadding { get; set; } = 2;
-
-        public EnumCharMap(T defaultValue) : base(defaultValue)
-        { }
+        public EnumCharMap(T defaultValueValue) : base(defaultValueValue) { }
         
         public virtual void LoadData(IEnumerable<string> input)
         {
@@ -42,26 +38,13 @@ namespace AoC.Common.Mapping
             }
         }
 
-        public override string DrawMap()
-        {
-            int min_X = MinX;
-            int min_Y = MinY;
-            int max_X = MaxX;
-            int max_Y = MaxY;
-
-            StringBuilder map = new StringBuilder();
-            for (int y = min_Y - DrawPadding; y <= max_Y + DrawPadding; y++)
-            {
-                map.Append(Environment.NewLine);
-
-                for (int x = min_X - DrawPadding; x <= max_X + DrawPadding; x++)
-                {
-                    var c = (T) this[x, y];
-                    map.Append((char)c.GetHashCode());
-                }
-            }
-
-            return map.ToString();
+        protected override char? ConvertValueToChar(Position position, T value)
+        { 
+            // Convert the Enum to a char
+            // We can't explicity cast an Enum to a Char - so use GetHashCode
+            // which should be the numberic value for the enum
+            var c = (T)this[position];
+            return  (char)c.GetHashCode();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Aoc.Aoc2018.Day13
 
 
         // Convert a direction into a MineTile for display.
-        private static Dictionary<Direction, MineTile> _directionMappings = new Dictionary<Direction, MineTile>
+        private static readonly Dictionary<Direction, MineTile> _directionMappings = new Dictionary<Direction, MineTile>
         {
             {Direction.Down, MineTile.CartDown},
             {Direction.Up, MineTile.CartUp},
@@ -42,7 +42,7 @@ namespace Aoc.Aoc2018.Day13
         };
 
         // Mapping of directions when going round a left curve <CurrentDirection, NewDirection>
-        private static Dictionary<Direction, Direction> LeftCurveMapping = new Dictionary<Direction, Direction>
+        private static readonly Dictionary<Direction, Direction> LeftCurveMapping = new Dictionary<Direction, Direction>
         {
             {Direction.Left, Direction.Down},
             {Direction.Right, Direction.Up},
@@ -52,7 +52,7 @@ namespace Aoc.Aoc2018.Day13
 
 
         // Mapping of directions when going round a right curve <CurrentDirection, NewDirection>
-        private static Dictionary<Direction, Direction> RightCurveMapping = new Dictionary<Direction, Direction>
+        private static readonly Dictionary<Direction, Direction> RightCurveMapping = new Dictionary<Direction, Direction>
         {
             {Direction.Left, Direction.Up},
             {Direction.Right, Direction.Down},
@@ -62,7 +62,7 @@ namespace Aoc.Aoc2018.Day13
 
 
         // Mapping of directions when turning left <CurrentDirection, NewDirection>
-        private static Dictionary<Direction, Direction> TurnLeftMapping = new Dictionary<Direction, Direction>
+        private static readonly Dictionary<Direction, Direction> TurnLeftMapping = new Dictionary<Direction, Direction>
         {
             {Direction.Left, Direction.Down},
             {Direction.Right, Direction.Up},
@@ -71,7 +71,7 @@ namespace Aoc.Aoc2018.Day13
         };
 
         // Mapping of directions when turning right <CurrentDirection, NewDirection>
-        private static Dictionary<Direction, Direction> TurnRightMapping = new Dictionary<Direction, Direction>
+        private static readonly Dictionary<Direction, Direction> TurnRightMapping = new Dictionary<Direction, Direction>
         {
             {Direction.Left, Direction.Up},
             {Direction.Right, Direction.Down},

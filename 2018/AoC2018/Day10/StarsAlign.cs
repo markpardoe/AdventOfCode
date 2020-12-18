@@ -13,7 +13,7 @@ namespace Aoc.Aoc2018.Day10
 {
     public class StarsAlign :AoCSolution<string>
     {
-        private static string outputFilePath = @"e:\tmpImages\";
+        private static readonly string outputFilePath = @"e:\tmpImages\";
         
         /// <summary>
         /// Had to fudge the output as the search area is too big for the console window.

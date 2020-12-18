@@ -213,7 +213,7 @@ namespace Aoc.Aoc2018.Day11
 
         public override string ToString()
         {
-            return $"{Position.ToString()}, Power = {Power}, Size = {SearchSize}";
+            return $"{Position}, Power = {Power}, Size = {SearchSize}";
         }
     }
 

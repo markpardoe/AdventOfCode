@@ -19,9 +19,7 @@ namespace Aoc.AoC2019.Problems.Day13
         public long FinalScore { get; private set; }
 
         private readonly IVirtualMachine _computer;
-
-        public GameMap Map { get; } = new GameMap();
-
+        private GameMap Map { get; } = new GameMap();
         public int? PaddleTarget { get; private set; } = null;
 
         public ArcadeCabinet(IVirtualMachine vm)
@@ -31,7 +29,7 @@ namespace Aoc.AoC2019.Problems.Day13
 
         public int CountBlocks(TileType type)
         {
-            return Map.Values.Where(a => a == type).ToList().Count;
+            return Map.CountValue(type);
         }
 
         public void RunGame()

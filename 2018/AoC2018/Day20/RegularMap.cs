@@ -10,7 +10,7 @@ namespace Aoc.Aoc2018.Day20
     {
         public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            string regEx = input.First();  // shpuld only be one line
+          //  string regEx = input.First();  // shpuld only be one line
 
             yield return 5;
             yield return 5;

@@ -30,14 +30,16 @@ namespace AoC.AoC2019.Tests.Day18
         }
 
 
-        [Theory]
-        [ClassData(typeof(Day18_TestData))]
-        public void Test_MazeRobot_Finds_ShortestPath(List<string> data, int expectedResult)
-        {
-            Maze maze = new Maze(data);
-            MazeRobot robot = new MazeRobot(maze, maze.StartPositions.First(), false);
-            Assert.Equal(expectedResult, robot.FindShortestPath().TotalDistance);
-        }
+        //[Theory]
+        //[ClassData(typeof(Day18_TestData))]
+        //public void Test_MazeRobot_Finds_ShortestPath(List<string> data, int expectedResult)
+        //{
+        //    Maze maze = new Maze(data);
+        //    MazeRobot robot = new MazeRobot(maze, maze.StartPositions.First(), false);
+        //    int shortestDistance = robot.FindShortestPath().TotalDistance;
+
+        //    shortestDistance.ShouldBe(expectedResult);
+        //}
 
 
         private class Day18_TestData : IEnumerable<object[]>
@@ -55,7 +57,7 @@ namespace AoC.AoC2019.Tests.Day18
                 "########################",
                 "#f.D.E.e.C.b.A.@.a.B.c.#",
                 "######################.#",
-                "#d.....................#",
+                "#_map.....................#",
                 "########################"
             };
 
@@ -64,7 +66,7 @@ namespace AoC.AoC2019.Tests.Day18
                 "########################",
                 "#...............b.C.D.f#",
                 "#.######################",
-                "#.....@.a.B.c.d.A.e.F.g#",
+                "#.....@.a.B.c._map.A.e.F.g#",
                 "########################"
             };
 
@@ -77,7 +79,7 @@ namespace AoC.AoC2019.Tests.Day18
                 "########@########",
                 "#k.E..a...g..B.n#",
                 "########.########",
-                "#l.F..d...h..C.m#",
+                "#l.F.._map...h..C.m#",
                 "#################"
             };
 
@@ -85,7 +87,7 @@ namespace AoC.AoC2019.Tests.Day18
             {
                 "########################",
                 "#@..............ac.GI.b#",
-                "###d#e#f################",
+                "###_map#e#f################",
                 "###A#B#C################",
                 "###g#h#i################",
                 "########################"

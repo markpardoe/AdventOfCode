@@ -9,10 +9,10 @@ namespace Aoc.AoC2019.Problems.Day17
 
     public enum ScaffoldType
     {
-        Scaffold = 1,
-        Empty = 2,
-        Unknown = 0 ,
-        Cleaned = 3
+        Scaffold = '#',
+        Empty = '.',
+        Unknown = '?' ,
+        Cleaned = '+'
     }
 
     public class ScaffoldMap : Map<ScaffoldType>
@@ -22,17 +22,16 @@ namespace Aoc.AoC2019.Problems.Day17
         public Position Robot { get; internal set; }
         public Direction RobotFacing { get; internal set; }
 
-
         public List<Position> FindAllIntersections()
         {
             List<Position> intersections = new List<Position>();           
 
-            foreach (Position p in base.Keys)
+            foreach (Position p in _map.Keys)
             {
                 if (this[p] == ScaffoldType.Scaffold)
                 {
-                    var neighbours = p.GetNeighboringPositions();
-                    if (neighbours.All(p => this[p] == ScaffoldType.Scaffold))
+                    var neighbors = p.GetNeighboringPositions();
+                    if (neighbors.All(p => this[p] == ScaffoldType.Scaffold))
                     {
                         intersections.Add(p);
                     }
@@ -41,63 +40,23 @@ namespace Aoc.AoC2019.Problems.Day17
             return intersections;
         }
 
-        public override string DrawMap()
+        // Mapping to the character set for the robot
+        private readonly Dictionary<Direction, char> _robotFacingCharacterMap = new Dictionary<Direction, char>()
         {
-            int min_X = MinX;
-            int min_Y = MinY;
-            int max_X = MaxX;
-            int max_Y = MaxY;
+            {Direction.Up, '^'},
+            {Direction.Down, 'V'},
+            {Direction.Left, '<'},
+            {Direction.Right, '>'}
+        };
 
-            StringBuilder map = new StringBuilder();
-            for (int y = min_Y; y <= max_Y; y++)
+        protected override char? ConvertValueToChar(Position position, ScaffoldType value)
+        {
+            if (Robot.Equals(position))
             {
-                map.Append(Environment.NewLine);
-
-                for (int x = min_X; x <= max_X; x++)
-                {
-                    ScaffoldType tile = this[new Position(x, y)];
-                    if (Robot.X == x && Robot.Y == y)
-                    {
-                        switch(RobotFacing)
-                        {
-                            case (Direction.Up): 
-                                map.Append("^");
-                                break;
-                            case (Direction.Down):
-                                map.Append("V");
-                                break;
-                            case (Direction.Left):
-                                map.Append("<");
-                                break;
-                            case (Direction.Right):
-                                map.Append(">");
-                                break;
-                            default:
-                                map.Append("X");
-                                break;
-                        }
-                    }
-                    else if (tile == ScaffoldType.Empty)
-                    {
-                        map.Append(".");
-                    }
-                    else if (tile == ScaffoldType.Unknown)
-                    {
-                        map.Append("?");
-                    }
-                    else if (tile == ScaffoldType.Scaffold)
-                    {
-                        map.Append("#");
-                    }
-
-                    else if (tile == ScaffoldType.Cleaned)
-                    {
-                        map.Append("+");
-                    }
-                }
+                return _robotFacingCharacterMap[RobotFacing];
             }
 
-            return map.ToString();
+            return (char)value;
         }
     }
 }

@@ -133,7 +133,7 @@ namespace Aoc.AoC2019.Problems.Day20
             }
         }
 
-        public override IEnumerable<Position> GetAvailableNeighbours(Position position)
+        public override IEnumerable<Position> GetAvailableNeighbors(Position position)
         {
             var neighbours =  position.GetNeighboringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void).ToList();
 
@@ -201,7 +201,7 @@ namespace Aoc.AoC2019.Problems.Day20
                 // check if we've found an empty cell?
                 if (ExitPosition.Equals(current)) { return current; }
 
-                var neighbours = GetAvailableNeighbours(current);
+                var neighbours = GetAvailableNeighbors(current);
 
                 foreach (var location in neighbours)
                 {

@@ -16,7 +16,7 @@ namespace Aoc.AoC2019.Problems.Day24
 
         public override List<GameTile> Neighbours { get { return new List<GameTile>(); } }
 
-        public override string Code { get { return "?"; } }
+        public char Code { get { return '?'; } }
     }
 
     public class GameTile : Position
@@ -66,16 +66,16 @@ namespace Aoc.AoC2019.Problems.Day24
             return base.ToString() + ": " + IsBug;
         }
 
-        public virtual string Code
+        public virtual char Code
         {
             get
             {
                 //   return this.ToString();
                 if (IsBug)
                 {
-                    return "#";
+                    return '#';
                 }
-                return ".";
+                return '.';
             }
 
         }
