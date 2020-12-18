@@ -17,22 +17,18 @@ namespace Aoc.Aoc2018.Day17
         public int WaterTiles => Map.Count(x => (x.Value == FloodTile.WaterFalling || x.Value == FloodTile.WaterResting) && x.Key.Y >= minYBeforeSource);
         public int RestingWaterTiles => Map.Values.Count(x => x == FloodTile.WaterResting);
         
-        private readonly Position _spring;
         private readonly int minYBeforeSource;
 
 
         public FloodMap(IEnumerable<string> input, Position spring) : base(FloodTile.Sand)
         {
             LoadData(input);
-            _spring = spring;
-
             minYBeforeSource = MinY;  // Get this before we add the spring value
 
             Add(spring, FloodTile.Spring);
             DrawPadding = 0;
         }
-
-
+        
         // Pour water downwards until it hits clay - or other water
         public void PourWater(Position startPosition)
         {

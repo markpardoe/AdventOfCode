@@ -71,11 +71,5 @@ namespace AoC.AoC2020.Problems.Day17
             }
             return count;
         }
-     
-        // Convert the enum to its char value for mapping purposes
-        private char? EnumChar(CubeStatus value)
-        {
-            return (char) value;
-        }
     }
 }
