@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AoC.Common.Mapping;
 
 namespace AoC.AoC2020.Problems.Day17
 {

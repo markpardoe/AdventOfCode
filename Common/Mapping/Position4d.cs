@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace AoC.AoC2020.Problems.Day17
+namespace AoC.Common.Mapping
 {
-
-    public struct Position4d : IEquatable<Position4d>
+    public readonly struct Position4d : IEquatable<Position4d>
     {
         public int X { get; }
         public int Y { get; }
