@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AoC.Common.Mapping
+namespace AoC.Common.Mapping._4d
 {
 
     public readonly struct Position4d : IEquatable<Position4d>

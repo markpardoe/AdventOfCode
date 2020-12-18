@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AoC.Common.Mapping._3d;
 
 namespace Aoc.AoC2019.Problems.Day20
 {

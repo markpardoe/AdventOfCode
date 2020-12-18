@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using AoC.Common.Mapping;
+using System.Text;
 
-namespace AoC.AoC2020.Problems.Day17
+namespace AoC.Common.Mapping._3d
 {
     public class Map3d <TValue> 
     {

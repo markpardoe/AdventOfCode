@@ -1,5 +1,6 @@
 ﻿using AoC.Common.Mapping;
 using System;
+using AoC.Common.Mapping._3d;
 
 namespace Aoc.AoC2019.Problems.Day20
 {

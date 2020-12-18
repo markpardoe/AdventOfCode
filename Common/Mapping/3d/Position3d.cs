@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AoC.Common.Mapping
+namespace AoC.Common.Mapping._3d
 {
     public readonly struct Position3d : IEquatable<Position3d>
     {
@@ -39,7 +39,7 @@ namespace AoC.Common.Mapping
             return n;
         }
 
-        // Gets all the neighbours on the same layer (x, y)
+        // Gets all the neighbors on the same layer (x, y)
         public IEnumerable<Position3d> GetNeighboursOnLayer()
         {
             var n = new HashSet<Position3d>();
