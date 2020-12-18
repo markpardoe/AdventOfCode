@@ -8,7 +8,7 @@ namespace AoC.Common.Mapping
         public int X { get; }
         public int Y { get; }
         public int Z { get; }
-
+        
         public Position3d(int x, int y, int z)
         {
             X = x;
@@ -38,7 +38,29 @@ namespace AoC.Common.Mapping
             n.Remove((this));  // remove current position
             return n;
         }
-        
+
+        // Gets all the neighbours on the same layer
+        public IEnumerable<Position3d> GetNeighboursOnLayer()
+        {
+            var n = new HashSet<Position3d>();
+
+            for (int horizontal = X - 1; horizontal <= X + 1; horizontal++)
+            {
+                for (int vertical = Y - 1; vertical <= Y + 1; vertical++)
+                {
+                    n.Add(new Position3d(horizontal, vertical, Z));
+
+                }
+            }
+
+            n.Remove((this));  // remove current position
+            return n;
+        }
+
+        public int DistanceTo(Position3d target)
+        {
+            return Math.Abs(this.X - target.X) + Math.Abs(this.Y - target.Y) + Math.Abs(target.Z - target.Z);
+        }
            
         public bool Equals(Position3d other)
         {

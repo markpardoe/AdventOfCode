@@ -12,8 +12,8 @@ namespace Aoc.AoC2019.Problems.Day20
         private readonly List<List<char>> _mazeData = new List<List<char>>();
         private readonly HashSet<Portal> _portals = new HashSet<Portal>();
 
-        public LayerPosition StartPosition { get; }
-        public LayerPosition ExitPosition { get; }
+        public Position3d StartPosition { get; }
+        public Position3d ExitPosition { get; }
 
         public override int MaxX => _mazeData[0].Count;
         public override int MinX => 0;
@@ -50,12 +50,12 @@ namespace Aoc.AoC2019.Problems.Day20
                             if (portalId == "AA")
                             {
                                 pType = PortalType.Start;
-                                StartPosition = new LayerPosition(x, y, 0);
+                                StartPosition = new Position3d(x, y, 0);
                             }
                             else if (portalId == "ZZ")
                             {
                                 pType = PortalType.Exit;
-                                ExitPosition = new LayerPosition(x, y, 0);
+                                ExitPosition = new Position3d(x, y, 0);
                             }
                             else if (x == this.MaxX - 3 || y >=(this.MaxY - 3) || x == 2 || y == 2)
                             {
@@ -112,19 +112,20 @@ namespace Aoc.AoC2019.Problems.Day20
             #endregion
         }
 
-        public TileType this[int x, int y, int layer] => this[new LayerPosition(x, y, layer)];
+        public TileType this[int x, int y, int layer] => this[new Position3d(x, y, layer)];
 
-        public TileType this[LayerPosition position]
+        public TileType this[Position3d position]
         {
             get
             {
-                if (!_map.ContainsKey(position.Position))
+                Position pos = new Position(position.X, position.Y);
+                if (!_map.ContainsKey(pos))
                 {
                     return DefaultValue;
                 }
                 else
                 {
-                    return base[position.Position];
+                    return base[pos];
                 }
             }
         }
@@ -185,15 +186,16 @@ namespace Aoc.AoC2019.Problems.Day20
                 openList.Remove(current);
 
                 // check if we've found an empty cell?
-                if (current.Equals(ExitPosition)) { return current; }
+                if (current.X == ExitPosition.X && current.Y == ExitPosition.Y && current.Z == ExitPosition.Z) { return current; }
 
-                var pathsFromPosition = Paths[current.Position];  // Get all paths from this position
+                var pos2d = new Position(current.X, current.Y);
+                var pathsFromPosition = Paths[pos2d];  // Get all paths from this position
 
                 foreach (Path path in pathsFromPosition)
                 {
-                    if (path.Destination.IsActive(current.Layer + path.LayerModifier)) // no point moving to it if its not an active portal
+                    if (path.Destination.IsActive(current.Z + path.LayerModifier)) // no point moving to it if its not an active portal
                     {
-                        LayerPosition target = new LayerPosition(path.Destination.X, path.Destination.Y, current.Layer + path.LayerModifier);
+                        Position3d target = new Position3d(path.Destination.X, path.Destination.Y, current.Z + path.LayerModifier);
                         RecursiveMapNode locationPos = new RecursiveMapNode(target)
                         {
                             Parent = current,
