@@ -120,7 +120,7 @@ namespace Aoc.AoC2019.Problems.Day20
             get
             {
                 Position pos = new Position(position.X, position.Y);
-                if (!_map.ContainsKey(pos))
+                if (!Map.ContainsKey(pos))
                 {
                     return DefaultValue;
                 }

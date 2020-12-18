@@ -60,7 +60,7 @@ namespace Aoc.AoC2019.Problems.Day24
         private void AddNeighbors()
         {
             // Add neighbours
-            foreach (GameTile tile in _map.Values)
+            foreach (GameTile tile in Map.Values)
             {
                 var neighbours = tile.GetNeighboringPositions();
                 foreach (Position pos in neighbours)

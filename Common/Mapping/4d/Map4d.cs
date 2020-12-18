@@ -4,68 +4,25 @@ using System.Linq;
 
 namespace AoC.Common.Mapping._4d
 {
-    public class Map4d <TValue> 
+    public class Map4d <TValue> : MapBase<Position4d, TValue>
     {
-        protected readonly TValue _default;
-        protected Dictionary<Position4d, TValue> _map = new Dictionary<Position4d, TValue>();
         
-        public int MaxX => _map.Keys.Max(p => p.X);
-        public int MinX => _map.Keys.Min(p => p.X);
+        public int MaxX => Map.Keys.Max(p => p.X);
+        public int MinX => Map.Keys.Min(p => p.X);
 
-        public int MaxY => _map.Keys.Max(p => p.Y);
-        public int MinY => _map.Keys.Min(p => p.Y);
+        public int MaxY => Map.Keys.Max(p => p.Y);
+        public int MinY => Map.Keys.Min(p => p.Y);
 
-        public int MaxZ => _map.Keys.Max(p => p.Z);
-        public int MinZ => _map.Keys.Min(p => p.Z);
+        public int MaxZ => Map.Keys.Max(p => p.Z);
+        public int MinZ => Map.Keys.Min(p => p.Z);
 
-        public int MaxW => _map.Keys.Max(p => p.W);
-        public int MinW => _map.Keys.Min(p => p.W);
+        public int MaxW => Map.Keys.Max(p => p.W);
+        public int MinW => Map.Keys.Min(p => p.W);
 
-        public Map4d(TValue defaultValue)
-        {
-            _default = defaultValue;
-            MapConverter = new Func<TValue, char?>(DefaultStringFunction);
-        }
+        public Map4d(TValue defaultValue) : base(defaultValue) { }
 
-        public void Add(Position4d key, TValue value)
-        {
-            if (_map.ContainsKey(key))
-            {
-                _map[key] = value;
-            }
-            else
-            {
-                _map.Add(key, value);
-            }
-        }
 
         public void Add(int x, int y, int z, int w, TValue value) => Add(new Position4d(x, y, z, w), value);
-
-        public  TValue this[Position4d position]
-        {
-            get
-            {
-                if (!_map.ContainsKey(position))
-                {
-                    return _default;
-                }
-                else
-                {
-                    return _map[position];
-                }
-            }
-            set
-            {
-                if (!_map.ContainsKey(position))
-                {
-                    _map.Add(position, value);
-                }
-                else
-                {
-                    _map[position] = value;
-                }
-            }
-        }
 
         public TValue this[int x, int y, int z, int w]
         {
@@ -73,15 +30,19 @@ namespace AoC.Common.Mapping._4d
             set => this[new Position4d(x, y, z, w)] = value;
         }
 
-        public int CountValue(TValue item) => _map.Values.Count(v => v.Equals(item));
+        public override string DrawMap()
+        {
+            throw new NotImplementedException();
+        }
 
-        protected Func<TValue, char?> MapConverter;  // function to use for converting the value for mapping purposes
-        private char? DefaultStringFunction(TValue value) => value?.ToString()[0];
-       
+        public override IEnumerable<Position4d> GetAvailableNeighbors(Position4d position)
+        {
+            return position.GetNeighbors();
+        }
 
         // Returns all positions within the region of the map (between min and max bounds)
         // Will return positions within bounds that are not keys in the map collection
-        public IEnumerable<KeyValuePair<Position4d, TValue>> GetBoundedEnumerator(int padding = 0)
+        public override IEnumerable<KeyValuePair<Position4d, TValue>> GetBoundedEnumerator(int padding = 0)
         {
             int minZ = MinZ - padding;
             int maxZ = MaxZ + padding;

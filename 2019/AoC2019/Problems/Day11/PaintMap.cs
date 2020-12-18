@@ -23,6 +23,6 @@ namespace Aoc.AoC2019.Problems.Day11
             return ' ';
         }
 
-        public int PanelCount() => _map.Count;
+        public int PanelCount() => Map.Count;
     }
 }

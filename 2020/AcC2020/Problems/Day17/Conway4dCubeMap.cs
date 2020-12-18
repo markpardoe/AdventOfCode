@@ -8,7 +8,7 @@ using AoC.Common.Mapping._4d;
 namespace AoC.AoC2020.Problems.Day17
 {
 
-    public class Conway4dCubeMap : Map4d<CubeStatus>
+    public sealed class Conway4dCubeMap : Map4d<CubeStatus>
     {
         public int Generation { get; private set; } = 0;
 
@@ -16,8 +16,6 @@ namespace AoC.AoC2020.Problems.Day17
 
         public Conway4dCubeMap(IEnumerable<string> input) : base(CubeStatus.Inactive)
         {
-            MapConverter = new Func<CubeStatus, char?>(EnumChar);  // Set the converter to use for drawing
-
             var y = 0;
             foreach (var line in input)
             {
@@ -55,14 +53,14 @@ namespace AoC.AoC2020.Problems.Day17
                 }
                 
                 // replace the map with the buffer
-                _map.Clear();
+                Map.Clear();
 
                 foreach (var location in _buffer)
                 {
                     // only copy active locations
                     if (location.Value == CubeStatus.Active)
                     {
-                        _map.Add(location.Key, location.Value);
+                        Map.Add(location.Key, location.Value);
                     }
                 }
 

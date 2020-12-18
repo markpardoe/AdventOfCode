@@ -38,7 +38,7 @@ namespace Aoc.AoC2019.Problems.Day15
 
         private void AddUnexploredLocation(Position position)
         {
-            if (!_map.ContainsKey(position))
+            if (!Map.ContainsKey(position))
             { 
                 Add(position, ShipTile.Unknown);
             }
@@ -48,7 +48,7 @@ namespace Aoc.AoC2019.Problems.Day15
         {
             get
             {
-                var b = _map.Keys.Where(k => base[k] == ShipTile.OxygenSystem).ToList();
+                var b = Map.Keys.Where(k => base[k] == ShipTile.OxygenSystem).ToList();
                 if (b.Count == 0) return null;
                 return b.First();
             }
@@ -61,7 +61,7 @@ namespace Aoc.AoC2019.Problems.Day15
 
         public IEnumerable<Position> GetUnExploredLocations()
         {
-            return _map.Keys.Where(k => this[k] == ShipTile.Unknown);
+            return Map.Keys.Where(k => this[k] == ShipTile.Unknown);
         }
 
         protected override char? ConvertValueToChar(Position position, ShipTile value)

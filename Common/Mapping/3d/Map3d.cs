@@ -5,65 +5,26 @@ using System.Text;
 
 namespace AoC.Common.Mapping._3d
 {
-    public class Map3d <TValue> 
+    /// <summary>
+    /// 3d Map
+    /// </summary>
+    /// <typeparam name="TValue"></typeparam>
+    public class Map3d <TValue> : MapBase<Position3d, TValue>
     {
-        protected readonly TValue _default;
-        protected Dictionary<Position3d, TValue> _map = new Dictionary<Position3d, TValue>();
         
-        public int MaxX => _map.Keys.Max(p => p.X);
-        public int MinX => _map.Keys.Min(p => p.X);
+        public int MaxX => Map.Keys.Max(p => p.X);
+        public int MinX => Map.Keys.Min(p => p.X);
 
-        public int MaxY => _map.Keys.Max(p => p.Y);
-        public int MinY => _map.Keys.Min(p => p.Y);
+        public int MaxY => Map.Keys.Max(p => p.Y);
+        public int MinY => Map.Keys.Min(p => p.Y);
 
-        public int MaxZ => _map.Keys.Max(p => p.Z);
-        public int MinZ => _map.Keys.Min(p => p.Z);
+        public int MaxZ => Map.Keys.Max(p => p.Z);
+        public int MinZ => Map.Keys.Min(p => p.Z);
 
-        public Map3d(TValue defaultValue)
-        {
-            _default = defaultValue;
-            MapConverter = new Func<TValue, char?>(DefaultStringFunction);
-        }
-
-        public void Add(Position3d key, TValue value)
-        {
-            if (_map.ContainsKey(key))
-            {
-                _map[key] = value;
-            }
-            else
-            {
-                _map.Add(key, value);
-            }
-        }
-
+        public Map3d(TValue defaultValue) : base(defaultValue) {}
+        
+      
         public void Add(int x, int y, int z, TValue value) => Add(new Position3d(x, y, z), value);
-
-        public  TValue this[Position3d position]
-        {
-            get
-            {
-                if (!_map.ContainsKey(position))
-                {
-                    return _default;
-                }
-                else
-                {
-                    return _map[position];
-                }
-            }
-            set
-            {
-                if (!_map.ContainsKey(position))
-                {
-                    _map.Add(position, value);
-                }
-                else
-                {
-                    _map[position] = value;
-                }
-            }
-        }
 
         public TValue this[int x, int y, int z]
         {
@@ -71,14 +32,16 @@ namespace AoC.Common.Mapping._3d
             set => this[new Position3d(x, y, z)] = value;
         }
 
-        public int CountValue(TValue item) => _map.Values.Count(v => v.Equals(item));
+        // Function to use for converting the value to a char for mapping purposes
+        // Override for custom mapping
+        protected virtual char? ConvertValueToChar(Position3d position, TValue value) => value?.ToString()?[0];
 
-        protected Func<TValue, char?> MapConverter;  // function to use for converting the value for mapping purposes
-        private char? DefaultStringFunction(TValue value) => value?.ToString()[0];
+        public override IEnumerable<Position3d> GetAvailableNeighbors(Position3d position)
+        {
+            return position.GetNeighbors();
+        }
 
-       
-
-        public virtual string DrawMap()
+        public override string DrawMap()
         {
             int minZ = MinZ;
             int maxZ = MaxZ;
@@ -97,7 +60,8 @@ namespace AoC.Common.Mapping._3d
                 {
                     for (int x = minX ; x <= maxX ; x++)
                     {
-                        sb.Append(MapConverter(this[x, y, z]));
+                        Position3d pos = new Position3d(x, y, z);
+                        sb.Append(ConvertValueToChar(pos, this[pos]));
                     }
                     sb.Append(Environment.NewLine);
                 }
@@ -108,7 +72,7 @@ namespace AoC.Common.Mapping._3d
 
         // Returns all positions within the region of the map (between min and max bounds)
         // Will return positions within bounds that are not keys in the map collection
-        public IEnumerable<KeyValuePair<Position3d, TValue>> GetBoundedEnumerator(int padding = 0)
+        public override IEnumerable<KeyValuePair<Position3d, TValue>> GetBoundedEnumerator(int padding = 0)
         {
             int minZ = MinZ - padding;
             int maxZ = MaxZ + padding;

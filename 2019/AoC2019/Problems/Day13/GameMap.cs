@@ -19,13 +19,13 @@ namespace Aoc.AoC2019.Problems.Day13
         // keep track of the location of the ball & paddle in separate variables
         protected override void AddOrReplace(Position key, TileType value)
         {
-            if (_map.ContainsKey(key))
+            if (Map.ContainsKey(key))
             {
-                _map[key] = value;
+                Map[key] = value;
             }
             else
             {
-                _map.Add(key, value);
+                Map.Add(key, value);
             }
 
             if (value == TileType.Ball)

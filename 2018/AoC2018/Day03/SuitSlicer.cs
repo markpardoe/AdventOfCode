@@ -77,7 +77,7 @@ namespace Aoc.Aoc2018.Day03
                 }
             }
 
-            public int CountGreaterThan1 => _map.Values.Count(x => x > 1);
+            public int CountGreaterThan1 => Map.Values.Count(x => x > 1);
         }
     }
 }

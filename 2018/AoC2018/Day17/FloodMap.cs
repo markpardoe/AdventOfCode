@@ -14,8 +14,8 @@ namespace Aoc.Aoc2018.Day17
     {
         private readonly string regexPattern = @"^\s*(?<axis>[xy])=(?<start>\d+)\.*(?<end>\d*)\s*$";
 
-        public int WaterTiles => _map.Count(x => (x.Value == FloodTile.WaterFalling || x.Value == FloodTile.WaterResting) && x.Key.Y >= minYBeforeSource);
-        public int RestingWaterTiles => _map.Values.Count(x => x == FloodTile.WaterResting);
+        public int WaterTiles => Map.Count(x => (x.Value == FloodTile.WaterFalling || x.Value == FloodTile.WaterResting) && x.Key.Y >= minYBeforeSource);
+        public int RestingWaterTiles => Map.Values.Count(x => x == FloodTile.WaterResting);
         
         private readonly Position _spring;
         private readonly int minYBeforeSource;

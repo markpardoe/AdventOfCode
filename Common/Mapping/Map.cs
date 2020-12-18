@@ -5,46 +5,26 @@ using System.Text;
 
 namespace AoC.Common.Mapping
 {
-    public class Map<TValue>
+    /// <summary>
+    /// Map of 2d Positions
+    /// </summary>
+    /// <typeparam name="TValue"></typeparam>
+    public class Map<TValue> : MapBase<Position, TValue>
     {
-        public virtual int MaxX => _map.Keys.Max(p => p.X);
-        public virtual int MinX => _map.Keys.Min(p => p.X);
-        public virtual int MaxY => _map.Keys.Max(p => p.Y);
-        public virtual int MinY => _map.Keys.Min(p => p.Y);
-
-        protected readonly TValue DefaultValue;
-        protected int DrawPadding { get; set; } = 0;    // Empty spaces to include when drawing the map
-
-        protected Dictionary<Position, TValue> _map = new Dictionary<Position, TValue>();
-        
-        public Map(TValue defaultValueValue)
-        {
-            DefaultValue = defaultValueValue;
-        }
+        public virtual int MaxX => Map.Keys.Max(p => p.X);
+        public virtual int MinX => Map.Keys.Min(p => p.X);
+        public virtual int MaxY => Map.Keys.Max(p => p.Y);
+        public virtual int MinY => Map.Keys.Min(p => p.Y);
 
         // Function to use for converting the value to a char for mapping purposes
         // Override for custom mapping
         protected virtual char? ConvertValueToChar(Position position, TValue value) => value?.ToString()?[0];
 
-        public virtual void Add(Position key, TValue value) => AddOrReplace(key, value);
-  
-        public void Add(int x, int y, TValue value) => Add(new Position(x, y), value);
+        public Map(TValue defaultValue) : base(defaultValue)
+        { }
 
-        public virtual TValue this[Position position]
-        {
-            get
-            {
-                if (!_map.ContainsKey(position))
-                {
-                    return DefaultValue;
-                }
-                else
-                {
-                    return _map[position];
-                }
-            }
-            set => AddOrReplace(position, value);
-        }
+        
+        public void Add(int x, int y, TValue value) => Add(new Position(x, y), value);
         
         public TValue this[int x, int y]
         {
@@ -52,26 +32,13 @@ namespace AoC.Common.Mapping
             set => this[new Position(x, y)] = value;
         }
 
-        protected virtual void AddOrReplace(Position key, TValue value)
-        {
-            if (_map.ContainsKey(key))
-            {
-                _map[key] = value;
-            }
-            else
-            {
-                _map.Add(key, value);
-            }
-        }
-
-       public int CountValue(TValue item) => _map.Values.Count(v => v.Equals(item));
-
-        public virtual IEnumerable<Position> GetAvailableNeighbors(Position position)
+        
+        public override IEnumerable<Position> GetAvailableNeighbors(Position position)
         {
             return position.GetNeighboringPositions();
         }
 
-        public virtual string DrawMap()
+        public override string DrawMap()
         {
             int minY = MinY - DrawPadding;
             int maxY = MaxY + DrawPadding;
@@ -94,7 +61,7 @@ namespace AoC.Common.Mapping
 
         // Returns all positions within the region of the map (between min and max bounds)
         // Will return positions within bounds that are not keys in the map collection
-        public IEnumerable<KeyValuePair<Position, TValue>> GetBoundedEnumerator(int padding = 0)
+        public override IEnumerable<KeyValuePair<Position, TValue>> GetBoundedEnumerator(int padding = 0)
         {
             int minY = MinY - padding;
             int maxY = MaxY + padding;

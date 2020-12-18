@@ -17,12 +17,10 @@ namespace AoC.AoC2020.Problems.Day17
     {
         public int Generation { get; private set; } = 0;
 
-        private Dictionary<Position3d, CubeStatus> _buffer = new Dictionary<Position3d, CubeStatus>();
+        private readonly Dictionary<Position3d, CubeStatus> _buffer = new Dictionary<Position3d, CubeStatus>();
 
         public ConwayCubeMap(IEnumerable<string> input) : base(CubeStatus.Inactive)
         {
-            MapConverter = new Func<CubeStatus, char?>(EnumChar);  // Set the converter to use for drawing
-
             var y = 0;
             foreach (var line in input)
             {
@@ -38,6 +36,7 @@ namespace AoC.AoC2020.Problems.Day17
             }
         }
 
+        protected override char? ConvertValueToChar(Position3d position, CubeStatus value) => (char) value;
 
 
         public void RunGeneration(int steps = 1)
@@ -94,14 +93,14 @@ namespace AoC.AoC2020.Problems.Day17
                 //}
 
                 // replace the map with the buffer
-                _map.Clear();
+                Map.Clear();
 
                 foreach (var location in _buffer)
                 {
                     // only copy active locations
                     if (location.Value == CubeStatus.Active)
                     {
-                        _map.Add(location.Key, location.Value);
+                        Map.Add(location.Key, location.Value);
                     }
                 }
 
