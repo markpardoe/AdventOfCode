@@ -17,7 +17,7 @@ namespace Aoc.AoC2019.Problems.Day19
     {
         public TractorBeamMap() : base(BeamStatus.Unknown) { }
 
-        private Dictionary<BeamStatus, char> beamCharMapping = new Dictionary<BeamStatus, char>()
+        private readonly Dictionary<BeamStatus, char> _beamCharMapping = new Dictionary<BeamStatus, char>()
         {
             {BeamStatus.Pulling, '#'},
             {BeamStatus.Stationary, '.'},
@@ -26,7 +26,7 @@ namespace Aoc.AoC2019.Problems.Day19
 
         protected override char? ConvertValueToChar(Position pos, BeamStatus value)
         {
-            return (char) value;
+            return _beamCharMapping[value];
         }
     }
 }

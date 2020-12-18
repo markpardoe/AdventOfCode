@@ -7,7 +7,6 @@ using AoC.Common.Mapping;
 
 namespace AoC.AoC2020.Problems.Day03
 {
-
     public enum TreeStatus
     {
         Open = 0,
@@ -17,7 +16,6 @@ namespace AoC.AoC2020.Problems.Day03
 
     public class TreeMap : Map<TreeStatus>
     {
-        
         public TreeMap(IEnumerable<string> inputData) : base(TreeStatus.Closed)
         {
             int row = 0;

@@ -30,7 +30,7 @@ namespace AoC.AoC2020.Problems.Day11
 
 
         // List of all seats (ie. not floor) in the map.
-        // USe a list rather than a hashset as we need to preserve the order of the seats to generate a code for checking statuses.
+        // Use a list rather than a hashset as we need to preserve the order of the seats to generate a code for checking statuses.
         // By only listing seats (eg. "###LL##") and ignoring spaces this should be smaller and faster.
         private readonly List<Position> seats = new List<Position>();
         private readonly int _seatLimit;
@@ -60,7 +60,6 @@ namespace AoC.AoC2020.Problems.Day11
                         seats.Add(pos);
                     }
                 }
-
                 y++;
             }
 

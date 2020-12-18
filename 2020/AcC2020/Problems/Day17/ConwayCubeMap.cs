@@ -40,15 +40,6 @@ namespace AoC.AoC2020.Problems.Day17
         {
             for (int i = 0; i < steps; i++)
             {
-                // Cache min / max values for efficiency
-                // We want to work 1 layer outside current map to see if it grows
-                int minZ = MinZ - 1;
-                int maxZ = MaxZ + 1;
-                int minY = MinY - 1;
-                int maxY = MaxY + 1;
-                int minX = MinX - 1;
-                int maxX = MaxX + 1;
-
                 foreach (var location in GetBoundedEnumerator(1))
                 {
                     var pos = location.Key;
