@@ -39,7 +39,7 @@ namespace AoC.Common.Mapping
             return n;
         }
 
-        // Gets all the neighbours on the same layer
+        // Gets all the neighbours on the same layer (x, y)
         public IEnumerable<Position3d> GetNeighboursOnLayer()
         {
             var n = new HashSet<Position3d>();
@@ -59,7 +59,7 @@ namespace AoC.Common.Mapping
 
         public int DistanceTo(Position3d target)
         {
-            return Math.Abs(this.X - target.X) + Math.Abs(this.Y - target.Y) + Math.Abs(target.Z - target.Z);
+            return Math.Abs(this.X - target.X) + Math.Abs(this.Y - target.Y) + Math.Abs(this.Z - target.Z);
         }
            
         public bool Equals(Position3d other)
