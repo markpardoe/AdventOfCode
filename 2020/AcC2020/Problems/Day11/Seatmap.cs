@@ -20,19 +20,23 @@ namespace AoC.AoC2020.Problems.Day11
     /// Seat layout map
     /// Hold positions of seats in a 2d space.
     /// </summary>
-    public class SeatMap : Map<SeatLocation>
+    public class SeatMap : Map<SeatType>
     {
         // List of all seats (ie. not floor) in the map.
         // USe a list rather than a hashset as we need to preserve the order of the seats to generate a code for checking statuses.
         // By only listing seats (eg. "###LL##") and ignoring spaces this should be smaller and faster.
-        private readonly List<SeatLocation> seats = new List<SeatLocation>();
+        private readonly List<Position> seats = new List<Position>();
+        private readonly int _seatLimit;
 
         // List of seats as a string.  Useful for comparing states.
-        public string StatusCode => string.Join("", seats);
-        public int OccupiedSeats => seats.Count(s => s.IsOccupied);
+        public string StatusCode => string.Join("", seats.Select(x =>(char)  Map[x]));
 
-        public SeatMap(IEnumerable<string> input, int seatLimit) : base(null)
+
+        public int OccupiedSeats => CountValue(SeatType.Occupied);
+
+        public SeatMap(IEnumerable<string> input, int seatLimit) : base(SeatType.Unknown)
         {
+            _seatLimit = seatLimit;
             var y = 0;
             foreach (var line in input)
             {
@@ -42,12 +46,11 @@ namespace AoC.AoC2020.Problems.Day11
                     var tile = (SeatType)line[x];
                     Position pos = new Position(x, y);
 
-                    SeatLocation seat = new SeatLocation(pos, tile, seatLimit);
-                    Add(pos, seat);
+                    Add(pos, tile);
 
-                    if (seat.IsSeat)
+                    if (tile == SeatType.Occupied || tile== SeatType.Empty)
                     {
-                        seats.Add(seat);
+                        seats.Add(pos);
                     }
                 }
 
@@ -65,16 +68,33 @@ namespace AoC.AoC2020.Problems.Day11
             // Calculate the new status for each location and buffer it.
             foreach (var seat in seats)
             {
-                int occupiedNeighbours = seat.Position.GetNeighboringPositionsIncludingDiagonals().Select(s => this[s]).Count(x => x != null && x.IsOccupied);
-                seat.CalculateNewStatus(occupiedNeighbours);
+                int occupiedNeighbours = seat.GetNeighboringPositionsIncludingDiagonals().Select(s => this[s]).Count(x => x == SeatType.Occupied);
+                AddToBuffer(seat, CalculateNewStatus(Map[seat], occupiedNeighbours));
             }
+             UpdateFromBuffer();
+        }
 
-            // Update seat value from buffer
-            foreach (var seat in seats)
+        // We flip all seats simultaneously so we can't update the status 
+        // until we've worked out the new status of every seat.
+        // So store the new value in a buffer [NewStatus] and then update every seat at the same time.
+        public SeatType CalculateNewStatus(SeatType seat, int occupiedSeats)
+        {
+            if (seat == SeatType.Floor) return SeatType.Floor;  // do nothing
+
+            if (seat == SeatType.Empty && occupiedSeats == 0)
             {
-                seat.UpdateSeat();
+               return SeatType.Occupied;
+            }
+            else if (seat == SeatType.Occupied && occupiedSeats >= _seatLimit)
+            {
+                return  SeatType.Empty;
+            }
+            else
+            {
+                return seat;
             }
         }
+
 
         /// <summary>
         /// Runs 1 turn of the seating simulation.
@@ -84,26 +104,30 @@ namespace AoC.AoC2020.Problems.Day11
         public void RunComplexSimulationTurn()
         {
             // Calculate the new status for each location and buffer it.
-            foreach (var seat in seats)
+            foreach (var location in this.GetBoundedEnumerator(0))
             {
+                var seat = location.Key;
+                if (location.Value == SeatType.Floor)
+                {
+                    AddToBuffer(seat, location.Value);
+                    continue;
+                }
+
                 int occupiedNeighbours =
-                    (IsVisibleOccupiedSeatsFromPosition(seat.Position, -1, 0) ? 1 : 0) +
-                    (IsVisibleOccupiedSeatsFromPosition(seat.Position, 1, 0) ? 1 : 0) +
-                    (IsVisibleOccupiedSeatsFromPosition(seat.Position, -1, 1) ? 1 : 0) +
-                    (IsVisibleOccupiedSeatsFromPosition(seat.Position, 1, 1) ? 1 : 0) +
-                    (IsVisibleOccupiedSeatsFromPosition(seat.Position, -1, -1) ? 1 : 0) +
-                    (IsVisibleOccupiedSeatsFromPosition(seat.Position, 1, -1) ? 1 : 0) +
-                    (IsVisibleOccupiedSeatsFromPosition(seat.Position, 0, -1) ? 1 : 0) +
-                    (IsVisibleOccupiedSeatsFromPosition(seat.Position, 0, 1) ? 1 : 0);
+                    (IsVisibleOccupiedSeatsFromPosition(seat, -1, 0) ? 1 : 0) +
+                    (IsVisibleOccupiedSeatsFromPosition(seat, 1, 0) ? 1 : 0) +
+                    (IsVisibleOccupiedSeatsFromPosition(seat, -1, 1) ? 1 : 0) +
+                    (IsVisibleOccupiedSeatsFromPosition(seat, 1, 1) ? 1 : 0) +
+                    (IsVisibleOccupiedSeatsFromPosition(seat, -1, -1) ? 1 : 0) +
+                    (IsVisibleOccupiedSeatsFromPosition(seat, 1, -1) ? 1 : 0) +
+                    (IsVisibleOccupiedSeatsFromPosition(seat, 0, -1) ? 1 : 0) +
+                    (IsVisibleOccupiedSeatsFromPosition(seat, 0, 1) ? 1 : 0);
 
-                seat.CalculateNewStatus(occupiedNeighbours);
+               AddToBuffer(seat, CalculateNewStatus(Map[seat], occupiedNeighbours));
             }
 
-            // Update seat value from buffer
-            foreach (var seat in seats)
-            {
-                seat.UpdateSeat();
-            }
+            UpdateFromBuffer();
+
         }
 
         // Checks if we can see any occupied seats in the direction indicated 
@@ -112,16 +136,15 @@ namespace AoC.AoC2020.Problems.Day11
             int x = start.X + xModifier;
             int y = start.Y + yModifier;
 
-            SeatLocation seat = this[x, y];
-
-            while (seat != null)
+            var seat = this[x, y];
+            while (seat != SeatType.Unknown)
             {
-                if (seat.IsOccupied)
+                if (seat == SeatType.Occupied)
                 {
                     return true;
                 }
 
-                if (seat.IsEmpty)
+                if (seat == SeatType.Empty)
                 {
                     return false;
                 }
