@@ -17,10 +17,10 @@ namespace Aoc.AoC2019.Problems.Day24
 
         public override IEnumerable<long> Solve(IEnumerable<string> data)
         {
-            yield return FindReoccuringState(Example1);
-            yield return RecusiveGame_CountBugs(Example1, 10);
+            yield return FindReoccuringState(data);
+        //    yield return RecusiveGame_CountBugs(Example1, 10);
 
-            //yield return RecusiveGame_CountBugs(data, 200);
+            yield return RecusiveGame_CountBugs(data, 200);
         }              
 
         public long FindReoccuringState(IEnumerable<string> data)
@@ -31,18 +31,13 @@ namespace Aoc.AoC2019.Problems.Day24
             var initialState = game.DrawMap();
             previousStates.Add(initialState);
 
-            //Console.WriteLine(initialState);
-            //Console.WriteLine();
-
             while(true)
             {
                 game.EvolveMap();
                 string state = game.DrawMap();
-                // Console.WriteLine(state);
 
                 if (previousStates.Contains(state))
                 {
-                    //Console.WriteLine(state);
                     return game.GetBioDiversityScore();
                 }
                 else
@@ -55,17 +50,12 @@ namespace Aoc.AoC2019.Problems.Day24
         public long RecusiveGame_CountBugs(IEnumerable<string> data, int numGenerations)
         {
             RecursiveGameOfLifeMap game = new RecursiveGameOfLifeMap(data.ToList());
-            Console.WriteLine(game.DrawMap());
 
             for (int i = 0; i < numGenerations; i++)
             {
                 game.EvolveMap();
-                Console.WriteLine();
-                Console.WriteLine(game.DrawMap());
             }
 
-            Console.WriteLine();
-            Console.WriteLine(game.DrawMap());
 
             return game.TotalBugs();
         }

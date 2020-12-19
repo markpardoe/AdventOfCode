@@ -113,13 +113,12 @@ namespace Aoc.AoC2019.Problems.Day24
 
         private void UpdatePosition(Position3d position, BugTile tile)
         {
-         
+
             if (position.X == 2 && position.Y == 2)
             {
-                AddToBuffer(position, tile);
+                AddToBuffer(position, BugTile.Centre);
             }
-
-            var n = position.GetNeighbors().Where(p => this[p] == BugTile.Bug).ToList();
+            
             int bugCount = GetNeighbors(position).Count(p => this[p] == BugTile.Bug);
 
             // Get inner squares
@@ -127,42 +126,42 @@ namespace Aoc.AoC2019.Problems.Day24
             {
                 if (position.Y == 1)
                 {
-                    bugCount += CountBugsInRow(0, position.Z - 1);
+                    bugCount += CountBugsInRow(0, position.Z + 1);
                 }
                 else if (position.Y == 3)
                 {
-                    bugCount += CountBugsInRow(4, position.Z - 1);
+                    bugCount += CountBugsInRow(4, position.Z + 1);
                 }
             }
             else if (position.Y == 2)
             {
                 if (position.X == 1)
                 {
-                    bugCount += CountBugsInRow(0, position.Z - 1);
+                    bugCount += CountBugsInColumn(0, position.Z + 1);
                 }
                 else if (position.X == 3)
                 {
-                    bugCount += CountBugsInRow(4, position.Z - 1);
+                    bugCount += CountBugsInColumn(4, position.Z + 1);
                 }
             }
 
             // Get counts from next layer up if on outer edge of square
             if (position.X == 0)
             {
-                bugCount += this[1, 2, position.Z + 1] == BugTile.Bug ? 1 : 0;
+                bugCount += this[1, 2, position.Z - 1] == BugTile.Bug ? 1 : 0;
             }
             else if (position.X == 4)
             {
-                bugCount += this[3, 2, position.Z + 1] == BugTile.Bug ? 1 : 0;
+                bugCount += this[3, 2, position.Z - 1] == BugTile.Bug ? 1 : 0;
             }
         
             if (position.Y == 0)
             {
-                bugCount += this[2, 1, position.Z + 1] == BugTile.Bug ? 1 : 0;
+                bugCount += this[2, 1, position.Z - 1] == BugTile.Bug ? 1 : 0;
             }
             else if (position.Y == 4)
             {
-                bugCount += this[2, 3, position.Z + 1] == BugTile.Bug ? 1 : 0;
+                bugCount += this[2, 3, position.Z - 1] == BugTile.Bug ? 1 : 0;
             }
 
             if (tile == BugTile.Bug && bugCount == 1)
@@ -177,23 +176,22 @@ namespace Aoc.AoC2019.Problems.Day24
 
         private void AddOuterMap()
         {
-            int outerLayer = _maxZ;
             
-            if (CountBugsInColumn(0, _maxZ) > 0 || CountBugsInColumn(4, _maxZ) >0 || CountBugsInRow(0, _maxZ) > 0 || CountBugsInRow(4, _maxZ) > 0)
+            if (CountBugsInColumn(0, MinZ) > 0 || CountBugsInColumn(4, MinZ) >0 || CountBugsInRow(0, MinZ) > 0 || CountBugsInRow(4, MinZ) > 0)
             {
-                _maxZ++;
+                _minZ--;
             }
         }
 
         private void AddInnerMap()
         {
-            int bugs = CountBugsOnInnerEdge(MinZ);
+            int bugs = CountBugsOnInnerEdge(MaxZ);
 
             // if any bugs in inner circle - we need to add a new inner map
             if (bugs > 0)
             {
                 // have to add a new lower level
-                _minZ--;
+                _maxZ++;
             }
         }
     }
