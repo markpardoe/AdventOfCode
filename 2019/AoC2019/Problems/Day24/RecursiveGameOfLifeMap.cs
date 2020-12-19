@@ -1,115 +1,200 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
+﻿using AoC.Common.Mapping._3d;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-//namespace Aoc.AoC2019.Problems.Day24
-//{
-//    public class RecursiveGameOfLifeMap
-//    {
-//        private readonly Dictionary<int, GameOfLifeMap> layers = new Dictionary<int, GameOfLifeMap>();
-      
-//        public RecursiveGameOfLifeMap(List<string> data)
-//        {
-//            GameOfLifeMap map = new GameOfLifeMap(data, true);
-//            layers.Add(0, map);  // add the initial layer
+namespace Aoc.AoC2019.Problems.Day24
+{
+    public class RecursiveGameOfLifeMap : Map3d<BugTile>
+    {
+        // Set fixed grid sizes
+        public override int MinX => 0;
+        public override int MaxX => 4;
+        public override int MinY => 0;
+        public override int MaxY => 4;
 
-//        }
+        private int _minZ = 0;
+        private int _maxZ = 0;
+        public override int MaxZ => _maxZ;
+        public override int MinZ => _minZ;
 
-//        public int TotalBugs()
-//        {
-//            int total = 0;
-//            foreach(GameOfLifeMap map in layers.Values)
-//            {
-//                total += map.NumberOfBugs;
-//            }
 
-//            return total;
-//        }
+        public RecursiveGameOfLifeMap(List<string> data) : base(BugTile.Empty)
+        {
+            int y = 0;
+            foreach (string line in data)
+            {
+                for (int x = 0; x < line.Length; x++)
+                {
+                    Position3d pos = new Position3d(x, y, 0);
+                    BugTile tile = (BugTile)line[x];
 
-//        public string DrawMap()
-//        {
-//            StringBuilder sb = new StringBuilder();
-//            var keys = layers.Keys.OrderBy(p => p);
-//            foreach (int layer in keys)
-//            {
-//                sb.Append("Layer: ");
-//                sb.Append(layer);
-//                sb.Append(Environment.NewLine);
-//                sb.Append(layers[layer].DrawMap());
-//                sb.Append(Environment.NewLine);
-//            }
+                    // Only add bug tiles - empty tiles will be returned automatically
+                    if (tile == BugTile.Bug)
+                    {
+                        this.Add(pos, tile);
+                    }
+                }
+                y++;
+            }
 
-//            return sb.ToString();
-//        }
+            this[new Position3d(2, 2, 0)] = BugTile.Centre;
+        }
 
-//        public void EvolveMap()
-//        {
-//            // check if we need a new layer
-//            AddInnerMap();
-//            AddOuterMaps();
+        public int TotalBugs()
+        {
+            return CountValue(BugTile.Bug);
+        }
 
-//            foreach (GameOfLifeMap map in layers.Values)
-//            {
-//                map.UpdateBuffer();
-//            }
+        protected override char? ConvertValueToChar(Position3d position, BugTile value)
+        {
+            return (char) value;
+        }
 
-//            foreach (GameOfLifeMap map in layers.Values)
-//            {
-//                map.UpdateFromBuffer();
-//            }
-//        }
+        private int CountBugsInColumn(int column, int layer)
+        {
+            return Map.Keys.Where(p => p.X == column && p.Z == layer).Count(p => this[p] == BugTile.Bug);
+        }
 
-//        private void AddInnerMap()
-//        {
-//            int innerLayer = layers.Keys.Max();
-//            GameOfLifeMap map = layers[innerLayer];
+        private int CountBugsInRow(int row, int layer)
+        {
+            return Map.Keys.Where(p => p.Y == row && p.Z == layer).Count(p => this[p] == BugTile.Bug);
+        }
 
-//            // if any bugs in inner circle - we need to add a new inner map
-//            if (map.GetInnerEdge().Sum(t => t.NumberOfBugs) > 0)
-//            {
-//                GameOfLifeMap innerMap = new GameOfLifeMap();
-//                layers.Add(innerLayer + 1, innerMap);
+        // Get the 4 positions around the inner square for a z-layer
+        private int CountBugsOnInnerEdge(int z)
+        {
+            return GetNeighbors(new Position3d(2, 2, z)).Count(x => this[x] == BugTile.Bug);
+        }
 
-//                UpdateNeighbours(map[1, 2], innerMap.GetColumn(0));  // left
-//                UpdateNeighbours(map[2, 1], innerMap.GetRow(0));  // upper
-//                UpdateNeighbours(map[2, 3], innerMap.GetRow(4));  // bottom
-//                UpdateNeighbours(map[3, 2], innerMap.GetColumn(4));  // right
-//            }
-//        }
+        public void EvolveMap()
+        {
+            // Check if we need to add inner or outer levels
+            AddInnerMap();
+            AddOuterMap();
 
-//        private void AddOuterMaps()
-//        {
-//            int outerLayer = layers.Keys.Min();
-//            GameOfLifeMap map = layers[outerLayer];
+            foreach (var location in GetBoundedEnumerator())
+            {
+                UpdatePosition(location.Key, location.Value);
+            }
 
-//            // Get the number of bugs in each of the outside columns.  If any of them are 1 or 2 - then we need to expand the map outwards.
-//            List<int> bugCounts = new List<int>() { CountBugs(map.GetColumn(0)), CountBugs(map.GetColumn(4)), CountBugs(map.GetRow(0)), CountBugs(map.GetRow(4)) };
-//            if (bugCounts.Contains(1) || bugCounts.Contains(2))
-//            {
-//                GameOfLifeMap outermap = new GameOfLifeMap();
-//                layers.Add(outerLayer - 1, outermap);
+            //// check one layer above / below the current grid
+            //// If new laters are added - the Z Axis will update automatically
+            //// X and Y axis should stay the same
+            //for (int z = MinZ - 1; z <= MaxZ + 1; z++)
+            //{
+            //    for (int y = MinY; y <= MaxY; y++)
+            //    {
+            //        for (int x = MinX; x <= MaxX; x++)
+            //        {
+            //            var position = new Position3d(x, y, z);
+            //            UpdatePosition(position);
+            //        }
+            //    }
+            //}
 
-//                UpdateNeighbours(outermap[1, 2], map.GetColumn(0));  // left
-//                UpdateNeighbours(outermap[2, 1], map.GetRow(0));  // upper
-//                UpdateNeighbours(outermap[2, 3], map.GetRow(4));  // bottom
-//                UpdateNeighbours(outermap[3, 2], map.GetColumn(4));  // right
-//            }
-//        }
 
-//        private int CountBugs(IEnumerable<GameTile> tiles)
-//        {
-//            return tiles.Sum(t => t.NumberOfBugs);
-//        }
+            UpdateFromBuffer();
 
-//        private void UpdateNeighbours(GameTile tile, List<GameTile> newTiles)
-//        {
-//            foreach (GameTile t in newTiles)
-//            {
-//                tile.Neighbours.Add(t);
-//                t.Neighbours.Add(tile);
-//            }
-//        }
-//    }
-      
-//}
+            // Grow the map if needed
+            _minZ = Map.Keys.Min(p => p.Z);
+            _maxZ = Map.Keys.Max(p => p.Z);
+        }
+
+        // Gets all 8 neighbors on the same layer (x, y)
+        private IEnumerable<Position3d> GetNeighbors(Position3d pos)
+        {
+            yield return new Position3d(pos.X - 1, pos.Y, pos.Z);
+            yield return new Position3d(pos.X + 1, pos.Y, pos.Z);
+            yield return new Position3d(pos.X, pos.Y - 1, pos.Z);
+            yield return new Position3d(pos.X, pos.Y + 1, pos.Z);
+        }
+
+        private void UpdatePosition(Position3d position, BugTile tile)
+        {
+         
+            if (position.X == 2 && position.Y == 2)
+            {
+                AddToBuffer(position, tile);
+            }
+
+            var n = position.GetNeighbors().Where(p => this[p] == BugTile.Bug).ToList();
+            int bugCount = GetNeighbors(position).Count(p => this[p] == BugTile.Bug);
+
+            // Get inner squares
+            if (position.X == 2)
+            {
+                if (position.Y == 1)
+                {
+                    bugCount += CountBugsInRow(0, position.Z - 1);
+                }
+                else if (position.Y == 3)
+                {
+                    bugCount += CountBugsInRow(4, position.Z - 1);
+                }
+            }
+            else if (position.Y == 2)
+            {
+                if (position.X == 1)
+                {
+                    bugCount += CountBugsInRow(0, position.Z - 1);
+                }
+                else if (position.X == 3)
+                {
+                    bugCount += CountBugsInRow(4, position.Z - 1);
+                }
+            }
+
+            // Get counts from next layer up if on outer edge of square
+            if (position.X == 0)
+            {
+                bugCount += this[1, 2, position.Z + 1] == BugTile.Bug ? 1 : 0;
+            }
+            else if (position.X == 4)
+            {
+                bugCount += this[3, 2, position.Z + 1] == BugTile.Bug ? 1 : 0;
+            }
+        
+            if (position.Y == 0)
+            {
+                bugCount += this[2, 1, position.Z + 1] == BugTile.Bug ? 1 : 0;
+            }
+            else if (position.Y == 4)
+            {
+                bugCount += this[2, 3, position.Z + 1] == BugTile.Bug ? 1 : 0;
+            }
+
+            if (tile == BugTile.Bug && bugCount == 1)
+            {
+                AddToBuffer(position, BugTile.Bug);
+            }
+            else if (tile == BugTile.Empty && (bugCount == 1 || bugCount == 2))
+            {
+                AddToBuffer(position, BugTile.Bug);
+            }
+        }
+
+        private void AddOuterMap()
+        {
+            int outerLayer = _maxZ;
+            
+            if (CountBugsInColumn(0, _maxZ) > 0 || CountBugsInColumn(4, _maxZ) >0 || CountBugsInRow(0, _maxZ) > 0 || CountBugsInRow(4, _maxZ) > 0)
+            {
+                _maxZ++;
+            }
+        }
+
+        private void AddInnerMap()
+        {
+            int bugs = CountBugsOnInnerEdge(MinZ);
+
+            // if any bugs in inner circle - we need to add a new inner map
+            if (bugs > 0)
+            {
+                // have to add a new lower level
+                _minZ--;
+            }
+        }
+    }
+}

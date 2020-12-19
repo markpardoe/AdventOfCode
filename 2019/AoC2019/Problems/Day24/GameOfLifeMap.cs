@@ -11,14 +11,13 @@ namespace Aoc.AoC2019.Problems.Day24
         Bug = '#',
         Empty = '.',
         Centre = '?',
-        Unknown = '*'
     }
 
     public class GameOfLifeMap : FixedSizeMap<BugTile>
     {
         public int NumberOfBugs => CountValue(BugTile.Bug);
 
-        public GameOfLifeMap(List<string> map, bool isRecursive = false) : base(BugTile.Empty, new Position(0,0), new Position(4,4))
+        public GameOfLifeMap(List<string> map) : base(BugTile.Empty, new Position(0,0), new Position(4,4))
         {        
             int y = 0;
             foreach (string line in map)
@@ -35,12 +34,6 @@ namespace Aoc.AoC2019.Problems.Day24
                     }
                 }
                 y++;
-            }
-
-
-            if (isRecursive)
-            {
-                base[new Position(2,2)] = BugTile.Centre;
             }
         }
 
@@ -91,49 +84,7 @@ namespace Aoc.AoC2019.Problems.Day24
                     AddToBuffer(tile.Key, BugTile.Bug);
                 }
             }
-
             UpdateFromBuffer();
-        }
-            //foreach(GameTile tile in _allTiles)
-            //{
-            //    tile.UpdateBuffer();
-            //}
-
-            //foreach (GameTile tile in _allTiles)
-            //{
-            //    tile.UpdateFromBuffer();
-            //}
-       // }
-
-        //public List<GameTile> GetColumn(int column)
-        //{
-        //    return _allTiles.Where(t => t.X == column).ToList();
-        //}
-
-        //public List<GameTile> GetRow(int row)
-        //{
-        //    return _allTiles.Where(t => t.Y == row).ToList();
-        //}
-
-        //public List<GameTile> GetInnerEdge()
-        //{
-        //    return new List<GameTile>() { Map[2, 1], base[2, 3], base[1, 2], base[3, 2] };
-        //}
-
-        //public void UpdateBuffer()
-        //{
-        //    foreach (GameTile tile in _allTiles)
-        //    {
-        //        tile.UpdateBuffer();
-        //    }
-        //}
-
-        //public void UpdateFromBuffer()
-        //{
-        //    foreach (GameTile tile in _allTiles)
-        //    {
-        //        tile.UpdateFromBuffer();
-        //    }
-        //}
+        }             
     }
 }

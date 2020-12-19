@@ -39,24 +39,6 @@ namespace AoC.Common.Mapping._3d
             return n;
         }
 
-        // Gets all the neighbors on the same layer (x, y)
-        public IEnumerable<Position3d> GetNeighboursOnLayer()
-        {
-            var n = new HashSet<Position3d>();
-
-            for (int horizontal = X - 1; horizontal <= X + 1; horizontal++)
-            {
-                for (int vertical = Y - 1; vertical <= Y + 1; vertical++)
-                {
-                    n.Add(new Position3d(horizontal, vertical, Z));
-
-                }
-            }
-
-            n.Remove((this));  // remove current position
-            return n;
-        }
-
         public int DistanceTo(Position3d target)
         {
             return Math.Abs(this.X - target.X) + Math.Abs(this.Y - target.Y) + Math.Abs(this.Z - target.Z);

@@ -12,14 +12,14 @@ namespace AoC.Common.Mapping._3d
     public class Map3d <TValue> : BufferedMap<Position3d, TValue>
     {
         
-        public int MaxX => Map.Keys.Max(p => p.X);
-        public int MinX => Map.Keys.Min(p => p.X);
+        public virtual int MaxX => Map.Keys.Max(p => p.X);
+        public virtual int MinX => Map.Keys.Min(p => p.X);
 
-        public int MaxY => Map.Keys.Max(p => p.Y);
-        public int MinY => Map.Keys.Min(p => p.Y);
+        public virtual int MaxY => Map.Keys.Max(p => p.Y);
+        public virtual int MinY => Map.Keys.Min(p => p.Y);
 
-        public int MaxZ => Map.Keys.Max(p => p.Z);
-        public int MinZ => Map.Keys.Min(p => p.Z);
+        public virtual int MaxZ => Map.Keys.Max(p => p.Z);
+        public virtual int MinZ => Map.Keys.Min(p => p.Z);
 
         public Map3d(TValue defaultValue) : base(defaultValue) {}
         
