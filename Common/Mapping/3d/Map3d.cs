@@ -36,7 +36,7 @@ namespace AoC.Common.Mapping._3d
         // Override for custom mapping
         protected virtual char? ConvertValueToChar(Position3d position, TValue value) => value?.ToString()?[0];
 
-        public override IEnumerable<Position3d> GetAvailableNeighbors(Position3d position)
+        protected override IEnumerable<Position3d> GetAvailableNeighbors(Position3d position)
         {
             return position.GetNeighbors();
         }

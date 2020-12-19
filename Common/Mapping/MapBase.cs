@@ -51,7 +51,7 @@ namespace AoC.Common.Mapping
             }
         }
 
-        public abstract IEnumerable<TPosition> GetAvailableNeighbors(TPosition position);
+        protected abstract IEnumerable<TPosition> GetAvailableNeighbors(TPosition position);
         public abstract string DrawMap();
         public abstract IEnumerable<KeyValuePair<TPosition, TValue>> GetBoundedEnumerator(int padding = 0);
 

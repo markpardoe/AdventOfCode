@@ -54,7 +54,7 @@ namespace Aoc.AoC2019.Problems.Day15
             }
         }
 
-        public override IEnumerable<Position> GetAvailableNeighbors(Position position)
+        protected override IEnumerable<Position> GetAvailableNeighbors(Position position)
         {
             return position.GetNeighboringPositions().Where(p => base[p] != ShipTile.Wall);
         }

@@ -57,6 +57,21 @@ namespace AoC.Common.Mapping
             return node;
         }
 
+        // Returns the first node that has a parent.
+        // If we assume the 1st node without a parent is the start location
+        // we want the next node down the chain (ie. where we move to from the start)
+        public MapNode GetFirstMove()
+        {
+            MapNode node = this;
+
+            while (node.Parent?.Parent != null)
+            {
+                node = node.Parent;
+            }
+
+            return node;
+        }
+
         // Sort by total distance
         public int CompareTo(MapNode other)
         {
@@ -66,25 +81,20 @@ namespace AoC.Common.Mapping
             return TotalDistance.CompareTo(other.TotalDistance);
         }
 
-
         private class SortTotalDistanceAscendingComparer : IComparer<MapNode>
         {
-
             public int Compare(MapNode x, MapNode y)
             {
                 return x.TotalDistance.CompareTo(y.TotalDistance);
             }
-
         }
 
         private class SortDistanceFromStartAscendingComparer : IComparer<MapNode>
         {
-
             public int Compare(MapNode x, MapNode y)
             {
                 return x.DistanceFromStart.CompareTo(y.DistanceFromStart);
             }
-
         }
 
         // Method to return IComparer object for sort helper.

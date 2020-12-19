@@ -201,7 +201,7 @@ namespace Aoc.AoC2019.Problems.Day18
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public override IEnumerable<Position> GetAvailableNeighbors(Position position)
+        protected override IEnumerable<Position> GetAvailableNeighbors(Position position)
         {
             return position.GetNeighboringPositions().Where(x => this[x] != null && this[x].Tile != TileType.Wall);
         }

@@ -24,13 +24,13 @@ namespace Aoc.Aoc2018.Day20
 
     public sealed class RoomMap : Map<MapTile>
     {
-        private readonly Position _start = new Position(0,0);
+        public readonly Position Start = new Position(0,0);
         
         public RoomMap(string input) : base(MapTile.Unknown)
         {
            var inputData = input.Skip(1).ToList();
-           Add(_start, MapTile.Room);
-           var start = new HashSet<Position>() {_start};
+           Add(Start, MapTile.Room);
+           var start = new HashSet<Position>() {Start};
            var data = new Queue<char>(input.ToCharArray());
            BuildMap(start, data);  // store endpoints in the maze
 
@@ -44,14 +44,6 @@ namespace Aoc.Aoc2018.Day20
            }
         }
         
-        public HashSet<MapNode> FindPathToAllRooms()
-        {
-            var rooms = Map.Where(x => x.Value == MapTile.Room).Select(x => x.Key);
-            var result = PathToTargets(_start, rooms);
-
-            return result;
-        }
-
         public HashSet<Position> BuildMap(HashSet<Position> startPositions, Queue<char> inputData)
         {
             // Where we end up at the end each path
@@ -106,113 +98,7 @@ namespace Aoc.Aoc2018.Day20
             return finalPositions;
         }
 
-        /// <summary>
-        /// Performs a BFS to find shortest path to every target in the input
-        /// Assumes an unweighted map (ie. distance/cost between points always = 1).
-        /// </summary>
-        /// <param name="targets"></param>
-        /// <returns></returns>
-        public HashSet<MapNode> PathToTargets(Position start, IEnumerable<Position> targets)
-        {
-            // Create a copy of targets to avoid modifying in place
-            HashSet<Position> targetList = new HashSet<Position>(targets);
-            HashSet<MapNode> output = new HashSet<MapNode>();
-
-            Queue<MapNode> openList = new Queue<MapNode>();
-            HashSet<MapNode> closedList = new HashSet<MapNode>();
-
-            openList.Enqueue(new MapNode(start));
-
-            while (openList.Count > 0)
-            {
-                // get the 1st node
-                var currentPosition = openList.Dequeue();
-
-                var neighbors = GetAvailableNeighbors(currentPosition)
-                    .Select(x => new MapNode(x, currentPosition, currentPosition.DistanceFromStart + 1));
-
-                foreach (var n in neighbors)
-                {
-                    // We've reached a target - BFS guarentees its the shortest path
-                    if (targetList.Contains(currentPosition))
-                    {
-                        output.Add(currentPosition);
-                        targetList.Remove(currentPosition);
-
-                        // found all the targets - so quit
-                        if (targetList.Count == 0)
-                        {
-                            return output;
-                        }
-                    }
-
-                    // Check if we've already visited the node (or about to visit it)
-                    // BFS guarantee shortest-path, so we don't have to check if the new distance is shorter
-                    if (closedList.Contains(n) || openList.Contains(n))
-                    {
-                        // Already got a shorter path to this position
-                        continue;
-                    }
-                    openList.Enqueue(n);
-                }
-                closedList.Add(currentPosition);
-            }
-            return output;
-        }
-
-        /// <summary>
-        /// Finds the sghortest path from start to target positions using A* search algorithm
-        /// https://www.geeksforgeeks.org/a-search-algorithm/
-        /// </summary>
-        /// <param name="start"></param>
-        /// <param name="target"></param>
-        public MapNode FindPathTo(Position start, Position target)
-        {
-            HashSet<MapNode> openList = new HashSet<MapNode>() {new MapNode(start)};
-            HashSet<MapNode> closedList = new HashSet<MapNode>();
-
-            while (openList.Count > 0)
-            {
-                // get the node with the shortest distance
-                var currentPosition = openList.OrderBy(x => x.TotalDistance).First();
-                openList.Remove(currentPosition);
-
-                // Console.WriteLine($"Checking {currentPosition}");
-
-                var neighbors = GetAvailableNeighbors(currentPosition)
-                    .Select(x => new MapNode(x, currentPosition, currentPosition.DistanceFromStart + 1)).ToList();
-                
-                foreach (var n in neighbors)
-                {
-                    n.CalculatedDistanceToTarget = n.DistanceTo(target);
-                    if (n.X == target.X && n.Y == target.Y)
-                    {
-                        return n;
-                    }
-
-                    // Check if node already in open list with a lower TotalDistance
-                    if (openList.Any(x => x.X == n.X && x.Y == n.Y && x.TotalDistance <= n.TotalDistance))
-                    {
-                        // Already got a shorter path to this position
-                        continue;
-                    }
-
-                    // Check if node with same position in closedList with lower distance (ie. we've already found a faster way to this position)
-                    // Check if node already in open list with a lower TotalDistance
-                    if (closedList.Any(x => x.X == n.X && x.Y == n.Y && x.TotalDistance <= n.TotalDistance))
-                    {
-                        // Already got a shorter path to this position
-                        continue;
-                    }
-
-                    openList.Add(n);
-                }
-
-                closedList.Add(currentPosition);
-            }
-
-            return null; // no destination found
-        }
+        
 
         /// <summary>
         /// Returns neighboring rooms.
@@ -221,7 +107,7 @@ namespace Aoc.Aoc2018.Day20
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public override IEnumerable<Position> GetAvailableNeighbors(Position position)
+        protected override IEnumerable<Position> GetAvailableNeighbors(Position position)
         {
             var result = new HashSet<Position>();
             if (this[position] != MapTile.Room) return result; 
@@ -277,7 +163,7 @@ namespace Aoc.Aoc2018.Day20
 
         protected override char? ConvertValueToChar(Position position, MapTile value)
         {
-            if (position.Equals(_start))
+            if (position.Equals(Start))
             {
                 return 'X';
             }

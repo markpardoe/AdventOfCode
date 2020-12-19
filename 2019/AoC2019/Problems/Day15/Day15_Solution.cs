@@ -22,8 +22,8 @@ namespace Aoc.AoC2019.Problems.Day15
             Robot robot = new Robot(vm);
             robot.ExploreShip();
 
-            yield return robot.GetPathToOxygen().Count();
-            yield return robot.FindTimeToFillWithOxxygen();
+            yield return robot.GetPathToOxygen().DistanceFromStart;
+            yield return robot.FindTimeToFillWithOxygen();
         }
     }
 }

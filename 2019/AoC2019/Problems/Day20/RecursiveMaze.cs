@@ -251,7 +251,7 @@ namespace Aoc.AoC2019.Problems.Day20
             }
         }
 
-        public override IEnumerable<Position> GetAvailableNeighbors(Position position)
+        protected override IEnumerable<Position> GetAvailableNeighbors(Position position)
         {
             return position.GetNeighboringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void);
         }

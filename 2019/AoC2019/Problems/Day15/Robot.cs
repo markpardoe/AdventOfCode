@@ -13,13 +13,13 @@ namespace Aoc.AoC2019.Problems.Day15
     {
         private readonly IVirtualMachine _computer;
         private readonly ShipMap _map = new ShipMap();
+        private readonly Position Start = new Position(0, 0);
 
         public Robot(IVirtualMachine computer)
         {
             _computer = computer ?? throw new ArgumentNullException(nameof(computer));
-            Position start = new Position(0, 0);
-            _map.Add(start, ShipTile.Start);
-            _map.MoveDroid(start);
+            _map.Add(Start, ShipTile.Start);
+            _map.MoveDroid(Start);
         }
 
         public void ExploreShip()
@@ -32,12 +32,12 @@ namespace Aoc.AoC2019.Problems.Day15
                     // Awaiting input - so find the next move and input it
                     if (_computer.Status == ExecutionStatus.AwaitingInput)
                     {
-                       // Console.WriteLine("Generatining directions");
+                        // Console.WriteLine("Generatining directions");
 
-                        List<Position> moves = GetPathToTile(_map.Droid, ShipTile.Unknown);  // find the nearest 'unknown' tile
-
-                        if (moves.Count == 0) { return; }  // no moves found - we must have explored entire grid - so exit.
-                        nextLocation = moves[0]; // get first location
+                        var move = _map.ShortestPathToNearestValue(_map.Droid, ShipTile.Unknown);
+                       
+                        if (move == null) { return; }  // no moves found - we must have explored entire grid - so exit.
+                        nextLocation = move.GetFirstMove(); // get first location
 
                         var direction = _map.Droid.FindDirection(nextLocation);
                         _computer.Execute((long) direction);
@@ -82,9 +82,9 @@ namespace Aoc.AoC2019.Problems.Day15
             return _map.Oxygen;
         }
 
-        public List<Position> GetPathToOxygen()
+        public MapNode GetPathToOxygen()
         {
-            return GetPathToTile(new Position(0, 0), ShipTile.OxygenSystem);
+            return _map.ShortestPathToPosition(Start, _map.Oxygen);
         }
 
         // Deal with the returned code for the IntCodeCompiler for the given locations
@@ -110,135 +110,14 @@ namespace Aoc.AoC2019.Problems.Day15
             }
         }
 
-        // Fill 1 adjacent per minute - so find maximum distance from Oxygen
-        public int FindTimeToFillWithOxxygen()
+        // Fill 1 adjacent per minute - so find maximum travel distance
+        // to an empty square using BFS
+        public int FindTimeToFillWithOxygen()
         {
-            Position oxygenLocation = _map.Oxygen;
-            var openList = new HashSet<MapNode>();  // list of celles to be checked
-            var closedList = new HashSet<MapNode>();  // checked locations
 
-            MapNode current = new MapNode(oxygenLocation);
-            // Add additional points to check
-            openList.Add(current);
-
-            while (openList.Count > 0)
-            {
-                // get the closest square
-                current = openList.OrderBy(l => l.DistanceFromStart).First();
-
-                // move location to closed list
-                closedList.Add(current);
-                openList.Remove(current);
-         
-                var neighbours = _map.GetAvailableNeighbors(current);
-
-                foreach (var location in neighbours)
-                {
-                    MapNode locationPos = new MapNode(location)
-                    {
-                        Parent = current,
-                        DistanceFromStart = current.DistanceFromStart + 1
-                    };
-
-                    // if location is in the closed / open lists  - check if we've found a faster way there
-                    // & update distance from start if we have a shorter path                    
-                    // Otherwise we need to add it as a new move
-                    if (!UpdateLocationInList(closedList, locationPos) && !UpdateLocationInList(openList, locationPos))
-                    {
-                        openList.Add(locationPos);
-                    }
-                }
-            }
-
-            //Console.WriteLine("Map Searched.");
-            return closedList.Max(p => p.DistanceFromStart);
-        }
-
-        private MapNode FindTarget(Position start, ShipTile targetType)
-        {
-          //  Console.WriteLine("Calculating next move....");
-
-            // breadth first search to find next available position
-            var openList = new HashSet<MapNode>();  // list of cells to be checked
-            var closedList = new HashSet<MapNode>();  // checked locations
-
-            MapNode current = new MapNode(start);
-
-            // Add additional points to check
-            openList.Add(current);
-
-            while (openList.Count > 0)
-            {
-                // get the closest square
-                current = openList.OrderBy(l => l.DistanceFromStart).First();
-
-                // move location to closed list
-                closedList.Add(current);
-                openList.Remove(current);
-
-                // check if we've found an empty cell?
-                if (_map[current] == targetType) { return current; }
-
-                var neighbours = _map.GetAvailableNeighbors(current);
-
-                foreach (var location in neighbours)
-                {
-                    MapNode locationPos = new MapNode(location)
-                    {
-                        Parent = current,
-                        DistanceFromStart = current.DistanceFromStart + 1
-                    };
-
-                    // if location is in the closed / open lists  - check if we've found a faster way there
-                    // & update distance from start if we have a shorter path                    
-                    // Otherwise we need to add it as a new move
-                    if (!UpdateLocationInList(closedList, locationPos) && !UpdateLocationInList(openList, locationPos))
-                    {
-                        openList.Add(locationPos);
-                    }
-                }
-            }
-          //  Console.WriteLine("Next move found.");
-            // nothing found
-            return null;
-        }
-
-        private List<Position> GetPathToTile(Position start, ShipTile targetType)
-        {
-            List<Position> path = new List<Position>();
-            MapNode target = FindTarget(start, targetType); 
-
-            if (target == null) { return path; }  // no target found - so no moves to make
-            
-          //  Console.WriteLine("Target found: " + target.Position.ToString());
-
-
-            while (target != null && !target.Equals(start)) 
-            {
-                path.Add(target);
-                target = target.Parent;
-            }
-            path.Reverse();  // list is in the wrong direction!
-
-            return path;
-        }
-
-        private bool UpdateLocationInList(HashSet<MapNode> list, MapNode currentPosition)
-        {
-            // update distance from start if we have a shorter path
-            if (list.TryGetValue(currentPosition, out MapNode p))
-            {
-                if (p.DistanceFromStart > currentPosition.DistanceFromStart + 1)
-                {
-                    p.DistanceFromStart = currentPosition.DistanceFromStart + 1;
-                    p.Parent = currentPosition;
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }       
+            var path = _map.ShortestPathToValue(_map.Oxygen, ShipTile.Empty);
+            return path.Max(s => s.DistanceFromStart);
+          
+        }        
     }
 }

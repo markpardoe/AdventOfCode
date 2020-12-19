@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Aoc.Aoc2018.Day20;
+using AoC.Common.Mapping;
 using Shouldly;
 using Xunit;
 
@@ -22,7 +23,7 @@ namespace AoC.AoC2018.Tests.Day20
         {
             var sut = new RoomMap(input);
 
-            var allRooms = sut.FindPathToAllRooms();
+            var allRooms = sut.ShortestPathToValue(sut.Start, MapTile.Room);
             int actual = allRooms.Max(x => x.DistanceFromStart);
 
             actual.ShouldBe(expected);

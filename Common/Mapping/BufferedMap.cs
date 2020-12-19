@@ -5,7 +5,7 @@ namespace AoC.Common.Mapping
 {
     /// <summary>
     /// Mapbase with a buffer.
-    /// This allows 'next' values to be stored and the entire map updated in one operation
+    /// allowing 'next' values to be stored and the entire map updated in one operation
     /// </summary>
     /// <typeparam name="TPosition"></typeparam>
     /// <typeparam name="TValue"></typeparam>
