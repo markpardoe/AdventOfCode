@@ -25,16 +25,14 @@ namespace Aoc.Aoc2018.Day20
     public sealed class RoomMap : Map<MapTile>
     {
         private readonly Position _start = new Position(0,0);
-        private readonly HashSet<Position> _endPoints = new HashSet<Position>();
         
-
         public RoomMap(string input) : base(MapTile.Unknown)
         {
            var inputData = input.Skip(1).ToList();
            Add(_start, MapTile.Room);
            var start = new HashSet<Position>() {_start};
            var data = new Queue<char>(input.ToCharArray());
-           _endPoints = BuildMap(start, data);  // store endpoints in the maze
+           BuildMap(start, data);  // store endpoints in the maze
 
            // replace unknown with walls
            foreach (var p in GetBoundedEnumerator())
@@ -46,27 +44,7 @@ namespace Aoc.Aoc2018.Day20
            }
         }
         
-        public int FindMaxDoorsToEndPoint()
-        {
-            int maxDistance = 0;
-            //foreach (var endPoint in _endPoints)
-            //{
-            //    Console.WriteLine($"Finding Target {endPoint} of {_endPoints.Count}");
-            //    var node = FindPathTo(_start, endPoint);
-            //    if (node != null && node.DistanceFromStart > maxDistance)
-            //    {
-            //        maxDistance = node.DistanceFromStart;
-            //    }
-
-            //    Console.WriteLine($"Target {endPoint} Found: {node.DistanceFromStart}");
-            //}
-
-            var paths = PathToTargets(_start, _endPoints);
-            return paths.Max(x => x.DistanceFromStart);
-
-        }
-
-        public HashSet<MapNode> FindPathToAllTargets()
+        public HashSet<MapNode> FindPathToAllRooms()
         {
             var rooms = Map.Where(x => x.Value == MapTile.Room).Select(x => x.Key);
             var result = PathToTargets(_start, rooms);
