@@ -6,89 +6,55 @@ using System.Text;
 
 namespace Aoc.AoC2019.Problems.Day24
 {
-    public class GameOfLifeMap : Map<GameTile>
+    public enum BugTile
     {
-        private readonly HashSet<GameTile> _allTiles = new HashSet<GameTile>();
+        Bug = '#',
+        Empty = '.',
+        Centre = '?',
+        Unknown = '*'
+    }
 
-        public int NumberOfBugs
-        {
-            get
-            {
-                return _allTiles.Sum(t => t.NumberOfBugs);
-            }
-        }
+    public class GameOfLifeMap : FixedSizeMap<BugTile>
+    {
+        public int NumberOfBugs => CountValue(BugTile.Bug);
 
-        public GameOfLifeMap(List<string> map, bool isRecursive = false) : base(null)
+        public GameOfLifeMap(List<string> map, bool isRecursive = false) : base(BugTile.Empty, new Position(0,0), new Position(4,4))
         {        
-            for (int y = 0; y < 5; y++)
+            int y = 0;
+            foreach (string line in map)
             {
-                char[] row = map[y].ToCharArray();
-
-                for (int x = 0; x < 5; x++)
+                for (int x = 0; x< line.Length; x++)
                 {
-                    bool isBug = (row[x] == '#');
-                    GameTile t = new GameTile(x, y, isBug);
-                    base.Add(t.Position, t);
-                    _allTiles.Add(t);
+                    Position pos = new Position(x, y);
+                    BugTile tile = (BugTile) line[x];
+
+                    // Only add bug tiles - empty tiles will be returned automatically
+                    if (tile == BugTile.Bug)
+                    {
+                        this.Add(pos, tile);
+                    }
                 }
+                y++;
             }
+
 
             if (isRecursive)
             {
-                base[new Position(2,2)] = new NullTile(2,2);
+                base[new Position(2,2)] = BugTile.Centre;
             }
-
-            AddNeighbors();
         }
 
         // Create a new empty map
-        public GameOfLifeMap() : base(null)
+        public GameOfLifeMap() : base(BugTile.Empty)
         {
-            for (int y = 0; y < 5; y++)
-            {
-                for (int x = 0; x < 5; x++)
-                {
-                    GameTile t = new GameTile(x, y, false);
-                    base.Add(t.Position, t);
-                    _allTiles.Add(t);
-                }
-            }
-            base[new Position(2, 2)] = new NullTile(2, 2);
-            AddNeighbors();
+            this[new Position(2, 2)] =  BugTile.Centre;
         }
 
-        private void AddNeighbors()
+        protected override char? ConvertValueToChar(Position position, BugTile value)
         {
-            // Add neighbours
-            foreach (GameTile tile in Map.Values)
-            {
-                var neighbours = tile.Position.GetNeighboringPositions();
-                foreach (Position pos in neighbours)
-                {
-                    GameTile t = base[pos];
-                    if (t != null)
-                    {
-                        tile.Neighbours.Add(t);
-                    }
-                }
-            }
+            return (char)value;
         }
 
-        // Only draw region of 5 squares
-        public override string DrawMap()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            for (int y = 0; y < 5; y++)
-            {
-                for (int x = 0; x < 5; x++)
-                {
-                    sb.Append(base[x, y].Code);
-                }
-                sb.Append(Environment.NewLine);
-            }
-            return sb.ToString();
-        }
 
         public long GetBioDiversityScore()
         {
@@ -99,7 +65,7 @@ namespace Aoc.AoC2019.Problems.Day24
             {
                 for (int x = 0; x < 5; x++)
                 {
-                    if (base[x,y].IsBug)
+                    if (this[x,y] == BugTile.Bug)
                     {
                         total += score;
                     }
@@ -111,46 +77,63 @@ namespace Aoc.AoC2019.Problems.Day24
 
         public void EvolveMap()
         {
-            foreach(GameTile tile in _allTiles)
+            foreach (var tile in GetBoundedEnumerator())
             {
-                tile.UpdateBuffer();
+                var bugs = tile.Key.GetNeighboringPositions().Count(x => this[x] == BugTile.Bug);
+
+
+                if (tile.Value == BugTile.Bug && bugs == 1)
+                {
+                    AddToBuffer(tile.Key, BugTile.Bug);
+                }
+                else if (tile.Value == BugTile.Empty && (bugs == 1 || bugs == 2))
+                {
+                    AddToBuffer(tile.Key, BugTile.Bug);
+                }
             }
 
-            foreach (GameTile tile in _allTiles)
-            {
-                tile.UpdateFromBuffer();
-            }
+            UpdateFromBuffer();
         }
+            //foreach(GameTile tile in _allTiles)
+            //{
+            //    tile.UpdateBuffer();
+            //}
 
-        public List<GameTile> GetColumn(int column)
-        {
-            return _allTiles.Where(t => t.X == column).ToList();
-        }
+            //foreach (GameTile tile in _allTiles)
+            //{
+            //    tile.UpdateFromBuffer();
+            //}
+       // }
 
-        public List<GameTile> GetRow(int row)
-        {
-            return _allTiles.Where(t => t.Y == row).ToList();
-        }
+        //public List<GameTile> GetColumn(int column)
+        //{
+        //    return _allTiles.Where(t => t.X == column).ToList();
+        //}
 
-        public List<GameTile> GetInnerEdge()
-        {
-            return new List<GameTile>() { base[2, 1], base[2, 3], base[1, 2], base[3, 2] };
-        }
+        //public List<GameTile> GetRow(int row)
+        //{
+        //    return _allTiles.Where(t => t.Y == row).ToList();
+        //}
 
-        public void UpdateBuffer()
-        {
-            foreach (GameTile tile in _allTiles)
-            {
-                tile.UpdateBuffer();
-            }
-        }
+        //public List<GameTile> GetInnerEdge()
+        //{
+        //    return new List<GameTile>() { Map[2, 1], base[2, 3], base[1, 2], base[3, 2] };
+        //}
 
-        public void UpdateFromBuffer()
-        {
-            foreach (GameTile tile in _allTiles)
-            {
-                tile.UpdateFromBuffer();
-            }
-        }
+        //public void UpdateBuffer()
+        //{
+        //    foreach (GameTile tile in _allTiles)
+        //    {
+        //        tile.UpdateBuffer();
+        //    }
+        //}
+
+        //public void UpdateFromBuffer()
+        //{
+        //    foreach (GameTile tile in _allTiles)
+        //    {
+        //        tile.UpdateFromBuffer();
+        //    }
+        //}
     }
 }

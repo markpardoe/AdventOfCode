@@ -1,6 +1,7 @@
 ﻿using AoC.Common;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Aoc.AoC2019.Problems.Day24
 {
@@ -16,8 +17,8 @@ namespace Aoc.AoC2019.Problems.Day24
 
         public override IEnumerable<long> Solve(IEnumerable<string> data)
         {
-            yield return FindReoccuringState(data);
-            yield return RecusiveGame_CountBugs(data, 200);
+            yield return FindReoccuringState(Example1);
+        //    yield return RecusiveGame_CountBugs(data, 200);
         }              
 
         public long FindReoccuringState(IEnumerable<string> data)
@@ -25,18 +26,21 @@ namespace Aoc.AoC2019.Problems.Day24
             HashSet<string> previousStates = new HashSet<string>();
 
             GameOfLifeMap game = new GameOfLifeMap(data.ToList());
-            previousStates.Add(game.DrawMap());
-         //   Console.WriteLine(game.DrawMap());
-          //  Console.WriteLine();
+            var initialState = game.DrawMap();
+            previousStates.Add(initialState);
+
+            Console.WriteLine(initialState);
+            Console.WriteLine();
 
             while(true)
             {
                 game.EvolveMap();
                 string state = game.DrawMap();
+                Console.WriteLine(state);
 
                 if (previousStates.Contains(state))
                 {
-                   // Console.WriteLine(game.DrawMap());
+                    Console.WriteLine(state);
                     return game.GetBioDiversityScore();
                 }
                 else
@@ -48,15 +52,16 @@ namespace Aoc.AoC2019.Problems.Day24
 
         public long RecusiveGame_CountBugs(IEnumerable<string> data, int numGenerations)
         {
-            RecursiveGameOfLifeMap game = new RecursiveGameOfLifeMap(data.ToList());
-            //Console.WriteLine(game.DrawMap());
+            //RecursiveGameOfLifeMap game = new RecursiveGameOfLifeMap(data.ToList());
+            ////Console.WriteLine(game.DrawMap());
 
-            for (int i = 0; i < numGenerations; i++)
-            {
-               game.EvolveMap();
-            }
+            //for (int i = 0; i < numGenerations; i++)
+            //{
+            //   game.EvolveMap();
+            //}
 
-            return game.TotalBugs();
+            //return game.TotalBugs();
+            return 0;
         }
 
 
