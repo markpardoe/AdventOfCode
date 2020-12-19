@@ -30,7 +30,7 @@ namespace AoC.Common.Mapping._4d
             set => this[new Position4d(x, y, z, w)] = value;
         }
 
-        public override string DrawMap()
+        public override string DrawMap(int padding = 0)
         {
             throw new NotImplementedException();
         }

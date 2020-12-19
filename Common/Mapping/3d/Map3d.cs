@@ -41,7 +41,7 @@ namespace AoC.Common.Mapping._3d
             return position.GetNeighbors();
         }
 
-        public override string DrawMap()
+        public override string DrawMap(int padding = 0)
         {
             int minZ = MinZ;
             int maxZ = MaxZ;

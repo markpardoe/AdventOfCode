@@ -101,38 +101,21 @@ namespace Aoc.Aoc2018.Day22
             return this[x - 1, y].ErosionLevel * this[x, y - 1].ErosionLevel;
         }
 
-        public override string DrawMap()
+
+        protected override char? ConvertValueToChar(Position position, CaveRegion value)
         {
-            int min_X = 0;
-            int min_Y = 0;
-            int max_X = _target.X;
-            int max_Y = _target.Y;
-
-            StringBuilder map = new StringBuilder();
-            for (int y = min_Y; y <= max_Y; y++)
+            if (_target.Equals(position))
             {
-                map.Append(Environment.NewLine);
-
-                for (int x = min_X ; x <= max_X ; x++)
-                {
-
-                    if (_target.X == x && _target.Y == y)
-                    {
-                        map.Append("T");
-                    }
-                    else if (_start.X == x && _start.Y == y)
-                    {
-                        map.Append("M");
-                    }
-                    else
-                    {
-                        map.Append(this[x, y].ToString());
-                    }
-                }
+                return 'T';
             }
-
-            return map.ToString();
-        }
-
+            else if (_start.Equals(position))
+            {
+               return 'M';
+            }
+            else
+            {
+                return (char) value.RegionType;
+            }
+        }     
     }
 }

@@ -159,22 +159,9 @@ namespace AoC.AoC2020.Problems.Day11
             return false;
         }
 
-        public override string DrawMap()
+        protected override char? ConvertValueToChar(Position position, SeatType value)
         {
-            int max_X = MaxX;
-            int max_Y = MaxY;
-
-            StringBuilder map = new StringBuilder();
-            for (int y = 0; y <= max_Y; y++)
-            {
-                map.Append(Environment.NewLine);
-
-                for (int x = 0; x <= max_X + 2; x++)
-                {
-                    map.Append(this[x, y]);
-                }
-            }
-            return map.ToString();
+            return (char)value;
         }
     }
 }

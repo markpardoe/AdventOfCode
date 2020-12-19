@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +10,7 @@ namespace AoC.Common.Mapping
     /// </summary>
     /// <typeparam name="TPosition"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    public abstract class MapBase<TPosition, TValue> where TPosition:IEquatable<TPosition>
+    public abstract class MapBase<TPosition, TValue> : IEnumerable<KeyValuePair<TPosition, TValue>> where TPosition : IEquatable<TPosition>
     {
         protected MapBase(TValue defaultValue)
         {
@@ -18,8 +19,6 @@ namespace AoC.Common.Mapping
 
         protected readonly Dictionary<TPosition, TValue> Map = new Dictionary<TPosition, TValue>();
         protected readonly TValue DefaultValue;
-
-        protected int DrawPadding { get; set; } = 0;   // Empty spaces to include when drawing the map
 
         public virtual void Add(TPosition key, TValue value) => AddOrReplace(key, value);
         public virtual TValue this[TPosition position]
@@ -52,9 +51,17 @@ namespace AoC.Common.Mapping
         }
 
         protected abstract IEnumerable<TPosition> GetAvailableNeighbors(TPosition position);
-        public abstract string DrawMap();
+        public abstract string DrawMap(int padding = 0);
         public abstract IEnumerable<KeyValuePair<TPosition, TValue>> GetBoundedEnumerator(int padding = 0);
 
-       
+        public IEnumerator<KeyValuePair<TPosition, TValue>> GetEnumerator()
+        {
+            return Map.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

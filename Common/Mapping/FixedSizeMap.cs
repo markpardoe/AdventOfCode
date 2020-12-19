@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AoC.Common.Mapping
 {
@@ -65,6 +67,6 @@ namespace AoC.Common.Mapping
                 _maxY = bottomRight.Value.Y;
                 _maxX = bottomRight.Value.X;
             }
-        }
+        }        
     }
 }

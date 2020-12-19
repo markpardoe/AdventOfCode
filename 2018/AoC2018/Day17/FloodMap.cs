@@ -26,7 +26,6 @@ namespace Aoc.Aoc2018.Day17
             minYBeforeSource = MinY;  // Get this before we add the spring value
 
             Add(spring, FloodTile.Spring);
-            DrawPadding = 0;
         }
         
         // Pour water downwards until it hits clay - or other water
@@ -154,49 +153,25 @@ namespace Aoc.Aoc2018.Day17
             }
         }
 
-        public override string DrawMap()
+
+        public override string DrawMap(int padding = 0)
         {
-            int min_X = MinX;
-            int min_Y = MinY;
-            int max_X = MaxX;
-            int max_Y = MaxY;
+            MapBoundary b = GetMapBoundaries(padding);
 
             StringBuilder map = new StringBuilder();
-            for (int y = min_Y - DrawPadding; y <= max_Y + DrawPadding; y++)
+            for (int y = b.MinY ; y <= b.MaxY ; y++)
             {
                 map.Append(Environment.NewLine);
                 map.Append($"{y:D4}");
-                for (int x = min_X - DrawPadding; x <= max_X + DrawPadding; x++)
+
+                for (int x = b.MinX; x <= b.MaxX; x++)
                 {
-                    //var c = (T)this[x, y];
                     map.Append((char) this[x,y]);
                 }
             }
 
             return map.ToString();
-        }
-
-        public string DrawSubMap(int minY, int maxY)
-        {
-            int min_X = MinX;
-            int min_Y = minY;
-            int max_X = MaxX;
-            int max_Y = maxY;
-
-            StringBuilder map = new StringBuilder();
-            for (int y = min_Y - DrawPadding; y <= max_Y + DrawPadding; y++)
-            {
-                map.Append(Environment.NewLine);
-                map.Append($"{y:D4}");
-                for (int x = min_X - DrawPadding; x <= max_X + DrawPadding; x++)
-                {
-                    //var c = (T)this[x, y];
-                    map.Append((char)this[x, y]);
-                }
-            }
-
-            return map.ToString();
-        }
+        }        
 
 
         #region Load input Data & create initial map

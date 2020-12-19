@@ -49,7 +49,7 @@ namespace Aoc.AoC2019.Problems.Day20
 
         public override string ToString()
         {
-            return $"{PortalId} ({X},{Y}) ({Type.ToString()})";
+            return $"{PortalId} ({X},{Y}) ({Type})";
         }        
     }
 }

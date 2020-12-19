@@ -18,7 +18,7 @@ namespace Aoc.Aoc2018.Day11
             GridSize = gridSize;
         }
 
-        public override string DrawMap()
+        public override string DrawMap(int padding = 0)
         {
 
             StringBuilder map = new StringBuilder();

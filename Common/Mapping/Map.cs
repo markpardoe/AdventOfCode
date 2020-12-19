@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Collections;
 
 namespace AoC.Common.Mapping
 {
@@ -32,7 +33,7 @@ namespace AoC.Common.Mapping
             set => this[new Position(x, y)] = value;
         }
 
-        public MapBoundary Boundary => new MapBoundary(Map.Keys);
+        protected MapBoundary GetMapBoundaries(int padding = 0)  => new MapBoundary(this, padding);
 
         /// <summary>
         /// Returns the 4 positions surrounding the specified point for moving into.
@@ -45,9 +46,9 @@ namespace AoC.Common.Mapping
             return position.GetNeighboringPositions();
         }
 
-        public override string DrawMap()
+        public override string DrawMap(int padding = 0)
         {
-            var bounds = new MapBoundary(Map.Keys, DrawPadding);
+            var bounds = GetMapBoundaries(padding);
             StringBuilder sb = new StringBuilder();
 
             for (int y = bounds.MinY; y <= bounds.MaxY; y++)
@@ -64,10 +65,11 @@ namespace AoC.Common.Mapping
         }
 
         // Returns all positions within the region of the map (between min and max bounds)
+        // Positions are returned in order from left to right, then top to bottom.
         // Will return positions within bounds that are not keys in the map collection
         public override IEnumerable<KeyValuePair<Position, TValue>> GetBoundedEnumerator(int padding = 0)
         {
-            var bounds = new MapBoundary(Map.Keys, padding);
+            var bounds  = GetMapBoundaries(padding);
 
             for (int y = bounds.MinY; y <= bounds.MaxY; y++)
             {
@@ -221,6 +223,52 @@ namespace AoC.Common.Mapping
             }
 
             return null; // no destination found
+        }
+
+        // Helper class for caching map boundaries.
+        // Calculating them is expensive on large maps - so we don't want to recalculate more than neccessary
+        protected readonly struct MapBoundary
+        {
+            public int MaxX { get; }
+            public int MinX { get; }
+            public int MinY { get; }
+            public int MaxY { get; }
+
+            public MapBoundary(Map<TValue> map, int padding = 0)
+            {
+                MaxX = map.MaxX + padding;
+                MinX = map.MinX - padding;
+                MaxY = map.MaxY + padding;
+                MinY = map.MinY - padding;
+            }
+
+           
+            //public IEnumerator<int> GetYEnumerator()
+            //{
+            //    for (int y = MinY; y <= MaxY; y++)
+            //    {
+            //        yield return y;
+            //    }
+            //}
+
+            //public IEnumerator<int> GetXEnumerator()
+            //{
+            //    for (int x = MinX; x <= MaxX; x++)
+            //    {
+            //        yield return x;
+            //    }
+            //}
+
+            public IEnumerator<Position> GetEnumerator()
+            {
+                for (int y = MinY; y <= MaxY; y++)
+                {
+                    for (int x = MinX; x <= MaxX; x++)
+                    {
+                        yield return new Position(x, y);
+                    }
+                }
+            }         
         }
     }
 }

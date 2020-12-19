@@ -8,9 +8,7 @@ namespace Aoc.AoC2019.Problems.Day13
     public class GameMap :Map<TileType>
     {
         public GameMap() : base(TileType.Empty)
-        {
-            this.DrawPadding = 2;  // Draw 2 spaces around the map when printing it
-        }
+        {   }
 
         public Position Ball { get; set; }
         public Position Paddle { get; private set; }

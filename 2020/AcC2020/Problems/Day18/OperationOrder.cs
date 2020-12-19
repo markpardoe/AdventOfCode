@@ -204,7 +204,7 @@ namespace AoC.AoC2020.Problems.Day18
             }
         }
 
-        private List<string> example = new List<string>()
+        private readonly List<string> example = new List<string>()
         {
             "2 * 3 + (4 * 5)",
             "5 + (8 * 3 + 9 + 3 * 4 * 3)",

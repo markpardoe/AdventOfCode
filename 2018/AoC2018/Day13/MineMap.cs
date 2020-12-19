@@ -27,7 +27,7 @@ namespace Aoc.Aoc2018.Day13
     class MineMap : Map<MineTile>
     {
         private readonly HashSet<MineCart> _carts = new HashSet<MineCart>();
-        private List<Position> _crashes = new List<Position>();
+        private readonly List<Position> _crashes = new List<Position>();
 
         public IReadOnlyCollection<Position> Crashes => _crashes;
         public IReadOnlyCollection<MineCart> Carts => _carts;
@@ -74,7 +74,8 @@ namespace Aoc.Aoc2018.Day13
             }
         }
 
-        public override string DrawMap()
+        // Use custom override because we need to draw carts onto the map
+        public override string DrawMap(int padding = 0)
         {
             int max_X = MaxX;
             int max_Y = MaxY;
@@ -93,8 +94,7 @@ namespace Aoc.Aoc2018.Day13
                     if (cartsOnRow.Count > 0)
                     {
                         cart = cartsOnRow.FirstOrDefault(c => c.X == x && c.Y == y);
-                    }
-                    
+                    }                    
 
                     if (cart != null)
                     {

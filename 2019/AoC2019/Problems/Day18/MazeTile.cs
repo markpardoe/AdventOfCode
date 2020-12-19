@@ -93,7 +93,6 @@ namespace Aoc.AoC2019.Problems.Day18
         {
             get
             {
-
                 if (Tile == TileType.Key)
                 {
                     return KeyId.ToLower();

@@ -74,7 +74,7 @@ namespace Aoc.Aoc2018.Day15
             return _units.Count(x => x.Status == Unit.UnitStatus.Alive && x.Type == unitType);
         }
 
-        public override string DrawMap()
+        public override string DrawMap(int padding = 0)
         {
             var maxX = MaxX;
             var maxY = MaxY;

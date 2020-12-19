@@ -9,9 +9,7 @@ namespace Aoc.AoC2019.Problems.Day11
     public class PaintMap : Map<PaintColor>
     {
         public PaintMap() : base(PaintColor.Black)
-        {
-            DrawPadding = 2;
-        }
+        { }
 
         protected override char? ConvertValueToChar(Position position, PaintColor value)
         {

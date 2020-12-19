@@ -131,19 +131,16 @@ namespace Aoc.AoC2019.Problems.Day20
             }
         }
 
-        public override string DrawMap()
+        public override string DrawMap(int padding = 0)
         {
-            int min_X = MinX;
-            int min_Y = MinY;
-            int max_X = MaxX;
-            int max_Y = MaxY;
+            MapBoundary boundary = GetMapBoundaries();
 
             StringBuilder map = new StringBuilder();
-            for (int y = min_Y; y < max_Y; y++)
+            for (int y = boundary.MinY; y < boundary.MaxY; y++)
             {
                 map.Append(Environment.NewLine);
 
-                for (int x = min_X; x < max_X; x++)
+                for (int x = boundary.MinX; x < boundary.MaxX; x++)
                 {
                     if (base[x,y] == TileType.Portal)
                     {

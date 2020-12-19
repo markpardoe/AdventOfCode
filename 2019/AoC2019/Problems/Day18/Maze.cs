@@ -60,40 +60,21 @@ namespace Aoc.AoC2019.Problems.Day18
             }
         }
 
-        public override string DrawMap()
+        protected override char? ConvertValueToChar(Position position, MazeTile value)
         {
-            int min_X = MinX;
-            int min_Y = MinY;
-            int max_X = MaxX;
-            int max_Y = MaxY;
-
-            StringBuilder map = new StringBuilder();
-            for (int y = min_Y; y <= max_Y; y++)
-            {
-                map.Append(Environment.NewLine);
-
-                for (int x = min_X; x <= max_X; x++)
-                {
-                    map.Append(this[x, y].MapValue);
-
-                }
-            }
-            return map.ToString();
+            return this[position].MapValue[0];
         }
 
         public string DrawMap(params IPosition[] robots)
         {
-            int min_X = MinX;
-            int min_Y = MinY;
-            int max_X = MaxX;
-            int max_Y = MaxY;
+            MapBoundary b = GetMapBoundaries();
 
             StringBuilder map = new StringBuilder();
-            for (int y = min_Y; y <= max_Y; y++)
+            for (int y = b.MinY; y <= b.MaxY; y++)
             {
                 map.Append(Environment.NewLine);
 
-                for (int x = min_X; x <= max_X; x++)
+                for (int x = b.MinX; x <= b.MaxX; x++)
                 {
                     if (robots.Contains(new Position(x, y)))
                     {
