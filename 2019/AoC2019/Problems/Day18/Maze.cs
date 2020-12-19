@@ -32,7 +32,7 @@ namespace Aoc.AoC2019.Problems.Day18
                     Position p = new Position(x, y);
 
                     MazeTile tile = new MazeTile(x, y, c);
-                    this.Add(tile, tile);
+                    this.Add(tile.Position, tile);
 
 
                     if (tile.Tile == TileType.Key)
@@ -56,7 +56,7 @@ namespace Aoc.AoC2019.Problems.Day18
             foreach (MazeTile origin in KeyPositions)
             {
                 HashSet<KeyDistance> distances = FindKeys(origin);
-                KeyDistances.Add(origin, distances);
+                KeyDistances.Add(origin.Position, distances);
             }
         }
 
@@ -81,7 +81,7 @@ namespace Aoc.AoC2019.Problems.Day18
             return map.ToString();
         }
 
-        public string DrawMap(params Position[] robots)
+        public string DrawMap(params IPosition[] robots)
         {
             int min_X = MinX;
             int min_Y = MinY;
@@ -119,7 +119,7 @@ namespace Aoc.AoC2019.Problems.Day18
             var openList = new HashSet<MapNode>();  // list of cells to be checked
             var closedList = new HashSet<MapNode>();  // checked locations
 
-            MapNode current = new MapNode(start);
+            MapNode current = new MapNode(start.Position);
 
             //Add current position to open list to start searching
             openList.Add(current);
@@ -133,7 +133,7 @@ namespace Aoc.AoC2019.Problems.Day18
                 closedList.Add(current);
                 openList.Remove(current);
 
-                MazeTile tile = this[current];
+                MazeTile tile = this[current.Position];
                 // check if we've found an empty cell?
                 if (tile.Tile == TileType.Key && current.DistanceFromStart > 0)
                 {                 
@@ -145,7 +145,7 @@ namespace Aoc.AoC2019.Problems.Day18
                 }
 
                 // Get open (not wall) adjacent squares
-                var neighbors = this.GetAvailableNeighbors(current);  
+                var neighbors = this.GetAvailableNeighbors(current.Position);  
 
                 // for every neighbour 
                 // Check if its in closedList - if so its already been checked.
@@ -171,13 +171,13 @@ namespace Aoc.AoC2019.Problems.Day18
             foreach (string key in results.Keys)
             {
                 MapNode node = results[key];
-                KeyDistance d = new KeyDistance(start, this[node], node);
+                KeyDistance d = new KeyDistance(start, this[node.Position], node);
                 node = node.Parent;
 
                 // loop through list checking if any keys are required.
                 while (node.Parent != null)
                 {                    
-                    MazeTile tile = this[node];
+                    MazeTile tile = this[node.Position];
                     if (tile.Tile == TileType.Door)
                     {
                         d.Doors.Add(tile.KeyId);  

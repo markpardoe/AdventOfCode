@@ -33,7 +33,7 @@ namespace Aoc.AoC2019.Problems.Day03
             }
         }
 
-        public Position GetCollision(Line other)
+        public Position? GetCollision(Line other)
         {
             if (this.Axis == other.Axis) return null;  // we assume no collisions if running in the same direction
 

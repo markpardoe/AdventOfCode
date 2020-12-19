@@ -91,8 +91,8 @@ namespace Aoc.AoC2019.Problems.Day20
                 }
                 else if (portalLink.Count == 2)
                 {
-                    Portals.Add(portalLink[0], portalLink[1]);
-                    Portals.Add(portalLink[1], portalLink[0]);
+                    Portals.Add(portalLink[0].Position, portalLink[1].Position);
+                    Portals.Add(portalLink[1].Position, portalLink[0].Position);
                 }
             }
         }
@@ -118,7 +118,7 @@ namespace Aoc.AoC2019.Problems.Day20
             return false;
         }
 
-        public string GetPortalId(int x1, int y1, int x2, int y2)
+        private string GetPortalId(int x1, int y1, int x2, int y2)
         {
             char A = _mazeData[y1][x1];
             char B = _mazeData[y2][x2];
@@ -145,82 +145,30 @@ namespace Aoc.AoC2019.Problems.Day20
             return neighbours;
         }
 
-        public override string DrawMap()
+        protected override char? ConvertValueToChar(Position position, TileType value)
         {
-            int min_X = MinX;
-            int min_Y = MinY;
-            int max_X = MaxX;
-            int max_Y = MaxY;
-
-            StringBuilder map = new StringBuilder();
-            for (int y = min_Y; y <= max_Y; y++)
+            if (this[position] == TileType.Portal)
             {
-                map.Append(Environment.NewLine);
-
-                for (int x = min_X; x <= max_X; x++)
-                {
-                    if (base[x, y] == TileType.Portal)
-                    {
-                        map.Append("@");
-                    }
-                    else if (x == StartPosition.X && y == StartPosition.Y)
-                    {
-                        map.Append("S");
-                    }
-                    else if (x == ExitPosition.X && y == ExitPosition.Y)
-                    {
-                        map.Append("X");
-                    }
-                    else
-                    {
-                        map.Append(_mazeData[y][x]);
-                    }
-                }
+                return '@';
             }
-            return map.ToString();
+            else if (position.Equals(StartPosition))
+            {
+                return 'S';
+            }
+            else if (ExitPosition.Equals(position))
+            {
+                return 'X';
+            }
+            else
+            {
+                return _mazeData[position.X][position.Y];
+            }
+
         }
-
-
+        
         public MapNode FindExit()
         {
-            HashSet<MapNode> openList = new HashSet<MapNode>();
-            HashSet<MapNode> closedList = new HashSet<MapNode>();
-
-            MapNode current = new MapNode(StartPosition);
-            openList.Add(current);
-
-            while (openList.Count > 0)
-            {
-                // get the closest square
-                current = openList.OrderBy(l => l.DistanceFromStart).First();
-
-                // move location to closed list
-                closedList.Add(current);
-                openList.Remove(current);
-
-                // check if we've found an empty cell?
-                if (ExitPosition.Equals(current)) { return current; }
-
-                var neighbours = GetAvailableNeighbors(current);
-
-                foreach (var location in neighbours)
-                {
-                    MapNode locationPos = new MapNode(location)
-                    {
-                        Parent = current,
-                        DistanceFromStart = current.DistanceFromStart + 1
-                    };
-
-                    // if location is in the closed / open lists  - check if we've found a faster way there
-                    // & update distance from start if we have a shorter path                    
-                    // Otherwise we need to add it as a new move
-                    if (!closedList.Contains(locationPos))
-                    {
-                        openList.Add(locationPos);
-                    }
-                }
-            }
-            return null;
+            return ShortestPathToPosition(StartPosition, ExitPosition);
         }
     }
 }

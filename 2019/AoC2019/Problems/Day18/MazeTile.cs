@@ -15,13 +15,20 @@ namespace Aoc.AoC2019.Problems.Day18
     /// <summary>
     /// A location in the maze - with the tileType and position.
     /// </summary>
-    public class MazeTile : Position, IEquatable<MazeTile>, IEquatable<Position>
+    public class MazeTile : IEquatable<MazeTile>, IPosition
     {
         public TileType Tile { get; }
         public string KeyId {get;}
+        public Path Parent { get; set; }
 
-        public MazeTile(int x, int y, char tile) :base(x,y)
+        public Position Position { get; }
+        public int X => Position.X;
+        public int Y => Position.Y;
+
+        public MazeTile(int x, int y, char tile) 
         {
+            Position = new Position(x, y);
+
             KeyId = tile.ToString().ToUpper();
 
             if (tile == '#') 
@@ -61,7 +68,7 @@ namespace Aoc.AoC2019.Problems.Day18
         // Since a tile can only contain one 'type' (wall, key, door, etc)
         // We only need to check the (x, y) co-ordinates match.
         // This also allows us to check it directly against a Position.
-        public bool Equals([AllowNull] MazeTile other)
+        public bool Equals( MazeTile other)
         {
             if (other == null) return false;
             return this.X == other.X && this.Y == other.Y;
@@ -70,9 +77,9 @@ namespace Aoc.AoC2019.Problems.Day18
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
-            if (obj is Position)
+            if (obj is MazeTile)
             {
-                return this.Equals(obj as Position);
+                return this.Equals(obj as MazeTile);
             }
             return false;
         }

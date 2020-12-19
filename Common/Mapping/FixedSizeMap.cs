@@ -51,19 +51,19 @@ namespace AoC.Common.Mapping
         }
 
 
-        public FixedSizeMap(TValue defaultValue, Position topLeft = null, Position bottomRight = null) : base(
+        public FixedSizeMap(TValue defaultValue, Position? topLeft = null, Position? bottomRight = null) : base(
             defaultValue)
         {
-            if (topLeft != null)
+            if (topLeft.HasValue)
             {
-                _minY = topLeft.Y;
-                _minX = topLeft.X;
+                _minY = topLeft.Value.Y;
+                _minX = topLeft.Value.X;
             }
 
-            if (bottomRight != null)
+            if (bottomRight.HasValue)
             {
-                _maxY = bottomRight.Y;
-                _maxX = bottomRight.X;
+                _maxY = bottomRight.Value.Y;
+                _maxX = bottomRight.Value.X;
             }
         }
     }

@@ -173,13 +173,13 @@ namespace Aoc.Aoc2018.Day15
             // If target is null - we didn't find a valid square to move to
             if (target != null)
             {
-                if (unit.Position.DistanceTo(target) != 1)
+                if (unit.Position.DistanceTo(target.Position) != 1)
                     throw new InvalidDataException("Distance to target must be one!");
 
                 // Move unit and update map
                 this[unit.Position] = ArenaTile.Open;
-                this[target] = unit.TileType;
-                unit.Move(target);
+                this[target.Position] = unit.TileType;
+                unit.Move(target.Position);
             }
         }
 
@@ -203,7 +203,7 @@ namespace Aoc.Aoc2018.Day15
             while (locationsToCheck.Count > 0)
             {
                 var current = locationsToCheck.Dequeue();
-                var tile = this[current];
+                var tile = this[current.Position];
 
                 if (tile == targetType)
                 {
@@ -216,7 +216,7 @@ namespace Aoc.Aoc2018.Day15
 
                 if (tile == ArenaTile.Open && !checkedPositions.Contains(current))
                 {
-                    var next = current.GetNeighboringPositionsInReadingOrder();
+                    var next = current.Position.GetNeighboringPositionsInReadingOrder();
                     foreach (var p in next)
                         locationsToCheck.Enqueue(new MapNode(p, current, current.DistanceFromStart + 1));
                 }

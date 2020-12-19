@@ -37,7 +37,7 @@ namespace Aoc.AoC2019.Problems.Day15
                         var move = _map.ShortestPathToNearestValue(_map.Droid, ShipTile.Unknown);
                        
                         if (move == null) { return; }  // no moves found - we must have explored entire grid - so exit.
-                        nextLocation = move.GetFirstMove(); // get first location
+                        nextLocation = move.GetFirstMove().Position; // get first location
 
                         var direction = _map.Droid.FindDirection(nextLocation);
                         _computer.Execute((long) direction);

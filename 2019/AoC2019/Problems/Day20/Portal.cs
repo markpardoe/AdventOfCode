@@ -19,13 +19,17 @@ namespace Aoc.AoC2019.Problems.Day20
         Exit = 3
     }
 
-    public class Portal :Position
+    public class Portal : IPosition
     {
         public string PortalId { get; }
         public PortalType Type { get; }
+        public Position Position { get; }
+        public int X => Position.X;
+        public int Y => Position.Y;
 
-        public Portal (int x, int y, string portalId, PortalType portalType) :base(x,y)
+        public Portal (int x, int y, string portalId, PortalType portalType) 
         {
+            Position = new Position(x, y);
             PortalId = portalId;
             this.Type = portalType;
         }

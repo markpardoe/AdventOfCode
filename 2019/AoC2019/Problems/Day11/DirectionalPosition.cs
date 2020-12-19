@@ -12,15 +12,19 @@ namespace Aoc.AoC2019.Problems.Day11
         Right = 1
     }
 
-    public class DirectionalPosition : Position
+    public class DirectionalPosition : IPosition
     {
         private readonly Direction _direction;
-        
-        public DirectionalPosition(int x, int y, Direction direction) :base(x, y)
+        public Position Position { get; set; }
+
+        public int X => Position.X;
+        public int Y => Position.Y;
+
+        public DirectionalPosition(int x, int y, Direction direction)
         {
+            Position = new Position(x, y);
             _direction = direction;
         }
-
 
         public DirectionalPosition Turn(TurnDirection turn)
         {

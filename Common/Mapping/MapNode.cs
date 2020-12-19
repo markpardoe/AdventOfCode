@@ -5,12 +5,17 @@ using System.Text;
 
 namespace AoC.Common.Mapping
 {
-    public class MapNode : Position, IEquatable<MapNode>, IComparable<MapNode>
+    public class MapNode : IEquatable<MapNode>, IComparable<MapNode>
     {
         public MapNode Parent { get; set; }
 
-        public MapNode(Position p, MapNode parent = null, int distanceFromStart = 0 ) : base(p.X, p.Y)
+        public Position Position { get; }
+        public int X => Position.X;
+        public int Y => Position.Y;
+
+        public MapNode(Position p, MapNode parent = null, int distanceFromStart = 0 )
         {
+            Position = new Position(p.X, p.Y);
             DistanceFromStart = distanceFromStart;
             Parent = parent;
         }
@@ -33,7 +38,7 @@ namespace AoC.Common.Mapping
         public override bool Equals(Object obj)
         {
             if (obj == null) return false;
-            if (obj is Position) return (Equals((Position)obj));
+            if (obj is Position position) return (Equals(position));
             return false;
         }
 

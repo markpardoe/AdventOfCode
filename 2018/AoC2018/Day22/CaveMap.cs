@@ -34,7 +34,7 @@ namespace Aoc.Aoc2018.Day22
             int geo = GetGeologicalIndex(x, y);
             int erosion = (geo + _depth) % 20183;
             var region =  new CaveRegion(x, y, erosion, geo);
-            this.Add((Position) region, region);
+            this.Add( region.Position, region);
         }
 
         // Adds a new unexplored region to the map

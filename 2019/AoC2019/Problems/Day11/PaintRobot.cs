@@ -25,7 +25,7 @@ namespace Aoc.AoC2019.Problems.Day11
             _computer = vm ?? throw new ArgumentNullException(nameof(vm));
             _startLocation = new DirectionalPosition(0, 0, Direction.Up);
             _currentPosition = _startLocation;
-            Map[_startLocation] = startPositionColor;
+            Map[_startLocation.Position] = startPositionColor;
         }
 
         public void Paint()
@@ -37,7 +37,7 @@ namespace Aoc.AoC2019.Problems.Day11
                 _moves.Add(move);
 
                 // paint current location
-                Map[_currentPosition] = move.Color;
+                Map[_currentPosition.Position] = move.Color;
 
                 // move to new location
                 _currentPosition = _currentPosition.Turn(move.Turn);
@@ -55,7 +55,7 @@ namespace Aoc.AoC2019.Problems.Day11
             {
                 if (_computer.Status == ExecutionStatus.AwaitingInput)
                 {
-                    _computer.Execute((long) Map[_currentPosition]);
+                    _computer.Execute((long) Map[_currentPosition.Position]);
                 }
                 else 
                 {

@@ -48,9 +48,7 @@ namespace Aoc.AoC2019.Problems.Day15
         {
             get
             {
-                var b = Map.Keys.Where(k => base[k] == ShipTile.OxygenSystem).ToList();
-                if (b.Count == 0) return null;
-                return b.First();
+                return Map.First(x => x.Value == ShipTile.OxygenSystem).Key;
             }
         }
 

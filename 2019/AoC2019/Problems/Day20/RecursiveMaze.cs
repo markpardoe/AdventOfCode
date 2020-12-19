@@ -100,14 +100,14 @@ namespace Aoc.AoC2019.Problems.Day20
                 List<Portal> portalLink = portalPairs[Id];
                 foreach (Portal p in portalLink)
                 {
-                    Paths.Add(p, new List<Path>());
-                    Paths[p].AddRange(FindPortals(p));  // Add all links to the current portal
+                    Paths.Add(p.Position, new List<Path>());
+                    Paths[p.Position].AddRange(FindPortals(p));  // Add all links to the current portal
                 }
                 if (portalLink.Count == 2)
                 {
                     // Add the link between portal pairs.
-                    Paths[portalLink[0]].Add(new Path(portalLink[0], portalLink[1], 1, true));
-                    Paths[portalLink[1]].Add(new Path(portalLink[1], portalLink[0], 1, true));
+                    Paths[portalLink[0].Position].Add(new Path(portalLink[0], portalLink[1], 1, true));
+                    Paths[portalLink[1].Position].Add(new Path(portalLink[1], portalLink[0], 1, true));
                 }
             }
             #endregion
@@ -284,7 +284,7 @@ namespace Aoc.AoC2019.Problems.Day20
             var openList = new HashSet<MapNode>();  // list of cells to be checked
             var closedList = new HashSet<MapNode>();  // checked locations
 
-            MapNode current = new MapNode(start);
+            MapNode current = new MapNode(start.Position);
 
             //Add current position to open list to start searching
             openList.Add(current);
@@ -298,7 +298,7 @@ namespace Aoc.AoC2019.Problems.Day20
                 closedList.Add(current);
                 openList.Remove(current);
 
-                TileType tile = this[current];
+                TileType tile = this[current.Position];
                 // check if we've found an empty cell?
                 if (tile == TileType.Portal && current.DistanceFromStart > 0)
                 {
@@ -309,7 +309,7 @@ namespace Aoc.AoC2019.Problems.Day20
                     }
                 }
 
-                var neighbours = GetAvailableNeighbors(current);  // Get open (not wall or door) adjacent squares.
+                var neighbours = GetAvailableNeighbors(current.Position);  // Get open (not wall or door) adjacent squares.
 
                 // for every neighbour 
                 // Check if its in closedList - if so its already been checked.

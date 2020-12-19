@@ -53,12 +53,12 @@ namespace Aoc.AoC2019.Problems.Day03
             {
                 foreach (LineWithDistance line2 in wire2Path)
                 {
-                    Position collide = line1.GetCollision(line2);
-                    if (collide != null)
+                    Position? collide = line1.GetCollision(line2);
+                    if (collide.HasValue)
                     {
-                        if (collide.X != 0 || collide.Y != 0)  // ignore the start position
+                        if (collide.Value.X != 0 || collide.Value.Y != 0)  // ignore the start position
                         {
-                            int distance = distanceCalculator(line1, line2, collide);
+                            int distance = distanceCalculator(line1, line2, collide.Value);
                             if (distance < minDistance)
                             {
                                 minDistance = distance;

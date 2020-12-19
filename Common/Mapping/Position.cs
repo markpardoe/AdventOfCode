@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace AoC.Common.Mapping
 {
+    public interface IPosition
+    {
+        int X { get;  }
+        int Y { get; }
+    }
+
     /// <summary>
     /// Represents a Position in a 2D space.
     /// Held as a class rather than a struct as various helper classes inherit from it.
     /// Assumes a co-ordinate system with 0,0 in top left corner - and Y increments in a downwards direction
     /// </summary>
-    public class Position : IEquatable<Position>
+    public readonly struct Position : IEquatable<Position>, IPosition
     {
         public int X { get; }
         public int Y { get; }
@@ -25,7 +31,7 @@ namespace AoC.Common.Mapping
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public int DistanceTo(Position p)
+        public int DistanceTo(IPosition p)
         {
             return Math.Abs(this.X - p.X) + Math.Abs(this.Y - p.Y);
         }
@@ -85,7 +91,7 @@ namespace AoC.Common.Mapping
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public Direction FindDirection(Position target)
+        public Direction FindDirection(IPosition target)
         {
             if (target.Y < this.Y) return Direction.Up;
             if (target.Y > this.Y) return Direction.Down;
@@ -130,13 +136,12 @@ namespace AoC.Common.Mapping
 
         public bool Equals(Position other)
         {
-            if (other == null) return false;
             return ((other.X == this.X) && (other.Y == this.Y));
         }
 
         public Position Copy()
         {
-            return new Position(this.X, Y);
+            return new Position(X, Y);
         }
 
         public override bool Equals(object obj)
@@ -154,5 +159,7 @@ namespace AoC.Common.Mapping
         {
             return HashCode.Combine(X, Y);
         }
+
+       
     }
 }

@@ -10,9 +10,13 @@ namespace Aoc.AoC2019.Problems.Day18
     ///  Holds a path through the maze.
     ///  Contains the keys collected and which KeyDistances (between start --> key or key --> key) travelled.
     /// </summary>
-    public class Path : Position, IEquatable<Path>
-    {
+    public class Path : IEquatable<Path>, IPosition
+    {       
         public Path Parent { get; set; }
+
+        public Position Position { get; }
+        public int X => Position.X;
+        public int Y => Position.Y;
 
         public List<string> KeysCollected { get; set; }
 
@@ -25,8 +29,9 @@ namespace Aoc.AoC2019.Problems.Day18
             get;  internal set;
         }
 
-        public Path(MazeTile p,  params string[] keys) : base(p.X, p.Y)
+        public Path(MazeTile p,  params string[] keys)
         {
+            Position = new Position(p.X, p.Y);
             KeysCollected = new List<string>(keys);
             Id = string.Join("", keys.OrderBy(c => c));
         }

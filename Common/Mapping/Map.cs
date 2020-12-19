@@ -117,18 +117,18 @@ namespace AoC.Common.Mapping
                 // get the 1st node
                 var currentPosition = openList.Dequeue();
 
-                var neighbors = GetAvailableNeighbors(currentPosition)
+                var neighbors = GetAvailableNeighbors(currentPosition.Position)
                     .Select(x => new MapNode(x, currentPosition, currentPosition.DistanceFromStart + 1));
 
                 foreach (var n in neighbors)
                 {
                     // We've reached a target - BFS guarentees its the shortest path
-                    if (targetList.Contains(currentPosition))
+                    if (targetList.Contains(currentPosition.Position))
                     {
 
                         yield return currentPosition;
 
-                        targetList.Remove(currentPosition);
+                        targetList.Remove(currentPosition.Position);
 
                         // found all the targets - so quit
                         if (targetList.Count == 0)
@@ -177,7 +177,7 @@ namespace AoC.Common.Mapping
         /// <param name="target"></param>
         public MapNode ShortestPathToPosition(Position start, Position target)
         {
-            HashSet<MapNode> openList = new HashSet<MapNode>() { new MapNode(start) };
+            HashSet<MapNode> openList = new HashSet<MapNode>() { new MapNode(new Position(start.X, start.Y))};
             HashSet<MapNode> closedList = new HashSet<MapNode>();
 
             while (openList.Count > 0)
@@ -188,12 +188,12 @@ namespace AoC.Common.Mapping
 
                 // Console.WriteLine($"Checking {currentPosition}");
 
-                var neighbors = GetAvailableNeighbors(currentPosition)
+                var neighbors = GetAvailableNeighbors(currentPosition.Position)
                     .Select(x => new MapNode(x, currentPosition, currentPosition.DistanceFromStart + 1)).ToList();
 
                 foreach (var n in neighbors)
                 {
-                    n.CalculatedDistanceToTarget = n.DistanceTo(target);
+                    n.CalculatedDistanceToTarget = n.Position.DistanceTo(target);
                     if (n.X == target.X && n.Y == target.Y)
                     {
                         return n;

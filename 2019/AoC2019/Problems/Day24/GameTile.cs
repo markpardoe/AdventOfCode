@@ -19,10 +19,13 @@ namespace Aoc.AoC2019.Problems.Day24
         public override char Code => '?';
     }
 
-    public class GameTile : Position
+    public class GameTile : IPosition
     {
         public virtual bool IsBug { get; private set; }
         public virtual List<GameTile> Neighbours { get; } = new List<GameTile>();
+        public Position Position { get; }
+        public int X => Position.X;
+        public int Y => Position.Y;
 
         private bool _buffer = false;
 
@@ -35,8 +38,9 @@ namespace Aoc.AoC2019.Problems.Day24
             }
         }
 
-        public GameTile(int x, int y, bool isBug) : base(x, y)
+        public GameTile(int x, int y, bool isBug) 
         {
+            Position = new Position(x, y);
             this.IsBug = isBug;
         }
 

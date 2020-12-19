@@ -18,7 +18,6 @@ namespace Aoc.AoC2019.Problems.Day20
         public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
             Maze m = new Maze(input.ToList());
-            //yield return m.DrawMap();
 
             MapNode node = m.FindExit();
             yield return node.TotalDistance;

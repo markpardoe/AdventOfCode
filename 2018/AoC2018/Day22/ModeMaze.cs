@@ -34,7 +34,7 @@ namespace Aoc.Aoc2018.Day22
         Narrow = '|',
     }
 
-    public class CaveRegion  :Position
+    public class CaveRegion
     {
         private static readonly IReadOnlyDictionary<RegionType, int> RiskLevels = new Dictionary<RegionType, int>()
         {
@@ -43,12 +43,16 @@ namespace Aoc.Aoc2018.Day22
             {RegionType.Wet, 1}
         };
 
+        public Position Position { get; }
+        public int X => Position.X;
+        public int Y => Position.Y;
         public int ErosionLevel { get; }
         public int GeologicalIndex { get; }
         public RegionType RegionType { get; }
 
-        public CaveRegion(int x, int y, int erosionLevel, int geologicalIndex) : base(x, y)
+        public CaveRegion(int x, int y, int erosionLevel, int geologicalIndex) 
         {
+            Position = new Position(x, y);
             GeologicalIndex = geologicalIndex;
             ErosionLevel = erosionLevel;
 

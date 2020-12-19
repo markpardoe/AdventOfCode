@@ -28,7 +28,7 @@ namespace Aoc.AoC2019.Problems.Day24
                 {
                     bool isBug = (row[x] == '#');
                     GameTile t = new GameTile(x, y, isBug);
-                    base.Add((Position) t, t);
+                    base.Add(t.Position, t);
                     _allTiles.Add(t);
                 }
             }
@@ -49,7 +49,7 @@ namespace Aoc.AoC2019.Problems.Day24
                 for (int x = 0; x < 5; x++)
                 {
                     GameTile t = new GameTile(x, y, false);
-                    base.Add((Position)t, t);
+                    base.Add(t.Position, t);
                     _allTiles.Add(t);
                 }
             }
@@ -62,7 +62,7 @@ namespace Aoc.AoC2019.Problems.Day24
             // Add neighbours
             foreach (GameTile tile in Map.Values)
             {
-                var neighbours = tile.GetNeighboringPositions();
+                var neighbours = tile.Position.GetNeighboringPositions();
                 foreach (Position pos in neighbours)
                 {
                     GameTile t = base[pos];
