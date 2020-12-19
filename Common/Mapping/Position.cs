@@ -87,7 +87,6 @@ namespace AoC.Common.Mapping
         /// <returns></returns>
         public Direction FindDirection(Position target)
         {
-            Console.WriteLine("");
             if (target.Y < this.Y) return Direction.Up;
             if (target.Y > this.Y) return Direction.Down;
             if (target.X > this.X) return Direction.Right;
