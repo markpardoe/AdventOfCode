@@ -5,7 +5,6 @@ namespace AoC.AoC2018.Tests.Day20
 {
     public class RegularMapTests : AocSolutionTest<int>
     {
-        // Not implememented!
-        protected override SolutionData<int> Solution => new SolutionData<int>(new RegularMap(), 1, 1);
+        protected override SolutionData<int> Solution => new SolutionData<int>(new RegularMap(), 3930, 8240);
     }
 }
