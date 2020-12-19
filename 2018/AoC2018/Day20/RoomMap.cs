@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,79 +20,98 @@ namespace Aoc.Aoc2018.Day20
         DoorVertical = '|',
         Unknown = '?'
     }
-
-   
+    
 
     public class RoomMap : Map<MapTile>
     {
-        private readonly Position _startPositon = new Position(0,0);
+        private readonly Position _start = new Position(0,0);
 
 
         public RoomMap(string input) : base(MapTile.Unknown)
         {
            var inputData = input.Skip(1).ToList();
-           GenerateMap(_startPositon, inputData);
+
+           var start = new HashSet<Position>() {_start};
+           var data = new Queue<char>(input.ToCharArray());
+           BuildMap(start, data);
+
+           // replace unknown with walls
+           foreach (var p in GetBoundedEnumerator())
+           {
+               if (p.Value == MapTile.Unknown)
+               {
+                   this[p.Key] = MapTile.Wall;
+               }
+           }
         }
 
-
-        private void GenerateMap(Position currentPosition, List<char> inputData)
+        
+        public HashSet<Position> BuildMap(HashSet<Position> startPositions, Queue<char> inputData)
         {
-            List<IPath> paths = new List<IPath>();
+            // Where we end up at the end each path
+            HashSet<Position> finalPositions = new HashSet<Position>();
+            List<Position> currentPositions = startPositions.ToList();
 
-            List<CompassDirection> directions = new List<CompassDirection>();
-           
-            for (int i = 0; i < inputData.Count; i++)
+            while (inputData.Count > 0)
             {
-                char current = inputData[i];
+                char token = inputData.Dequeue();
 
-                if (_validDirections.Contains(current))
+                if (_validDirections.Keys.Contains(token))
                 {
-                    directions.Add((CompassDirection) current);
-                }
-                else if (current == '(')
-                {
-                    paths.Add(new Path(directions));
-                    directions.Clear();
+                    CompassDirection direction = _validDirections[token];
 
-                    //i = GenerateMap(currentPosition, index);
-                    // start of a child group - so drop down a level
-                }
-            }
-        }
-
-        private int FindEndBracket(List<char> search, int startIndex)
-        {
-            if (search[startIndex] != '(') throw new ArgumentException();
-            int bracketLevel = 1;
-
-            for (int i = startIndex + 1; i <= search.Count; i++)
-            {
-                char current = search[i];
-
-                if (current == ')')
-                {
-                    bracketLevel--;
-                    if (bracketLevel == 0)
+                    // Use iterator as we're modifying currentpositions as we go
+                    for (int i = 0; i < currentPositions.Count; i++)
                     {
-                        return i;   // found the close bracket
+                        // Get current position - and replace with the position once we've moved
+                        var current = currentPositions[i];
+                        currentPositions[i] = Move(direction, current);
                     }
                 }
-                else if (current == '(')
+
+                else if (token == ')') // End of a group of directions
                 {
-                    bracketLevel++;
+                    finalPositions.UnionWith(currentPositions);
+                    break;
+                }
+
+                else if (token == '(')
+                {
+                    // replace the current list of positions with positions after moving in the bracketed group
+                    currentPositions = BuildMap(currentPositions.ToHashSet(), inputData).ToList();
+                }
+                else if (token == '|')
+                {
+                    // Add current positions to the finals list, and start a new 'current' list from the start
+                    finalPositions.UnionWith(currentPositions);
+                    currentPositions = startPositions.ToList();
+                }
+                else if (token == '^' || token == '$')
+                {
+                    // ignore as this indicates start or end of RegEx
+                    continue;
+                }
+                else
+                {
+                    throw new DataException($"Invalid token: {token}");
                 }
             }
 
-            throw new InvalidDataException("No close bracket found"); // end of the list - no bracket found
+            return finalPositions;
         }
-
-       
+        
 
         // easy way to tell if its a move command, or a special character
-        private readonly HashSet<char> _validDirections = new HashSet<char>() {'N', 'S', 'E', 'W'};
+        private readonly Dictionary<char, CompassDirection> _validDirections = new Dictionary<char, CompassDirection>()
+        {
+            {'N', CompassDirection.North},
+            {'S', CompassDirection.South},
+            {'W', CompassDirection.West},
+            {'E', CompassDirection.East},
+        };
 
         // Moves current mapping position in the specified direction.
-        // Adding the door and any adjoining walls
+        // Adding the door and any adjoining walls to the map
         private Position Move(CompassDirection direction, Position position)
         {
             Position doorPosition = position.Move(direction);
@@ -110,41 +130,21 @@ namespace Aoc.Aoc2018.Day20
                 this.Add(doorPosition.Move(CompassDirection.West), MapTile.Wall);
             }
 
-            var finalPostion = doorPosition.Move(direction);
-            this.Add(finalPostion, MapTile.Room);
+            var finalPosition = doorPosition.Move(direction);
+            this.Add(finalPosition, MapTile.Room);
 
-            return finalPostion;
+            return finalPosition;
         }
-        
 
-        public override string DrawMap()
+
+        protected override char? ConvertValueToChar(Position position, MapTile value)
         {
-            int minX = MinX;
-            int minY = MinY;
-            int maxX = MaxX;
-            int maxY = MaxY;
-
-            StringBuilder map = new StringBuilder();
-            for (int y = minY; y <= maxY; y++)
+            if (position.Equals(_start))
             {
-                map.Append(Environment.NewLine);
-
-                for (int x = minX; x <= maxX; x++)
-                {
-                    if (_startPositon.X == x && _startPositon.Y == y)
-                    {
-                        // Draw current location on map
-                        map.Append('X');
-                    }
-                    else
-                    {
-                        var c = (MapTile) this[x, y];
-                        map.Append((char) c);
-                    }
-                }
+                return 'X';
             }
 
-            return map.ToString();
+            return (char) value;
         }
     }
 }

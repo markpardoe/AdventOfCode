@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day18.SettlersOfNorthPole();
+            var problem = new Day20.RegularMap();
           
             List<string> data = new List<string>();
 

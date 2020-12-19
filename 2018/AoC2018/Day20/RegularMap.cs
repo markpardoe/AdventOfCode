@@ -11,8 +11,11 @@ namespace Aoc.Aoc2018.Day20
         public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
           //  string regEx = input.First();  // shpuld only be one line
+          RoomMap map = new RoomMap(input.First());
+          Console.WriteLine(map.DrawMap());
 
-            yield return 5;
+
+            yield return map.CountValue(MapTile.Room);
             yield return 5;
         }
 
