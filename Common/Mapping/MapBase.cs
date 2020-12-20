@@ -38,7 +38,7 @@ namespace AoC.Common.Mapping
         }
         public int CountValue(TValue item) => Map.Values.Count(v => v.Equals(item));
 
-        protected virtual void AddOrReplace(TPosition key, TValue value)
+        private void AddOrReplace(TPosition key, TValue value)
         {
             if (Map.ContainsKey(key))
             {
@@ -48,7 +48,11 @@ namespace AoC.Common.Mapping
             {
                 Map.Add(key, value);
             }
+
+            OnMapUpdated(key, value);
         }
+
+        protected virtual void OnMapUpdated(TPosition key, TValue value) { }
 
         protected abstract IEnumerable<TPosition> GetAvailableNeighbors(TPosition position);
         public abstract string DrawMap(int padding = 0);

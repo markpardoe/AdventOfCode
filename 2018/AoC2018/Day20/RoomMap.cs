@@ -17,20 +17,9 @@ namespace Aoc.Aoc2018.Day20
     {
         Room = '.', 
         Wall = '#',
-        DoorHoziontal = '-',
+        DoorHorizontal = '-',
         DoorVertical = '|',
         Unknown = '?'
-    }
-
-    /// <summary>
-    ///  Holds compass directions - some problems give inputs as N, S, E or W
-    /// </summary>
-    public enum CompassDirection
-    {
-        North = 'N',
-        South = 'S',
-        West = 'W',
-        East = 'E'
     }
 
 
@@ -126,7 +115,7 @@ namespace Aoc.Aoc2018.Day20
 
             // Get neighboring doors
             var neighbors = position.GetNeighboringPositions()
-                .Where(x => this[x] == MapTile.DoorHoziontal || this[x] == MapTile.DoorVertical);
+                .Where(x => this[x] == MapTile.DoorHorizontal || this[x] == MapTile.DoorVertical);
 
             // We don't want the location of the door - we want the room AFTER the door.  So move another square in that direction
             foreach (var door in neighbors)
@@ -161,7 +150,7 @@ namespace Aoc.Aoc2018.Day20
             }
             else
             {
-                this.Add(doorPosition, MapTile.DoorHoziontal);
+                this.Add(doorPosition, MapTile.DoorHorizontal);
                 this.Add(doorPosition.Move(CompassDirection.East), MapTile.Wall);
                 this.Add(doorPosition.Move(CompassDirection.West), MapTile.Wall);
             }

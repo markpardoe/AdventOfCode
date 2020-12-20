@@ -13,19 +13,9 @@ namespace Aoc.AoC2019.Problems.Day13
         public Position Ball { get; set; }
         public Position Paddle { get; private set; }
 
-        // Override default implementation of AddOrReplace as we need to
-        // keep track of the location of the ball & paddle in separate variables
-        protected override void AddOrReplace(Position key, TileType value)
+        // We need to keep track of changes to ball or paddle positions
+        protected override void OnMapUpdated(Position key, TileType value)
         {
-            if (Map.ContainsKey(key))
-            {
-                Map[key] = value;
-            }
-            else
-            {
-                Map.Add(key, value);
-            }
-
             if (value == TileType.Ball)
             {
                 this.Ball = key;
