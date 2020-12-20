@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Aoc.Aoc2018.Common;
 using Aoc.Aoc2018.Day20;
 using AoC.Common.DataStructures;
 using AoC.Common.Mapping;
@@ -20,7 +21,18 @@ namespace Aoc.Aoc2018.Day20
         DoorVertical = '|',
         Unknown = '?'
     }
-    
+
+    /// <summary>
+    ///  Holds compass directions - some problems give inputs as N, S, E or W
+    /// </summary>
+    public enum CompassDirection
+    {
+        North = 'N',
+        South = 'S',
+        West = 'W',
+        East = 'E'
+    }
+
 
     public sealed class RoomMap : Map<MapTile>
     {

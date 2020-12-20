@@ -12,7 +12,6 @@ namespace AoC.Common.Mapping
 
     /// <summary>
     /// Represents a Position in a 2D space.
-    /// Held as a class rather than a struct as various helper classes inherit from it.
     /// Assumes a co-ordinate system with 0,0 in top left corner - and Y increments in a downwards direction
     /// </summary>
     public readonly struct Position : IEquatable<Position>, IPosition
@@ -74,18 +73,6 @@ namespace AoC.Common.Mapping
             };
         }
 
-        public Position Move(CompassDirection direction, int distance = 1)
-        {
-            return direction switch
-            {
-                CompassDirection.North => new Position(X, Y - distance),
-                CompassDirection.South => new Position(X, Y + distance),
-                CompassDirection.West => new Position(X - distance, Y),
-                CompassDirection.East => new Position(X + distance, Y),
-                _ => throw new InvalidOperationException("Invalid Direction."),
-            };
-        }
-
         /// <summary>
         /// Returns the direction of a specified Position relative to itself
         /// </summary>
@@ -103,16 +90,10 @@ namespace AoC.Common.Mapping
 
         public IEnumerable<Position> GetNeighboringPositions()
         {
-            return new List<Position>() { Move(Direction.Up), this.Move(Direction.Down), this.Move(Direction.Left), this.Move(Direction.Right) };
-        }
-
-        /// <summary>
-        /// Gets neighboring positions in reading order.  Ie. from top row, then left to right
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Position> GetNeighboringPositionsInReadingOrder()
-        {
-            return new List<Position>() { Move(Direction.Up), this.Move(Direction.Left), this.Move(Direction.Right), this.Move(Direction.Down) };
+            yield return Move(Direction.Up);
+            yield return Move(Direction.Down);
+            yield return Move(Direction.Left);
+            yield return Move(Direction.Right);
         }
 
         /// <summary>
@@ -121,17 +102,15 @@ namespace AoC.Common.Mapping
         /// <returns></returns>
         public IEnumerable<Position> GetNeighboringPositionsIncludingDiagonals()
         {
-           return new List<Position>
-            {
-                new Position(this.X, this.Y + 1),
-                new Position(this.X, this.Y - 1 ),
-                new Position(this.X + 1,  this.Y ),
-                new Position(this.X + 1, this.Y + 1),
-                new Position(this.X + 1, this.Y - 1 ),
-                new Position(this.X - 1,  this.Y ),
-                new Position(this.X - 1, this.Y + 1),
-                new Position(this.X - 1, this.Y - 1 ),
-            };
+
+            yield return new Position(this.X, this.Y + 1);
+            yield return new Position(this.X, this.Y - 1);
+            yield return new Position(this.X + 1, this.Y);
+            yield return new Position(this.X + 1, this.Y + 1);
+            yield return new Position(this.X + 1, this.Y - 1);
+            yield return new Position(this.X - 1, this.Y);
+            yield return new Position(this.X - 1, this.Y + 1);
+            yield return new Position(this.X - 1, this.Y - 1);
         }
 
         public bool Equals(Position other)
@@ -159,7 +138,5 @@ namespace AoC.Common.Mapping
         {
             return HashCode.Combine(X, Y);
         }
-
-       
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Aoc.Aoc2018.Common;
 using AoC.Common.Mapping;
 
 namespace Aoc.Aoc2018.Day15
