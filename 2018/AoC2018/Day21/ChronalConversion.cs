@@ -28,8 +28,8 @@ namespace Aoc.Aoc2018.Day21
             // So all we need to do is run the program for any input value, and
             // find the value of register[1] the first time we hit instruction 28
             //
-            // Part 2 simply caches register[1] everytime we hit line 28
-            // When a value repeats - we know we've started to cycle so return previoud value.
+            // Part 2 simply caches register[1] every-time we hit line 28
+            // When a value repeats - we know we've started to cycle so return previous value.
             // Could be optimized?  Takes 5 min to run but does give correct answer.
             OpcodeVM opcode = new OpcodeVM(input, 0);
             long lastValue = -1;
