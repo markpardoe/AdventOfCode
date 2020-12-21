@@ -19,20 +19,17 @@ namespace AoC.AoC2020.Problems.Day20
             var tiles = ParseMaps(input).ToList();
             int gridSize = (int)Math.Sqrt(tiles.Count);
             var data = GetMapVariants(tiles);
-            yield return SolvePartA(data, gridSize);
-        }
-
-        public ulong SolvePartA(IEnumerable<ImageMap> images, int gridSize)
-        {
+ 
             CompositeImage img = new CompositeImage(gridSize);
-            var result =  CreateImage(img, images.ToList());
+            var result = CreateImage(img, data.ToList());
 
-            Console.WriteLine(result.DrawMap());
-            return result.GetTileIdTotal();
+            //Console.WriteLine(result.DrawMap());
+            yield return result.GetTileIdTotal();
         }
 
         private CompositeImage CreateImage(CompositeImage compositeImage, IReadOnlyList<ImageMap> images)
         {
+            // If all spaces full - then we're done!
             if (compositeImage.IsComplete) return compositeImage;
 
             // Where to place the next image
@@ -43,6 +40,8 @@ namespace AoC.AoC2020.Problems.Day20
             foreach (var img in images)
             {
                 var newImage = compositeImage.Copy();
+                // If we can add a tile into the next empty spot 
+                // Use recursion to try and add the next tile.. and so on until completed
                 if (newImage.TryAddImage(nextPosition.Value, img))
                 {
                     newImage = CreateImage(newImage, images.Where(x => x.TileId != img.TileId).ToList());
@@ -59,31 +58,26 @@ namespace AoC.AoC2020.Problems.Day20
         // Gets the 8 versions of the map - rotated (x4) and flipped and rotated (x4)
         private IEnumerable<ImageMap> GetMapVariants(IEnumerable<ImageMap> images)
         {
-            HashSet<ImageMap> maps = new HashSet<ImageMap>() { };
-            int count = 0;
             foreach (var img in images)
             {
-                count++;
-                maps.Add(img);
-
+                yield return img;
                 var tmp = img;
+
                 for (int i = 0; i < 3; i++)
                 {
                     tmp = tmp.RotateRight();
-                    var r = maps.Add(tmp);
+                    yield return tmp;
                 }
 
                 tmp = img.Flip();
-                var f = maps.Add(tmp);
+                yield return tmp;
 
                 for (int i = 0; i < 3; i++)
                 {
                     tmp = tmp.RotateRight();
-                    var t = maps.Add(tmp);
+                    yield return tmp;
                 }
             }
-
-            return maps;
         }
 
         private IEnumerable<ImageMap> ParseMaps(IEnumerable<string> rawData)

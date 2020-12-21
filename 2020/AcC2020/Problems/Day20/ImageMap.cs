@@ -7,8 +7,14 @@ using AoC.Common.Mapping;
 
 namespace AoC.AoC2020.Problems.Day20
 {
+    public enum WaterPixel
+    {
+        Water ='#',
+        Empty = '.',
+        Monster = 'O'
+    }
 
-    public class ImageMap :  FixedSizeMap<bool>
+    public class ImageMap :  FixedSizeMap<WaterPixel>
     {
         public int TileId { get; }
         public bool IsFlipped { get; private set; } = false;
@@ -31,20 +37,19 @@ namespace AoC.AoC2020.Problems.Day20
             StringBuilder sb = new StringBuilder();
             for (int x = 0; x <= MaxX; x++)
             {
-                bool value = this[x, row];
-                sb.Append(value ? '#' : '.');
+                sb.Append((char) this[x, row]);
             }
 
             return sb.ToString();
         }
 
-        protected override char? ConvertValueToChar(Position position, bool value)
+        protected override char? ConvertValueToChar(Position position, WaterPixel value)
         {
-            return value ? '#' : '.';
+            return (char) value;
         }
 
         // Fixed size grid of 9x9
-        public ImageMap(int tileId, IEnumerable<string> rawData) : base(false, new Position(0,0))
+        public ImageMap(int tileId, IEnumerable<string> rawData) : base(WaterPixel.Empty, new Position(0,0))
         {
             TileId = tileId;
             var y = 0;
@@ -52,7 +57,7 @@ namespace AoC.AoC2020.Problems.Day20
             {
                 for (var x = 0; x < line.Length; x++)
                 {
-                    var value = line[x] == '#';
+                    var value = (WaterPixel) line[x];
                     Position pos = new Position(x, y);
 
                     Add(pos, value);
@@ -63,7 +68,7 @@ namespace AoC.AoC2020.Problems.Day20
             CacheEdges();
         }
 
-        private ImageMap(int tileId) : base(false, new Position(0, 0))
+        private ImageMap(int tileId) : base(WaterPixel.Empty, new Position(0, 0))
         {
             TileId = tileId;
         }
@@ -78,10 +83,10 @@ namespace AoC.AoC2020.Problems.Day20
 
             for (int i = 0; i <= MaxX; ++i)
             {
-                up = up + (this[i, 0] ? '#' : '.');
-                down = down + (this[i, MaxY] ? '#' : '.');
-                right = right + (this[MaxX, i] ? '#' : '.');
-                left = left + (this[0, i] ? '#' : '.');
+                up = up +  (char) this[i, 0];
+                down = down + (char) this[i, MaxY];
+                right = right + (char) this[MaxX, i];
+                left = left + (char) this[0, i];
             }
 
             _edges.Add(Direction.Up, up);
