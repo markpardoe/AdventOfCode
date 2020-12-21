@@ -19,7 +19,6 @@ namespace AoC.AoC2020.Problems.Day20
         public int TileId { get; }
         public bool IsFlipped { get; private set; } = false;
 
-
         // Cache a string representing one side of the map
         private readonly Dictionary<Direction, string> _edges = new Dictionary<Direction, string>();
 
@@ -68,7 +67,7 @@ namespace AoC.AoC2020.Problems.Day20
             CacheEdges();
         }
 
-        private ImageMap(int tileId) : base(WaterPixel.Empty, new Position(0, 0))
+        public ImageMap(int tileId) : base(WaterPixel.Empty, new Position(0, 0))
         {
             TileId = tileId;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using AoC.Common;
 using AoC.Common.Mapping;
@@ -18,13 +19,37 @@ namespace AoC.AoC2020.Problems.Day20
         {
             var tiles = ParseMaps(input).ToList();
             int gridSize = (int)Math.Sqrt(tiles.Count);
-            var data = GetMapVariants(tiles);
+            var data = tiles.SelectMany(x => GetMapVariants(x));
  
             CompositeImage img = new CompositeImage(gridSize);
             var result = CreateImage(img, data.ToList());
 
-            //Console.WriteLine(result.DrawMap());
+           // Console.WriteLine(result.DrawMap());
             yield return result.GetTileIdTotal();
+
+            // Convert the compositeImage into one image (with borders removed)
+            ImageMap finalImage = result.ExtractMap();
+
+            yield return (ulong) FindMonsters(finalImage);
+        }
+
+        private long FindMonsters(ImageMap image)
+        {
+            // monsters could be in any rotation / flip of the map
+            var finalImageGroup = GetMapVariants(image);
+
+            foreach (var i in finalImageGroup)
+            {
+                int monsters = CountMonsters(i);
+                if (monsters > 0)
+                {
+                    Console.WriteLine($"Monsters: {monsters}");
+                    Console.WriteLine(i.DrawMap());
+                    return i.CountValue(WaterPixel.Water);
+                }
+            }
+
+            return 0;
         }
 
         private CompositeImage CreateImage(CompositeImage compositeImage, IReadOnlyList<ImageMap> images)
@@ -56,30 +81,27 @@ namespace AoC.AoC2020.Problems.Day20
         }
 
         // Gets the 8 versions of the map - rotated (x4) and flipped and rotated (x4)
-        private IEnumerable<ImageMap> GetMapVariants(IEnumerable<ImageMap> images)
+        private IEnumerable<ImageMap> GetMapVariants(ImageMap image)
         {
-            foreach (var img in images)
+            yield return image;
+            var tmp = image;
+
+            for (int i = 0; i < 3; i++)
             {
-                yield return img;
-                var tmp = img;
-
-                for (int i = 0; i < 3; i++)
-                {
-                    tmp = tmp.RotateRight();
-                    yield return tmp;
-                }
-
-                tmp = img.Flip();
+                tmp = tmp.RotateRight();
                 yield return tmp;
+            }
 
-                for (int i = 0; i < 3; i++)
-                {
-                    tmp = tmp.RotateRight();
-                    yield return tmp;
-                }
+            tmp = image.Flip();
+            yield return tmp;
+
+            for (int i = 0; i < 3; i++)
+            {
+                tmp = tmp.RotateRight();
+                yield return tmp;
             }
         }
-
+        
         private IEnumerable<ImageMap> ParseMaps(IEnumerable<string> rawData)
         {
             List<string> current = new List<string>();
@@ -113,14 +135,64 @@ namespace AoC.AoC2020.Problems.Day20
             }
         }
 
-        private readonly IEnumerable<string> _simpleMap = new List<string>()
+        // Relative co-ordinates for a sea monster based off 0,0 as first tile
+        private IEnumerable<(int x, int y)> GetSeaMonster()
         {
-            "Tile 0:",
-            "..##",
-            "#..#",
-            ".#.#",
-            "#..#"
-        };
+            yield return (0, 0);
+            yield return (18, -1);      // check out-of range values first to exit quickly
+            yield return (19, 0);
+            yield return (1, 1);
+            yield return (4, 1);
+            yield return (5, 0);
+            yield return (6, 0);
+            yield return (7, 1);
+            yield return (10, 1);
+            yield return (11, 0);
+            yield return (12, 0);
+            yield return (13, 1);
+            yield return (16, 1);
+            yield return (17, 0);
+            yield return (18, 0);
+        }
+
+        private bool IsMonster(Position currentPosition, ImageMap map)
+        {
+            foreach (var monster in GetSeaMonster())
+            {
+                if (map[currentPosition.X + monster.x, currentPosition.Y + monster.y] != WaterPixel.Water)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void DrawMonster(Position currentPosition, ImageMap map)
+        {
+            foreach (var monster in GetSeaMonster())
+            {
+                map[currentPosition.X + monster.x, currentPosition.Y + monster.y] = WaterPixel.Monster;
+            }
+        }
+
+        private int CountMonsters(ImageMap map)
+        {
+            int count = 0;
+            var locations = map.ToList();
+            foreach (var location in locations)
+            {
+                if (location.Value == WaterPixel.Water)
+                {
+                    if (IsMonster(location.Key, map))
+                    {
+                        count++;
+                        DrawMonster(location.Key, map);
+                    }
+                }
+            }
+
+            return count;
+        }
 
         private readonly IEnumerable<string> _example1 = new List<string>()
         {

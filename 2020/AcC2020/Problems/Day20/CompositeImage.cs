@@ -6,12 +6,13 @@ using AoC.Common.Mapping;
 
 namespace AoC.AoC2020.Problems.Day20
 {
+    /// <summary>
+    /// An image map made up of a grid of image maps
+    /// </summary>
     public class CompositeImage 
     {
         public int GridSize { get; }
         private readonly FixedSizeMap<ImageMap> _images;
-        private readonly HashSet<int> _tileId = new HashSet<int>();
-
         public bool IsComplete => GetNextFreePosition() == null;
 
         public CompositeImage(int gridSize)
@@ -20,6 +21,13 @@ namespace AoC.AoC2020.Problems.Day20
             _images = new FixedSizeMap<ImageMap>(null, new Position(0,0), new Position(gridSize - 1, gridSize - 1));
         }
 
+        /// <summary>
+        /// Try to add the image to the specified position.
+        /// The position must be empty, and the added image must match up to the edges of adjacent images.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="img"></param>
+        /// <returns></returns>
         public bool TryAddImage(Position position, ImageMap img)
         {
 
@@ -65,10 +73,9 @@ namespace AoC.AoC2020.Problems.Day20
             return null;
         }
 
-        private void AddImage(Position postion, ImageMap img)
+        private void AddImage(Position position, ImageMap img)
         {
-            _tileId.Add(img.TileId);
-            _images[postion] = img;
+            _images[position] = img;
         }
 
 
@@ -135,6 +142,42 @@ namespace AoC.AoC2020.Problems.Day20
                 sb.AppendLine();
             }
             return sb.ToString();
+        }
+
+
+        /// <summary>
+        /// Returns a combined image-map of all the internal maps - with their borders removed
+        /// </summary>
+        /// <param name="removeBorder"></param>
+        /// <returns></returns>
+        public ImageMap ExtractMap()
+        {
+            ImageMap map = new ImageMap(0);
+
+            // iterate through the grids
+            for (int y = 0; y < GridSize; y++)
+            {
+                int startY = y* 8;
+                for (int x = 0; x < GridSize; x++)
+                {
+                    int startX = x * 8;
+                    ImageMap current = _images[x, y];
+
+                    // use -1 as padding to remove outside edges
+                    foreach (var location in current.GetBoundedEnumerator(-1))
+                    {
+                        // Create a sparse map by only populating water
+                        // This should make searching for monsters faster as we only need to check populated (water) squares
+                        if (location.Value == WaterPixel.Water)
+                        {
+                            map[startX + location.Key.X - 1, startY + location.Key.Y - 1] = location.Value;
+                        }
+                        
+                    }
+                }
+            }
+
+            return map;
         }
     }
 }
