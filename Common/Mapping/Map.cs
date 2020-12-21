@@ -242,23 +242,6 @@ namespace AoC.Common.Mapping
                 MinY = map.MinY - padding;
             }
 
-           
-            //public IEnumerator<int> GetYEnumerator()
-            //{
-            //    for (int y = MinY; y <= MaxY; y++)
-            //    {
-            //        yield return y;
-            //    }
-            //}
-
-            //public IEnumerator<int> GetXEnumerator()
-            //{
-            //    for (int x = MinX; x <= MaxX; x++)
-            //    {
-            //        yield return x;
-            //    }
-            //}
-
             public IEnumerator<Position> GetEnumerator()
             {
                 for (int y = MinY; y <= MaxY; y++)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +25,6 @@ namespace AoC.Common.Mapping
                 return _maxX.Value;
             }
         }
-
         public override int MinX
         {
             get
@@ -33,7 +33,6 @@ namespace AoC.Common.Mapping
                 return _minX.Value;
             }
         }
-
         public override int MaxY
         {
             get
@@ -42,7 +41,6 @@ namespace AoC.Common.Mapping
                 return _maxY.Value;
             }
         }
-
         public override int MinY
         {
             get
@@ -52,9 +50,18 @@ namespace AoC.Common.Mapping
             }
         }
 
+        // Check if the position is within map boundaries
+        protected override void BeforeMapUpdated(Position position, TValue value)
+        {
+            if ((position.X < MinX) || (position.X > MaxX) || (position.Y < MinY) || (position.Y > MaxY))
+            {
+                throw new IndexOutOfRangeException($"Position {position} is outside map boundaries");
+            }
+        }
+
 
         public FixedSizeMap(TValue defaultValue, Position? topLeft = null, Position? bottomRight = null) : base(
-            defaultValue)
+                                                                                                                defaultValue)
         {
             if (topLeft.HasValue)
             {

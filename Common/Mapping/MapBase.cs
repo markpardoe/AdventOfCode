@@ -20,8 +20,8 @@ namespace AoC.Common.Mapping
         protected readonly Dictionary<TPosition, TValue> Map = new Dictionary<TPosition, TValue>();
         protected readonly TValue DefaultValue;
 
-        public virtual void Add(TPosition key, TValue value) => AddOrReplace(key, value);
-        public virtual TValue this[TPosition position]
+        public void Add(TPosition key, TValue value) => AddOrReplace(key, value);
+        public TValue this[TPosition position]
         {
             get
             {
@@ -51,8 +51,8 @@ namespace AoC.Common.Mapping
 
             OnMapUpdated(key, value);
         }
-
         protected virtual void OnMapUpdated(TPosition key, TValue value) { }
+        protected virtual void BeforeMapUpdated(TPosition key, TValue value) { }
 
         protected abstract IEnumerable<TPosition> GetAvailableNeighbors(TPosition position);
         public abstract string DrawMap(int padding = 0);
