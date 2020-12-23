@@ -39,6 +39,11 @@ namespace AoC.Common.Mapping._3d
             return n;
         }
 
+        public int DistanceToOrigin()
+        {
+            return this.DistanceTo(new Position3d(0,0,0));
+        }
+
         public int DistanceTo(Position3d target)
         {
             return Math.Abs(this.X - target.X) + Math.Abs(this.Y - target.Y) + Math.Abs(this.Z - target.Z);

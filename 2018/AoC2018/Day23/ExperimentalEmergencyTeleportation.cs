@@ -17,21 +17,23 @@ namespace Aoc.Aoc2018.Day23
 
         public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            var nanobots = ParseInput(input);
+            var nanobots = ParseInput(input).ToList();
             var maxSignalBot = nanobots.OrderByDescending(x => x.SignalRadius).First();
 
             int nanoBotsInRange = nanobots.Count(x => x.Positon.DistanceTo(maxSignalBot.Positon) <= maxSignalBot.SignalRadius);
             yield return nanoBotsInRange;
 
-           Console.WriteLine("Min X " + nanobots.Min(p => p.Positon.X));
-           Console.WriteLine("Max X " + nanobots.Max(p => p.Positon.X));
-           Console.WriteLine("Min y " + nanobots.Min(p => p.Positon.Y));
-           Console.WriteLine("Max y " + nanobots.Max(p => p.Positon.Y));
-           Console.WriteLine("Min z " + nanobots.Min(p => p.Positon.Z));
-           Console.WriteLine("Max z " + nanobots.Max(p => p.Positon.Z));
+            int minX = nanobots.Min(p => p.Positon.X);
+            int maxX = nanobots.Max(p => p.Positon.X);
+            int minY = nanobots.Min(p => p.Positon.Y);
+            int maxY = nanobots.Max(p => p.Positon.Y);
+            int minZ = nanobots.Min(p => p.Positon.Z);
+            int maxZ = nanobots.Max(p => p.Positon.Z);
+
+            Position3d bestPosition =  SearchGrid(new Position3d(minX, minY, minZ), new Position3d(maxX, maxY, maxZ), 100000000, nanobots.ToHashSet());
+            yield return bestPosition.DistanceToOrigin();
         }
-
-
+        
         private IEnumerable<NanoBot> ParseInput(IEnumerable<string> rawData)
         {
             string nanoBotPattern = @"^pos=<(?<x>-*\d+),\s*(?<y>-*\d+),\s*(?<z>-*\d+)>\s*.\s*r=(?<r>-*\d+)";
@@ -44,6 +46,61 @@ namespace Aoc.Aoc2018.Day23
                 int z = int.Parse(match.Groups["z"].Value);
                 int r = int.Parse(match.Groups["r"].Value);
                 yield return new NanoBot(x,y,z,r);
+            }
+        }
+
+        /// <summary>
+        /// Find best position by using a recursive search
+        /// Each step we make the search area smaller, and centered around the best positon from the previous step
+        /// </summary>
+        /// <param name="topLeft"></param>
+        /// <param name="bottomRight"></param>
+        /// <param name="stepSize"></param>
+        /// <param name="nanobots"></param>
+        /// <returns></returns>
+        private Position3d SearchGrid(Position3d topLeft, Position3d bottomRight, int stepSize, HashSet<NanoBot> nanobots)
+        {
+            int max = Int32.MinValue;
+            Position3d maxPosition =new Position3d(0,0,0);
+
+            for (int z = topLeft.Z; z <= bottomRight.Z; z += stepSize)
+            {
+                for (int y = topLeft.Y; y <= bottomRight.Y; y += stepSize)
+                {
+                    for (int x = topLeft.X; x <= bottomRight.X; x += stepSize)
+                    {
+                        Position3d currentPosition = new Position3d(x,y,z);
+                        int count = nanobots.Count(x => x.Positon.DistanceTo(currentPosition) <= x.SignalRadius);
+
+                        if (count > max)
+                        {
+                            max = count;
+                            maxPosition = currentPosition;
+                        }
+                        else if (count == max)
+                        {
+                            // use position closest to the origin
+                            if (maxPosition.DistanceToOrigin() > currentPosition.DistanceToOrigin())
+                            {
+                                maxPosition = currentPosition;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (stepSize == 1)
+            {
+                return maxPosition;
+            }
+            else
+            {
+                // Search again around the best position with a smaller stepsize
+                return SearchGrid(new Position3d(maxPosition.X - stepSize, maxPosition.Y - stepSize, maxPosition.Z - stepSize),
+                                  new Position3d(maxPosition.X + stepSize,
+                                                 maxPosition.Y + stepSize,
+                                                 maxPosition.Z + stepSize),
+                                  stepSize / 2, nanobots);      // make search step half the size.  Tried with 10 and it couldn't find the best solution
             }
         }
     }
