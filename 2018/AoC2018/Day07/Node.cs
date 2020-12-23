@@ -16,7 +16,7 @@ namespace Aoc.Aoc2018.Day07
         {
             this.NodeId = Id;
             char c = Id.ToUpper()[0];
-            Time = 60 + (c - 64);
+            Time =  60 + (c - 64);
         }
 
         public bool Equals([AllowNull] Node other)
