@@ -56,7 +56,6 @@ namespace AoC.AoC2020.Problems.Day22
             if (cards.Count > 0)
             {
                 yield return cards;
-                cards = new List<int>();
             }
         }
         
