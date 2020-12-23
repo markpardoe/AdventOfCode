@@ -11,7 +11,7 @@ namespace Aoc.Aoc2018
     {
         static void Main()
         {
-            var problem = new Day24.ImmuneSystem20XX();
+            var problem = new Day25.FourDimensionalAdventure();
           
             List<string> data = new List<string>();
 

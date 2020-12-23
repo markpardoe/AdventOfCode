@@ -3,6 +3,7 @@ using AoC.Common;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 using AoC.AoC2020.Problems;
 using AoC.AoC2020.Problems.Day23;
 
@@ -23,11 +24,16 @@ namespace AoC.AoC2020
 
             Console.WriteLine(problem.Name);
 
+            // Time problem execution - ignoring time for reading input file
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             foreach (var result in problem.Solve(data))
             {
                 Console.WriteLine(result);
             }
-
+            stopWatch.Stop();
+            Console.WriteLine();
+            Console.WriteLine($"Solved in {stopWatch.ElapsedMilliseconds}ms");
             Console.WriteLine("Press enter to exit.");
             Console.ReadLine();
         }
