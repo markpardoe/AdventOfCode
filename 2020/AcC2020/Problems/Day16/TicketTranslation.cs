@@ -23,14 +23,14 @@ namespace AoC.AoC2020.Problems.Day16
             int total = 0;
             foreach (var ticket in _tickets)
             {
-                var error =  IsTicketValid(ticket);
-                if (error.IsValid)
+                var (isValid, errorRate) = IsTicketValid(ticket);
+                if (isValid)
                 {
                     validTickets.Add(ticket);
                 }
                 else
                 {
-                    total += error.ErrorRate;
+                    total += errorRate;
                 }
             }
 
