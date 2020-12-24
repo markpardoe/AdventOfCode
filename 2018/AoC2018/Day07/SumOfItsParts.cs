@@ -132,7 +132,7 @@ namespace Aoc.Aoc2018.Day07
             return graph;
         }
 
-        private IEnumerable<string> _example = new List<string>()
+        private readonly IEnumerable<string> _example = new List<string>()
         {
             "Step C must be finished before step A can begin.",
             "Step C must be finished before step F can begin.",

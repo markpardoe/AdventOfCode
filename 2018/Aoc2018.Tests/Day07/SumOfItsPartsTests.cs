@@ -8,7 +8,7 @@ namespace AoC.AoC2018.Tests.Day07
 {
     public class SumOfItsPartsTests : AocSolutionTest<string>
     {
-        protected override SolutionData<string> Solution => new SolutionData<string>(new SumOfItsParts(), "BGJCNLQUYIFMOEZTADKSPVXRHW", "N/A");
+        protected override SolutionData<string> Solution => new SolutionData<string>(new SumOfItsParts(), "BGJCNLQUYIFMOEZTADKSPVXRHW", "1017");
 
         private readonly List<string> ExampleInput = new List<string>()
         {
@@ -22,15 +22,5 @@ namespace AoC.AoC2018.Tests.Day07
         };
 
         private readonly string ExampleResult = "CABDFE";
-
-        [Fact]
-        public void Test_FindShortestPath()
-        {
-            var sut = new SumOfItsParts();
-            string result =  sut.FindShortestPath(ExampleInput);
-
-            result.ShouldBe(ExampleResult);
-            Assert.Equal(ExampleResult, result);
-        }
     }
 }
