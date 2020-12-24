@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AoC.Common.Mapping._3d;
 
-namespace AoC.Common.Mapping
+namespace AoC.Common.Mapping.Hex
 {
     public class HexGrid<TValue> : BufferedMap<AxialPosition, TValue>
     {
@@ -35,12 +35,66 @@ namespace AoC.Common.Mapping
 
         public override string DrawMap(int padding = 0)
         {
-            throw new System.NotImplementedException();
+            int minZ = MinZ;
+            int maxZ = MaxZ;
+            int minY = MinY;
+            int maxY = MaxY;
+            int minX = MinX;
+            int maxX = MaxX; 
+            
+            StringBuilder sb = new StringBuilder();
+
+
+            for (int y = minY; y <= maxY; y++)
+            {
+                sb.Append(Environment.NewLine);
+                if (y % 2 == 0)
+                {
+                    sb.Append(" ");  // offset alternative lines
+                }
+
+                for (int x = minX; x <= maxX; x++)
+                {
+                    if (x == 0 && y == 0)
+                    {
+                        sb.Append("X ");
+                    }
+                    else
+                    {
+                        int z = 0 - x - y;
+                        AxialPosition pos = new AxialPosition(x, y, z);
+
+                        sb.Append(ConvertValueToChar(pos, this[pos]));
+                        sb.Append(" ");
+                    }
+                }
+            }
+            
+
+            return sb.ToString();
         }
 
         public override IEnumerable<KeyValuePair<AxialPosition, TValue>> GetBoundedEnumerator(int padding = 0)
         {
-            throw new System.NotImplementedException();
+            int minY = MinY - padding;
+            int maxY = MaxY + padding;
+            int minX = MinX - padding;
+            int maxX = MaxX + padding;
+
+            for (int y = minY; y <= maxY; y++)
+            {
+                for (int x = minX; x <= maxX; x++)
+                {
+                    int z = 0 - x - y;
+                    AxialPosition pos = new AxialPosition(x, y, z);
+
+                    yield return new KeyValuePair<AxialPosition, TValue>(pos, this[pos]);
+                }
+            }
         }
+
+        // Function to use for converting the value to a char for mapping purposes
+        // Override for custom mapping
+        protected virtual char? ConvertValueToChar(AxialPosition position, TValue value) => value?.ToString()?[0];
     }
 }

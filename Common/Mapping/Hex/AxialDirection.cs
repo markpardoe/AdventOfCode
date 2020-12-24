@@ -1,4 +1,4 @@
-﻿namespace AoC.Common.Mapping
+﻿namespace AoC.Common.Mapping.Hex
 {
     // 6 Cardinal directions for a Hex grid
     public enum AxialDirection

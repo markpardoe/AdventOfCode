@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace AoC.Common.Mapping
+namespace AoC.Common.Mapping.Hex
 {
     /// <summary>
     /// Stores Hex positions as an x,y, z axial -co-ordinate.
@@ -52,8 +52,8 @@ namespace AoC.Common.Mapping
 
                 // Move left to right downwards : \
                 // Move along Y & Z axis
-                AxialDirection.SouthEast => new AxialPosition(X, Y - distance, Z + distance),
-                AxialDirection.NorthWest => new AxialPosition(X, Y + distance, Z - distance),
+                AxialDirection.SouthEast => new AxialPosition(X, Y + distance, Z - distance),
+                AxialDirection.NorthWest => new AxialPosition(X, Y - distance, Z + distance),
 
                 // Move right to left downwards:  /
                 // Move along X & Y axis.
