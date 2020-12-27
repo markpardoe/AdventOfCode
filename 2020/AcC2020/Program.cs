@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using AoC.AoC2020.Problems.Day24;
+using AoC.AoC2020.Problems.Day25;
 
 namespace AoC.AoC2020
 {
@@ -12,7 +13,7 @@ namespace AoC.AoC2020
     {
         static void Main()
         {
-            var problem = new LobbyLayout();
+            var problem = new ComboBreaker();
             var data = new List<string>();
 
             if (problem.InputFileName != null)
