@@ -17,8 +17,11 @@ namespace AoC.AoC2020.Problems.Day22
         {
             var players = ParseInput(input).ToList();
             
-            IGame game = new RecursiveGame();
-            yield return FindWinningScore(game, players[0], players[1]);
+            IGame game1 = new Game();
+            yield return FindWinningScore(game1, players[0], players[1]);
+
+            IGame game2 = new RecursiveGame();
+            yield return FindWinningScore(game2, players[0], players[1]);
         }
 
         private int FindWinningScore(IGame game, IEnumerable<int> hand1, IEnumerable<int> hand2) 
@@ -28,7 +31,7 @@ namespace AoC.AoC2020.Problems.Day22
 
             var winner = game.Play(player1, player2);
 
-            Console.WriteLine($"Winner = {winner}");
+            //Console.WriteLine($"Winner = {winner}");
 
             return winner == Winner.PlayerOne ? player1.Score : player2.Score;
         }

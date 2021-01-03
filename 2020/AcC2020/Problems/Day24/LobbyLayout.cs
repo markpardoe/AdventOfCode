@@ -27,6 +27,7 @@ namespace AoC.AoC2020.Problems.Day24
                 //Console.WriteLine($"{i + 1}: {lobby.CountValue(TileColor.Black)} ");
             }
             //Console.WriteLine(lobby.DrawMap());
+            yield return lobby.CountValue(TileColor.Black);
         }
 
         private readonly IEnumerable<string> _example = new List<string>()

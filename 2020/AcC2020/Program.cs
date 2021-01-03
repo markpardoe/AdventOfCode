@@ -5,7 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using AoC.AoC2020.Problems.Day24;
-using AoC.AoC2020.Problems.Day25;
+using AoC.AoC2020.Problems.Day22;
 
 namespace AoC.AoC2020
 {
@@ -13,7 +13,7 @@ namespace AoC.AoC2020
     {
         static void Main()
         {
-            var problem = new ComboBreaker();
+            var problem = new CrabCombat();
             var data = new List<string>();
 
             if (problem.InputFileName != null)
