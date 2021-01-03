@@ -22,7 +22,7 @@ namespace Aoc.Aoc2018.Day21
             // Line28: Eqrr 1 0 5
             //
             // This checks if register[1] and register[0] are equal.
-            // If so it exits the program by setting register[5] = 1
+            // If so, it exits the program by setting register[5] = 1
             // Line 29 [addr 5 3 3] then adds this '1' to the InstructionPointer,
             // taking it out of range and ending the program.
             // So all we need to do is run the program for any input value, and
