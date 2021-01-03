@@ -26,8 +26,8 @@ namespace AoC.AoC2020.Problems.Day25
 
             while (val != key)
             {
-                val = val * subject;
-                val = val % 20201227;
+                val *= subject;
+                val %= 20201227;
                 loopSize++;
             }
 
@@ -42,22 +42,19 @@ namespace AoC.AoC2020.Problems.Day25
             for (int i = 0; i < loopSize; i++)
             {
                 //Console.WriteLine($"{i}: {val}");
-                val = val * subject;
-                val = val % 20201227;
+                val *= subject;
+                val %= 20201227;
             }
 
             return val;
         }
 
-        private int key1 = 11349501;
-        private int key2 = 5107328;
+        private readonly int key1 = 11349501;
+        private readonly int key2 = 5107328;
 
         public override int Year => 2020;
-
         public override int Day => 25;
-
         public override string Name => "day 25";
-
         public override string InputFileName => null;
     }
 }

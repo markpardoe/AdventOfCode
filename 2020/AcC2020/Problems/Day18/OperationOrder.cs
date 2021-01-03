@@ -163,8 +163,7 @@ namespace AoC.AoC2020.Problems.Day18
             while (ops.Count > 0)
             {
                 string token = ops.Dequeue();
-                long val;
-                if (long.TryParse(token, out val))
+                if (long.TryParse(token, out var val))
                 {
                     values.Push(val);
                 }

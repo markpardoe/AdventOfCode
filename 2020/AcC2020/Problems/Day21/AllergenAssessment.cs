@@ -29,15 +29,12 @@ namespace AoC.AoC2020.Problems.Day21
             yield return sortedMap;
         }
 
-        private string _ingredientPattern = @"^(?<ingredients>[a-z ]*)\s*\(contains (?<allergies>[a-z ,]*)\)\s*$";
+        private readonly string _ingredientPattern = @"^(?<ingredients>[a-z ]*)\s*\(contains (?<allergies>[a-z ,]*)\)\s*$";
 
         #region Parse input data
         private IEnumerable<Recipe> ParseInput(IEnumerable<string> rawData)
         {
             // Dictionaries linking an ingredient / allergy to all AllRecipes that contain them
-            var allergiesLookup = new Dictionary<string, HashSet<Recipe>>();
-            var ingredientsLookup = new Dictionary<string, HashSet<Recipe>>();
-
             foreach (string line in rawData)
             {
                 var match = Regex.Match(line, _ingredientPattern);
@@ -57,7 +54,7 @@ namespace AoC.AoC2020.Problems.Day21
         }
         #endregion
 
-        private IEnumerable<string> _example = new List<string>()
+        private readonly IEnumerable<string> _example = new List<string>()
         {
             "mxmxvkd kfcds sqjhc nhms (contains dairy, fish)",
             "trh fvjkl sbzzf mxmxvkd (contains dairy)",

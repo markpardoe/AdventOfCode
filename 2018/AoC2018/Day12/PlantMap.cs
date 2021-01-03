@@ -16,7 +16,7 @@ namespace Aoc.Aoc2018.Day12
     public class PlantMap
     {
         private readonly Dictionary<int, PlantStatus> _plantmap = new Dictionary<int, PlantStatus>();
-        private PlantStatus _default = PlantStatus.Empty;
+        private readonly PlantStatus _default = PlantStatus.Empty;
         private readonly HashSet<PlantGrowthRule> _rules;
 
         public PlantMap(HashSet<PlantGrowthRule> rules)
@@ -84,8 +84,6 @@ namespace Aoc.Aoc2018.Day12
             int minX = MinX - 2;
             int maxX = MaxX + 2;
             Dictionary<int, PlantStatus> updates = new Dictionary<int, PlantStatus>();
-
-            int pots = _plantmap.Keys.Count;
 
             for (int x = minX; x <= maxX; x++)
             {

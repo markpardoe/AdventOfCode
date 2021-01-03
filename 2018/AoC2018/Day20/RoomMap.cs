@@ -29,7 +29,6 @@ namespace Aoc.Aoc2018.Day20
         
         public RoomMap(string input) : base(MapTile.Unknown)
         {
-           var inputData = input.Skip(1).ToList();
            Add(Start, MapTile.Room);
            var start = new HashSet<Position>() {Start};
            var data = new Queue<char>(input.ToCharArray());
