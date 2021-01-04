@@ -248,7 +248,7 @@ namespace Aoc.AoC2019.Problems.Day20
             }
         }
 
-        protected override IEnumerable<Position> GetAvailableNeighbors(Position position)
+        protected override IEnumerable<Position> GetNeighboringPositions(Position position)
         {
             return position.GetNeighboringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void);
         }
@@ -306,7 +306,7 @@ namespace Aoc.AoC2019.Problems.Day20
                     }
                 }
 
-                var neighbours = GetAvailableNeighbors(current.Position);  // Get open (not wall or door) adjacent squares.
+                var neighbours = GetNeighboringPositions(current.Position);  // Get open (not wall or door) adjacent squares.
 
                 // for every neighbour 
                 // Check if its in closedList - if so its already been checked.

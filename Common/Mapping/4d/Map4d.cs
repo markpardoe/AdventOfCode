@@ -35,7 +35,7 @@ namespace AoC.Common.Mapping._4d
             throw new NotImplementedException();
         }
 
-        protected override IEnumerable<Position4d> GetAvailableNeighbors(Position4d position)
+        protected override IEnumerable<Position4d> GetNeighboringPositions(Position4d position)
         {
             return position.GetNeighbors();
         }

@@ -107,7 +107,7 @@ namespace Aoc.Aoc2018.Day20
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        protected override IEnumerable<Position> GetAvailableNeighbors(Position position)
+        protected override IEnumerable<Position> GetNeighboringPositions(Position position)
         {
             var result = new HashSet<Position>();
             if (this[position] != MapTile.Room) return result; 

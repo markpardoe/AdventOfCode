@@ -15,7 +15,7 @@ namespace Aoc.Aoc2018.Day20
             RoomMap map = new RoomMap(data);
 
             // Get paths (including distances) to all rooms in the maze
-            var paths = map.ShortestPathToValue(map.Start, MapTile.Room);
+            var paths = map.FindPathToAllValues(map.Start, MapTile.Room);
             yield return paths.Max(x => x.DistanceFromStart);
             yield return paths.Count(x => x.DistanceFromStart >= 1000);
         }

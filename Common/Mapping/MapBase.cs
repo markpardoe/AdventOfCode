@@ -36,6 +36,12 @@ namespace AoC.Common.Mapping
             }
             set => AddOrReplace(position, value);
         }
+
+        /// <summary>
+        /// Returns the number of instances of a value found in the map dictionary.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public int CountValue(TValue item) => Map.Values.Count(v => v.Equals(item));
 
         private void AddOrReplace(TPosition key, TValue value)
@@ -54,7 +60,7 @@ namespace AoC.Common.Mapping
         protected virtual void OnMapUpdated(TPosition key, TValue value) { }
         protected virtual void BeforeMapUpdated(TPosition key, TValue value) { }
 
-        protected abstract IEnumerable<TPosition> GetAvailableNeighbors(TPosition position);
+        protected abstract IEnumerable<TPosition> GetNeighboringPositions(TPosition position);
         public abstract string DrawMap(int padding = 0);
         public abstract IEnumerable<KeyValuePair<TPosition, TValue>> GetBoundedEnumerator(int padding = 0);
 

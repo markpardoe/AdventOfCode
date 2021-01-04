@@ -34,7 +34,7 @@ namespace Aoc.AoC2019.Problems.Day15
                     {
                         // Console.WriteLine("Generatining directions");
 
-                        var move = _map.ShortestPathToNearestValue(_map.Droid, ShipTile.Unknown);
+                        var move = _map.FindPathToNearestValue(_map.Droid, ShipTile.Unknown);
                        
                         if (move == null) { return; }  // no moves found - we must have explored entire grid - so exit.
                         nextLocation = move.GetFirstMove().Position; // get first location
@@ -84,7 +84,7 @@ namespace Aoc.AoC2019.Problems.Day15
 
         public MapNode GetPathToOxygen()
         {
-            return _map.ShortestPathToPosition(Start, _map.Oxygen);
+            return _map.FindPathToPosition(Start, _map.Oxygen);
         }
 
         // Deal with the returned code for the IntCodeCompiler for the given locations
@@ -115,7 +115,7 @@ namespace Aoc.AoC2019.Problems.Day15
         public int FindTimeToFillWithOxygen()
         {
 
-            var path = _map.ShortestPathToValue(_map.Oxygen, ShipTile.Empty);
+            var path = _map.FindPathToAllValues(_map.Oxygen, ShipTile.Empty);
             return path.Max(s => s.DistanceFromStart);
           
         }        

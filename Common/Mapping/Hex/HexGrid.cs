@@ -28,7 +28,7 @@ namespace AoC.Common.Mapping.Hex
             set => this[new AxialPosition(x, y, z)] = value;
         }
 
-        protected override IEnumerable<AxialPosition> GetAvailableNeighbors(AxialPosition position)
+        protected override IEnumerable<AxialPosition> GetNeighboringPositions(AxialPosition position)
         {
             return position.GetNeighbors();
         }

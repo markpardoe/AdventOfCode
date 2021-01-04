@@ -133,7 +133,7 @@ namespace Aoc.AoC2019.Problems.Day20
             }
         }
 
-        protected override IEnumerable<Position> GetAvailableNeighbors(Position position)
+        protected override IEnumerable<Position> GetNeighboringPositions(Position position)
         {
             var neighbours =  position.GetNeighboringPositions().Where(p => base[p] != TileType.Wall && base[p] != TileType.Void).ToList();
 
@@ -168,7 +168,7 @@ namespace Aoc.AoC2019.Problems.Day20
         
         public MapNode FindExit()
         {
-            return ShortestPathToPosition(StartPosition, ExitPosition);
+            return FindPathToPosition(StartPosition, ExitPosition);
         }
     }
 }

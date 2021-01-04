@@ -23,7 +23,7 @@ namespace AoC.AoC2018.Tests.Day20
         {
             var sut = new RoomMap(input);
 
-            var allRooms = sut.ShortestPathToValue(sut.Start, MapTile.Room);
+            var allRooms = sut.FindPathToAllValues(sut.Start, MapTile.Room);
             int actual = allRooms.Max(x => x.DistanceFromStart);
 
             actual.ShouldBe(expected);

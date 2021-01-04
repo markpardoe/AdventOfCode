@@ -11,7 +11,6 @@ namespace AoC.Common.Mapping._3d
     /// <typeparam name="TValue"></typeparam>
     public class Map3d <TValue> : BufferedMap<Position3d, TValue>
     {
-        
         public virtual int MaxX => Map.Keys.Max(p => p.X);
         public virtual int MinX => Map.Keys.Min(p => p.X);
 
@@ -36,7 +35,7 @@ namespace AoC.Common.Mapping._3d
         // Override for custom mapping
         protected virtual char? ConvertValueToChar(Position3d position, TValue value) => value?.ToString()?[0];
 
-        protected override IEnumerable<Position3d> GetAvailableNeighbors(Position3d position)
+        protected override IEnumerable<Position3d> GetNeighboringPositions(Position3d position)
         {
             return position.GetNeighbors();
         }

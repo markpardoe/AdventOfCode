@@ -126,7 +126,7 @@ namespace Aoc.AoC2019.Problems.Day18
                 }
 
                 // Get open (not wall) adjacent squares
-                var neighbors = this.GetAvailableNeighbors(current.Position);  
+                var neighbors = this.GetNeighboringPositions(current.Position);  
 
                 // for every neighbour 
                 // Check if its in closedList - if so its already been checked.
@@ -182,7 +182,7 @@ namespace Aoc.AoC2019.Problems.Day18
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        protected override IEnumerable<Position> GetAvailableNeighbors(Position position)
+        protected override IEnumerable<Position> GetNeighboringPositions(Position position)
         {
             return position.GetNeighboringPositions().Where(x => this[x] != null && this[x].Tile != TileType.Wall);
         }
