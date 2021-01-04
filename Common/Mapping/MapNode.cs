@@ -77,7 +77,7 @@ namespace AoC.Common.Mapping
             return node;
         }
 
-        // Sort by total distance
+        // Sort by total distance from origin (0,0)
         public int CompareTo(MapNode other)
         {
             if (ReferenceEquals(this, other)) return 0;
