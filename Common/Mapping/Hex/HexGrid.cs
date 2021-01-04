@@ -35,8 +35,6 @@ namespace AoC.Common.Mapping.Hex
 
         public override string DrawMap(int padding = 0)
         {
-            int minZ = MinZ;
-            int maxZ = MaxZ;
             int minY = MinY;
             int maxY = MaxY;
             int minX = MinX;

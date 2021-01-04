@@ -102,15 +102,18 @@ namespace Aoc.Aoc2018.Day20
 
         /// <summary>
         /// Returns neighboring rooms.
-        /// We could return the poistion of the doors (as they are technically adjourning)
-        /// but faster to skip search step of a position that will only ever have one exit.
+        /// We could return the position of the doors (as they are technically adjourning)
+        /// but faster to skip a position that will only ever have one exit and move straight to the next room.
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
         protected override IEnumerable<Position> GetNeighboringPositions(Position position)
         {
             var result = new HashSet<Position>();
-            if (this[position] != MapTile.Room) return result; 
+            if (this[position] != MapTile.Room)
+            {
+                yield break;
+            } 
 
             // Get neighboring doors
             var neighbors = position.GetNeighboringPositions()
@@ -120,9 +123,8 @@ namespace Aoc.Aoc2018.Day20
             foreach (var door in neighbors)
             {
                 Direction direction = position.FindDirection(door);
-                result.Add(door.Move(direction));
+                yield return door.Move(direction);
             }
-            return result;
         }
 
         // easy way to tell if its a move command, or a special character
