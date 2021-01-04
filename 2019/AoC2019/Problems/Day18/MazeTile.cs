@@ -15,7 +15,7 @@ namespace Aoc.AoC2019.Problems.Day18
     /// <summary>
     /// A location in the maze - with the tileType and position.
     /// </summary>
-    public class MazeTile : IEquatable<MazeTile>, IPosition
+    public class MazeTile : IEquatable<MazeTile>
     {
         public TileType Tile { get; }
         public string KeyId {get;}

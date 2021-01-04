@@ -19,7 +19,7 @@ namespace Aoc.AoC2019.Problems.Day20
         Exit = 3
     }
 
-    public class Portal : IPosition
+    public class Portal
     {
         public string PortalId { get; }
         public PortalType Type { get; }

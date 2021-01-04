@@ -14,15 +14,14 @@ namespace Aoc.AoC2019.Problems.Day18
         
         // List of all keys reachable for this robot (ignoring doors). 
         // this is the target set of keys - once they're all collected the maze is complete.
-        private readonly  List<MazeTile> KeysReachable;
+        private readonly  List<MazeTile> _keysReachable;
 
         public MazeRobot(Maze maze, MazeTile startLocation, bool ignoreDoors = false)
         {
             Maze = maze ?? throw new ArgumentNullException(nameof(maze)); ;
             StartLocation = startLocation ?? throw new ArgumentNullException(nameof(startLocation));
             _ignoreDoors = ignoreDoors;
-
-            KeysReachable = maze.FindKeys(startLocation).Select(k => k.Destination).ToList();
+            _keysReachable = maze.FindKeys(startLocation).Select(k => k.Destination).ToList();
         }
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace Aoc.AoC2019.Problems.Day18
                 closedList.Add(current);
                 openList.Remove(current);
 
-                if (current.KeysCollected.Count == KeysReachable.Count)
+                if (current.KeysCollected.Count == _keysReachable.Count)
                 {
                     // If we've collected all the keys - then we're done.
                     return current;
@@ -145,7 +144,7 @@ namespace Aoc.AoC2019.Problems.Day18
 
         public string DrawMap()
         {
-            return Maze.DrawMap(this.StartLocation);
+            return Maze.DrawMap(this.StartLocation.Position);
         }
 
 

@@ -12,7 +12,7 @@ namespace Aoc.AoC2019.Problems.Day11
         Right = 1
     }
 
-    public class DirectionalPosition : IPosition
+    public class DirectionalPosition
     {
         private readonly Direction _direction;
         public Position Position { get; set; }

@@ -4,17 +4,11 @@ using System.Collections.Generic;
 
 namespace AoC.Common.Mapping
 {
-    public interface IPosition
-    {
-        int X { get;  }
-        int Y { get; }
-    }
-
     /// <summary>
     /// Represents a Position in a 2D space.
     /// Assumes a co-ordinate system with 0,0 in top left corner - and Y increments in a downwards direction
     /// </summary>
-    public readonly struct Position : IEquatable<Position>, IPosition
+    public readonly struct Position : IEquatable<Position>
     {
         public int X { get; }
         public int Y { get; }
@@ -30,7 +24,7 @@ namespace AoC.Common.Mapping
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public int DistanceTo(IPosition p)
+        public int DistanceTo(Position p)
         {
             return Math.Abs(this.X - p.X) + Math.Abs(this.Y - p.Y);
         }
@@ -78,7 +72,7 @@ namespace AoC.Common.Mapping
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public Direction FindDirection(IPosition target)
+        public Direction FindDirection(Position target)
         {
             if (target.Y < this.Y) return Direction.Up;
             if (target.Y > this.Y) return Direction.Down;

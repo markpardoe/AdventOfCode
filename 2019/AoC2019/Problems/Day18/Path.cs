@@ -10,7 +10,7 @@ namespace Aoc.AoC2019.Problems.Day18
     ///  Holds a path through the maze.
     ///  Contains the keys collected and which KeyDistances (between start --> key or key --> key) travelled.
     /// </summary>
-    public class Path : IEquatable<Path>, IPosition
+    public class Path : IEquatable<Path>
     {       
         public Path Parent { get; set; }
 

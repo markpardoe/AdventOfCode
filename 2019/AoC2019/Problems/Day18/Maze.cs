@@ -65,7 +65,7 @@ namespace Aoc.AoC2019.Problems.Day18
             return this[position].MapValue[0];
         }
 
-        public string DrawMap(params IPosition[] robots)
+        public string DrawMap(params Position[] robots)
         {
             MapBoundary b = GetMapBoundaries();
 

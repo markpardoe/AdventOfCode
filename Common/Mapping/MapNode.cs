@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AoC.Common.Mapping
 {
-    public class MapNode : IEquatable<MapNode>, IComparable<MapNode>, IPosition
+    public class MapNode : IEquatable<MapNode>, IComparable<MapNode>
     {
         public MapNode Parent { get; set; }
 
@@ -13,9 +13,9 @@ namespace AoC.Common.Mapping
         public int X => Position.X;
         public int Y => Position.Y;
 
-        public MapNode(IPosition p, MapNode parent = null, int distanceFromStart = 0 )
+        public MapNode(Position position, MapNode parent = null, int distanceFromStart = 0 )
         {
-            Position = new Position(p.X, p.Y);
+            Position = new Position(position.X, position.Y);
             DistanceFromStart = distanceFromStart;
             Parent = parent;
         }
