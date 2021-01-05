@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Aoc.AoC2019.IntCode</RootNamespace>
     <AssemblyName>Aoc.AoC2019.IntCode</AssemblyName>
   </PropertyGroup>
