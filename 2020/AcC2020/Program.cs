@@ -1,11 +1,9 @@
 ﻿using System;
-using AoC.Common;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
-using AoC.AoC2020.Problems.Day24;
-using AoC.AoC2020.Problems.Day22;
+using AoC.AoC2020.Problems.Day19;
 
 namespace AoC.AoC2020
 {
@@ -13,7 +11,7 @@ namespace AoC.AoC2020
     {
         static void Main()
         {
-            var problem = new CrabCombat();
+            var problem = new MonsterMessages();
             var data = new List<string>();
 
             if (problem.InputFileName != null)

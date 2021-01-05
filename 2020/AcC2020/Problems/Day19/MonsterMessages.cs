@@ -1,7 +1,5 @@
 ﻿using AoC.Common;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace AoC.AoC2020.Problems.Day19
@@ -15,47 +13,38 @@ namespace AoC.AoC2020.Problems.Day19
 
         public override IEnumerable<int> Solve(IEnumerable<string> input)
         {
-            throw new NotImplementedException();
+            var (rules, messages) = ParseInput(input);
+            RuleChecker checker = new RuleChecker(rules);
+            yield return checker.CountMatchedMessages(0, messages);
+
+            // Update rules 8 and 11
+            checker.UpdateRule(new Rule("8: 42 | 42 8"));
+            checker.UpdateRule(new Rule("11: 42 31 | 42 11 31"));
+            yield return checker.CountMatchedMessages(0, messages);
         }
 
 
-        private void ParseRules(List<string> input)
+        private (Dictionary<int, Rule> rules, List<string> messages) ParseInput(IEnumerable<string> input)
         {
-            
+            var receivedMessages = new List<string>();
+            var allRules = new Dictionary<int, Rule>();
 
-        }
-    }
-
-
-    public class Rule
-    {
-        public int RuleId { get; }
-        public bool IsLetter { get; private set; } = false;
-        public char Letter { get; set; }
-
-        // Or rules
-        public readonly List<List<int>> OrRules = new List<List<int>>();
-
-        public Rule (string input)
-        {
-            var split = input.Split(":", StringSplitOptions.RemoveEmptyEntries);
-
-            RuleId = int.Parse(split[0].Trim());
-
-            var ruleText = split[1].Trim();
-            if (ruleText.Contains('"'))  //its a letter
+            foreach (var line in input)
             {
-                Letter = ruleText[1];
-            }
-            else
-            {
-                var orRules = ruleText.Split('|');
-
-                foreach (var rule in orRules)
+             
+                if (line.Contains(':'))
                 {
-                    OrRules.Add(rule.Trim().Split(' ').Select(x => int.Parse(x)).ToList());
+                    var rule = new Rule(line);
+                    allRules.Add(rule.RuleId, rule);
+
+                }
+                else if (!string.IsNullOrWhiteSpace(line))
+                {
+                    receivedMessages.Add(line);
                 }
             }
+
+            return (allRules, receivedMessages);
         }
     }
 }
