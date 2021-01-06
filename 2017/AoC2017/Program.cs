@@ -10,7 +10,7 @@ namespace AoC2017
     {
         static void Main()
         {
-            var problem = new Day01.InverseCaptcha();
+            var problem = new Day02.CorruptionChecksum();
             var data = new List<string>();
 
             if (problem.InputFileName != null)
