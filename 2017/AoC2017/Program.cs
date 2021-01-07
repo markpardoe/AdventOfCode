@@ -10,7 +10,7 @@ namespace AoC2017
     {
         static void Main()
         {
-            var problem = new Day04.HighEntropyPassphrases();
+            var problem = new Day05.TwistyTrampolineMaze();
             var data = new List<string>();
 
             if (problem.InputFileName != null)
